@@ -1,17 +1,17 @@
 public interface IState<T>
 {
     /// <summary>
-    /// »óÅÂ¿¡ µé¾î°¬À» ¶§ ½ÇÇàÇÏ´Â ÇÔ¼ö
+    /// ìƒíƒœì— ë“¤ì–´ê°”ì„ ë•Œ ì‹¤í–‰í•˜ëŠ” í•¨ìˆ˜
     /// </summary>
     public void Enter(T sender);
 
     /// <summary>
-    /// »óÅÂ ÁßÀÏ ¶§ ½ÇÇàÇÏ´Â ÇÔ¼ö
+    /// ìƒíƒœ ì¤‘ì¼ ë•Œ ì‹¤í–‰í•˜ëŠ” í•¨ìˆ˜
     /// </summary>
     public void UpdateState(T sender);
 
     /// <summary>
-    /// »óÅÂ¿¡¼­ ´Ù¸¥ »óÅÂ·Î ³Ñ¾î°¥ ¶§ ½ÇÇàÇÏ´Â ÇÔ¼ö
+    /// ìƒíƒœì—ì„œ ë‹¤ë¥¸ ìƒíƒœë¡œ ë„˜ì–´ê°ˆ ë•Œ ì‹¤í–‰í•˜ëŠ” í•¨ìˆ˜
     /// </summary>
     public void Exit(T sender);
 }

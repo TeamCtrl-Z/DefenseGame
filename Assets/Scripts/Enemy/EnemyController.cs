@@ -9,20 +9,20 @@ public class EnemyController : MonoBehaviour
     /// </summary>
     public StateMachine<EnemyController> EnemyStateMachine;
 
-    // Stateµé
+    // Stateë“¤
     public IState<EnemyController> idle;
     public IState<EnemyController> attack;
 
     private void Awake()
     {
-        // State ¸¸µé±â
+        // State ë§Œë“¤ê¸°
         idle = new EnemyIdle();
         attack = new EnemyAttack();
     }
 
     private void Update()
     {
-        // Stateº°·Î UpdateÇÔ¼ö ½ÇÇàÇÏ±â
+        // Stateë³„ë¡œ Updateí•¨ìˆ˜ ì‹¤í–‰í•˜ê¸°
         EnemyStateMachine.Update();
     }
 }

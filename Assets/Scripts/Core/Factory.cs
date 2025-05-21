@@ -5,12 +5,12 @@ using UnityEngine;
 public class Factory : Singleton<Factory>
 {
     /// <summary>
-    /// Ä³¸¯ÅÍ Ç®
+    /// ìºë¦­í„° í’€
     /// </summary>
     CharacterPool character;
 
     /// <summary>
-    /// ÃÊ±âÈ­ ÇÔ¼ö
+    /// ì´ˆê¸°í™” í•¨ìˆ˜
     /// </summary>
     protected override void OnInitialize()
     {
@@ -20,11 +20,11 @@ public class Factory : Singleton<Factory>
     }
 
     /// <summary>
-    /// Ä³¸¯ÅÍ¸¦ ¼ÒÈ¯ÇÏ´Â ÇÔ¼ö
+    /// ìºë¦­í„°ë¥¼ ì†Œí™˜í•˜ëŠ” í•¨ìˆ˜
     /// </summary>
-    /// <param name="position">¼ÒÈ¯ À§Ä¡</param>
-    /// <param name="eulerAngles">¼ÒÈ¯ °¢µµ</param>
-    /// <returns>¼ÒÈ¯ÇÑ Ä³¸¯ÅÍ</returns>
+    /// <param name="position">ì†Œí™˜ ìœ„ì¹˜</param>
+    /// <param name="eulerAngles">ì†Œí™˜ ê°ë„</param>
+    /// <returns>ì†Œí™˜í•œ ìºë¦­í„°</returns>
     public CharacterController GetCharacter(Vector2 position, Vector2 eulerAngles)
     {
         return character.GetObject(position, eulerAngles);

@@ -6,24 +6,24 @@ using UnityEngine;
 public class RecycleObject : MonoBehaviour
 {
     /// <summary>
-    /// ÀçÈ°¿ë ¿ÀºêÁ§Æ®°¡ ºñÈ°¼ºÈ­ µÉ ¶§ ½ÇÇàµÇ´Â µ¨¸®°ÔÀÌÆ®
+    /// ì¬í™œìš© ì˜¤ë¸Œì íŠ¸ê°€ ë¹„í™œì„±í™” ë  ë•Œ ì‹¤í–‰ë˜ëŠ” ë¸ë¦¬ê²Œì´íŠ¸
     /// </summary>
     public Action onDisable = null;
 
     protected virtual void OnEnable()
     {
-        StopAllCoroutines();    // ÀÌÀü¿¡ ½ÇÇà ÁßÀÌ´ø ÄÚ·çÆ¾ ¸ğµÎ Á¤Áö
+        StopAllCoroutines();    // ì´ì „ì— ì‹¤í–‰ ì¤‘ì´ë˜ ì½”ë£¨í‹´ ëª¨ë‘ ì •ì§€
 
-        OnReset();              // °¢ Å¬·¡½ºº° ¸®¼Â Ã³¸®
+        OnReset();              // ê° í´ë˜ìŠ¤ë³„ ë¦¬ì…‹ ì²˜ë¦¬
     }
 
     protected virtual void OnDisable()
     {
-        onDisable?.Invoke();    // onDisableÀÌ nullÀÌ ¾Æ´Ï¸é ½ÇÇàÇÏ¶ó
+        onDisable?.Invoke();    // onDisableì´ nullì´ ì•„ë‹ˆë©´ ì‹¤í–‰í•˜ë¼
     }
 
     /// <summary>
-    /// ÀçÈ°¿ë µÉ‹š Ã³¸®µÇ´Â ÇÔ¼ö(ºó ÇÔ¼ö)
+    /// ì¬í™œìš© ë ë–„ ì²˜ë¦¬ë˜ëŠ” í•¨ìˆ˜(ë¹ˆ í•¨ìˆ˜)
     /// </summary>
     protected virtual void OnReset()
     {
@@ -31,9 +31,9 @@ public class RecycleObject : MonoBehaviour
     }
 
     /// <summary>
-    /// ÀÏÁ¤ ½Ã°£ ÈÄ¿¡ °ÔÀÓ¿ÀºêÁ§Æ®¸¦ ÀÚµ¿À¸·Î ºñÈ°¼ºÈ­½ÃÅ°´Â ÇÔ¼ö
+    /// ì¼ì • ì‹œê°„ í›„ì— ê²Œì„ì˜¤ë¸Œì íŠ¸ë¥¼ ìë™ìœ¼ë¡œ ë¹„í™œì„±í™”ì‹œí‚¤ëŠ” í•¨ìˆ˜
     /// </summary>
-    /// <param name="time">±â´Ù¸± ½Ã°£</param>
+    /// <param name="time">ê¸°ë‹¤ë¦´ ì‹œê°„</param>
     protected void DisableTimer(float time = 0.0f)
     {
         StartCoroutine(LifeOver(time));

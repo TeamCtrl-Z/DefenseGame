@@ -9,14 +9,14 @@ public class CharacterController : RecycleObject
     /// </summary>
     public StateMachine<CharacterController> characterStateMachine;
 
-    // Stateµé
+    // Stateë“¤
     public IState<CharacterController> idle;
     public IState<CharacterController> attack;
     public IState<CharacterController> skill;
 
     private void Awake()
     {
-        // State ¸¸µé±â
+        // State ë§Œë“¤ê¸°
         idle = new CharacterIdle();
         attack = new CharacterAttack();
         skill = new CharacterSkill();
@@ -29,7 +29,7 @@ public class CharacterController : RecycleObject
 
     private void Update()
     {
-        // Stateº°·Î UpdateÇÔ¼ö ½ÇÇàÇÏ±â
+        // Stateë³„ë¡œ Updateí•¨ìˆ˜ ì‹¤í–‰í•˜ê¸°
         characterStateMachine.Update();
     }
 

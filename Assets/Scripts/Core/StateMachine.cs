@@ -5,45 +5,45 @@ using UnityEngine;
 public class StateMachine<T>
 {
     /// <summary>
-    /// ¿ÀºêÁ§Æ®ÀÇ Á¤º¸¸¦ º¸³»ÁÖ´Â º¯¼ö
+    /// ì˜¤ë¸Œì íŠ¸ì˜ ì •ë³´ë¥¼ ë³´ë‚´ì£¼ëŠ” ë³€ìˆ˜
     /// </summary>
     private T sender;
 
     /// <summary>
-    /// ¿ÀºêÁ§Æ®ÀÇ ÇöÀç »óÅÂ¸¦ ÀúÀåÇÏ´Â ÇÁ·ÎÆÛÆ¼
+    /// ì˜¤ë¸Œì íŠ¸ì˜ í˜„ì¬ ìƒíƒœë¥¼ ì €ì¥í•˜ëŠ” í”„ë¡œí¼í‹°
     /// </summary>
     public IState<T> Current { get; private set; }
 
     /// <summary>
-    /// »ı¼ºÀÚ
+    /// ìƒì„±ì
     /// </summary>
-    /// <param name="sender">¿ÀºêÁ§Æ®</param>
-    /// <param name="defaultState">ÃÊ±â »óÅÂ</param>
+    /// <param name="sender">ì˜¤ë¸Œì íŠ¸</param>
+    /// <param name="defaultState">ì´ˆê¸° ìƒíƒœ</param>
     public StateMachine(T sender, IState<T> defaultState)
     {
         this.sender = sender;
         Current = defaultState;
-        Current.Enter(sender);  // ÃÊ±â »óÅÂÀÇ Enter()ÇÔ¼ö ½ÇÇà
+        Current.Enter(sender);  // ì´ˆê¸° ìƒíƒœì˜ Enter()í•¨ìˆ˜ ì‹¤í–‰
     }
 
     /// <summary>
-    /// »óÅÂ°¡ ÀüÈ¯µÉ ¶§ ½ÇÇàµÇ´Â ÇÔ¼ö
+    /// ìƒíƒœê°€ ì „í™˜ë  ë•Œ ì‹¤í–‰ë˜ëŠ” í•¨ìˆ˜
     /// </summary>
-    /// <param name="nextState">´ÙÀ½ »óÅÂ</param>
+    /// <param name="nextState">ë‹¤ìŒ ìƒíƒœ</param>
     public void TransitionTo(IState<T> nextState)
     {
-        // ÀüÈ¯µÇ±â Àü »óÅÂÀÇ Exit() ½ÇÇà
+        // ì „í™˜ë˜ê¸° ì „ ìƒíƒœì˜ Exit() ì‹¤í–‰
         Current.Exit(sender);
 
-        // ¹Ù²Ü »óÅÂ·Î ÀüÈ­
+        // ë°”ê¿€ ìƒíƒœë¡œ ì „í™”
         Current = nextState;
 
-        // ¹Ù²Û »óÅÂÀÇ Enter() ½ÇÇà
+        // ë°”ê¾¼ ìƒíƒœì˜ Enter() ì‹¤í–‰
         Current.Enter(sender);
     }
 
     /// <summary>
-    /// °¢ »óÅÂº° Update ÇÔ¼ö
+    /// ê° ìƒíƒœë³„ Update í•¨ìˆ˜
     /// </summary>
     public void Update()
     {
