@@ -15,6 +15,11 @@ public class Factory : Singleton<Factory>
     private ProjectilePool projectile;
 
     /// <summary>
+    /// Fairy 풀
+    /// </summary>
+    private FairyPool fairy;
+
+    /// <summary>
     /// 초기화 함수
     /// </summary>
     protected override void OnInitialize()
@@ -24,6 +29,9 @@ public class Factory : Singleton<Factory>
 
         if (this.TryGetComponentInChildren<ProjectilePool>(out projectile))
             projectile.Initialize();
+
+        if (this.TryGetComponentInChildren<FairyPool>(out fairy))
+            fairy.Initialize();
     }
 
     /// <summary>
@@ -47,5 +55,10 @@ public class Factory : Singleton<Factory>
     {
         Debug.Log($"GetProjectile {position}");
         return projectile.GetObject(position, new Vector3(0, 0, angle));
+    }
+
+    public FairyController GetFairy(Vector2 position, float angle = 0.0f)
+    {
+        return fairy.GetObject(position, new Vector3(0, 0, angle));
     }
 }

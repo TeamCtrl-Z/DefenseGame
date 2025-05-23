@@ -7,7 +7,7 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(TargetingComponent))]
 [RequireComponent(typeof(AttackHandler))]
-public class FairyController : RecycleObject
+public class FairyController : RecycleObject, IPlaceable
 {
     public Transform TargetTransform => targetingComponent.GetTarget();
     /// <summary>
@@ -34,7 +34,16 @@ public class FairyController : RecycleObject
         fairyStateMachine.Update();
     }
 
-//에디터가 실행 중일 때만
+    /// <summary>
+    /// 페어리를 배치하는 함수
+    /// </summary>
+    /// <param name="placePosition"> 배치할 위치 </param>
+    public void Place(Vector2 placePosition)
+    {
+        transform.position = placePosition;
+    }
+
+    //에디터가 실행 중일 때만
     private void OnDrawGizmosSelected()
     {
         if (Application.isPlaying == false)
