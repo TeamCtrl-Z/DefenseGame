@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class EnemyAttack : EnemyBase
 {
+    public EnemyAttack(EnemyStateMachine stateMachine) : base(stateMachine)
+    {}
+
     public override void Enter(EnemyController sender)
     {
         base.Enter(sender);
