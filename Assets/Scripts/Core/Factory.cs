@@ -7,16 +7,16 @@ public class Factory : Singleton<Factory>
     /// <summary>
     /// 캐릭터 풀
     /// </summary>
-    CharacterPool character;
+    FairyPool fairy;
 
     /// <summary>
     /// 초기화 함수
     /// </summary>
     protected override void OnInitialize()
     {
-        character = GetComponentInChildren<CharacterPool>();
-        if (character != null)
-            character.Initialize();
+        fairy = GetComponentInChildren<FairyPool>();
+        if (fairy != null)
+            fairy.Initialize();
     }
 
     /// <summary>
@@ -25,8 +25,8 @@ public class Factory : Singleton<Factory>
     /// <param name="position">소환 위치</param>
     /// <param name="eulerAngles">소환 각도</param>
     /// <returns>소환한 캐릭터</returns>
-    public CharacterController GetCharacter(Vector2 position, Vector2 eulerAngles)
+    public FairyController GetCharacter(Vector2 position, Vector2 eulerAngles)
     {
-        return character.GetObject(position, eulerAngles);
+        return fairy.GetObject(position, eulerAngles);
     }
 }
