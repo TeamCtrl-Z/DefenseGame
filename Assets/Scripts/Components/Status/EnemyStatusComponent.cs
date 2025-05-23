@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class EnemyStatusComponent : MonoBehaviour, IMoveStatus, IHealthStatus, ICharacterIdentity
 {
-    public int ID { get; private set; }
+    [field: SerializeField] public int ID { get; private set; }
     public float MoveSpeed { get; private set; }
     public float CurrentHP { get; private set; }
     public float MaxHP { get; private set; }
