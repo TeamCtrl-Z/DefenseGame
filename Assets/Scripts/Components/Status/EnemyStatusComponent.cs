@@ -16,7 +16,7 @@ public class EnemyStatusComponent : MonoBehaviour, IMoveStatus, IHealthStatus, I
     /// </summary>
     private EnemyStatusData statData;
 
-    private void Awake()
+    private void Start()
     {
         if (!EnemyDataManager.Instance.TryGetStatData(ID, out statData))
         {

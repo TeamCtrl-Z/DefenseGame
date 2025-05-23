@@ -40,7 +40,6 @@ public class StateMachine<T>
         if (Current != null)
             Current.Exit(sender);
 
-        Debug.Log($"{Current} -> {nextState}");
         // 바꿀 상태로 전화
         Current = nextState;
 

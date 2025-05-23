@@ -25,6 +25,10 @@ public class FairyController : RecycleObject, IPlaceable
         fairyStatusComponent = GetComponent<FairyStatusComponent>();
         targetingComponent = GetComponent<TargetingComponent>();
         attackHandler = GetComponent<AttackHandler>();
+    }
+
+    protected void Start()
+    {
         fairyStateMachine = new FairyStateMachine(this, animator, fairyStatusComponent as IBattleStatus, attackHandler);
     }
 
