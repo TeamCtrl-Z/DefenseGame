@@ -28,7 +28,6 @@ public class FairyIdle : FairyBase
         
         if (sender.TargetTransform)
         {
-            Debug.Log(sender.TargetTransform.name);
             stateMachine.TransitionTo(stateMachine.Attack);
         }
     }

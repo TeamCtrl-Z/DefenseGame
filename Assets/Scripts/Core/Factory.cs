@@ -53,7 +53,6 @@ public class Factory : Singleton<Factory>
     /// <returns>소환한 Projectile</returns>
     public Projectile GetProjectile(Vector2 position, float angle = 0.0f)
     {
-        Debug.Log($"GetProjectile {position}");
         return projectile.GetObject(position, new Vector3(0, 0, angle));
     }
 
