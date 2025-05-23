@@ -2,8 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyBase : IState<EnemyController>
+public abstract class EnemyBase : IState<EnemyController>
 {
+    protected EnemyStateMachine stateMachine;
+    public EnemyBase(EnemyStateMachine stateMachine)
+    {
+        this.stateMachine = stateMachine;
+    }
+
     public virtual void Enter(EnemyController sender)
     {
     }

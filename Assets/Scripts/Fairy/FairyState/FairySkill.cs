@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class FairySkill : FairyBase
 {
+    public FairySkill(FairyStateMachine stateMachine) : base(stateMachine)
+    {
+    }
+
     public override void Enter(FairyController sender)
     {
         base.Enter(sender);

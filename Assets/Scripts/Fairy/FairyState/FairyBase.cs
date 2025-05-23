@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class FairyBase : IState<FairyController>
 {
+    protected FairyStateMachine stateMachine;
+    public FairyBase(FairyStateMachine stateMachine)
+    {
+        this.stateMachine = stateMachine;
+    }
+
     public virtual void Enter(FairyController sender)
     {
     }

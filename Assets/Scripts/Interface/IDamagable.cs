@@ -1,0 +1,11 @@
+using UnityEngine;
+
+public interface IDamagable
+{
+    /// <summary>
+    /// 피격 당했을 때 실행하는 함수
+    /// </summary>
+    /// <param name="attacker"> 공격한 오브젝트 </param>
+    /// <param name="data"> 현재 피격 정보 </param>
+    void OnDamage(GameObject attacker, HittingData data);
+}
