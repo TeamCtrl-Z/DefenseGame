@@ -10,6 +10,11 @@ public class ContainerManager : MonoBehaviour, IInitialize
     [SerializeField]
     private NodeContainerObject boatNodeContainer;
 
+    public NodeContainerObject BoatNodeContainer
+    {
+        get { return boatNodeContainer; }
+    }
+
     /// <summary>
     /// 초기화 하는 함수
     /// </summary>

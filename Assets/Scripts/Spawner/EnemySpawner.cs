@@ -58,7 +58,7 @@ public class EnemySpawner : Singleton<EnemySpawner>
         {
             float randomX = UnityEngine.Random.Range(minMaxX.x, minMaxX.y);
             float randomY = UnityEngine.Random.Range(minMaxY.x, minMaxY.y);
-            EnemyController enemy = Factory.Instance.GetEnemy(new Vector2(randomX, randomY));
+            EnemyController enemy = Factory.Instance.GetEnemy_000(new Vector2(randomX, randomY));
             SpriteRenderer sprite = enemy.GetComponent<SpriteRenderer>();
             sprite.sortingOrder = Mathf.RoundToInt(-randomY * 100);
             enemy.transform.SetParent(transform, true);
