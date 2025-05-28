@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class NodeObject : NodeObjectBase, IDragHandler, IBeginDragHandler, IEndDragHandler
+public class NodeObject : NodeObjectBase
 {
     /// <summary>
     /// 드래그의 시작을 알리는 델리게이트(unit:드래그를 시작한 슬롯의 인덱스)
@@ -17,18 +17,21 @@ public class NodeObject : NodeObjectBase, IDragHandler, IBeginDragHandler, IEndD
     public event Action<uint?> onDragEnd;
 
     /// <summary>
-    /// 드래그가 시작되면 실행되는 함수
+    /// 노드 오브젝트의 레이어
     /// </summary>
-    public void OnBeginDrag(PointerEventData eventData)
+    private LayerMask layerMask;
+
+    private void Awake()
     {
-        onDragBegin?.Invoke(Index);
+        layerMask = LayerMask.GetMask("NodeObject");
     }
 
     /// <summary>
-    /// 드래그 중일 때 실행되는 함수(빈함수)
+    /// 드래그가 시작되면 실행되는 함수
     /// </summary>
-    public void OnDrag(PointerEventData eventData)
+    public void OnBeginDrag()
     {
+        onDragBegin?.Invoke(Index);
     }
 
     /// <summary>
@@ -36,14 +39,18 @@ public class NodeObject : NodeObjectBase, IDragHandler, IBeginDragHandler, IEndD
     /// </summary>
     public void OnEndDrag(PointerEventData eventData)
     {
-        GameObject obj = eventData.pointerCurrentRaycast.gameObject;
         uint? endIndex = null;
-        if (obj != null)
+
+        Vector2 wp = Camera.main.ScreenToWorldPoint(eventData.position);
+
+        Collider2D[] hits = Physics2D.OverlapPointAll(wp, layerMask);
+        foreach (var hit in hits)
         {
-            NodeObject endNode = obj.GetComponent<NodeObject>();
-            if (endNode != null)
+            var node = hit.GetComponent<NodeObject>();
+            if (node != null)
             {
-                endIndex = endNode.Index;
+                endIndex = node.Index;
+                break;
             }
         }
 

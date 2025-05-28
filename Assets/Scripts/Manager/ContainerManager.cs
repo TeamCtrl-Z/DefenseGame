@@ -10,10 +10,10 @@ public class ContainerManager : MonoBehaviour, IInitialize
     [SerializeField]
     private NodeContainerObject boatNodeContainer;
 
-    public NodeContainerObject BoatNodeContainer
-    {
-        get { return boatNodeContainer; }
-    }
+    /// <summary>
+    /// 배의 노드 컨테이너를 가져오는 프로퍼티
+    /// </summary>
+    public NodeContainerObject BoatNodeContainer => boatNodeContainer;
 
     /// <summary>
     /// 초기화 하는 함수

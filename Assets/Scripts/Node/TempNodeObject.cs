@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -24,7 +25,21 @@ public class TempNodeObject : NodeObjectBase
     {
         transform.position = GetMouseWorldPosition();
         if (Fairy != null)
-            Fairy.Place(transform.position);
+            Fairy.Place(tempNodeIndex);
+    }
+
+    public override void PlaceNode(IPlaceable fairy)
+    {
+        if (fairy != null)
+        {
+            this.fairy = fairy;
+            fairy.Place(tempNodeIndex);
+            isEmpty = false;
+        }
+        else
+        {
+            ClearNode();
+        }
     }
 
     /// <summary>
