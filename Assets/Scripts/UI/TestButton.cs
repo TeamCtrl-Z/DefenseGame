@@ -9,6 +9,7 @@ public class TestButton : MonoBehaviour
     public void OnPlaceClick()
     {
         FairyController fairy = Factory.Instance.GetFairy(Vector2.zero, 0.0f);
-        nodeObject.PlaceNode(fairy);
+        PlaceableObject placeable = fairy.GetComponent<PlaceableObject>();
+        nodeObject.PlaceNode(placeable);
     }
 }
