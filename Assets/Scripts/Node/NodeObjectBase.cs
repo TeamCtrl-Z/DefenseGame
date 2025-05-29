@@ -18,7 +18,7 @@ public class NodeObjectBase : MonoBehaviour
     /// <summary>
     /// 이 노드에 배치됐는지 기록하는 변수
     /// </summary>
-    private bool isEmpty;
+    protected bool isEmpty;
 
     /// <summary>
     /// 이 노드에 배치됐는지 알려주는 프로퍼티 
@@ -28,7 +28,7 @@ public class NodeObjectBase : MonoBehaviour
     /// <summary>
     /// 이 노드가 가지고 있는 페어리
     /// </summary>
-    private IPlaceable fairy;
+    protected IPlaceable fairy;
 
     /// <summary>
     /// 이 노드가 가지고 있는 페어리를 알려주는 프로퍼티
@@ -38,12 +38,12 @@ public class NodeObjectBase : MonoBehaviour
     /// <summary>
     /// 이 노드에 페어리를 추가하는 함수
     /// </summary>
-    public void PlaceNode(IPlaceable fairy)
+    public virtual void PlaceNode(IPlaceable fairy)
     {
         if (fairy != null)
         {
             this.fairy = fairy;
-            fairy.Place(transform.position);
+            fairy.Place(Index);
             isEmpty = false;
         }
         else

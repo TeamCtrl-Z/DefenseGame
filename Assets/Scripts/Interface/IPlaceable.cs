@@ -8,6 +8,6 @@ public interface IPlaceable
     /// <summary>
     /// 배치하는 함수
     /// </summary>
-    /// <param name="placePosition">배치하는 위치</param>
-    public void Place(Vector2 placePosition);
+    /// <param name="index">배치하는 노드의 번호</param>
+    public void Place(uint index);
 }
