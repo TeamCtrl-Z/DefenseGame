@@ -15,11 +15,6 @@ public class HighlightOverlay : MonoBehaviour
     private Collider2D cellCollider;
 
     /// <summary>
-    /// Glow 코루틴 참조 변수
-    /// </summary>
-    private Coroutine glowCoroutine;
-
-    /// <summary>
     /// 배치칸 알파 제어용
     /// </summary>
     private SpriteRenderer spriteRenderer;
@@ -76,10 +71,8 @@ public class HighlightOverlay : MonoBehaviour
     /// </summary>
     public void ForceGlowIn()
     {
-        if (glowCoroutine != null)
-            StopCoroutine(glowCoroutine);
-
-        glowCoroutine = StartCoroutine(AnimateGlow(0f, 1.5f));
+        StopCoroutine(nameof(AnimateGlow));
+        StartCoroutine(AnimateGlow(0f, 1.5f));
     }
 
     /// <summary>
@@ -87,10 +80,8 @@ public class HighlightOverlay : MonoBehaviour
     /// </summary>
     public void ForceGlowOut()
     {
-        if (glowCoroutine != null) 
-            StopCoroutine(glowCoroutine);
-
-        glowCoroutine = StartCoroutine(AnimateGlow(1.5f, 0f));
+        StopCoroutine(nameof(AnimateGlow));
+        StartCoroutine(AnimateGlow(1.5f, 0f));
     }
 
     /// <summary>
@@ -114,7 +105,6 @@ public class HighlightOverlay : MonoBehaviour
         spriteRenderer.GetPropertyBlock(propertyBlock);
         propertyBlock.SetFloat(intensityId, to);
         spriteRenderer.SetPropertyBlock(propertyBlock);
-        glowCoroutine = null;
     }
 
     /// <summary>

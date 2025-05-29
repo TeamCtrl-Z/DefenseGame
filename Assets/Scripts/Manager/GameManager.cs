@@ -16,6 +16,11 @@ public class GameManager : Singleton<GameManager>
     private ContainerManager containerManager;
 
     /// <summary>
+    /// ChapterManager
+    /// </summary>
+    private ChapterManager chapterManager;
+
+    /// <summary>
     /// InputManager를 반환하는 프로퍼티(읽기 전용)
     /// </summary>
     public InputManager InputManager
@@ -42,6 +47,19 @@ public class GameManager : Singleton<GameManager>
     }
 
     /// <summary>
+    /// ChapterManager를 반환하는 프로퍼티(읽기 전용)
+    /// </summary>
+    public ChapterManager ChapterManager
+    {
+        get
+        {
+            if (chapterManager == null)
+                chapterManager = GetComponent<ChapterManager>();
+            return chapterManager;
+        }
+    }
+
+    /// <summary>
     /// 씬이 로드될때마다 실행하는 함수(Additive 제외)
     /// </summary>
     protected override void OnInitialize()
@@ -53,5 +71,8 @@ public class GameManager : Singleton<GameManager>
 
         containerManager = GetComponent<ContainerManager>();
         containerManager.Initialize();
+
+        chapterManager = GetComponent<ChapterManager>();
+        chapterManager.Initialize();
     }
 }

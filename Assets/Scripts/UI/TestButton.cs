@@ -12,4 +12,9 @@ public class TestButton : MonoBehaviour
         PlaceableObject placeable = fairy.GetComponent<PlaceableObject>();
         nodeObject.PlaceNode(placeable);
     }
+
+    public void OnStartClick()
+    {
+        GameManager.Instance.ChapterManager.StartStage();
+    }
 }
