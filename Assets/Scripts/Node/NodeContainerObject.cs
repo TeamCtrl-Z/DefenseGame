@@ -7,6 +7,16 @@ using UnityEngine;
 public class NodeContainerObject : MonoBehaviour
 {
     /// <summary>
+    /// 드래그 시작을 알리는 델리게이트
+    /// </summary>
+    public event Action onDragBegin;
+
+    /// <summary>
+    /// 드래그 종료를 알리는 델리게이트
+    /// </summary>
+    public event Action onDragEnd;
+
+    /// <summary>
     /// 컨테이너의 노드들
     /// </summary>
     [SerializeField]
@@ -88,6 +98,7 @@ public class NodeContainerObject : MonoBehaviour
     private void OnFairyMoveBegin(uint index)
     {
         MoveFairy(index, tempNode.Index);
+        onDragBegin?.Invoke();
     }
 
     /// <summary>
@@ -105,6 +116,7 @@ public class NodeContainerObject : MonoBehaviour
         {
             CancelMove();
         }
+        onDragEnd?.Invoke();
     }
 
     /// <summary>

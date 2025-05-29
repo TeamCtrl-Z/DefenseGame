@@ -8,13 +8,12 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Background
   - Water
   - UI
   - Boat
   - Enemy
   - Fairy
-  - Background
   - NodeObject
   - 
   - 
@@ -37,7 +36,11 @@ TagManager:
   - 
   - 
   - 
+  - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 3284831275
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
