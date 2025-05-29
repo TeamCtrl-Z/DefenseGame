@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,7 @@ using UnityEngine;
 /// <summary>
 /// 피격 데이터 구조체
 /// </summary>
+[Serializable]
 public struct HittingData
 {
     public float Damage;

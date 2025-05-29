@@ -7,34 +7,34 @@ using UnityEngine;
 public static class CsvLoader
 {
     /// <summary>
-    /// Resources/Data/CSVs/{resourceName}.csv ¸¦ ÀÐ¾î¼­
-    /// Ã¹ ¹øÂ° Çì´õ ÄÃ·³À» int Å°·Î »ç¿ëÇÏ°í,
-    /// ³ª¸ÓÁö ÄÃ·³Àº TÀÇ ÇÁ·ÎÆÛÆ¼/ÇÊµå¿¡ ÀÚµ¿ ¸ÅÇÎÇÏ¿©
-    /// Dictionary<int,T>¸¦ ¹ÝÈ¯ÇÕ´Ï´Ù.
+    /// Resources/Data/CSVs/{resourceName}.csv ï¿½ï¿½ ï¿½Ð¾î¼­
+    /// Ã¹ ï¿½ï¿½Â° ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½ï¿½ int Å°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï°ï¿½,
+    /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½ï¿½ Tï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¼/ï¿½Êµå¿¡ ï¿½Úµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½
+    /// Dictionary<int,T>ï¿½ï¿½ ï¿½ï¿½È¯ï¿½Õ´Ï´ï¿½.
     /// </summary>
     public static Dictionary<int, T> LoadTable<T>(string resourceName) where T : new()
     {
-        // 1) CSV ÅØ½ºÆ® ·Îµå
+        // 1) CSV ï¿½Ø½ï¿½Æ® ï¿½Îµï¿½
         var ta = Resources.Load<TextAsset>($"Data/{resourceName}");
         if (ta == null)
-            throw new Exception($"CSV '{resourceName}.csv' À» Resources/Data/CSVs ¿¡¼­ Ã£À» ¼ö ¾ø½À´Ï´Ù.");
+            throw new Exception($"CSV '{resourceName}.csv' ï¿½ï¿½ Resources/Data/CSVs ï¿½ï¿½ï¿½ï¿½ Ã£ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
 
-        // 2) ÀüÃ¼ ¶óÀÎ ºÐ¸® (À©µµ¿ì/À¯´Ð½º °³Çà ¸ðµÎ ´ëÀÀ)
+        // 2) ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ ï¿½Ð¸ï¿½ (ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½Ð½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
         var lines = ta.text
             .Split(new[] { "\r\n", "\n" }, StringSplitOptions.RemoveEmptyEntries);
         if (lines.Length < 2)
-            throw new Exception("CSV¿¡´Â Çì´õ + ÃÖ¼Ò 1°³ ÀÌ»óÀÇ µ¥ÀÌÅÍ ÇàÀÌ ÇÊ¿äÇÕ´Ï´Ù.");
+            throw new Exception("CSVï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ + ï¿½Ö¼ï¿½ 1ï¿½ï¿½ ï¿½Ì»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½ï¿½Õ´Ï´ï¿½.");
 
-        // 3) Çì´õ¿Í ÄÃ·³¸í ¹è¿­ ÃßÃâ
+        // 3) ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½ï¿½ ï¿½è¿­ ï¿½ï¿½ï¿½ï¿½
         var headers = lines[0].Split(',').Select(h => h.Trim()).ToArray();
-        var keyColumnName = headers[0];      // Ã¹ ¹øÂ° ÄÃ·³ ÀÌ¸§À» Å°·Î »ç¿ë
+        var keyColumnName = headers[0];      // Ã¹ ï¿½ï¿½Â° ï¿½Ã·ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ Å°ï¿½ï¿½ ï¿½ï¿½ï¿½
 
-        // 4) T Å¸ÀÔÀÇ public ÇÁ·ÎÆÛÆ¼¡¤ÇÊµå ¸ÞÅ¸Á¤º¸ Ä³½Ì
+        // 4) T Å¸ï¿½ï¿½ï¿½ï¿½ public ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¼ï¿½ï¿½ï¿½Êµï¿½ ï¿½ï¿½Å¸ï¿½ï¿½ï¿½ï¿½ Ä³ï¿½ï¿½
         var type = typeof(T);
         var props = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
         var fields = type.GetFields(BindingFlags.Public | BindingFlags.Instance);
 
-        // 5) µ¥ÀÌÅÍ Çà¸¶´Ù T ÀÎ½ºÅÏ½º »ý¼º & °ª Ã¤¿ì±â
+        // 5) ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½à¸¶ï¿½ï¿½ T ï¿½Î½ï¿½ï¿½Ï½ï¿½ ï¿½ï¿½ï¿½ï¿½ & ï¿½ï¿½ Ã¤ï¿½ï¿½ï¿½
         var list = new List<T>();
         for (int i = 1; i < lines.Length; i++)
         {
@@ -46,7 +46,7 @@ public static class CsvLoader
                 var header = headers[c];
                 var raw = cols[c].Trim();
 
-                // ÇÁ·ÎÆÛÆ¼ ¿ì¼±
+                // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¼ ï¿½ì¼±
                 var prop = props.FirstOrDefault(p => p.Name.Equals(header, StringComparison.OrdinalIgnoreCase));
                 if (prop != null && prop.CanWrite)
                 {
@@ -55,7 +55,7 @@ public static class CsvLoader
                     continue;
                 }
 
-                // ÇÊµå Ã¼Å©
+                // ï¿½Êµï¿½ Ã¼Å©
                 var field = fields.FirstOrDefault(f => f.Name.Equals(header, StringComparison.OrdinalIgnoreCase));
                 if (field != null)
                 {
@@ -67,19 +67,19 @@ public static class CsvLoader
             list.Add(obj);
         }
 
-        // 6) Å° °ªÀ» ²¨³»´Â µ¨¸®°ÔÀÌÆ® »ý¼º
+        // 6) Å° ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½
         Func<T, int> getKey = CreateKeyGetter<T>(keyColumnName);
 
-        // 7) Dictionary »ý¼º ÈÄ ¹ÝÈ¯
+        // 7) Dictionary ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½È¯
         return list.ToDictionary(getKey);
     }
 
-    // Ã¹ ¹øÂ° Çì´õ(Å° ÄÃ·³) ÀÌ¸§À» ¹Þ¾Æ T¿¡¼­ ÇØ´ç int °ªÀ» ²¨³»´Â Func<T,int> »ý¼º
+    // Ã¹ ï¿½ï¿½Â° ï¿½ï¿½ï¿½(Å° ï¿½Ã·ï¿½) ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½Þ¾ï¿½ Tï¿½ï¿½ï¿½ï¿½ ï¿½Ø´ï¿½ int ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Func<T,int> ï¿½ï¿½ï¿½ï¿½
     private static Func<T, int> CreateKeyGetter<T>(string keyColumnName) where T : new()
     {
         var type = typeof(T);
 
-        // ÇÁ·ÎÆÛÆ¼ °Ë»ö
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¼ ï¿½Ë»ï¿½
         var prop = type.GetProperty(
             keyColumnName,
             BindingFlags.Public | BindingFlags.Instance | BindingFlags.IgnoreCase
@@ -87,7 +87,7 @@ public static class CsvLoader
         if (prop != null && prop.PropertyType == typeof(int))
             return obj => (int)prop.GetValue(obj);
 
-        // ÇÊµå °Ë»ö
+        // ï¿½Êµï¿½ ï¿½Ë»ï¿½
         var field = type.GetField(
             keyColumnName,
             BindingFlags.Public | BindingFlags.Instance | BindingFlags.IgnoreCase
@@ -95,6 +95,6 @@ public static class CsvLoader
         if (field != null && field.FieldType == typeof(int))
             return obj => (int)field.GetValue(obj);
 
-        throw new Exception($"Å¸ÀÔ '{type.Name}'¿¡ '{keyColumnName}' (int) ÇÁ·ÎÆÛÆ¼/ÇÊµå°¡ ¾ø½À´Ï´Ù.");
+        throw new Exception($"Å¸ï¿½ï¿½ '{type.Name}'ï¿½ï¿½ '{keyColumnName}' (int) ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¼/ï¿½Êµå°¡ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
     }
 }

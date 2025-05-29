@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 084b3337f9add57469ec523d99ae5519, type: 3}
+  m_Name: FireAttributeAbility
+  m_EditorClassIdentifier: 
+  triggerStrategy: {fileID: 11400000, guid: 39cea7b7ab804a7418b86648de7c88e7, type: 2}
+  targetScopeDefinition: {fileID: 11400000, guid: 7a73370f9a7dacd4db428552520c99bb, type: 2}
+  effect: {fileID: 11400000, guid: 2e8eae6b16127684ea98bbe7a8195983, type: 2}

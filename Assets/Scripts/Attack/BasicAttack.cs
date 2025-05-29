@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -23,6 +24,8 @@ public class BasicAttack
     /// </summary>
     private Transform attacker;
 
+    public event Action<GameObject, Vector3> OnHitEnemy;
+
     public BasicAttack(Transform attacker, HittingData data)
     {
         this.attacker = attacker;
@@ -45,8 +48,12 @@ public class BasicAttack
     /// 피격자에게 피격 처리하는 메서드
     /// </summary>
     /// <param name="damagable"></param>
-    private void OnHit(IDamagable damagable)
+    private void OnHit(GameObject target, Vector3 hitPoint)
     {
-        damagable.OnDamage(attacker.gameObject, data);
+        if (target.TryGetComponent<IDamagable>(out IDamagable damagable))
+        {
+            OnHitEnemy?.Invoke(target, hitPoint);
+            damagable.OnDamage(attacker.gameObject, data);
+        }
     }
 }

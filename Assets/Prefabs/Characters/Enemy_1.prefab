@@ -175,6 +175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f64093e39ebaa548a5ea9fffa28b16e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyHPPrefab: {fileID: 7117484175716486429, guid: 7404ce1ad3fdf3a47865dd217558565f, type: 3}
   <ID>k__BackingField: 0
 --- !u!95 &-7411345559912782072
 Animator:

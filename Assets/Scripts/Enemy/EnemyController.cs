@@ -11,6 +11,7 @@ public class EnemyController : RecycleObject, IDamagable
     private EnemyStateMachine enemyStateMachine;
     public IMoveStatus MoveStatus { get; private set; }
     public IHealthStatus HealthStatus { get; private set; }
+    public MarkCondition MarkCondition { get; private set; }
 
     private void Awake()
     {
@@ -34,5 +35,19 @@ public class EnemyController : RecycleObject, IDamagable
     public void OnDamage(GameObject attacker, HittingData data)
     {
         HealthStatus.ChangeHP(-data.Damage);
+    }
+
+    public void OnDotDamage(GameObject attacker, HittingData data, float term)
+    {
+        StartCoroutine(DotDamageRoutine(data, term));
+    }
+
+    private IEnumerator DotDamageRoutine(HittingData data, float term)
+    {
+        while (true)
+        {
+            HealthStatus.ChangeHP(-data.Damage);
+            yield return new WaitForSeconds(term);
+        }
     }
 }

@@ -41,7 +41,7 @@ public class NearestTargeting : ITargetingStrategy
     /// </summary>
     private Transform origin;
     public NearestTargeting(Transform origin) => this.origin = origin;
-    public Transform SelectTarget(IEnumerable<EnemyController> enemies)
+    public virtual Transform SelectTarget(IEnumerable<EnemyController> enemies)
     {
         Transform nearest = null;
         float minDistance = float.MaxValue;
@@ -92,6 +92,9 @@ public class HealthiestTargeting : ITargetingStrategy
 }
 #endregion
 
+/// <summary>
+/// 어떤 적을 먼저 공격할지 정하는 Component
+/// </summary>
 public class TargetingComponent : MonoBehaviour
 {
     // TODO: Status에 따로 추가할지 추후에 결정
@@ -110,6 +113,8 @@ public class TargetingComponent : MonoBehaviour
     /// 사용할 타겟팅 전략
     /// </summary>
     private ITargetingStrategy targetingStrategy;
+
+    [SerializeReference] ITargetFilter fillterType;
 
     private void Start()
     {
@@ -131,9 +136,9 @@ public class TargetingComponent : MonoBehaviour
     public Transform GetTarget()
     {
         var enemiesInRange = Physics2D.OverlapCircleAll(transform.position, AttackRange, LayerMask.GetMask("Enemy"))
-            .Select(collider => collider.GetComponent<EnemyController>())
-            .Where(enemy => enemy != null);
+        .Select(e => e.GetComponent<EnemyController>());
+        var candidates = fillterType.Filter(enemiesInRange);
 
-        return targetingStrategy.SelectTarget(enemiesInRange);
+        return targetingStrategy.SelectTarget(candidates);
     }
 }

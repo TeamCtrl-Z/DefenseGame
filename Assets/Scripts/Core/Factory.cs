@@ -59,6 +59,8 @@ public class Factory : Singleton<Factory>
     /// </summary>
     private FairyPool fairy;
 
+    private MarkerPool marker;
+
     /// <summary>
     /// 초기화 함수
     /// </summary>
@@ -96,6 +98,9 @@ public class Factory : Singleton<Factory>
 
         if (this.TryGetComponentInChildren<FairyPool>(out fairy))
             fairy.Initialize();
+
+        if (this.TryGetComponentInChildren<MarkerPool>(out marker))
+            marker.Initialize();
     }
 
     /// <summary>
@@ -211,5 +216,10 @@ public class Factory : Singleton<Factory>
     public FairyController GetFairy(Vector2 position, float angle = 0.0f)
     {
         return fairy.GetObject(position, new Vector3(0, 0, angle));
+    }
+
+    public WireCircleMarker GetWireCircleMarker(Vector2 position, float angle = 0.0f)
+    {
+        return marker.GetObject(position, new Vector3(0, 0, angle));
     }
 }

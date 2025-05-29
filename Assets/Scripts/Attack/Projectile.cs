@@ -17,7 +17,7 @@ public class Projectile : RecycleObject
 
     private new Rigidbody2D rigidbody;
     private Transform target;
-    public event Action<IDamagable> OnHit;
+    public event Action<GameObject, Vector3> OnHit;
 
     private void Awake()
     {
@@ -37,7 +37,11 @@ public class Projectile : RecycleObject
         if (collision.transform != target)
             return;
 
-        OnHit?.Invoke(target.GetComponent<IDamagable>());
+        // if (collision.TryGetComponent<IDamagable>(out IDamagable dmg))
+        // {
+
+        // }
+        OnHit?.Invoke(collision.gameObject, transform.position);
         DisableTimer();
     }
 }

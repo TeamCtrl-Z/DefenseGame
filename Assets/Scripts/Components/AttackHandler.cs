@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using AnimatorHash;
@@ -10,6 +11,8 @@ public class AttackHandler : MonoBehaviour
 {
     private BasicAttack basicAttack;
     // TODO : AttributeAttack 추가하기
+    [SerializeField] private AttributeAbility attributeAbility;
+    private HittingData attributeHittingData;
 
     /// <summary>
     /// 캐릭터 ID를 가져오는 인터페이스
@@ -25,7 +28,11 @@ public class AttackHandler : MonoBehaviour
         if (FairyDataManager.Instance.TryGetValue(characterIdentity.ID, out FairyStatusData statData))
         {
             basicAttack = new BasicAttack(transform, new HittingData(statData.AttackPower));
+            //basicAttack.OnHitEnemy += splashAttack.Execute;
         }
+
+        attributeHittingData = new HittingData(statData.AttackPower);
+        attributeAbility.Initialize(basicAttack, this, attributeHittingData);
     }
 
     public void DoAttack(Transform target)
