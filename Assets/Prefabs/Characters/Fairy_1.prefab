@@ -134,7 +134,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1, y: 2}
   m_EdgeRadius: 0
 --- !u!95 &2447021253940917984
 Animator:
@@ -182,8 +182,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <ID>k__BackingField: 0
-  <AttackSpeed>k__BackingField: 0
-  <AttackPower>k__BackingField: 0
+  <AttackSpeedFactor>k__BackingField: 1
+  <AttackPowerFactor>k__BackingField: 1
 --- !u!114 &8123162563991563042
 MonoBehaviour:
   m_ObjectHideFlags: 0
