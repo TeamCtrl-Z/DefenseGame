@@ -18,7 +18,7 @@ public class NodeObjectBase : MonoBehaviour
     /// <summary>
     /// 이 노드에 배치됐는지 기록하는 변수
     /// </summary>
-    protected bool isEmpty;
+    protected bool isEmpty = true;
 
     /// <summary>
     /// 이 노드에 배치됐는지 알려주는 프로퍼티 

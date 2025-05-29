@@ -57,7 +57,13 @@ public class Factory : Singleton<Factory>
     /// <summary>
     /// Fairy 풀
     /// </summary>
-    private FairyPool fairy;
+    private FairyBasicPool fairyBasic;
+
+    private FairyFirePool fairyFire;
+    private FairyPoisonPool fairyPoison;
+    private FairyLightPool fairyLight;
+
+    private MarkerPool marker;
 
     /// <summary>
     /// 초기화 함수
@@ -94,8 +100,20 @@ public class Factory : Singleton<Factory>
         if (this.TryGetComponentInChildren<ProjectilePool>(out projectile))
             projectile.Initialize();
 
-        if (this.TryGetComponentInChildren<FairyPool>(out fairy))
-            fairy.Initialize();
+        if (this.TryGetComponentInChildren<FairyBasicPool>(out fairyBasic))
+            fairyBasic.Initialize();
+
+        if (this.TryGetComponentInChildren<FairyFirePool>(out fairyFire))
+            fairyFire.Initialize();
+        
+        if (this.TryGetComponentInChildren<FairyPoisonPool>(out fairyPoison))
+            fairyPoison.Initialize();
+        
+        if (this.TryGetComponentInChildren<FairyLightPool>(out fairyLight))
+            fairyLight.Initialize();
+
+        if (this.TryGetComponentInChildren<MarkerPool>(out marker))
+            marker.Initialize();
     }
 
     /// <summary>
@@ -208,8 +226,28 @@ public class Factory : Singleton<Factory>
         return projectile.GetObject(position, new Vector3(0, 0, angle));
     }
 
-    public FairyController GetFairy(Vector2 position, float angle = 0.0f)
+    public FairyController GetFairyBasic(Vector2 position, float angle = 0.0f)
     {
-        return fairy.GetObject(position, new Vector3(0, 0, angle));
+        return fairyBasic.GetObject(position, new Vector3(0, 0, angle));
+    }
+
+    public FairyController GetFariyFire(Vector2 position, float angle = 0.0f)
+    {
+        return fairyFire.GetObject(position, new Vector3(0, 0, angle));
+    }
+
+    public FairyController GetFariyPoison(Vector2 position, float angle = 0.0f)
+    {
+        return fairyPoison.GetObject(position, new Vector3(0, 0, angle));
+    }
+
+    public FairyController GetFariyLight(Vector2 position, float angle = 0.0f)
+    {
+        return fairyLight.GetObject(position, new Vector3(0, 0, angle));
+    }
+
+    public WireCircleMarker GetWireCircleMarker(Vector2 position, float angle = 0.0f)
+    {
+        return marker.GetObject(position, new Vector3(0, 0, angle));
     }
 }

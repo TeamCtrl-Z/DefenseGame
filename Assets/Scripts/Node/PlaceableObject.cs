@@ -26,6 +26,8 @@ public class PlaceableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
     /// </summary>
     Transform poolTransform;
 
+    public uint CurrentNodeIndex { get; private set; }
+
     private void Awake()
     {
         containerManager = GameManager.Instance.ContainerManager;
@@ -71,6 +73,7 @@ public class PlaceableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
 
         else
         {
+            CurrentNodeIndex = index;
             onDragBegin = null;
             onDragEnd = null;
             onDragBegin += containerManager.BoatNodeContainer[index].OnBeginDrag;

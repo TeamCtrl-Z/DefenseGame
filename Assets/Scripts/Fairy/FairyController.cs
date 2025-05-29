@@ -5,8 +5,6 @@ using UnityEngine;
 
 [RequireComponent(typeof(FairyStatusComponent))]
 [RequireComponent(typeof(Animator))]
-[RequireComponent(typeof(TargetingComponent))]
-[RequireComponent(typeof(AttackHandler))]
 public class FairyController : RecycleObject
 {
     public Transform TargetTransform => targetingComponent.GetTarget();

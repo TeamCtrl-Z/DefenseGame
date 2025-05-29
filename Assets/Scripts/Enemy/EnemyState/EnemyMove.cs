@@ -10,6 +10,9 @@ public class EnemyMove : EnemyBase
     public override void Enter(EnemyController sender)
     {
         base.Enter(sender);
+        
+        float speed = sender.MoveStatus.MoveSpeed;
+        stateMachine.Rigidbody.velocity = new Vector3(-speed, 0.0f);
     }
 
     public override void UpdateState(EnemyController sender)
@@ -22,8 +25,10 @@ public class EnemyMove : EnemyBase
             stateMachine.TransitionTo(stateMachine.Attack);
         }
 
-        float speed = sender.MoveStatus.MoveSpeed;
-        sender.transform.Translate(new Vector3(-speed, 0.0f, 0.0f) * Time.deltaTime);
+        if (stateMachine.BlockComponent.IsBlocked)
+        {
+            stateMachine.TransitionTo(stateMachine.Idle);
+        }
     }
 
     public override void Exit(EnemyController sender)

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class NodeContainerObject : MonoBehaviour
@@ -45,11 +46,16 @@ public class NodeContainerObject : MonoBehaviour
     public TempNodeObject TempNode => tempNode;
 
     /// <summary>
+    /// 컬럼별 Node 인덱스 맵, k = 반올림 x좌표, v = 그 컬럼의 노드 인덱스 리스트
+    /// </summary>
+    private Dictionary<int, List<uint>> columnMap;
+
+    /// <summary>
     /// 노드 컨테이너를 초기화 하는 함수
     /// </summary>
     public void InitializeNodeContainer()
     {
-        for(uint i = 0; i < nodes.Length; i++)
+        for (uint i = 0; i < nodes.Length; i++)
         {
             nodes[i].InitializeNode(i);
             nodes[i].onDragBegin += OnFairyMoveBegin;
@@ -57,11 +63,32 @@ public class NodeContainerObject : MonoBehaviour
         }
 
         tempNode.InitializeTempNode();
+        BuildColumnMap();
     }
 
     private void OnDisable()
     {
         ClearAllDelegates();
+    }
+
+    /// <summary>
+    /// 세로줄 그룹짓는 함수
+    /// </summary>
+    private void BuildColumnMap()
+    {
+        columnMap = new Dictionary<int, List<uint>>();
+
+        for (uint i = 0; i < nodes.Length; i++)
+        {
+            int colKey = Mathf.RoundToInt(nodes[i].transform.position.x);
+
+            if (columnMap.ContainsKey(colKey) == false)
+            {
+                columnMap[colKey] = new List<uint>();
+            }
+
+            columnMap[colKey].Add(i);
+        }
     }
 
     /// <summary>
@@ -173,6 +200,20 @@ public class NodeContainerObject : MonoBehaviour
         }
     }
 
+    public bool TryGetFairyAt(uint index, out IPlaceable fairy)
+    {
+        fairy = null;
+        if (IsValidIndex(index, out NodeObjectBase node))
+        {
+            if (node.IsEmpty == false)
+            {
+                fairy = node.Fairy;
+                return true;
+            }
+        }
+        return false;
+    }
+
     /// <summary>
     /// 옮기는 것을 취소하는 함수
     /// </summary>
@@ -182,6 +223,22 @@ public class NodeContainerObject : MonoBehaviour
         PlaceFairy(fromIndex, TempNode.Fairy);
         tempNode.ClearNode();
 
+    }
+
+    /// <summary>
+    /// Index 노드와 같은 세로줄에 있는 다른 노드 인덱스들을 리턴
+    /// </summary>
+    /// <param name="index"> 노드 인덱스 </param>
+    /// <returns></returns>
+    public List<uint> GetVerticalNeighbors(uint index)
+    {
+        if (index >= nodes.Length) return new List<uint>();
+
+        int colKey = Mathf.RoundToInt(nodes[index].transform.position.x);
+        if (columnMap.TryGetValue(colKey, out var list) == false)
+            return new List<uint>();
+
+        return list.Where(i => i != index).ToList();
     }
 
     /// <summary>
