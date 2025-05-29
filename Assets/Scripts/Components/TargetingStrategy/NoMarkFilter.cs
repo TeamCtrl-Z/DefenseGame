@@ -10,8 +10,8 @@ using UnityEngine;
 public enum MarkCondition { None = 0, Poison, Freeze, }
 
 [CreateAssetMenu(fileName = "NoMarkFilter", menuName = "Targeting/Filter/NoMarkFilter")]
-public class NoMarkFilter : ScriptableObject, ITargetFilter
+public class NoMarkFilter : TargetFilterData
 {
     public MarkCondition MarkType;
-    public IEnumerable<EnemyController> Filter(IEnumerable<EnemyController> enemies) => enemies.Where(e => e.MarkCondition != MarkType);
+    public override IEnumerable<EnemyController> Filter(IEnumerable<EnemyController> enemies) => enemies.Where(e => e.MarkCondition != MarkType);
 }

@@ -114,7 +114,10 @@ public class TargetingComponent : MonoBehaviour
     /// </summary>
     private ITargetingStrategy targetingStrategy;
 
-    [SerializeReference] ITargetFilter fillterType;
+    /// <summary>
+    /// 선택 조건
+    /// </summary>
+    [SerializeField] private TargetFilterData fillterType;
 
     private void Start()
     {
@@ -137,8 +140,12 @@ public class TargetingComponent : MonoBehaviour
     {
         var enemiesInRange = Physics2D.OverlapCircleAll(transform.position, AttackRange, LayerMask.GetMask("Enemy"))
         .Select(e => e.GetComponent<EnemyController>());
-        var candidates = fillterType.Filter(enemiesInRange);
+        if (fillterType != null)
+        {
+            var candidates = fillterType.Filter(enemiesInRange);
 
-        return targetingStrategy.SelectTarget(candidates);
+            return targetingStrategy.SelectTarget(candidates);
+        }
+        return targetingStrategy.SelectTarget(enemiesInRange);
     }
 }

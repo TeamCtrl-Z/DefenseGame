@@ -12,7 +12,7 @@ public class EnemyStatusComponent : MonoBehaviour, IMoveStatus, IHealthStatus, I
     [field: SerializeField] private GameObject enemyHPPrefab;
     private Image hpBar;
     [field: SerializeField] public int ID { get; private set; }
-    public float MoveSpeed { get; private set; }
+    public float MoveSpeed { get; private set; } = 3.0f;
     public float CurrentHP { get; private set; }
     public float MaxHP { get; private set; }
     public event Action<float> OnHPChanged;

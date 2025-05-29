@@ -10,11 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 985742445938415812}
   - component: {fileID: 800074536531206415}
-  - component: {fileID: 902481885604811025}
   - component: {fileID: 2195413274768187831}
   - component: {fileID: -1416969191847120083}
+  - component: {fileID: 902481885604811025}
   - component: {fileID: -2208974991643963094}
   - component: {fileID: -7411345559912782072}
+  - component: {fileID: 73318884043820784}
   m_Layer: 7
   m_Name: Enemy_1
   m_TagString: Untagged
@@ -89,18 +90,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &902481885604811025
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4333508385416445607}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 712387dad77688149a47c84e72729e2d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!58 &2195413274768187831
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -161,8 +150,20 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
+--- !u!114 &902481885604811025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4333508385416445607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 712387dad77688149a47c84e72729e2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &-2208974991643963094
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,3 +199,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &73318884043820784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4333508385416445607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47f29502aaa337e4188898caad09542b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distance: 2
+  blockLayer:
+    serializedVersion: 2
+    m_Bits: 64

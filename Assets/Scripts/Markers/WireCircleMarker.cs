@@ -11,4 +11,10 @@ public class WireCircleMarker : RecycleObject
 
         DisableTimer(3.0f);
     }
+
+    protected override void OnDisable()
+    {
+        transform.localScale = Vector2.one;
+        base.OnDisable();
+    }
 }

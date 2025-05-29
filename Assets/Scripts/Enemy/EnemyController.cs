@@ -15,9 +15,12 @@ public class EnemyController : RecycleObject, IDamagable
 
     private void Awake()
     {
-        enemyStateMachine = new EnemyStateMachine(this);
         MoveStatus = GetComponent<IMoveStatus>();
         HealthStatus = GetComponent<IHealthStatus>();
+    }
+    void Start()
+    {
+        enemyStateMachine = new EnemyStateMachine(this);
     }
 
     private void Update()
@@ -28,8 +31,8 @@ public class EnemyController : RecycleObject, IDamagable
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, 1.0f);  // radius = 1
+        // Gizmos.color = Color.red;
+        // Gizmos.DrawWireSphere(transform.position, 1.0f);  // radius = 1
     }
 
     public void OnDamage(GameObject attacker, HittingData data)
@@ -40,6 +43,7 @@ public class EnemyController : RecycleObject, IDamagable
     public void OnDotDamage(GameObject attacker, HittingData data, float term)
     {
         StartCoroutine(DotDamageRoutine(data, term));
+        MarkCondition = data.condition;
     }
 
     private IEnumerator DotDamageRoutine(HittingData data, float term)

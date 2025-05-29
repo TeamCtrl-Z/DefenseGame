@@ -9,10 +9,7 @@ using UnityEngine;
 /// </summary>
 public class AttackHandler : MonoBehaviour
 {
-    private BasicAttack basicAttack;
-    // TODO : AttributeAttack 추가하기
-    [SerializeField] private AttributeAbility attributeAbility;
-    private HittingData attributeHittingData;
+    [SerializeField] private AttackBase attack;
 
     /// <summary>
     /// 캐릭터 ID를 가져오는 인터페이스
@@ -25,18 +22,17 @@ public class AttackHandler : MonoBehaviour
 
     private void Start()
     {
-        if (FairyDataManager.Instance.TryGetValue(characterIdentity.ID, out FairyStatusData statData))
-        {
-            basicAttack = new BasicAttack(transform, new HittingData(statData.AttackPower));
-            //basicAttack.OnHitEnemy += splashAttack.Execute;
-        }
-
-        attributeHittingData = new HittingData(statData.AttackPower);
-        attributeAbility.Initialize(basicAttack, this, attributeHittingData);
+        // if (FairyDataManager.Instance.TryGetValue(characterIdentity.ID, out FairyStatusData statData))
+        // {
+        //     basicAttack = new BasicAttack(transform, new HittingData(statData.AttackPower));
+        //     //basicAttack.OnHitEnemy += splashAttack.Execute;
+        // }
+        if (attack != null)
+            attack.Initialize(GetComponent<FairyController>());
     }
 
     public void DoAttack(Transform target)
     {
-        basicAttack.DoAttack(target);
+        attack.DoAttack(target);
     }
 }
