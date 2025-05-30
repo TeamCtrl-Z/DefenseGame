@@ -136,6 +136,6 @@ public class HighlightOverlay : MonoBehaviour
             spriteRenderer.color = new Color(1, 1, 1, alpha);
             yield return null;
         }
-        spriteRenderer.color = new Color(1, 1, 1, 0f);
+        spriteRenderer.color = new Color(1, 1, 1, 0.1f);
     }
 }

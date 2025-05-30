@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: -1416969191847120083}
   - component: {fileID: 902481885604811025}
   - component: {fileID: -2208974991643963094}
-  - component: {fileID: -7411345559912782072}
   - component: {fileID: 73318884043820784}
+  - component: {fileID: 7256499425212340642}
   m_Layer: 7
   m_Name: Enemy_1
   m_TagString: Untagged
@@ -79,7 +79,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
@@ -87,7 +87,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!58 &2195413274768187831
@@ -178,7 +178,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyHPPrefab: {fileID: 7117484175716486429, guid: 7404ce1ad3fdf3a47865dd217558565f, type: 3}
   <ID>k__BackingField: 0
---- !u!95 &-7411345559912782072
+--- !u!114 &73318884043820784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4333508385416445607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47f29502aaa337e4188898caad09542b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distance: 2
+  blockLayer:
+    serializedVersion: 2
+    m_Bits: 64
+--- !u!95 &7256499425212340642
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
@@ -199,19 +215,3 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &73318884043820784
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4333508385416445607}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47f29502aaa337e4188898caad09542b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  distance: 2
-  blockLayer:
-    serializedVersion: 2
-    m_Bits: 64
