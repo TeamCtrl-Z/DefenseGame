@@ -57,7 +57,7 @@ public class Factory : Singleton<Factory>
     private ProjectilePool projectile;
 
     /// <summary>
-    /// Fairy 풀
+    /// Fairy Basic풀
     /// </summary>
     private FairyBasicPool fairyBasic;
 
@@ -65,6 +65,7 @@ public class Factory : Singleton<Factory>
     private FairyPoisonPool fairyPoison;
     private FairyLightPool fairyLight;
     private FairyFreezePool fairyFreeze;
+    private FairyFrozenPool fairyFrozen;
 
     private MarkerPool marker;
 
@@ -117,6 +118,9 @@ public class Factory : Singleton<Factory>
 
         if (this.TryGetComponentInChildren<FairyFreezePool>(out fairyFreeze))
             fairyFreeze.Initialize();
+        
+        if (this.TryGetComponentInChildren<FairyFrozenPool>(out fairyFrozen))
+            fairyFrozen.Initialize();
 
         if (this.TryGetComponentInChildren<MarkerPool>(out marker))
             marker.Initialize();
@@ -232,29 +236,24 @@ public class Factory : Singleton<Factory>
         return projectile.GetObject(position, new Vector3(0, 0, angle));
     }
 
+    /// <summary>
+    /// FairyType을 입력하여 Fairy를 받아오는 함수
+    /// </summary>
+    /// <param name="type"> Fairy 유형 </param>
+    /// <param name="position"> 위치 </param>
+    /// <param name="angle"> 각도 </param>
+    /// <returns></returns>
     public FairyController GetFariyByType(FairyType type, Vector2 position, float angle = 0.0f)
     {
-        // switch (type)
-        // {
-        //     ("fairy" + type.ToString()).GetObject
-        //     case FairyType.Basic: return fairyBasic.GetObject(position, new Vector3(0, 0, angle));
-        // case FairyType.Fire: return fairyFire.GetObject(position, new Vector3(0, 0, angle));
-        // case FairyType.Poison: return fairyPoison.GetObject(position, new Vector3(0, 0, angle));
-        // }
-        string fieldName = "fairy" + type.ToString();
-        FieldInfo fi = this.GetType().GetField(fieldName, BindingFlags.NonPublic);
-
-        if (fi == null)
-            return null;
-
-        object target = fi.GetValue(this);
-
-        if (target is ObjectPool<FairyController> ob)
+        switch (type)
         {
-            return ob.GetObject(position, new Vector3(0, 0, angle));
+            case FairyType.Basic: return fairyBasic.GetObject(position, new Vector3(0, 0, angle));
+            case FairyType.Fire: return fairyFire.GetObject(position, new Vector3(0, 0, angle));
+            case FairyType.Poison: return fairyPoison.GetObject(position, new Vector3(0, 0, angle));
+            case FairyType.Freeze: return fairyFreeze.GetObject(position, new Vector3(0, 0, angle));
+            case FairyType.Frozen: return fairyFrozen.GetObject(position, new Vector3(0, 0, angle));
+            default: return null;
         }
-
-        return null;
     }
 
     public FairyController GetFairyBasic(Vector2 position, float angle = 0.0f)
@@ -280,6 +279,11 @@ public class Factory : Singleton<Factory>
     public FairyController GetFariyFreeze(Vector2 position, float angle = 0.0f)
     {
         return fairyFreeze.GetObject(position, new Vector3(0, 0, angle));
+    }
+
+    public FairyController GetFariyFrozen(Vector2 position, float angle = 0.0f)
+    {
+        return fairyFrozen.GetObject(position, new Vector3(0, 0, angle));
     }
 
     public WireCircleMarker GetWireCircleMarker(Vector2 position, float angle = 0.0f)

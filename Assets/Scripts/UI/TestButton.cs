@@ -16,6 +16,7 @@ public class TestButton : MonoBehaviour
         fairySelect[FairyType.Poison] = () => Factory.Instance.GetFariyPoison(Vector2.zero, 0.0f);
         fairySelect[FairyType.Light] = () => Factory.Instance.GetFariyLight(Vector2.zero, 0.0f);
         fairySelect[FairyType.Freeze] = () => Factory.Instance.GetFariyFreeze(Vector2.zero, 0.0f);
+        fairySelect[FairyType.Frozen] = () => Factory.Instance.GetFariyFrozen(Vector2.zero, 0.0f);
         // for (int i = 0; i < (int)FairyType.Max; i++)
         // {
         //     fairySelect[(FairyType)i] = () => Factory.Instance.GetFariyByType((FairyType)i, Vector2.zero, 0.0f);

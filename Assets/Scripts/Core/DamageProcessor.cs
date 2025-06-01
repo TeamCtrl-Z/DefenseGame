@@ -14,6 +14,7 @@ public class DamageProcessor : MonoBehaviour
         DamageFuncs[DebuffType.None] = (status, amount) => ApplyDamage(status, amount);
         DamageFuncs[DebuffType.Poison] = (status, amount) => ApplyDotDamage(status, amount);
         DamageFuncs[DebuffType.Freeze] = (status, amount) => ApplySlowDebuff(status, amount);
+        DamageFuncs[DebuffType.Frozen] = (status, amount) => ApplySlowDebuff(status, amount);
     }
 
     public void ApplyDamage(IHealthStatus hp, float dmg)
@@ -40,6 +41,7 @@ public class DamageProcessor : MonoBehaviour
     public void ApplySlowDebuff(IMoveStatus move, float slowRatio)
     {
         // TODO : 슬로우 디버프
-        move.MoveSpeedMultiplier = slowRatio;
+        if (move.MoveSpeedMultiplier > slowRatio)
+            move.MoveSpeedMultiplier = slowRatio;
     }
 }

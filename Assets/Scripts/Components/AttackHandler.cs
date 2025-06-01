@@ -36,9 +36,20 @@ public class AttackHandler : MonoBehaviour
     /// </summary>
     private float coolTime => status.AttackSpeed;
 
+    /// <summary>
+    /// Fairy의 Animator
+    /// </summary>
     private Animator animator;
 
+    /// <summary>
+    /// 공격을 시작할 때 알리기 위한 이벤트
+    /// </summary>
     public event Action OnAttack;
+
+    /// <summary>
+    /// 외부에 공격했다는 것을 알리기 위한 이벤트
+    /// </summary>
+    public event Action<IDamagable, Vector3> OnHit;
 
     private void Awake()
     {
@@ -47,8 +58,15 @@ public class AttackHandler : MonoBehaviour
         animator = GetComponentInParent<Animator>();
     }
 
+    private void OnEnable()
+    {
+
+    }
+
     private void Start()
     {
+        attack.OnHit -= OnHitRecieved;
+        attack.OnHit += OnHitRecieved;
         attack.Initialize(GetComponentInParent<FairyController>());
     }
 
@@ -61,17 +79,37 @@ public class AttackHandler : MonoBehaviour
         if (chosen != null)
             DoAttack(chosen);
     }
+
+    /// <summary>
+    /// 공격할 수 있는지 검사하는 함수
+    /// </summary>
+    /// <returns></returns>
     public bool CanAttack()
     {
         return Time.time >= lastAttackTime + coolTime
             && targeting.TargetsInRange.Any();
     }
 
+    /// <summary>
+    /// 공격을 실행하는 함수(TODO : 현재는 )
+    /// </summary>
+    /// <param name="target"></param>
     public void DoAttack(Transform target)
     {
+        animator.SetTrigger(AnimatorHash.Fairy.AttackTrigger);
         attack.DoAttack(target);
         lastAttackTime = Time.time;
-        animator.SetTrigger(AnimatorHash.Fairy.AttackTrigger);
         OnAttack?.Invoke();
+    }
+
+    /// <summary>
+    /// 공격했다는 알림을 받는 이벤트 함수
+    /// </summary>
+    /// <param name="dmg"> 데미지를 받은 피격체 </param>
+    /// <param name="origin"> 데미지를 입은 위치 </param>
+    private void OnHitRecieved(IDamagable dmg, Vector3 origin)
+    {
+        Debug.Log(this.transform.parent.name + ": " + this.GetType() + " : OnHit");
+        OnHit?.Invoke(dmg, origin);
     }
 }

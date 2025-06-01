@@ -11,11 +11,6 @@ public abstract class AttackBase : ScriptableObject, IAttack
     protected FairyController attacker;
 
     /// <summary>
-    /// 공격에 사용될 투사체
-    /// </summary>
-    private Projectile projectile;
-
-    /// <summary>
     /// 피격 데이터
     /// </summary>
     [SerializeField] protected HittingData data;
@@ -29,21 +24,22 @@ public abstract class AttackBase : ScriptableObject, IAttack
         this.attacker = attacker;
     }
 
-    public virtual void DoAttack(Transform target)
-    {
-        projectile = Factory.Instance.GetProjectile(attacker.transform.position);
-        projectile.OnHit += OnHit;
-        projectile.onDisable += () => projectile.OnHit -= OnHit;
-        projectile.Shoot(target);
-    }
+    public abstract void DoAttack(Transform target);
 
     /// <summary>
-    /// 투사체로 적을 공격했을 때 호출되는 이벤트 함수
+    /// 외부에게 몬스터를 피격시켰다고 알려주는 이벤트
+    /// </summary>
+    public event Action<IDamagable, Vector3> OnHit;
+
+    /// <summary>
+    /// 공격을 하는 주체가 몬스터를 공격했을 때 발동되는 이벤트 함수
     /// </summary>
     /// <param name="dmg"></param>
     /// <param name="origin"></param>
-    protected virtual void OnHit(IDamagable dmg, Vector3 origin)
+    protected virtual void NotifyOnHit(IDamagable dmg, Vector3 origin)
     {
+        Debug.Log(this.GetType() + " : OnHit");
         dmg.OnDamage(attacker.gameObject, data);
+        OnHit?.Invoke(dmg, origin);
     }
 }
