@@ -17,6 +17,11 @@ public class PlaceableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
     public event Action<PointerEventData> onDragEnd;
 
     /// <summary>
+    /// 페어리가 배치됐을 때 호출되는 이벤트
+    /// </summary>
+    public event Action<uint> OnPlaced;
+
+    /// <summary>
     /// 컨테이너 매니저
     /// </summary>
     private ContainerManager containerManager;
@@ -70,7 +75,6 @@ public class PlaceableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
         {
             transform.position = containerManager.BoatNodeContainer.TempNode.transform.position;
         }
-
         else
         {
             CurrentNodeIndex = index;
@@ -80,6 +84,8 @@ public class PlaceableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
             onDragEnd += containerManager.BoatNodeContainer[index].OnEndDrag;
             transform.SetParent(containerManager.BoatNodeContainer[index].transform, false);
             transform.position = containerManager.BoatNodeContainer[index].transform.position;
+            SortOrderFairy();
+            OnPlaced?.Invoke(index);
         }
     }
 
@@ -89,5 +95,11 @@ public class PlaceableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
     public void ReturnToPool()
     {
         transform.SetParent(poolTransform, false);
+    }
+
+    private void SortOrderFairy()
+    {
+        SpriteRenderer renderer = GetComponent<SpriteRenderer>();
+        renderer.sortingOrder = -Mathf.FloorToInt(transform.position.y * 1000);
     }
 }

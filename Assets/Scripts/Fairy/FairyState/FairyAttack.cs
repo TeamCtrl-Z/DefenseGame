@@ -11,7 +11,7 @@ public class FairyAttack : FairyBase
     {
         base.Enter(sender);
         stateMachine.Animator.SetTrigger(AnimatorHash.Fairy.AttackTrigger);
-        stateMachine.AttackHandler.DoAttack(sender.TargetTransform);
+        //stateMachine.AttackHandler.DoAttack(sender.TargetTransform);
     }
 
     public override void UpdateState(FairyController sender)

@@ -18,7 +18,7 @@ public class DotDamageEffectData : AbilityEffectData
     {
         if (target.TryGetComponent<IDamagable>(out IDamagable dmg))
         {
-            dmg.OnDotDamage(executer, data, Term);
+            //dmg.OnDotDamage(executer, data, Term);
         }
     }
 

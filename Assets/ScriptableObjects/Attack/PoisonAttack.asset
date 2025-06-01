@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: PoisonAttack
   m_EditorClassIdentifier: 
   data:
-    Damage: 5
-    condition: 1
+    Damage: 20
+    Debuff: 0
+  attributeData:
+    Damage: 10
+    Debuff: 1
   Term: 1

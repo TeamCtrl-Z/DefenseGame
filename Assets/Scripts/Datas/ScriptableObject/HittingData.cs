@@ -10,13 +10,13 @@ using UnityEngine;
 public struct HittingData
 {
     public float Damage;
-    public MarkCondition condition;
+    public DebuffType Debuff;
     // TODO : 필요한 것 있으면 그때 그때 추가
 
     // TODO : 나중에 CSV파일과 연동하기
-    public HittingData(float damage, MarkCondition condition)
+    public HittingData(float damage, DebuffType condition)
     {
         Damage = damage;
-        this.condition = condition;
+        this.Debuff = condition;
     }
 }

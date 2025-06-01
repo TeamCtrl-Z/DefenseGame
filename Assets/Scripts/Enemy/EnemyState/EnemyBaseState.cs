@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class EnemyBase : IState<EnemyController>
+public abstract class EnemyBaseState : IState<EnemyController>
 {
     protected EnemyStateMachine stateMachine;
-    public EnemyBase(EnemyStateMachine stateMachine)
+    public EnemyBaseState(EnemyStateMachine stateMachine)
     {
         this.stateMachine = stateMachine;
     }

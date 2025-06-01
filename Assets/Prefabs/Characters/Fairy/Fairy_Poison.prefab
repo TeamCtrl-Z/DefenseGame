@@ -52,14 +52,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fairy_Poison
       objectReference: {fileID: 0}
+    - target: {fileID: 3493612220457049999, guid: 9e7b6c1ac8121ce468ed43a686720566, type: 3}
+      propertyPath: attack
+      value: 
+      objectReference: {fileID: 11400000, guid: 8ed993e98162e8e45a68dda8650a931c, type: 2}
     - target: {fileID: 4639793165498065459, guid: 9e7b6c1ac8121ce468ed43a686720566, type: 3}
       propertyPath: attack
       value: 
       objectReference: {fileID: 11400000, guid: 8ed993e98162e8e45a68dda8650a931c, type: 2}
+    - target: {fileID: 4992255371126683721, guid: 9e7b6c1ac8121ce468ed43a686720566, type: 3}
+      propertyPath: fillterType
+      value: 
+      objectReference: {fileID: 11400000, guid: 445dc1c97621a8a449f8296977cd5216, type: 2}
+    - target: {fileID: 4992255371126683721, guid: 9e7b6c1ac8121ce468ed43a686720566, type: 3}
+      propertyPath: targetingStrategy
+      value: 
+      objectReference: {fileID: 11400000, guid: 8497bfd57c6086b4fa22a8747cc9a66b, type: 2}
+    - target: {fileID: 7121823322864196315, guid: 9e7b6c1ac8121ce468ed43a686720566, type: 3}
+      propertyPath: m_Name
+      value: FairyAttack
+      objectReference: {fileID: 0}
     - target: {fileID: 8123162563991563042, guid: 9e7b6c1ac8121ce468ed43a686720566, type: 3}
       propertyPath: fillterType
       value: 
       objectReference: {fileID: 11400000, guid: 445dc1c97621a8a449f8296977cd5216, type: 2}
+    - target: {fileID: 8123162563991563042, guid: 9e7b6c1ac8121ce468ed43a686720566, type: 3}
+      propertyPath: targetingStrategy
+      value: 
+      objectReference: {fileID: 11400000, guid: 57ed85cfcd682364885904598aa02d67, type: 2}
     - target: {fileID: 8561114932065450332, guid: 9e7b6c1ac8121ce468ed43a686720566, type: 3}
       propertyPath: m_Color.b
       value: 0.9716981

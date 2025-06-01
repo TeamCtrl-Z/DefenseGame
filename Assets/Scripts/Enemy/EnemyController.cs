@@ -3,21 +3,51 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyController : RecycleObject, IDamagable
+public class EnemyController : RecycleObject, IDamagable, ITargetable
 {
     /// <summary>
     /// StateMachine
     /// </summary>
     private EnemyStateMachine enemyStateMachine;
-    public IMoveStatus MoveStatus { get; private set; }
-    public IHealthStatus HealthStatus { get; private set; }
-    public MarkCondition MarkCondition { get; private set; }
+    public EnemyStatusComponent StatusComponent { get; private set; }
+
+    public Transform Transform => transform;
+
+    /// <summary>
+    /// 적의 디버프 관리
+    /// </summary>
+    private EnemyStatusEffectComponent statusEffect;
+
+    /// <summary>
+    /// 데미지 총괄 처리
+    /// </summary>
+    private DamageProcessor damageProcessor;
+
+    /// <summary>
+    /// 살아 있는지
+    /// </summary>
+    public bool IsAlive => StatusComponent.CurrentHP > 0.0f;
+
 
     private void Awake()
     {
-        MoveStatus = GetComponent<IMoveStatus>();
-        HealthStatus = GetComponent<IHealthStatus>();
+        StatusComponent = GetComponent<EnemyStatusComponent>();
+        statusEffect = GetComponent<EnemyStatusEffectComponent>();
+        damageProcessor = GetComponent<DamageProcessor>();
     }
+
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+        StatusComponent.OnHPChanged += HandleHpChanged;
+    }
+
+    protected override void OnDisable()
+    {
+        base.OnDisable();
+        StatusComponent.OnHPChanged -= HandleHpChanged;
+    }
+
     void Start()
     {
         enemyStateMachine = new EnemyStateMachine(this);
@@ -29,29 +59,25 @@ public class EnemyController : RecycleObject, IDamagable
         enemyStateMachine.Update();
     }
 
-    private void OnDrawGizmosSelected()
-    {
-        // Gizmos.color = Color.red;
-        // Gizmos.DrawWireSphere(transform.position, 1.0f);  // radius = 1
-    }
-
     public void OnDamage(GameObject attacker, HittingData data)
     {
-        HealthStatus.ChangeHP(-data.Damage);
+        statusEffect.AddStack(data.Debuff);
+        damageProcessor.DamageFuncs[data.Debuff](StatusComponent, data.Damage);
     }
 
-    public void OnDotDamage(GameObject attacker, HittingData data, float term)
+    private void HandleHpChanged(float hp)
     {
-        StartCoroutine(DotDamageRoutine(data, term));
-        MarkCondition = data.condition;
+        if (IsAlive == false)
+            enemyStateMachine.TransitionTo(enemyStateMachine.Die);
     }
 
-    private IEnumerator DotDamageRoutine(HittingData data, float term)
+    public void Die()
     {
-        while (true)
-        {
-            HealthStatus.ChangeHP(-data.Damage);
-            yield return new WaitForSeconds(term);
-        }
+        DisableTimer();
+    }
+
+    public IStatusEffectProvider GetStatusEffectProvider()
+    {
+        return statusEffect as IStatusEffectProvider;
     }
 }

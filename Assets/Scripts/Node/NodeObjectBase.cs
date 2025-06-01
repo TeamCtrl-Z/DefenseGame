@@ -35,6 +35,8 @@ public class NodeObjectBase : MonoBehaviour
     /// </summary>
     public IPlaceable Fairy => fairy;
 
+    public event Action<uint, IPlaceable> OnPlacedFairy;
+
     /// <summary>
     /// 이 노드에 페어리를 추가하는 함수
     /// </summary>
@@ -45,10 +47,14 @@ public class NodeObjectBase : MonoBehaviour
             this.fairy = fairy;
             fairy.Place(Index);
             isEmpty = false;
+
+            OnPlacedFairy?.Invoke(Index, fairy);
         }
         else
         {
+            Debug.Log("PlaceNode");
             ClearNode();
+            OnPlacedFairy?.Invoke(Index, null);
         }
     }
 

@@ -26,10 +26,10 @@ public class FairyIdle : FairyBase
         if (m_waitTime > 0.0f)
             return;
         
-        if (sender.TargetTransform)
-        {
-            stateMachine.TransitionTo(stateMachine.Attack);
-        }
+        // if (sender.TargetTransform)
+        // {
+        //     stateMachine.TransitionTo(stateMachine.Attack);
+        // }
     }
 
     public override void Exit(FairyController sender)

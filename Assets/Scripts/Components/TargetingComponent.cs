@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,75 +24,6 @@ public enum TargetingType
     Healthiest,
 }
 
-#region TargetingStrategy
-public interface ITargetingStrategy
-{
-    /// <summary>
-    /// 타겟을 선택하는 함수
-    /// </summary>
-    /// <param name="enemies"> 타겟을 선정할 후보들 </param>
-    /// <returns> 선정된 적 Transform </returns>
-    public Transform SelectTarget(IEnumerable<EnemyController> enemies);
-}
-
-public class NearestTargeting : ITargetingStrategy
-{
-    /// <summary>
-    /// Fariy 위치
-    /// </summary>
-    private Transform origin;
-    public NearestTargeting(Transform origin) => this.origin = origin;
-    public virtual Transform SelectTarget(IEnumerable<EnemyController> enemies)
-    {
-        Transform nearest = null;
-        float minDistance = float.MaxValue;
-
-        foreach (var enemy in enemies)
-        {
-            float distance = Vector2.Distance(origin.position, enemy.transform.position);
-            if (distance < minDistance)
-            {
-                minDistance = distance;
-                nearest = enemy.transform;
-            }
-        }
-        return nearest;
-    }
-}
-
-public class RandomTargeting : ITargetingStrategy
-{
-    public Transform SelectTarget(IEnumerable<EnemyController> enemies)
-    {
-        List<EnemyController> enemyList = new List<EnemyController>(enemies);
-        if (enemyList.Count == 0) return null;
-
-        int randomIndex = Random.Range(0, enemyList.Count);
-        return enemyList[randomIndex].transform;
-    }
-}
-
-public class HealthiestTargeting : ITargetingStrategy
-{
-    public Transform SelectTarget(IEnumerable<EnemyController> enemies)
-    {
-        Transform healthiest = null;
-        float maxHealth = float.MinValue;
-
-        foreach (var enemy in enemies)
-        {
-            float health = enemy.GetComponent<IHealthStatus>().CurrentHP;
-            if (health > maxHealth)
-            {
-                maxHealth = health;
-                healthiest = enemy.transform;
-            }
-        }
-        return healthiest;
-    }
-}
-#endregion
-
 /// <summary>
 /// 어떤 적을 먼저 공격할지 정하는 Component
 /// </summary>
@@ -112,40 +44,89 @@ public class TargetingComponent : MonoBehaviour
     /// <summary>
     /// 사용할 타겟팅 전략
     /// </summary>
-    private ITargetingStrategy targetingStrategy;
+    [SerializeField] private TargetingStrategyData targetingStrategy;
 
     /// <summary>
     /// 선택 조건
     /// </summary>
     [SerializeField] private TargetFilterData fillterType;
 
+    /// <summary>
+    /// 범위 안에 있는 타겟들
+    /// </summary>
+    private readonly HashSet<ITargetable> targetsInRange = new();
+
+    public IEnumerable<ITargetable> TargetsInRange => targetsInRange;
+
+    /// <summary>
+    /// 타겟이 감지되면 호출되는 이벤트
+    /// </summary>
+    public event Action<ITargetable> OnTargetEnterRange;
+
+    /// <summary>
+    /// 타겟이 범위 안에 나가면 호출되는 이벤트
+    /// </summary>
+    public event Action<ITargetable> OnTargetExitRange;
+
+    private void Awake()
+    {
+        CircleCollider2D col = GetComponent<CircleCollider2D>();
+        col.isTrigger = true;
+        col.radius = AttackRange;
+    }
+
     private void Start()
     {
-        characterIdentity = GetComponent<ICharacterIdentity>();
-        FairyDataManager.Instance.TryGetTargetingType(characterIdentity.ID, out TargetingType type);
-        targetingStrategy = type switch
-        {
-            TargetingType.Nearest => new NearestTargeting(transform),
-            TargetingType.Random => new RandomTargeting(),
-            TargetingType.Healthiest => new HealthiestTargeting(),
-            _ => throw new System.NotImplementedException()
-        };
+        characterIdentity = GetComponentInParent<ICharacterIdentity>();
+        // FairyDataManager.Instance.TryGetTargetingType(characterIdentity.ID, out TargetingType type);
+        // targetingStrategy = type switch
+        // {
+        //     TargetingType.Nearest => new NearestTargeting(transform),
+        //     TargetingType.Random => new RandomTargeting(),
+        //     TargetingType.Healthiest => new HealthiestTargeting(),
+        //     _ => throw new System.NotImplementedException()
+        // };
     }
 
     /// <summary>
     /// 타겟을 가져오는 메서드
     /// </summary>
     /// <returns></returns>
-    public Transform GetTarget()
+    public Transform SelectTarget(IEnumerable<ITargetable> candidates)
     {
-        var enemiesInRange = Physics2D.OverlapCircleAll(transform.position, AttackRange, LayerMask.GetMask("Enemy"))
-        .Select(e => e.GetComponent<EnemyController>());
         if (fillterType != null)
         {
-            var candidates = fillterType.Filter(enemiesInRange);
+            var fillteringCandidates = fillterType.Filter(candidates);
 
-            return targetingStrategy.SelectTarget(candidates);
+            return targetingStrategy.SelectTarget(transform, fillteringCandidates);
         }
-        return targetingStrategy.SelectTarget(enemiesInRange);
+        return targetingStrategy.SelectTarget(transform, candidates);
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.TryGetComponent<ITargetable>(out ITargetable target))
+        {
+            if (targetsInRange.Add(target))
+            {
+                if (target is EnemyController enemy)
+                    enemy.onDisable += () => RemoveTarget(target);
+                OnTargetEnterRange?.Invoke(target);
+            }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.TryGetComponent<ITargetable>(out ITargetable target))
+        {
+            RemoveTarget(target);
+        }
+    }
+
+    private void RemoveTarget(ITargetable target)
+    {
+        if (targetsInRange.Remove(target))
+            OnTargetExitRange?.Invoke(target);
     }
 }

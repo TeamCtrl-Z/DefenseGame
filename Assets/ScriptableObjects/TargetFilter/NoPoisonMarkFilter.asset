@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc33a6b63b7a6d348a281b7e114574b2, type: 3}
   m_Name: NoPoisonMarkFilter
   m_EditorClassIdentifier: 
-  MarkType: 1
+  DebuffType: 1

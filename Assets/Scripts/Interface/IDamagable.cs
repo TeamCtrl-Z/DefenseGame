@@ -10,10 +10,8 @@ public interface IDamagable
     void OnDamage(GameObject attacker, HittingData data);
 
     /// <summary>
-    /// 도트 데미지를 당했을 때 실행되는 함수
+    /// 디버프 스택 조회용
     /// </summary>
-    /// <param name="attacker"> 공격한 오브젝트 </param>
-    /// <param name="data"> 피격 정보 </param>
-    /// <param name="term"> 데미지 텀 </param>
-    void OnDotDamage(GameObject attacker, HittingData data, float term);
+    /// <returns></returns>
+    IStatusEffectProvider GetStatusEffectProvider();
 }

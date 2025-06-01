@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyIdle : EnemyBase
+public class EnemyIdleState : EnemyBaseState
 {
-    public EnemyIdle(EnemyStateMachine stateMachine) : base(stateMachine)
+    public EnemyIdleState(EnemyStateMachine stateMachine) : base(stateMachine)
     {}
 
     public override void Enter(EnemyController sender)
