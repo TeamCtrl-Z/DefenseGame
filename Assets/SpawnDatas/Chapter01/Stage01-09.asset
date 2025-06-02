@@ -18,40 +18,40 @@ MonoBehaviour:
     spawnPosition: {x: 10, y: 0}
   - spawnType: 0
     spawnTime: 1
-    spawnPosition: {x: 10, y: -1}
+    spawnPosition: {x: 10, y: -0.5}
   - spawnType: 0
     spawnTime: 1
+    spawnPosition: {x: 10, y: 0.5}
+  - spawnType: 3
+    spawnTime: 3
     spawnPosition: {x: 10, y: 1}
   - spawnType: 3
     spawnTime: 3
     spawnPosition: {x: 10, y: 2}
+  - spawnType: 0
+    spawnTime: 8
+    spawnPosition: {x: 10, y: -0.5}
+  - spawnType: 0
+    spawnTime: 8
+    spawnPosition: {x: 10, y: -1.5}
+  - spawnType: 0
+    spawnTime: 8
+    spawnPosition: {x: 10, y: 1}
   - spawnType: 3
-    spawnTime: 3
-    spawnPosition: {x: 10, y: 4}
-  - spawnType: 0
-    spawnTime: 8
-    spawnPosition: {x: 10, y: -1}
-  - spawnType: 0
-    spawnTime: 8
-    spawnPosition: {x: 10, y: -3}
-  - spawnType: 0
-    spawnTime: 8
+    spawnTime: 10
     spawnPosition: {x: 10, y: 2}
   - spawnType: 3
     spawnTime: 10
-    spawnPosition: {x: 10, y: 4}
-  - spawnType: 3
-    spawnTime: 10
-    spawnPosition: {x: 10, y: -4}
+    spawnPosition: {x: 10, y: -2}
   - spawnType: 0
     spawnTime: 16
-    spawnPosition: {x: 10, y: 3}
+    spawnPosition: {x: 10, y: 1.5}
   - spawnType: 0
     spawnTime: 16
     spawnPosition: {x: 10, y: 0}
   - spawnType: 0
     spawnTime: 16
-    spawnPosition: {x: 10, y: 2}
+    spawnPosition: {x: 10, y: 1}
   - spawnType: 3
     spawnTime: 18
     spawnPosition: {x: 10, y: 0}
@@ -60,19 +60,19 @@ MonoBehaviour:
     spawnPosition: {x: 10, y: 0}
   - spawnType: 0
     spawnTime: 24
-    spawnPosition: {x: 10, y: 2}
+    spawnPosition: {x: 10, y: 1}
   - spawnType: 0
     spawnTime: 25
-    spawnPosition: {x: 10, y: -2}
+    spawnPosition: {x: 10, y: -1}
   - spawnType: 0
     spawnTime: 26
-    spawnPosition: {x: 10, y: -1}
+    spawnPosition: {x: 10, y: -0.5}
   - spawnType: 3
     spawnTime: 26
-    spawnPosition: {x: 10, y: 3}
+    spawnPosition: {x: 10, y: 1.5}
   - spawnType: 3
     spawnTime: 27
-    spawnPosition: {x: 10, y: 4}
+    spawnPosition: {x: 10, y: 2}
   - spawnType: 6
     spawnTime: 30
     spawnPosition: {x: 10, y: 0}

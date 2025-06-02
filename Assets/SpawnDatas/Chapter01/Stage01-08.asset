@@ -15,64 +15,64 @@ MonoBehaviour:
   spawnInfos:
   - spawnType: 0
     spawnTime: 0
-    spawnPosition: {x: 10, y: -3}
+    spawnPosition: {x: 10, y: -1.5}
   - spawnType: 0
     spawnTime: 1
-    spawnPosition: {x: 10, y: -3}
+    spawnPosition: {x: 10, y: -1.5}
   - spawnType: 0
     spawnTime: 2
-    spawnPosition: {x: 10, y: -3}
+    spawnPosition: {x: 10, y: -1.5}
   - spawnType: 3
     spawnTime: 2
-    spawnPosition: {x: 10, y: -4}
+    spawnPosition: {x: 10, y: -2}
   - spawnType: 3
     spawnTime: 3
-    spawnPosition: {x: 10, y: -4}
-  - spawnType: 0
-    spawnTime: 8
-    spawnPosition: {x: 10, y: 3}
-  - spawnType: 0
-    spawnTime: 9
-    spawnPosition: {x: 10, y: 3}
-  - spawnType: 0
-    spawnTime: 10
-    spawnPosition: {x: 10, y: 3}
-  - spawnType: 3
-    spawnTime: 10
-    spawnPosition: {x: 10, y: 4}
-  - spawnType: 3
-    spawnTime: 11
-    spawnPosition: {x: 10, y: 4}
-  - spawnType: 0
-    spawnTime: 17
-    spawnPosition: {x: 10, y: -3}
-  - spawnType: 0
-    spawnTime: 17
     spawnPosition: {x: 10, y: -2}
   - spawnType: 0
+    spawnTime: 8
+    spawnPosition: {x: 10, y: 1.5}
+  - spawnType: 0
+    spawnTime: 9
+    spawnPosition: {x: 10, y: 1.5}
+  - spawnType: 0
+    spawnTime: 10
+    spawnPosition: {x: 10, y: 1.5}
+  - spawnType: 3
+    spawnTime: 10
+    spawnPosition: {x: 10, y: 2}
+  - spawnType: 3
+    spawnTime: 11
+    spawnPosition: {x: 10, y: 2}
+  - spawnType: 0
     spawnTime: 17
-    spawnPosition: {x: 10, y: 4}
+    spawnPosition: {x: 10, y: -1.5}
+  - spawnType: 0
+    spawnTime: 17
+    spawnPosition: {x: 10, y: -1}
+  - spawnType: 0
+    spawnTime: 17
+    spawnPosition: {x: 10, y: 2}
   - spawnType: 3
     spawnTime: 19
-    spawnPosition: {x: 10, y: -3}
+    spawnPosition: {x: 10, y: -1.5}
   - spawnType: 3
     spawnTime: 20
-    spawnPosition: {x: 10, y: 3}
-  - spawnType: 0
-    spawnTime: 24
-    spawnPosition: {x: 10, y: 2}
+    spawnPosition: {x: 10, y: 1.5}
   - spawnType: 0
     spawnTime: 24
     spawnPosition: {x: 10, y: 1}
   - spawnType: 0
     spawnTime: 24
+    spawnPosition: {x: 10, y: 0.5}
+  - spawnType: 0
+    spawnTime: 24
     spawnPosition: {x: 10, y: 0}
   - spawnType: 3
     spawnTime: 26
-    spawnPosition: {x: 10, y: -1}
+    spawnPosition: {x: 10, y: -0.5}
   - spawnType: 3
     spawnTime: 26
-    spawnPosition: {x: 10, y: -2}
+    spawnPosition: {x: 10, y: -1}
   - spawnType: 6
     spawnTime: 0
     spawnPosition: {x: 10, y: 0}
