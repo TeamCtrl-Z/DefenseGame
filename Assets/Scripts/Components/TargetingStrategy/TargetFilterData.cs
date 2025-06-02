@@ -3,5 +3,5 @@ using UnityEngine;
 
 public abstract class TargetFilterData : ScriptableObject, ITargetFilter
 {
-    public abstract IEnumerable<EnemyController> Filter(IEnumerable<EnemyController> enemies);
+    public abstract IEnumerable<ITargetable> Filter(IEnumerable<ITargetable> enemies);
 }

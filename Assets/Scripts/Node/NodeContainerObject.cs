@@ -238,7 +238,7 @@ public class NodeContainerObject : MonoBehaviour
         if (columnMap.TryGetValue(colKey, out var list) == false)
             return new List<uint>();
 
-        return list.Where(i => i != index).ToList();
+        return list.ToList();
     }
 
     /// <summary>

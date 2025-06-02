@@ -11,10 +11,30 @@ public class EnemyStatusComponent : MonoBehaviour, IMoveStatus, IHealthStatus, I
     /// </summary>
     [field: SerializeField] private GameObject enemyHPPrefab;
     private Image hpBar;
+
+    /// <summary>
+    /// Enemy 고유 ID
+    /// </summary>
     [field: SerializeField] public int ID { get; private set; }
-    public float MoveSpeed { get; private set; } = 3.0f;
+
+    /// <summary>
+    /// Enemy 고유 이동 속도
+    /// </summary>
+    private float moveSpeed = 2f;
+
+    /// <summary>
+    /// Enemy 속도 배수
+    /// </summary>
+    [field: SerializeField] public float MoveSpeedMultiplier { get; set; } = 1f;
+
+    /// <summary>
+    /// Enemy 실제 이동 속도 
+    /// </summary>
+    public float MoveSpeed => moveSpeed * MoveSpeedMultiplier;
+
     public float CurrentHP { get; private set; }
     public float MaxHP { get; private set; }
+
     public event Action<float> OnHPChanged;
 
     /// <summary>
@@ -49,14 +69,14 @@ public class EnemyStatusComponent : MonoBehaviour, IMoveStatus, IHealthStatus, I
     /// </summary>
     private void ApplyStatusData()
     {
-        MoveSpeed = statData.MoveSpeed;
+        moveSpeed = statData.MoveSpeed;
         MaxHP = statData.HP;
         CurrentHP = MaxHP;
     }
 
     public void ChangeSpeed(float speed)
     {
-        MoveSpeed = speed;
+        moveSpeed = speed;
     }
 
     public void ChangeHP(float amount)

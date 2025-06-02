@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface ITargetFilter
 {
-    IEnumerable<EnemyController> Filter(IEnumerable<EnemyController> enemies);
+    IEnumerable<ITargetable> Filter(IEnumerable<ITargetable> enemies);
 }

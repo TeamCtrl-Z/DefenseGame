@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1763257916298420326}
   - component: {fileID: 6855050769465126425}
   - component: {fileID: 3085633977577737613}
-  - component: {fileID: 1751123459464889310}
+  - component: {fileID: 4730590736494334881}
   m_Layer: 8
   m_Name: Fairy_Light
   m_TagString: Untagged
@@ -76,8 +76,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1156682411
+  m_SortingLayer: 1
   m_SortingOrder: 2
   m_Sprite: {fileID: -9095717837082945937, guid: e1790d45ff0ee324886ed461efa075f6, type: 3}
   m_Color: {r: 1, g: 0.9538098, b: 0, a: 1}
@@ -195,7 +195,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b6c250f0a3c5594cb25a75cb92fc61b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1751123459464889310
+--- !u!114 &4730590736494334881
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -204,7 +204,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 4923936915580164361}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6cf05f9498da746499a672ee2b7827e5, type: 3}
+  m_Script: {fileID: 11500000, guid: 971d4d4f84248184294e5f64a15f552f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spell: {fileID: 11400000, guid: c27b64d44c211d34a87e84195c14803c, type: 2}
+  buffType: 0
+  amount: 0.5
+  buffNeighbors: {fileID: 11400000, guid: 6c0f8828c979ddc4289201a7a78dfb72, type: 2}

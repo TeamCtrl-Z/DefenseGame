@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 /// <summary>
@@ -10,4 +11,6 @@ public interface IPlaceable
     /// </summary>
     /// <param name="index">배치하는 노드의 번호</param>
     public void Place(uint index);
+
+    public event Action<uint> OnPlaced;
 }
