@@ -7,7 +7,7 @@ public class AttributeManager : MonoBehaviour
 
     private void Awake()
     {
-        attribute.Initialize(this.gameObject);    
+        attribute = Instantiate(attribute);   
     }
 
     private void OnEnable()
@@ -28,6 +28,7 @@ public class AttributeManager : MonoBehaviour
         {
 
         }
+        attribute.Initialize(this.gameObject);
     }
 
     private IEnumerator IntervalRoutine(IOnIntervalEffect attribute, float interval)

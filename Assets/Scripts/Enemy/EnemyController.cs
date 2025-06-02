@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(DamageProcessor))]
+[RequireComponent(typeof(EnemyStatusEffectComponent))]
 public class EnemyController : RecycleObject, IDamagable, ITargetable
 {
     /// <summary>

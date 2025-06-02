@@ -46,52 +46,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 1256095973283775600, guid: 380c7f3c94511a8448eb29a70b2d9c5a, type: 3}
   poolSize: 64
---- !u!1 &1404926719672893201
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5942554273942493527}
-  - component: {fileID: 7327164905008729147}
-  m_Layer: 0
-  m_Name: Fairy_PoisonPool
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5942554273942493527
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1404926719672893201}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1527577420808434877}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7327164905008729147
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1404926719672893201}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58efa5a0b2dbc844abc5525a67cd386f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefab: {fileID: 2976149628883731713, guid: 704c2cf9550b55e47920f7e852116e15, type: 3}
-  poolSize: 16
 --- !u!1 &1406144983153174324
 GameObject:
   m_ObjectHideFlags: 0
@@ -139,10 +93,6 @@ Transform:
   - {fileID: 89086801713312810}
   - {fileID: 5495720766710434069}
   - {fileID: 9146937800155653814}
-  - {fileID: 5616394624759244793}
-  - {fileID: 5942554273942493527}
-  - {fileID: 8006308172535527377}
-  - {fileID: 1629459318994692575}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1168639004949360782
@@ -571,52 +521,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 4920049256668949872, guid: fd4eb4c1cec8e4341a6aa2be1257206d, type: 3}
   poolSize: 64
---- !u!1 &4332504680644356519
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1629459318994692575}
-  - component: {fileID: 3570710226881112719}
-  m_Layer: 0
-  m_Name: MarkerPool
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1629459318994692575
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4332504680644356519}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1527577420808434877}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3570710226881112719
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4332504680644356519}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67b2baa91bb4d924e9d37bed9f6860cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefab: {fileID: 5964252404715334549, guid: 07a32e6d94377ee49a81305d5f328e38, type: 3}
-  poolSize: 16
 --- !u!1 &5233883468079025462
 GameObject:
   m_ObjectHideFlags: 0

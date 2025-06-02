@@ -14,7 +14,9 @@ public class AttackHandler : MonoBehaviour
     /// <summary>
     /// Fairy가 사용할 공격
     /// </summary>
-    [SerializeField] private AttackBase attack;
+    [SerializeField] private AttackData attackSO;
+
+    private AttackBase attack;
 
     /// <summary>
     /// 공격속도와 공격력을 알아내기 위한 변수
@@ -56,18 +58,18 @@ public class AttackHandler : MonoBehaviour
         status = GetComponentInParent<IBattleStatus>();
         targeting = GetComponent<TargetingComponent>();
         animator = GetComponentInParent<Animator>();
+
+        if (attackSO == null)
+        {
+            Debug.LogError("AttackHandler: attackSO가 에디터에 할당되지 않았습니다.");
+        }
+        attack = attackSO.CreateAttack(GetComponentInParent<FairyController>());
     }
 
     private void OnEnable()
     {
-
-    }
-
-    private void Start()
-    {
         attack.OnHit -= OnHitRecieved;
         attack.OnHit += OnHitRecieved;
-        attack.Initialize(GetComponentInParent<FairyController>());
     }
 
     private void Update()

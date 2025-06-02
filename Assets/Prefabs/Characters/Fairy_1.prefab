@@ -291,4 +291,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ead405fa2270e6b4a8cc2c4abdad76de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attack: {fileID: 11400000, guid: c8830b85bd01fab4aaed04307237dda5, type: 2}
+  attackSO: {fileID: 11400000, guid: c8830b85bd01fab4aaed04307237dda5, type: 2}
