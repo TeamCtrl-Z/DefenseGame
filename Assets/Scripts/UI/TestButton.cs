@@ -8,6 +8,8 @@ public class TestButton : MonoBehaviour
     [SerializeField] private NodeObject nodeObject;
     [SerializeField] private Vector2 enemyTypeRange;
     private Dictionary<FairyType, Func<FairyController>> fairySelect = new();
+    [SerializeField]private int currentChapterIndex;
+    [SerializeField]private int currentStageIndex;
 
     void Awake()
     {
@@ -34,6 +36,6 @@ public class TestButton : MonoBehaviour
 
     public void OnStartClick()
     {
-        GameManager.Instance.ChapterManager.StartStage();
+        GameManager.Instance.ChapterManager.StartStage(currentChapterIndex, currentStageIndex);
     }
 }
