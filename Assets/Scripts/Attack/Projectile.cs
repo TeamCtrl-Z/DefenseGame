@@ -40,7 +40,7 @@ public class Projectile : RecycleObject
         if (collision.TryGetComponent<IDamagable>(out IDamagable dmg))
         {
             OnHit?.Invoke(dmg, transform.position);
-            DisableTimer();
+            gameObject.SetActive(false);
         }
     }
 }

@@ -61,16 +61,34 @@ public class Factory : Singleton<Factory>
     private ProjectilePool projectile;
 
     /// <summary>
-    /// Fairy Basic풀
+    /// Fairy풀
     /// </summary>
     private FairyBasicPool fairyBasic;
-
     private FairyFirePool fairyFire;
     private FairyPoisonPool fairyPoison;
     private FairyLightPool fairyLight;
     private FairyFreezePool fairyFreeze;
     private FairyFrozenPool fairyFrozen;
+    private FairyEletronicPool fairyEletronic;
 
+    /// <summary>
+    /// 눈보라 파티클 풀
+    /// </summary>
+    private SnowPool snow;
+
+    /// <summary>
+    /// 불 폭발 파티클 풀(Fire Splash 데미지 때 사용)
+    /// </summary>
+    private FireExplosionPool fireExp;
+
+    /// <summary>
+    /// 번개 파티클 풀(Eletronic 효과로 사용)
+    /// </summary>
+    private LightningPool lightning;
+
+    /// <summary>
+    /// 마크 풀
+    /// </summary>
     private MarkerPool marker;
 
     /// <summary>
@@ -125,9 +143,21 @@ public class Factory : Singleton<Factory>
 
         if (this.TryGetComponentInChildren<FairyFreezePool>(out fairyFreeze))
             fairyFreeze.Initialize();
-        
+
         if (this.TryGetComponentInChildren<FairyFrozenPool>(out fairyFrozen))
             fairyFrozen.Initialize();
+
+        if (this.TryGetComponentInChildren<FairyEletronicPool>(out fairyEletronic))
+            fairyEletronic.Initialize();
+
+        if (this.TryGetComponentInChildren<SnowPool>(out snow))
+            snow.Initialize();
+
+        if (this.TryGetComponentInChildren<FireExplosionPool>(out fireExp))
+            fireExp.Initialize();
+
+        if (this.TryGetComponentInChildren<LightningPool>(out lightning))
+            lightning.Initialize();
 
         if (this.TryGetComponentInChildren<MarkerPool>(out marker))
             marker.Initialize();
@@ -143,7 +173,7 @@ public class Factory : Singleton<Factory>
     {
         return enemy_000.GetObject(position, new Vector3(0, 0, angle));
     }
-
+    #region Enemy Pool
     /// <summary>
     /// 캐릭터를 소환하는 함수
     /// </summary>
@@ -231,6 +261,7 @@ public class Factory : Singleton<Factory>
     {
         return enemy_202.GetObject(position, new Vector3(0, 0, angle));
     }
+    #endregion
 
     /// <summary>
     /// 적이 죽을 때 이펙트를 소환하는 함수
@@ -254,6 +285,7 @@ public class Factory : Singleton<Factory>
         return projectile.GetObject(position, new Vector3(0, 0, angle));
     }
 
+    #region Fairy Pool
     /// <summary>
     /// FairyType을 입력하여 Fairy를 받아오는 함수
     /// </summary>
@@ -268,8 +300,10 @@ public class Factory : Singleton<Factory>
             case FairyType.Basic: return fairyBasic.GetObject(position, new Vector3(0, 0, angle));
             case FairyType.Fire: return fairyFire.GetObject(position, new Vector3(0, 0, angle));
             case FairyType.Poison: return fairyPoison.GetObject(position, new Vector3(0, 0, angle));
+            case FairyType.Light: return fairyLight.GetObject(position, new Vector3(0, 0, angle));
             case FairyType.Freeze: return fairyFreeze.GetObject(position, new Vector3(0, 0, angle));
             case FairyType.Frozen: return fairyFrozen.GetObject(position, new Vector3(0, 0, angle));
+            case FairyType.Eletronic: return fairyEletronic.GetObject(position, new Vector3(0, 0, angle));
             default: return null;
         }
     }
@@ -304,8 +338,31 @@ public class Factory : Singleton<Factory>
         return fairyFrozen.GetObject(position, new Vector3(0, 0, angle));
     }
 
+    public FairyController GetFariyEletronic(Vector2 position, float angle = 0.0f)
+    {
+        return fairyEletronic.GetObject(position, new Vector3(0, 0, angle));
+    }
+    #endregion
+
+    #region Particle Pool
+    public Snow GetSnow(Vector2 position, float angle = 0.0f)
+    {
+        return snow.GetObject(position, new Vector3(0, 0, angle));
+    }
+
+    public FireExplosion GetFireExplosion(Vector2 position, float angle = 0.0f)
+    {
+        return fireExp.GetObject(position, new Vector3(0, 0, angle));
+    }
+
+    public Lightning GetLightning(Vector2 position, float angle = 0.0f)
+    {
+        return lightning.GetObject(position, new Vector3(0, 0, angle));
+    }
+
     public WireCircleMarker GetWireCircleMarker(Vector2 position, float angle = 0.0f)
     {
         return marker.GetObject(position, new Vector3(0, 0, angle));
     }
+    #endregion
 }

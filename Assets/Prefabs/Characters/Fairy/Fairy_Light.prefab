@@ -180,7 +180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2e9560418a4bc34dba577904a7e1e3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <ID>k__BackingField: 0
+  <ID>k__BackingField: 4
   <AttackSpeedFactor>k__BackingField: 1
   <AttackPowerFactor>k__BackingField: 1
 --- !u!114 &3085633977577737613

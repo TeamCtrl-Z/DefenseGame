@@ -37,11 +37,6 @@ public class TargetingComponent : MonoBehaviour
     [field: SerializeField] public float AttackRange { get; private set; }
 
     /// <summary>
-    /// 캐릭터 ID를 가져오는 인터페이스
-    /// </summary>
-    private ICharacterIdentity characterIdentity;
-
-    /// <summary>
     /// 사용할 타겟팅 전략
     /// </summary>
     [SerializeField] private TargetingStrategyData targetingStrategy;
@@ -75,18 +70,6 @@ public class TargetingComponent : MonoBehaviour
         col.radius = AttackRange;
     }
 
-    private void Start()
-    {
-        characterIdentity = GetComponentInParent<ICharacterIdentity>();
-        // FairyDataManager.Instance.TryGetTargetingType(characterIdentity.ID, out TargetingType type);
-        // targetingStrategy = type switch
-        // {
-        //     TargetingType.Nearest => new NearestTargeting(transform),
-        //     TargetingType.Random => new RandomTargeting(),
-        //     TargetingType.Healthiest => new HealthiestTargeting(),
-        //     _ => throw new System.NotImplementedException()
-        // };
-    }
 
     /// <summary>
     /// 타겟을 가져오는 메서드
@@ -101,6 +84,17 @@ public class TargetingComponent : MonoBehaviour
             return targetingStrategy.SelectTarget(transform, fillteringCandidates);
         }
         return targetingStrategy.SelectTarget(transform, candidates);
+    }
+
+    public List<Transform> SelectTargets(IEnumerable<ITargetable> candidates, int count)
+    {
+        if (fillterType != null)
+        {
+            var fillteringCandidates = fillterType.Filter(candidates);
+
+            return targetingStrategy.SelectTargets(transform, fillteringCandidates, count);
+        }
+        return targetingStrategy.SelectTargets(transform, candidates, count);
     }
 
     private void OnTriggerEnter2D(Collider2D other)

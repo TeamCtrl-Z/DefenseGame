@@ -11,4 +11,9 @@ public class NoneTargeting : TargetingStrategyData
     {
         return null;
     }
+
+    public override List<Transform> SelectTargets(Transform origin, IEnumerable<ITargetable> enemies, int count)
+    {
+        return null;
+    }
 }

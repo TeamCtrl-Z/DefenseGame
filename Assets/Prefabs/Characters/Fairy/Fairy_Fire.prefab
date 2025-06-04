@@ -60,6 +60,10 @@ PrefabInstance:
       propertyPath: data.Damage
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 4542460653296486777, guid: 9e7b6c1ac8121ce468ed43a686720566, type: 3}
+      propertyPath: <ID>k__BackingField
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4639793165498065459, guid: 9e7b6c1ac8121ce468ed43a686720566, type: 3}
       propertyPath: attack
       value: 

@@ -9,10 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7586168ea22efd4399f4fc368cd26ad, type: 3}
-  m_Name: FrozenAttribute
+  m_Script: {fileID: 11500000, guid: 431ca488b85ca3241ad3d8a66f702df2, type: 3}
+  m_Name: EletronicAttribute
   m_EditorClassIdentifier: 
-  attributeData:
-    Damage: 0.3
-    Debuff: 3
-  <Interval>k__BackingField: 7
+  targetingStrategy: {fileID: 11400000, guid: 8497bfd57c6086b4fa22a8747cc9a66b, type: 2}
+  datas:
+  - Damage: 14
+    Debuff: 0
+  - Damage: 6
+    Debuff: 0
