@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// WireCircle로 표시하기 위한 클래스
+/// </summary>
 public class WireCircleMarker : RecycleObject
 {
-
     protected override void OnEnable()
     {
         base.OnEnable();

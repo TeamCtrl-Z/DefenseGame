@@ -7,7 +7,13 @@ using UnityEngine;
 /// </summary>
 [CreateAssetMenu(fileName = "HealthiestTargeting", menuName = "Targeting/HealthiestTargeting")]
 public class HealthiestTargeting : TargetingStrategyData
-{
+{  
+    /// <summary>
+    /// 가장 체력이 많은 적 고르는 함수
+    /// </summary>
+    /// <param name="origin"> 페어리 위치 </param>
+    /// <param name="enemies"> 적 후보군들 </param>
+    /// <returns></returns>
     public override Transform SelectTarget(Transform origin, IEnumerable<ITargetable> enemies)
     {
         Transform healthiest = null;
@@ -25,6 +31,13 @@ public class HealthiestTargeting : TargetingStrategyData
         return healthiest;
     }
 
+    /// <summary>
+    /// 체력이 많은 순으로 적들 고르는 함수
+    /// </summary>
+    /// <param name="origin"> 페어리 위치 </param>
+    /// <param name="enemies"> 적 후보군들 </param>
+    /// <param name="count"> 몇 명 </param>
+    /// <returns></returns>
     public override List<Transform> SelectTargets(Transform origin, IEnumerable<ITargetable> enemies, int count)
     {
         return enemies

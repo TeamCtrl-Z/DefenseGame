@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// 몬스터가 피격당할 때 속성 발현
+/// </summary>
 public interface IOnHitEffect
 {
     /// <summary>
@@ -10,12 +13,18 @@ public interface IOnHitEffect
     public void OnHit(IDamagable damagable, Vector3 origin);
 }
 
+/// <summary>
+/// 페어리끼리 합성할 때 속성 발현
+/// </summary>
 public interface IOnMergeEffect
 {
     // TODO : IMergable인터페이스 만든 후 다시 OnMerge 구현
     //void OnMerge()
 }
 
+/// <summary>
+/// 일정시간 마다 속성 발현
+/// </summary>
 public interface IOnIntervalEffect
 {
     /// <summary>

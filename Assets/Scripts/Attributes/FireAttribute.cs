@@ -1,6 +1,9 @@
 using System;
 using UnityEngine;
 
+/// <summary>
+/// 불 속성
+/// </summary>
 [CreateAssetMenu(fileName = "FireAttribute", menuName = "Attribute/FireAttribute")]
 public class FireAttribute : AttributeBase, IOnHitEffect
 {
@@ -14,12 +17,20 @@ public class FireAttribute : AttributeBase, IOnHitEffect
     /// </summary>
     public HittingData data;
 
+    /// <summary>
+    /// 스플래시 데미지를 받을 적 후보군들 캐싱을 위한 Collider 배열
+    /// </summary>
     private Collider2D[] cols = new Collider2D[16];
     
+    /// <summary>
+    /// 몬스터가 피격 당했을 때 스플래시 데미지 적용하는 함수
+    /// </summary>
+    /// <param name="damagable"> 피격 당한 적 </param>
+    /// <param name="origin"> 피격 당한 위치 </param>
     public void OnHit(IDamagable damagable, Vector3 origin)
     {
         Debug.Log($"FireAttribute : OnHit {origin}");
-        FireExplosion fire = Factory.Instance.GetFireExplosion(origin);
+        Factory.Instance.GetFireExplosion(origin);
 
         int cnt = Physics2D.OverlapCircleNonAlloc(origin, Radius, cols, LayerMask.GetMask("Enemy"));
 

@@ -9810,9 +9810,9 @@ GameObject:
   - component: {fileID: 1200741539757583203}
   - component: {fileID: 1200741539757583200}
   - component: {fileID: 6501266123212094651}
-  - component: {fileID: 8535302195185444932}
+  - component: {fileID: 2940825114437779296}
   m_Layer: 0
-  m_Name: LightningStrikeBlue
+  m_Name: LightningEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14817,7 +14817,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &8535302195185444932
+--- !u!114 &2940825114437779296
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -14826,9 +14826,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1200741539757583230}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b8d80bda1c6f384186423adda9ee3bf, type: 3}
+  m_Script: {fileID: 11500000, guid: 3bf350509827fe249b5efbeaa458642e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  disableTime: 1
 --- !u!1 &1200741541365563122
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+/// <summary>
+/// 버프 타입
+/// </summary>
 public enum BuffType
 {
-    AttackSpeed = 0, AttackPower, 
+    AttackSpeed = 0, AttackPower,
 }
+
 /// <summary>
 /// 주변의 아군을 버프 시켜주는 기능
 /// </summary>

@@ -2,6 +2,9 @@ using System;
 using System.Collections;
 using UnityEngine;
 
+/// <summary>
+/// Enemy를 제어하는 중앙 체계 클래스
+/// </summary>
 [RequireComponent(typeof(DamageProcessor))]
 [RequireComponent(typeof(EnemyStatusEffectComponent))]
 public class EnemyController : RecycleObject, IDamagable, ITargetable
@@ -30,8 +33,9 @@ public class EnemyController : RecycleObject, IDamagable, ITargetable
     public bool IsAlive => StatusComponent.CurrentHP > 0.0f;
 
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         StatusComponent = GetComponent<EnemyStatusComponent>();
         statusEffect = GetComponent<EnemyStatusEffectComponent>();
         damageProcessor = GetComponent<DamageProcessor>();

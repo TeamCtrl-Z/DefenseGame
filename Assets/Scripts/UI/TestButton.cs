@@ -14,10 +14,13 @@ public class TestButton : MonoBehaviour
     [SerializeField] private int currentStageIndex = 0;
 
     private int count = 0;
+    [SerializeField] private int currentChapterIndex;
+    [SerializeField] private int currentStageIndex;
 
     public void OnPlaceClick()
     {
-        if (count >= 8) return;
+        if (count >= 9) return;
+        
         int key = UnityEngine.Random.Range(Mathf.RoundToInt(enemyTypeRange.x), Mathf.RoundToInt(enemyTypeRange.y) + 1);
         Debug.Log(key);
         FairyController fairy = Factory.Instance.GetFariyByType((FairyType)key, Vector2.zero);
@@ -34,6 +37,7 @@ public class TestButton : MonoBehaviour
         // 최종으로 뽑힌 인덱스의 노드에 PlaceNode 호출
         GameManager.Instance.ContainerManager.BoatNodeContainer[(uint)nodeIdx]
             .PlaceNode(placeable);
+
         count++;
     }
 

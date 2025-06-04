@@ -4,6 +4,9 @@ using System.Linq;
 using System.Reflection;
 using UnityEngine;
 
+/// <summary>
+/// CSV파일을 로드하기 위한 클래스
+/// </summary>
 public static class CsvLoader
 {
     /// <summary>

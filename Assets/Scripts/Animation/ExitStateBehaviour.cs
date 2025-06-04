@@ -23,6 +23,12 @@ public class ExitStateBehaviour : CustomSMB
         isCompletelyFinished = false;
     }
 
+    /// <summary>
+    /// 애니메이션이 전환상태가 아닐 때 호출되는 함수
+    /// </summary>
+    /// <param name="animator">애니메이션을 가진 애니메이터</param>
+    /// <param name="stateInfo">상태 정보</param>
+    /// <param name="layerIndex">애니메이션의 레이어 번호</param>
     protected override void SMBNoTransitionUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         if (isCompletelyFinished == false && stateInfo.normalizedTime > 0.7f)
@@ -32,6 +38,11 @@ public class ExitStateBehaviour : CustomSMB
         }
     }
 
+    /// <summary>
+    /// 애니메이션 끝을 알리기위한 함수
+    /// </summary>
+    /// <param name="animator">현재 에니메이터</param>
+    /// <param name="layerIndex">애니메이션의 레이어 번호</param>
     protected void NotifyAnimationExit(Animator animator, int layerIndex)
     {
         OnStateExitEvent?.Invoke(animator, layerIndex);

@@ -11,6 +11,12 @@ public class RecycleObject : MonoBehaviour
     /// 재활용 오브젝트가 비활성화 될 때 실행되는 델리게이트
     /// </summary>
     public Action onDisable = null;
+    private Transform poolTransform;
+
+    protected virtual void Awake()
+    {
+        poolTransform = transform.parent;
+    }
 
     protected virtual void OnEnable()
     {
@@ -44,6 +50,16 @@ public class RecycleObject : MonoBehaviour
     IEnumerator LifeOver(float time = 0.0f)
     {
         yield return new WaitForSeconds(time);
+        if (transform.parent != poolTransform)
+            ReturnToPool();
         gameObject.SetActive(false);
+    }
+
+    /// <summary>
+    /// 기존의 오브젝트 풀 트랜스폼으로 돌리는 함수
+    /// </summary>
+    public virtual void ReturnToPool()
+    {
+        transform.SetParent(poolTransform, false);
     }
 }

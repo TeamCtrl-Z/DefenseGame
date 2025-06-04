@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 이동에 관한 Status 인터페이스
+/// </summary>
 public interface IMoveStatus
 {
     /// <summary>
@@ -12,7 +15,7 @@ public interface IMoveStatus
     /// <summary>
     /// 이동 속도 배수
     /// </summary>
-    public float MoveSpeedMultiplier { get; set;}
+    public float MoveSpeedMultiplier { get; set; }
 
     /// <summary>
     /// 이동 속도 변경

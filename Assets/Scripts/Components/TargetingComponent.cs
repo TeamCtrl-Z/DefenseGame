@@ -72,7 +72,7 @@ public class TargetingComponent : MonoBehaviour
 
 
     /// <summary>
-    /// 타겟을 가져오는 메서드
+    /// 적 타겟을 가져오는 메서드
     /// </summary>
     /// <returns></returns>
     public Transform SelectTarget(IEnumerable<ITargetable> candidates)
@@ -86,6 +86,12 @@ public class TargetingComponent : MonoBehaviour
         return targetingStrategy.SelectTarget(transform, candidates);
     }
 
+    /// <summary>
+    /// 적 타겟들을 가져오는 메서드
+    /// </summary>
+    /// <param name="candidates"> 후보 </param>
+    /// <param name="count"> 몇 마리 </param>
+    /// <returns> 적 Transform List </returns>
     public List<Transform> SelectTargets(IEnumerable<ITargetable> candidates, int count)
     {
         if (fillterType != null)
@@ -97,6 +103,10 @@ public class TargetingComponent : MonoBehaviour
         return targetingStrategy.SelectTargets(transform, candidates, count);
     }
 
+    /// <summary>
+    /// 적이 감지 됐을 때 호출되는 함수
+    /// </summary>
+    /// <param name="other"></param>
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.TryGetComponent<ITargetable>(out ITargetable target))
@@ -110,6 +120,10 @@ public class TargetingComponent : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 적이 감지 범위 밖으로 나갔을 때 호출되는 함수
+    /// </summary>
+    /// <param name="other"></param>
     private void OnTriggerExit2D(Collider2D other)
     {
         if (other.TryGetComponent<ITargetable>(out ITargetable target))
@@ -118,6 +132,10 @@ public class TargetingComponent : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 캐싱한 타겟들에서 지우기 위한 함수
+    /// </summary>
+    /// <param name="target"></param>
     private void RemoveTarget(ITargetable target)
     {
         if (targetsInRange.Remove(target))

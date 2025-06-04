@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// HP관련 인터페이스
+/// </summary>
 public interface IHealthStatus
 {
     /// <summary>

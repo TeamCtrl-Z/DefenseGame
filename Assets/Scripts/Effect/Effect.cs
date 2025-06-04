@@ -17,6 +17,7 @@ public class Effect : RecycleObject
     /// </summary>
     protected override void OnReset()
     {
-        DisableTimer(disableTime);
+        if (disableTime != 0.0f)
+            DisableTimer(disableTime);
     }
 }

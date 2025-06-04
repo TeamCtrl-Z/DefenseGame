@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 페어리를 제어하는 중앙 체계 클래스 
+/// </summary>
 [RequireComponent(typeof(FairyStatusComponent))]
 public class FairyController : RecycleObject
 {
@@ -17,7 +20,7 @@ public class FairyController : RecycleObject
     private FairyStatusComponent fairyStatusComponent;
 
 
-    private void Awake()
+    protected override void Awake()
     {
         animator = GetComponent<Animator>();
         fairyStatusComponent = GetComponent<FairyStatusComponent>();

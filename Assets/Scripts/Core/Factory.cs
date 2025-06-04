@@ -264,17 +264,6 @@ public class Factory : Singleton<Factory>
     #endregion
 
     /// <summary>
-    /// 적이 죽을 때 이펙트를 소환하는 함수
-    /// </summary>
-    /// <param name="position">소환 위치</param>
-    /// <param name="angle">소환 각도</param>
-    /// <returns>소환한 이펙트</returns>
-    public Effect GetEnemyDieEffect(Vector2 position, float angle = 0.0f)
-    {
-        return enemyDieEffect.GetObject(position, new Vector3(0, 0, angle));
-    }
-
-    /// <summary>
     /// Projectile을 소환하는 함수
     /// </summary>
     /// <param name="position">소환 위치</param>
@@ -344,20 +333,50 @@ public class Factory : Singleton<Factory>
     }
     #endregion
 
-    #region Particle Pool
-    public Snow GetSnow(Vector2 position, float angle = 0.0f)
+    #region Effect Pool
+
+    /// <summary>
+    /// 눈보라 이펙트 소환 함수
+    /// </summary>
+    /// <param name="position"></param>
+    /// <param name="angle"></param>
+    /// <returns></returns>
+    public Effect GetSnow(Vector2 position, float angle = 0.0f)
     {
         return snow.GetObject(position, new Vector3(0, 0, angle));
     }
 
-    public FireExplosion GetFireExplosion(Vector2 position, float angle = 0.0f)
+    /// <summary>
+    /// 불 속성 스플래시 이펙트 소환 함수
+    /// </summary>
+    /// <param name="position"></param>
+    /// <param name="angle"></param>
+    /// <returns></returns>
+    public Effect GetFireExplosion(Vector2 position, float angle = 0.0f)
     {
         return fireExp.GetObject(position, new Vector3(0, 0, angle));
     }
 
-    public Lightning GetLightning(Vector2 position, float angle = 0.0f)
+    /// <summary>
+    /// 전기 속성 번개 이펙트 소환 함수
+    /// </summary>
+    /// <param name="position"></param>
+    /// <param name="angle"></param>
+    /// <returns></returns>
+    public Effect GetLightning(Vector2 position, float angle = 0.0f)
     {
         return lightning.GetObject(position, new Vector3(0, 0, angle));
+    }
+    
+    /// <summary>
+    /// 적이 죽을 때 이펙트를 소환하는 함수
+    /// </summary>
+    /// <param name="position">소환 위치</param>
+    /// <param name="angle">소환 각도</param>
+    /// <returns>소환한 이펙트</returns>
+    public Effect GetEnemyDieEffect(Vector2 position, float angle = 0.0f)
+    {
+        return enemyDieEffect.GetObject(position, new Vector3(0, 0, angle));
     }
 
     public WireCircleMarker GetWireCircleMarker(Vector2 position, float angle = 0.0f)

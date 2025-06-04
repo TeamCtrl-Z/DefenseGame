@@ -15,6 +15,9 @@ public interface IBuffTargetStrategy
     public List<uint> GetNeighborsNodeIdx(uint idx);
 }
 
+/// <summary>
+/// 버프 타겟 전략 SO
+/// </summary>
 public abstract class BuffTargetStrategyData : ScriptableObject, IBuffTargetStrategy
 {
     public abstract List<uint> GetNeighborsNodeIdx(uint idx);

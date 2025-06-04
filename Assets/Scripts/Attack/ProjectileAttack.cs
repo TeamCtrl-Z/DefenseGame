@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// 투사체로 공격하는 클래스
+/// </summary>
 public class ProjectileAttack : AttackBase
 {
     /// <summary>
@@ -13,6 +16,10 @@ public class ProjectileAttack : AttackBase
             projectilePrefab = soData.ProjectilePrefab;
     }
 
+    /// <summary>
+    /// 투사체를 소환하여 적을 공격하는 함수
+    /// </summary>
+    /// <param name="target"></param>
     public override void DoAttack(Transform target)
     {
         Debug.Log(attacker);

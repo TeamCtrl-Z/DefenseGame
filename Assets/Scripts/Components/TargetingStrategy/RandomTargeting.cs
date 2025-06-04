@@ -7,6 +7,12 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "RandomTargeting", menuName = "Targeting/RandomTargeting")]
 public class RandomTargeting : TargetingStrategyData
 {
+    /// <summary>
+    /// 적 후보군들 중 무작위로 한 명 선택하는 함수
+    /// </summary>
+    /// <param name="origin"> 페어리 위치 </param>
+    /// <param name="enemies">적 후보군</param>
+    /// <returns>선택된 적 Transform</returns>
     public override Transform SelectTarget(Transform origin, IEnumerable<ITargetable> enemies)
     {
         List<ITargetable> enemyList = new List<ITargetable>(enemies);
@@ -16,7 +22,14 @@ public class RandomTargeting : TargetingStrategyData
         return enemyList[randomIndex].Transform;
     }
 
-public override List<Transform> SelectTargets(Transform origin, IEnumerable<ITargetable> enemies, int count)
+    /// <summary>
+    /// 무작위로 적들을 선택하는 함수
+    /// </summary>
+    /// <param name="origin">페어리 위치</param>
+    /// <param name="enemies">적 후보군</param>
+    /// <param name="count">몇 명</param>
+    /// <returns>선택된 적 Transform List</returns>
+    public override List<Transform> SelectTargets(Transform origin, IEnumerable<ITargetable> enemies, int count)
     {
         // 1) 후보 목록 생성
         List<ITargetable> enemyList = new List<ITargetable>(enemies);

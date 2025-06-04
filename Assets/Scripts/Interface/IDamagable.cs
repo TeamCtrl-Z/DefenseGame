@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// 피격 당할 수 있는 인터페이스
+/// </summary>
 public interface IDamagable
 {
     /// <summary>

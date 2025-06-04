@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 전투를 위한 Status
+/// </summary>
 public interface IBattleStatus
 {
     /// <summary>

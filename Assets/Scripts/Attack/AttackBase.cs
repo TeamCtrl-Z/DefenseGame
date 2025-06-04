@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 공격 추상 클래스
+/// </summary>
 public abstract class AttackBase : IAttack
 {
     /// <summary>

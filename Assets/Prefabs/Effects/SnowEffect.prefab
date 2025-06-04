@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 3549297379201433602}
   - component: {fileID: 3549297379201433603}
   - component: {fileID: 3549297379201433604}
-  - component: {fileID: 3438228594800922790}
+  - component: {fileID: 2041289475783112001}
   m_Layer: 0
-  m_Name: SnowDetailed
+  m_Name: SnowEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -170,7 +170,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1.5
+      scalar: 3
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -871,7 +871,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 25
+      scalar: 100
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -4849,7 +4849,7 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!114 &3438228594800922790
+--- !u!114 &2041289475783112001
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4858,6 +4858,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3549297379201433605}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7223d739c1deb184eb76838882b6ce16, type: 3}
+  m_Script: {fileID: 11500000, guid: 3bf350509827fe249b5efbeaa458642e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  disableTime: 3

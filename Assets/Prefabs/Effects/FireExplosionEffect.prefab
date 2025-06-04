@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 5661490496917053856}
   - component: {fileID: 802360296027821415}
   - component: {fileID: 723931347573818004}
-  - component: {fileID: -1254814408371964854}
+  - component: {fileID: 4165323673502159579}
   m_Layer: 0
-  m_Name: FireExplosionRed
+  m_Name: FireExplosionEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5000,7 +5000,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &-1254814408371964854
+--- !u!114 &4165323673502159579
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5009,9 +5009,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6885766525796233788}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66c198e2de06c3141ace3be5eecaa2fc, type: 3}
+  m_Script: {fileID: 11500000, guid: 3bf350509827fe249b5efbeaa458642e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  disableTime: 1
 --- !u!1 &7213879643295759976
 GameObject:
   m_ObjectHideFlags: 0

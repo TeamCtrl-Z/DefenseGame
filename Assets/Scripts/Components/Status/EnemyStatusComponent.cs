@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 적 Status 컴포넌트
+/// </summary>
 public class EnemyStatusComponent : MonoBehaviour, IMoveStatus, IHealthStatus, ICharacterIdentity
 {
     /// <summary>
@@ -30,7 +33,14 @@ public class EnemyStatusComponent : MonoBehaviour, IMoveStatus, IHealthStatus, I
     /// </summary>
     public float MoveSpeed => moveSpeed * MoveSpeedMultiplier;
 
+    /// <summary>
+    /// 현재 HP
+    /// </summary>
     public float CurrentHP { get; private set; }
+
+    /// <summary>
+    /// 최대 HP
+    /// </summary>
     public float MaxHP { get; private set; }
 
     /// <summary>
@@ -58,11 +68,19 @@ public class EnemyStatusComponent : MonoBehaviour, IMoveStatus, IHealthStatus, I
         CurrentHP = MaxHP;
     }
 
+    /// <summary>
+    /// 이동 속도를 변경해주는 함수
+    /// </summary>
+    /// <param name="speed"> 원하는 속도 </param>
     public void ChangeSpeed(float speed)
     {
         moveSpeed = speed;
     }
 
+    /// <summary>
+    /// HP를 변경경해주는 함수
+    /// </summary>
+    /// <param name="amount"> 변경할 양 </param>
     public void ChangeHP(float amount)
     {
         CurrentHP += amount;

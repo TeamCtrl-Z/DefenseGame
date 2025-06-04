@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Attribute SO
+/// </summary>
 public abstract class AttributeBase : ScriptableObject
 {
     /// <summary>
