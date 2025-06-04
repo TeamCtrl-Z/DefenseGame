@@ -38,7 +38,7 @@ public class EletronicAttribute : AttributeBase, IOnHitEffect
 
         var picked = targetingStrategy.SelectTargets(user.transform, allInRange, datas.Length + 1);
 
-        for (int i = 0;  i < picked.Count; i++)
+        for (int i = 1;  i < picked.Count; i++)
         {
             if (picked[i].TryGetComponent<IDamagable>(out var dmg))
             {

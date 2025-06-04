@@ -19,11 +19,7 @@ public class FireAttribute : AttributeBase, IOnHitEffect
     public void OnHit(IDamagable damagable, Vector3 origin)
     {
         Debug.Log($"FireAttribute : OnHit {origin}");
-        // WireCircleMarker marker = Factory.Instance.GetWireCircleMarker(origin);
-        // marker.transform.localScale *= Radius;
-
         FireExplosion fire = Factory.Instance.GetFireExplosion(origin);
-        fire.transform.localScale *= Radius;
 
         int cnt = Physics2D.OverlapCircleNonAlloc(origin, Radius, cols, LayerMask.GetMask("Enemy"));
 
