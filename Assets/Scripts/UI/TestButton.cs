@@ -14,8 +14,6 @@ public class TestButton : MonoBehaviour
     [SerializeField] private int currentStageIndex = 0;
 
     private int count = 0;
-    [SerializeField] private int currentChapterIndex;
-    [SerializeField] private int currentStageIndex;
 
     public void OnPlaceClick()
     {
