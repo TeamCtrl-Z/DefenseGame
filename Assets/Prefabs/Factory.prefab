@@ -754,7 +754,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 289e6254056b21847a49b57ce98004b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 6885766525796233788, guid: fd22b5b404284f04ea3bc4d1ba4c1ecc, type: 3}
+  prefab: {fileID: 5157812244420617108, guid: c989d48882d60b246aa340ddb23e92c7, type: 3}
   poolSize: 32
 --- !u!1 &6381317866819291530
 GameObject:
