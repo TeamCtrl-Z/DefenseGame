@@ -1,9 +1,10 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+/// <summary>
+/// 노드 오브젝트 클래스
+/// </summary>
 public class NodeObject : NodeObjectBase
 {
     /// <summary>

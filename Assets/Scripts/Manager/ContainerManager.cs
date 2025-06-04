@@ -1,7 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 노드 컨테이너들을 관리하는 매니저
+/// </summary>
 public class ContainerManager : MonoBehaviour, IInitialize
 {
     /// <summary>

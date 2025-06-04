@@ -1,10 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-// 이 클래스는 제네릭 타입이다
-// 이 클래스의 T타입은 component를 상속받은 타입만 가능하다
+/// <summary>
+/// 유니티 안에 한 개만 존재하는 싱글톤 컴포넌트 클래스
+/// </summary>
+/// <typeparam name="T">제네릭 타입</typeparam>
 public class Singleton<T> : MonoBehaviour where T : Component
 {
     /// <summary>
@@ -80,6 +80,11 @@ public class Singleton<T> : MonoBehaviour where T : Component
         SceneManager.sceneLoaded -= OnSceneLoaded;  // 등록 해제
     }
 
+    /// <summary>
+    /// 씬이 로드될 때 호출되는 함수
+    /// </summary>
+    /// <param name="scene">로드되는 씬</param>
+    /// <param name="mode">로드 모드</param>
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         if (!isInitialize)
@@ -110,6 +115,9 @@ public class Singleton<T> : MonoBehaviour where T : Component
 
     }
 
+    /// <summary>
+    /// 애플리케이션이 종료되기 전에 호출되는 함수
+    /// </summary>
     private void OnApplicationQuit()
     {
         isShutdown = true;

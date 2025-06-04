@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 챕터들을 관리하는 매니저 클래스
+/// </summary>
 public class ChapterManager : MonoBehaviour, IInitialize
 {
     /// <summary>

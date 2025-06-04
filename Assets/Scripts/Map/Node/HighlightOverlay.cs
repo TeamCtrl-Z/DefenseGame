@@ -1,7 +1,9 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 노드의 배치칸에 이펙트를 주는 클래스
+/// </summary>
 public class HighlightOverlay : MonoBehaviour
 {
     /// <summary>

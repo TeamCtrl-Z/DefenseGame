@@ -1,9 +1,11 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+/// <summary>
+/// 노드 컨테이너 오브젝트 클래스
+/// </summary>
 public class NodeContainerObject : MonoBehaviour
 {
     /// <summary>

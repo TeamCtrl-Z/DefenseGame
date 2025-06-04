@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEngine;
-
+/// <summary>
+/// 각종 매니저를 관리하는 게임 매니저
+/// </summary>
 public class GameManager : Singleton<GameManager>
 {
     /// <summary>

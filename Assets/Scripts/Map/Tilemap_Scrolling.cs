@@ -1,7 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 배경(타일맵)을 스크롤링하는 클래스
+/// </summary>
 public class Tilemap_Scrolling : MonoBehaviour
 {
     /// <summary>

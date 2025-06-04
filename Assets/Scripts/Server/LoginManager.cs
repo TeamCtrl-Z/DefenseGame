@@ -1,4 +1,3 @@
-// Assets/Scripts/LoginManager.cs
 using System;
 using System.IO;
 using System.Text;
@@ -10,6 +9,9 @@ using System.Collections;
 using Firebase.Auth;
 using Newtonsoft.Json;
 
+/// <summary>
+/// 로그인 및 계정 관리 매니저
+/// </summary>
 public class LoginManager : MonoBehaviour
 {
     [Header("— UI Panels —")]

@@ -1,7 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 스테이지 데이터를 담은 ScriptableObject 클래스
+/// </summary>
 [CreateAssetMenu(fileName = "NewSpawnData", menuName = "Game/StageData")]
 public class StageData : ScriptableObject
 {

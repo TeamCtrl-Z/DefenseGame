@@ -1,9 +1,10 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+/// <summary>
+/// 인풋 매니저 클래스(Android에서의 드래그 및 터치 이벤트를 처리)
+/// </summary>
 public class InputManager : MonoBehaviour, IInitialize
 {
     /// <summary>

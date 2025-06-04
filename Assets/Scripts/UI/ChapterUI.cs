@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+/// <summary>
+/// Test용
+/// </summary>
 public class ChapterUI : MonoBehaviour
 {
     public TextMeshProUGUI stageText;

@@ -1,9 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+/// <summary>
+/// 임시 노드 오브젝트 클래스
+/// </summary>
 public class TempNodeObject : NodeObjectBase
 {
     /// <summary>

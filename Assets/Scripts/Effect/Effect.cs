@@ -1,7 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 이펙트를 재사용하기 위한 클래스
+/// </summary>
 public class Effect : RecycleObject
 {
     /// <summary>

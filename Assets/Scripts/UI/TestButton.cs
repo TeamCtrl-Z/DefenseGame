@@ -2,12 +2,17 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
 
+/// <summary>
+/// 테스트 용
+/// </summary>
 public class TestButton : MonoBehaviour
 {
     [SerializeField] private NodeObject nodeObject;
     [SerializeField] private Vector2 enemyTypeRange;
+    [SerializeField] private int currentChapterIndex = 0;
+    [SerializeField] private int currentStageIndex = 0;
+
     private int count = 0;
 
     public void OnPlaceClick()

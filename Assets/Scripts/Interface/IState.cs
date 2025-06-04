@@ -1,3 +1,7 @@
+/// <summary>
+/// 상태 패턴을 구현하기 위한 인터페이스
+/// </summary>
+/// <typeparam name="T">상태를 가질 Class</typeparam>
 public interface IState<T>
 {
     /// <summary>

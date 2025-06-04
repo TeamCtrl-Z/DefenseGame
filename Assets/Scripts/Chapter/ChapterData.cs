@@ -1,7 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 챕터 데이터를 담는 ScriptableObject 클래스
+/// </summary>
 [CreateAssetMenu(fileName = "NewChapter", menuName = "Game/ChapterData")]
 public class ChapterData : ScriptableObject
 {

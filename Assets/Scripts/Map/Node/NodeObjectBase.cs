@@ -1,8 +1,9 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 노드 오브젝트의 기본 클래스
+/// </summary>
 public class NodeObjectBase : MonoBehaviour
 {
     /// <summary>

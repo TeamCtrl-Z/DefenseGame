@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// 마우스가 노드 위에 올려졌을 때 하이라이트 효과를 주는 컨트롤러
+/// </summary>
 public class NodeHoverController : MonoBehaviour
 {
     /// <summary>

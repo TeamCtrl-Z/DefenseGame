@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 오브젝트를 재활용하기 위한 기본 클래스
+/// </summary>
 public class RecycleObject : MonoBehaviour
 {
     /// <summary>

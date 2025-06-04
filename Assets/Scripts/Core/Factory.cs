@@ -1,8 +1,8 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// ObjectPool에 있는 오브젝트들을 소환하는 팩토리 클래스
+/// </summary>
 public class Factory : Singleton<Factory>
 {
     /// <summary>

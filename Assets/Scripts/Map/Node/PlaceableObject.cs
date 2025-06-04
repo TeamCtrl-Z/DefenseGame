@@ -1,9 +1,10 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+/// <summary>
+/// 배치 가능한 오브젝트를 나타내는 클래스
+/// </summary>
 public class PlaceableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler, IPlaceable
 {
     /// <summary>
