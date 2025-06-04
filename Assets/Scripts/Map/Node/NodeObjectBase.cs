@@ -36,6 +36,9 @@ public class NodeObjectBase : MonoBehaviour
     /// </summary>
     public IPlaceable Fairy => fairy;
 
+    /// <summary>
+    /// 페어리를 배치하면 실행되는 델리게이트
+    /// </summary>
     public event Action<uint, IPlaceable> OnPlacedFairy;
 
     /// <summary>

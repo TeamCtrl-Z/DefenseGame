@@ -61,7 +61,7 @@ public class CurrencyUI : MonoBehaviour
     /// <param name="newAmount">갱신하는 양</param>
     private void RefreshGoldText(uint newAmount)
     {
-        goldText.text = $"Gold: {newAmount}";
+        goldText.text = $"{newAmount}";
     }
 
     /// <summary>
@@ -70,7 +70,7 @@ public class CurrencyUI : MonoBehaviour
     /// <param name="newAmount">갱신하는 양</param>
     private void RefreshGemText(uint newAmount)
     {
-        gemText.text = $"Gem: {newAmount}";
+        gemText.text = $"{newAmount}";
     }
 
     /// <summary>
@@ -79,6 +79,6 @@ public class CurrencyUI : MonoBehaviour
     /// <param name="newAmount">갱신하는 양</param>
     private void RefreshDiamondText(uint newAmount)
     {
-        diamondText.text = $"Diamond: {newAmount}";
+        diamondText.text = $"{newAmount}";
     }
 }

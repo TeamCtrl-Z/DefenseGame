@@ -28,4 +28,9 @@ public interface IHealthStatus
     /// 체력 변경 이벤트
     /// </summary>
     public event Action<float> OnHPChanged;
+
+    /// <summary>
+    /// 죽음 이벤트
+    /// </summary>
+    public event Action OnDie;
 }

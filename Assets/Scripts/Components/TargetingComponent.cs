@@ -1,8 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
@@ -50,6 +48,10 @@ public class TargetingComponent : MonoBehaviour
     /// 범위 안에 있는 타겟들
     /// </summary>
     private readonly HashSet<ITargetable> targetsInRange = new();
+
+    /// <summary>
+    /// 범위 안에 있는 타겟틀을 가져오는 프로퍼티
+    /// </summary>
 
     public IEnumerable<ITargetable> TargetsInRange => targetsInRange;
 

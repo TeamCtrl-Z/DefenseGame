@@ -16,6 +16,9 @@ public class AttackHandler : MonoBehaviour
     /// </summary>
     [SerializeField] private AttackData attackSO;
 
+    /// <summary>
+    /// 고유 공격 클래스
+    /// </summary>
     private AttackBase attack;
 
     /// <summary>

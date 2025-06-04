@@ -20,5 +20,10 @@ public interface IBuffTargetStrategy
 /// </summary>
 public abstract class BuffTargetStrategyData : ScriptableObject, IBuffTargetStrategy
 {
+    /// <summary>
+    /// 주변 이웃 노드 인덱스를 반환하는 함수
+    /// </summary>
+    /// <param name="idx">노드의 인덱스</param>
+    /// <returns>이웃 노드들의 인덱스를 모아놓은 List</returns>
     public abstract List<uint> GetNeighborsNodeIdx(uint idx);
 }

@@ -26,8 +26,14 @@ public class BuffProvider : MonoBehaviour
     /// </summary>
     [SerializeField] private float amount;
 
+    /// <summary>
+    /// 버프를 줄 주변의 이웃 노드들에 대한 Data
+    /// </summary>
     [SerializeField] private BuffTargetStrategyData buffNeighbors;
 
+    /// <summary>
+    /// 노드 컨테이너를 반환하는 프로퍼티
+    /// </summary>
     private NodeContainerObject NodeContainer => GameManager.Instance.ContainerManager.BoatNodeContainer;
 
     /// <summary>
@@ -35,6 +41,9 @@ public class BuffProvider : MonoBehaviour
     /// </summary>
     private Dictionary<uint, IPlaceable> buffTable = new();
 
+    /// <summary>
+    /// 리스트 형태로 버프를 줄 노드들의 인덱스
+    /// </summary>
     private List<uint> neighborsIdx = new();
 
     private void OnEnable()

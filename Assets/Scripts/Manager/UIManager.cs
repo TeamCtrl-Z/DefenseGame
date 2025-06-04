@@ -27,6 +27,9 @@ public class UIManager : Singleton<UIManager>
     /// </summary>
     public Canvas FullScreenEffects;
 
+    /// <summary>
+    /// UIManager가 초기화 되는 메서드(UIManager가 생성되면 1번 호출됨)
+    /// </summary>
     protected override void OnPreInitialize()
     {
         base.OnPreInitialize();

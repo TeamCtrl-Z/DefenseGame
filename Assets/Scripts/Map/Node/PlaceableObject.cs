@@ -32,6 +32,9 @@ public class PlaceableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
     /// </summary>
     Transform poolTransform;
 
+    /// <summary>
+    /// 현재 노드 인덱스를 반환하는 프로퍼티
+    /// </summary>
     public uint CurrentNodeIndex { get; private set; }
 
     private void Awake()
@@ -98,6 +101,9 @@ public class PlaceableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
         transform.SetParent(poolTransform, false);
     }
 
+    /// <summary>
+    /// SortingOrder를 페어리의 위치에 맞게 설정하는 함수
+    /// </summary>
     private void SortOrderFairy()
     {
         SpriteRenderer renderer = GetComponent<SpriteRenderer>();

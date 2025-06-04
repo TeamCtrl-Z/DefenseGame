@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// 투사체 공격에 필요한 데이터를 저장하기 위한 ScriptableObject
+/// </summary>
 [CreateAssetMenu(fileName = "ProjectileAttack", menuName = "Attack/ProjectileAttack")]
 public class ProjectileAttackData : AttackData
 {

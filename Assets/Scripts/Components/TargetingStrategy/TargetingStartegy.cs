@@ -29,7 +29,20 @@ public interface ITargetingStrategy
 /// </summary>
 public abstract class TargetingStrategyData : ScriptableObject, ITargetingStrategy
 {
+    /// <summary>
+    /// 적을 선택하는 함수
+    /// </summary>
+    /// <param name="origin">페어리 위치</param>
+    /// <param name="enemies">적 후보군들</param>
+    /// <returns>적 Transform</returns>
     public abstract Transform SelectTarget(Transform origin, IEnumerable<ITargetable> enemies);
 
+    /// <summary>
+    /// 적들을 선택하는 함수
+    /// </summary>
+    /// <param name="origin">페어리 위치</param>
+    /// <param name="enemies">적 후보군들</param>
+    /// <param name="count">적 마릿수</param>
+    /// <returns>적 Transform List</returns>
     public abstract List<Transform> SelectTargets(Transform origin, IEnumerable<ITargetable> enemies, int count);
 }
