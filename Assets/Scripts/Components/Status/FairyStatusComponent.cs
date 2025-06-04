@@ -15,13 +15,13 @@ public class FairyStatusComponent : MonoBehaviour, IBattleStatus, ICharacterIden
     /// <summary>
     /// 공격 속도(쿨타임)
     /// </summary>
-    private float attackSpeed;
+    [SerializeField] private float attackSpeed;
     public float AttackSpeed => attackSpeed * AttackSpeedFactor;
 
     /// <summary>
     /// 공격력(기본 공격)
     /// </summary>
-    private float attackPower;
+    [SerializeField] private float attackPower;
     public float AttackPower => attackPower * AttackPowerFactor;
 
     /// <summary>
@@ -34,6 +34,8 @@ public class FairyStatusComponent : MonoBehaviour, IBattleStatus, ICharacterIden
     /// </summary>
     [field: SerializeField] public float AttackPowerFactor { get; private set; } = 1f;
 
+    private TargetingType type;
+
     /// <summary>
     /// 페어리 Status 데이터(CSV파일 불러온 데이터)
     /// </summary>
@@ -43,6 +45,7 @@ public class FairyStatusComponent : MonoBehaviour, IBattleStatus, ICharacterIden
     /// 공격력이 변경되었을 때 호출되는 이벤트
     /// </summary>
     public event Action<float> OnAttackPowerChanged;
+
     /// <summary>
     /// 공격속도가 변경되었을 때 호출되는 이벤트
     /// </summary>
@@ -50,7 +53,7 @@ public class FairyStatusComponent : MonoBehaviour, IBattleStatus, ICharacterIden
 
     private void Start()
     {
-        if (!FairyDataManager.Instance.TryGetValue(ID, out statData))
+        if (!FairyDataManager.Instance.TryGetStatData(ID, out statData))
         {
             Debug.LogError("Not Found");
             return;
@@ -66,6 +69,8 @@ public class FairyStatusComponent : MonoBehaviour, IBattleStatus, ICharacterIden
     {
         attackPower = statData.AttackPower;
         attackSpeed = statData.AttackSpeed;
+
+        Debug.Log(statData.Target);
     }
 
     /// <summary>
