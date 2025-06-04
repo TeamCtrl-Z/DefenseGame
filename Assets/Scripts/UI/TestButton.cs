@@ -34,6 +34,6 @@ public class TestButton : MonoBehaviour
 
     public void OnStartClick()
     {
-        GameManager.Instance.ChapterManager.StartStage();
+        GameManager.Instance.ChapterManager.StartStage(currentChapterIndex, currentStageIndex);
     }
 }

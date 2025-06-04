@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Reflection;
 using UnityEngine;
 
 public class Factory : Singleton<Factory>
@@ -50,6 +49,11 @@ public class Factory : Singleton<Factory>
     /// Enemy 풀
     /// </summary>
     private Enemy_202Pool enemy_202;
+
+    /// <summary>
+    /// EnemyDieEffect 풀
+    /// </summary>
+    private EnemyDieEffectPool enemyDieEffect;
 
     /// <summary>
     /// Projectile 풀
@@ -118,6 +122,9 @@ public class Factory : Singleton<Factory>
 
         if (this.TryGetComponentInChildren<Enemy_202Pool>(out enemy_202))
             enemy_202.Initialize();
+
+        if (this.TryGetComponentInChildren<EnemyDieEffectPool>(out enemyDieEffect))
+            enemyDieEffect.Initialize();
 
         if (this.TryGetComponentInChildren<ProjectilePool>(out projectile))
             projectile.Initialize();
@@ -255,6 +262,17 @@ public class Factory : Singleton<Factory>
         return enemy_202.GetObject(position, new Vector3(0, 0, angle));
     }
     #endregion
+
+    /// <summary>
+    /// 적이 죽을 때 이펙트를 소환하는 함수
+    /// </summary>
+    /// <param name="position">소환 위치</param>
+    /// <param name="angle">소환 각도</param>
+    /// <returns>소환한 이펙트</returns>
+    public Effect GetEnemyDieEffect(Vector2 position, float angle = 0.0f)
+    {
+        return enemyDieEffect.GetObject(position, new Vector3(0, 0, angle));
+    }
 
     /// <summary>
     /// Projectile을 소환하는 함수

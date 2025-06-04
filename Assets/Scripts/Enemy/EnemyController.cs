@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(DamageProcessor))]
@@ -75,7 +74,9 @@ public class EnemyController : RecycleObject, IDamagable, ITargetable
 
     public void Die()
     {
-        DisableTimer();
+        GameManager.Instance.ChapterManager.KillCount++;
+        Factory.Instance.GetEnemyDieEffect(transform.position);
+        gameObject.SetActive(false);
     }
 
     public IStatusEffectProvider GetStatusEffectProvider()
