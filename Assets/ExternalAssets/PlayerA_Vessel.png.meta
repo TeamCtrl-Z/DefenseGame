@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 30
+  spritePixelsToUnits: 28
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -110,7 +110,7 @@ TextureImporter:
     buildTarget: Android
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: 47
+    textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
@@ -128,8 +128,8 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 608
-        height: 640
+        width: 524
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,8 +137,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ab96b855b070d8c469b4e1cd6c41b5da
-      internalID: 443634129
+      spriteID: 63d59acb10ec3aa4e9b158fa55780cde
+      internalID: -862005732
       vertices: []
       indices: 
       edges: []
@@ -147,10 +147,10 @@ TextureImporter:
       name: PlayerA_Vessel_1
       rect:
         serializedVersion: 2
-        x: 608
+        x: 524
         y: 0
-        width: 608
-        height: 640
+        width: 524
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -158,8 +158,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4ec6f844293c023479b60c140c7462ac
-      internalID: -1134714043
+      spriteID: d9ae52abdaddedd41baf9df048e61d1f
+      internalID: -753395211
       vertices: []
       indices: 
       edges: []
@@ -168,10 +168,10 @@ TextureImporter:
       name: PlayerA_Vessel_2
       rect:
         serializedVersion: 2
-        x: 1216
+        x: 1048
         y: 0
-        width: 608
-        height: 640
+        width: 524
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -179,8 +179,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0b9c9e00c8c30f24bab0b8ed99356029
-      internalID: 1191456674
+      spriteID: 44021e5065b59794d97ead8ad907d6f8
+      internalID: 1774670310
       vertices: []
       indices: 
       edges: []
@@ -189,10 +189,10 @@ TextureImporter:
       name: PlayerA_Vessel_3
       rect:
         serializedVersion: 2
-        x: 1824
+        x: 1572
         y: 0
-        width: 608
-        height: 640
+        width: 524
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -200,8 +200,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eff930720d19d834ca4f5a003e7f6b1c
-      internalID: 2093970441
+      spriteID: 877f149eec92d614b9a2c4a8db06ba43
+      internalID: -1953360708
       vertices: []
       indices: 
       edges: []
@@ -210,10 +210,10 @@ TextureImporter:
       name: PlayerA_Vessel_4
       rect:
         serializedVersion: 2
-        x: 2432
+        x: 2096
         y: 0
-        width: 608
-        height: 640
+        width: 524
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -221,8 +221,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 044a1b5a5a49b664f883eb652120b944
-      internalID: -732727868
+      spriteID: ce926ea58a8800047b589b1e6590c7ab
+      internalID: -2084631423
       vertices: []
       indices: 
       edges: []
@@ -231,10 +231,10 @@ TextureImporter:
       name: PlayerA_Vessel_5
       rect:
         serializedVersion: 2
-        x: 3040
+        x: 2620
         y: 0
-        width: 608
-        height: 640
+        width: 524
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -242,8 +242,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2b56b4a5da7d4784cbbaf1220c87d94c
-      internalID: -6872613
+      spriteID: 275453372b163f647961b6e5d69200f4
+      internalID: -2051497810
       vertices: []
       indices: 
       edges: []
@@ -252,10 +252,10 @@ TextureImporter:
       name: PlayerA_Vessel_6
       rect:
         serializedVersion: 2
-        x: 3648
+        x: 3144
         y: 0
-        width: 608
-        height: 640
+        width: 524
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -263,8 +263,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 12a069d39d5db2447b6519309d09876e
-      internalID: 1081897966
+      spriteID: c826fc9abd7064540957d32d1595e5cf
+      internalID: -1479285922
       vertices: []
       indices: 
       edges: []
@@ -273,10 +273,10 @@ TextureImporter:
       name: PlayerA_Vessel_7
       rect:
         serializedVersion: 2
-        x: 4256
+        x: 3668
         y: 0
-        width: 608
-        height: 640
+        width: 524
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -284,8 +284,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e0fa466549786254b88b9d3f7b2dc7af
-      internalID: 272469066
+      spriteID: b66f91a00e439c540a6974501c8492ef
+      internalID: 441773254
       vertices: []
       indices: 
       edges: []
@@ -294,10 +294,10 @@ TextureImporter:
       name: PlayerA_Vessel_8
       rect:
         serializedVersion: 2
-        x: 4864
+        x: 4192
         y: 0
-        width: 608
-        height: 640
+        width: 524
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -305,8 +305,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 440b9d702dc6401499ce51832afbdc79
-      internalID: -1423148375
+      spriteID: bfe7a89fcc111ad478160db7bfa762dd
+      internalID: -287133205
       vertices: []
       indices: 
       edges: []
@@ -315,10 +315,10 @@ TextureImporter:
       name: PlayerA_Vessel_9
       rect:
         serializedVersion: 2
-        x: 5472
+        x: 4716
         y: 0
-        width: 608
-        height: 640
+        width: 524
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -326,8 +326,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 312511188eaab4a44ac86b6ab3c027ef
-      internalID: -1892671376
+      spriteID: 06154f3c054b9d44999acbc9f0e265c9
+      internalID: -1180887846
       vertices: []
       indices: 
       edges: []
@@ -336,10 +336,10 @@ TextureImporter:
       name: PlayerA_Vessel_10
       rect:
         serializedVersion: 2
-        x: 6080
+        x: 5240
         y: 0
-        width: 608
-        height: 640
+        width: 524
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -347,8 +347,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d272ff27383b5f64bb7ed6f8ae48442f
-      internalID: -1449552561
+      spriteID: 12baf3450565aee44b72481a40df7b39
+      internalID: -1398669811
       vertices: []
       indices: 
       edges: []
@@ -357,10 +357,10 @@ TextureImporter:
       name: PlayerA_Vessel_11
       rect:
         serializedVersion: 2
-        x: 6688
+        x: 5764
         y: 0
-        width: 608
-        height: 640
+        width: 524
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -368,8 +368,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 65beaa47772239f4e889efe5cc05281f
-      internalID: -36750829
+      spriteID: 2c5590bc9fa5ef3408df0b19c058a57e
+      internalID: 1074337175
       vertices: []
       indices: 
       edges: []
@@ -378,10 +378,10 @@ TextureImporter:
       name: PlayerA_Vessel_12
       rect:
         serializedVersion: 2
-        x: 7296
+        x: 6288
         y: 0
-        width: 608
-        height: 640
+        width: 524
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -389,8 +389,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5fa18d59f21bd8e4fa3977b0462e10b4
-      internalID: 987321905
+      spriteID: 5661c626388455f4fb6230fa2fb6b0b3
+      internalID: -8252365
       vertices: []
       indices: 
       edges: []
@@ -399,10 +399,10 @@ TextureImporter:
       name: PlayerA_Vessel_13
       rect:
         serializedVersion: 2
-        x: 7904
+        x: 6812
         y: 0
-        width: 608
-        height: 640
+        width: 524
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -410,8 +410,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3eca979db24e9d444bddb7bc6e7f66e9
-      internalID: 67086350
+      spriteID: 47b6b81ba8a0ea244adb1e46f7c9fe6f
+      internalID: -1846506251
       vertices: []
       indices: 
       edges: []
@@ -420,10 +420,10 @@ TextureImporter:
       name: PlayerA_Vessel_14
       rect:
         serializedVersion: 2
-        x: 8512
+        x: 7336
         y: 0
-        width: 608
-        height: 640
+        width: 524
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -431,8 +431,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 71d7bc2ae7a91b1419a9b224627104f7
-      internalID: 131773670
+      spriteID: 4a2861c6fa5e61c4aae55835847a7319
+      internalID: 1846231129
       vertices: []
       indices: 
       edges: []
@@ -441,10 +441,10 @@ TextureImporter:
       name: PlayerA_Vessel_15
       rect:
         serializedVersion: 2
-        x: 9120
+        x: 7860
         y: 0
-        width: 608
-        height: 640
+        width: 524
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -452,8 +452,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 166974e9e58f5ba44a7dc856184a7613
-      internalID: 680903958
+      spriteID: 63e9966b7dba3ca40bef02cfb9750c4a
+      internalID: -348597958
       vertices: []
       indices: 
       edges: []
@@ -462,10 +462,10 @@ TextureImporter:
       name: PlayerA_Vessel_16
       rect:
         serializedVersion: 2
-        x: 9728
+        x: 8384
         y: 0
-        width: 608
-        height: 640
+        width: 524
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -473,8 +473,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cb82b6bcf95563d479645d7ef0ad75d5
-      internalID: -941685137
+      spriteID: 77b5682bff474e84f8416f603cd7230c
+      internalID: -2071247316
       vertices: []
       indices: 
       edges: []
@@ -490,23 +490,23 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      PlayerA_Vessel_0: 443634129
-      PlayerA_Vessel_1: -1134714043
-      PlayerA_Vessel_10: -1449552561
-      PlayerA_Vessel_11: -36750829
-      PlayerA_Vessel_12: 987321905
-      PlayerA_Vessel_13: 67086350
-      PlayerA_Vessel_14: 131773670
-      PlayerA_Vessel_15: 680903958
-      PlayerA_Vessel_16: -941685137
-      PlayerA_Vessel_2: 1191456674
-      PlayerA_Vessel_3: 2093970441
-      PlayerA_Vessel_4: -732727868
-      PlayerA_Vessel_5: -6872613
-      PlayerA_Vessel_6: 1081897966
-      PlayerA_Vessel_7: 272469066
-      PlayerA_Vessel_8: -1423148375
-      PlayerA_Vessel_9: -1892671376
+      PlayerA_Vessel_0: -862005732
+      PlayerA_Vessel_1: -753395211
+      PlayerA_Vessel_10: -1398669811
+      PlayerA_Vessel_11: 1074337175
+      PlayerA_Vessel_12: -8252365
+      PlayerA_Vessel_13: -1846506251
+      PlayerA_Vessel_14: 1846231129
+      PlayerA_Vessel_15: -348597958
+      PlayerA_Vessel_16: -2071247316
+      PlayerA_Vessel_2: 1774670310
+      PlayerA_Vessel_3: -1953360708
+      PlayerA_Vessel_4: -2084631423
+      PlayerA_Vessel_5: -2051497810
+      PlayerA_Vessel_6: -1479285922
+      PlayerA_Vessel_7: 441773254
+      PlayerA_Vessel_8: -287133205
+      PlayerA_Vessel_9: -1180887846
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

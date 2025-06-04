@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7a27bdef829d254a87fc7cabff708ad, type: 3}
   m_Name: Stage01-20
   m_EditorClassIdentifier: 
+  stageName: Stage01-20
+  stageSpawnCount: 31
   spawnInfos:
   - spawnType: 3
     spawnTime: 0
