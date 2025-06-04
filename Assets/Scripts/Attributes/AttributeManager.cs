@@ -7,11 +7,13 @@ public class AttributeManager : MonoBehaviour
 
     private void Awake()
     {
-        attribute = Instantiate(attribute);   
+        attribute = Instantiate(attribute);
     }
 
     private void OnEnable()
     {
+        attribute.Initialize(this.gameObject);
+        
         if (attribute is IOnHitEffect hitAttribute)
         {
             AttackHandler attack = GetComponent<AttackHandler>();
@@ -28,7 +30,6 @@ public class AttributeManager : MonoBehaviour
         {
 
         }
-        attribute.Initialize(this.gameObject);
     }
 
     private IEnumerator IntervalRoutine(IOnIntervalEffect attribute, float interval)

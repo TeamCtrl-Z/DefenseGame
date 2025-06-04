@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 /// <summary>
@@ -7,11 +8,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NearestTargeting", menuName = "Targeting/NearestTargeting")]
 public class NearestTargeting : TargetingStrategyData
 {
-    /// <summary>
-    /// Fariy 위치
-    /// </summary>
-    //private Transform origin;
-    //public NearestTargeting(Transform origin) => this.origin = origin;
     public override Transform SelectTarget(Transform origin, IEnumerable<ITargetable> enemies)
     {
         Transform nearest = null;
@@ -27,5 +23,15 @@ public class NearestTargeting : TargetingStrategyData
             }
         }
         return nearest;
+    }
+    
+    public override List<Transform> SelectTargets(Transform origin, IEnumerable<ITargetable> enemies, int count)
+    {
+        //가까운순으로 정렬한 뒤, count만큼 꺼내서 Transform배열로 반환
+        return enemies
+            .OrderBy(e => Vector2.Distance(origin.position, e.Transform.position))
+            .Take(count)
+            .Select(e => e.Transform)
+            .ToList();
     }
 }

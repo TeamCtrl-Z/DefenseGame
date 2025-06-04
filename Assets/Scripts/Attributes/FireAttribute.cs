@@ -14,23 +14,22 @@ public class FireAttribute : AttributeBase, IOnHitEffect
     /// </summary>
     public HittingData data;
 
-    public override void Initialize(GameObject user)
-    {
-        base.Initialize(user);
-    }
-
+    private Collider2D[] cols = new Collider2D[16];
     
     public void OnHit(IDamagable damagable, Vector3 origin)
     {
-        Debug.Log("FireAttribute : OnHit");
-        WireCircleMarker marker = Factory.Instance.GetWireCircleMarker(origin);
-        marker.transform.localScale *= Radius;
+        Debug.Log($"FireAttribute : OnHit {origin}");
+        // WireCircleMarker marker = Factory.Instance.GetWireCircleMarker(origin);
+        // marker.transform.localScale *= Radius;
 
-        Collider2D[] cols = Physics2D.OverlapCircleAll(origin, Radius, LayerMask.GetMask("Enemy"));
+        FireExplosion fire = Factory.Instance.GetFireExplosion(origin);
+        fire.transform.localScale *= Radius;
 
-        foreach (Collider2D col in cols)
+        int cnt = Physics2D.OverlapCircleNonAlloc(origin, Radius, cols, LayerMask.GetMask("Enemy"));
+
+        for (int i = 0; i < cnt; i++)
         {
-            if (col.TryGetComponent<IDamagable>(out IDamagable target))
+            if (cols[i].TryGetComponent<IDamagable>(out IDamagable target))
             {
                 if (damagable == target) continue;
 

@@ -8,6 +8,8 @@ public class DamageProcessor : MonoBehaviour
     public readonly Dictionary<DebuffType, Action<EnemyStatusComponent, float>> DamageFuncs = new();
 
     private Coroutine dotDamageRoutine;
+    private Coroutine stopRoutine;
+    private const float DotInterval = 1f;
 
     private void Awake()
     {
@@ -35,7 +37,7 @@ public class DamageProcessor : MonoBehaviour
         if (dotDamageRoutine != null)
             StopCoroutine(dotDamageRoutine);
 
-        dotDamageRoutine = StartCoroutine(DotDamageRoutine(dmg, 1f));
+        dotDamageRoutine = StartCoroutine(DotDamageRoutine(dmg, DotInterval));
     }
 
     public void ApplySlowDebuff(IMoveStatus move, float slowRatio)
@@ -43,5 +45,21 @@ public class DamageProcessor : MonoBehaviour
         // TODO : 슬로우 디버프
         if (move.MoveSpeedMultiplier > slowRatio)
             move.MoveSpeedMultiplier = slowRatio;
+    }
+
+    public void ApplyStopDebuff(IMoveStatus move, float duration)
+    {
+        IEnumerator StopRoutine(float duration)
+        {
+            float origin = move.MoveSpeedMultiplier;
+            move.MoveSpeedMultiplier = 0.0f;
+            yield return new WaitForSeconds(duration);
+            move.MoveSpeedMultiplier = origin;
+        }
+
+        if (stopRoutine != null)
+            StopCoroutine(stopRoutine);
+
+        stopRoutine = StartCoroutine(StopRoutine(duration));
     }
 }

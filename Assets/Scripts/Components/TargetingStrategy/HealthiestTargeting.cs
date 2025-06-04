@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 /// <summary>
@@ -22,5 +23,14 @@ public class HealthiestTargeting : TargetingStrategyData
             }
         }
         return healthiest;
+    }
+
+    public override List<Transform> SelectTargets(Transform origin, IEnumerable<ITargetable> enemies, int count)
+    {
+        return enemies
+            .OrderBy(e => e.Transform.GetComponent<IHealthStatus>().CurrentHP)
+            .Take(count)
+            .Select(e => e.Transform)
+            .ToList();
     }
 }

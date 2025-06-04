@@ -13,6 +13,7 @@ public class FrozenAttribute : AttributeBase, IOnIntervalEffect
         Vector3 origin = user.transform.position;
         float radius = Mathf.Abs(origin.x) + 9.0f;
         var cols = Physics2D.OverlapCircleAll(origin, radius, LayerMask.GetMask("Enemy"));
+        Snow snow = Factory.Instance.GetSnow(new Vector2(0.0f, 4.0f));
         foreach (var col in cols)
         {
             if (col.TryGetComponent<IDamagable>(out IDamagable dmg))
