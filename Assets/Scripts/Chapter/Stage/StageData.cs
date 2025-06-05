@@ -7,6 +7,11 @@ using UnityEngine;
 public class StageData : ScriptableObject
 {
     /// <summary>
+    /// 스테이지 고유 아이디
+    /// </summary>
+    public uint StateID;
+    
+    /// <summary>
     /// 스테이지 이름
     /// </summary>
     public string stageName;

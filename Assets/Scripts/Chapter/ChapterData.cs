@@ -7,6 +7,11 @@ using UnityEngine;
 public class ChapterData : ScriptableObject
 {
     /// <summary>
+    /// 챕터 고유 아이디
+    /// </summary>
+    public uint ChapterID;
+    
+    /// <summary>
     /// 챕터 이름
     /// </summary>
     public string chapterName;
