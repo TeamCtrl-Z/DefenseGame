@@ -4,6 +4,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 유저 정보를 요청하는 서버 데이터 클래스
+/// </summary>
 public class ServerData_Users : ServerData
 {
     /// <summary>

@@ -505,7 +505,7 @@ public class Factory : Singleton<Factory>
     /// <param name="angle">소환 각도</param>
     /// <param name="goldAmount">Gold 양</param>
     /// <returns>소환된 Gold</returns>
-    public CurrencyDrop GetGold(Vector2 position, float angle = 0.0f, uint goldAmount = 0)
+    public CurrencyDrop GetGold(Vector2 position, float angle = 0.0f, ulong goldAmount = 0)
     {
         Vector2 rand = Random.insideUnitCircle * 0.5f;
         position += rand;
@@ -521,7 +521,7 @@ public class Factory : Singleton<Factory>
     /// <param name="angle">소환 각도</param>
     /// <param name="gemAmount">Gem 양</param>
     /// <returns>소환된 Gem</returns>
-    public CurrencyDrop GetGem(Vector2 position, float angle = 0.0f, uint gemAmount = 0)
+    public CurrencyDrop GetGem(Vector2 position, float angle = 0.0f, ulong gemAmount = 0)
     {
         Vector2 rand = Random.insideUnitCircle * 0.5f;
         position += rand;

@@ -33,7 +33,7 @@ public class ServerData_Chapter : ServerData
         {
             gold = UserDataManager.Instance.Currency_Gold,
             gem = UserDataManager.Instance.Currency_Gem,
-            stage_id = GameManager.Instance.ChapterManager.CurrentStage.StateID
+            stage_id = GameManager.Instance.ChapterManager.CurrentStage.StageID
         });
         yield return network.SendRequest();
 

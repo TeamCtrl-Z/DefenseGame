@@ -6,17 +6,17 @@ public interface IReward
     /// <summary>
     /// Gold 양
     /// </summary>
-    public uint Gold { get; }
+    public ulong Gold { get; }
 
     /// <summary>
     /// Gem 양
     /// </summary>
-    public uint Gem { get; }
+    public ulong Gem { get; }
 
     /// <summary>
     /// EXP 양
     /// </summary>
-    public uint Exp { get; }
+    public ulong Exp { get; }
 
     /// <summary>
     /// 보상 데이터를 로드하는 메소드

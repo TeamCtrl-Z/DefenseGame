@@ -6,9 +6,10 @@ using UnityEngine;
 
 public class ServerData : Singleton<ServerData>
 {
-
     protected virtual void ApplyCommonResponse(string data)
     {
+
+
     }
 
 }

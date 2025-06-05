@@ -133,7 +133,18 @@ public class ChapterManager : MonoBehaviour, IInitialize
     /// </summary>
     public void ClearStage()
     {
-        KillCount = 0;
+        if (!CurrentStage.isClear)
+        {
+            currentStage.isClear = true;
+            KillCount = 0;
+            UserDataManager.Instance.AddCurrency_Gold(currentStage.reward_Gold);
+            UserDataManager.Instance.AddCurrency_Gem(currentStage.reward_Gem);
+            StartCoroutine(StageClearRewardWithServer());
+            if (currentChapter.stages[20] == currentStage)
+            {
+                ClearChapter();
+            }
+        }
     }
 
     /// <summary>
@@ -141,7 +152,50 @@ public class ChapterManager : MonoBehaviour, IInitialize
     /// </summary>
     public void ClearChapter()
     {
-        
+        if (!currentChapter.isClear)
+        {
+            UserDataManager.Instance.AddCurrency_Gold(currentChapter.reward_Gold);
+            UserDataManager.Instance.AddCurrency_Gem(currentChapter.reward_Gem);
+            currentChapter.isClear = true;
+            StartCoroutine(ChapterClearRewardWithServer());
+        }
+
+    }
+
+    /// <summary>
+    /// 스테이지 클리어 후 서버에 재화 업로드를 요청하는 코루틴 
+    /// </summary>
+    private IEnumerator StageClearRewardWithServer()
+    {
+        void fail()
+        {
+            Debug.LogWarning("스테이지 보상 받기 실패");
+        }
+
+        void success()
+        {
+            Debug.Log("스테이지 보상 받기 성공");
+        }
+
+        yield return ServerData_Chapter.Instance.RequestStageClear(success, fail);
+    }
+
+    /// <summary>
+    /// 챕터 클리어 후 서버에 재화 업로드를 요청하는 코루틴 
+    /// </summary>
+    private IEnumerator ChapterClearRewardWithServer()
+    {
+        void fail()
+        {
+            Debug.LogWarning("챕터 보상 받기 실패");
+        }
+
+        void success()
+        {
+            Debug.Log("챕터 보상 받기 성공");
+        }
+
+        yield return ServerData_Chapter.Instance.RequestChapterClear(success, fail);
     }
 
     /// <summary>

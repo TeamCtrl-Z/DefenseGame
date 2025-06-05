@@ -43,7 +43,7 @@ public class LoginManager : MonoBehaviour
     private void Awake()
     {
         auth = FirebaseAuth.DefaultInstance;
-        accountFilePath = Path.Combine(Application.persistentDataPath, "guest_account.json");
+        accountFilePath = Path.Combine(Application.persistentDataPath, "UserData.json");
 
         OnStatusChange?.Invoke("");
     }
