@@ -31,7 +31,7 @@ public class Projectile : RecycleObject
     /// <summary>
     /// 적을 공격했을 때 호출하는 이벤트
     /// </summary>
-    public event Action<IDamagable, Vector3> OnHit;
+    public event Action<IDamageable, Vector3> OnHit;
 
     protected override void Awake()
     {
@@ -59,7 +59,7 @@ public class Projectile : RecycleObject
         if (collision.transform != target)
             return;
 
-        if (collision.TryGetComponent<IDamagable>(out IDamagable dmg))
+        if (collision.TryGetComponent<IDamageable>(out IDamageable dmg))
         {
             OnHit?.Invoke(dmg, transform.position);
             gameObject.SetActive(false);

@@ -33,7 +33,7 @@ public class FireAttribute : AttributeBase, IOnHitEffect
     /// </summary>
     /// <param name="damagable"> 피격 당한 적 </param>
     /// <param name="origin"> 피격 당한 위치 </param>
-    public void OnHit(IDamagable damagable, Vector3 origin)
+    public void OnHit(IDamageable damagable, Vector3 origin)
     {
         Debug.Log($"FireAttribute : OnHit {origin}");
         Factory.Instance.GetFireExplosion(origin);
@@ -42,7 +42,7 @@ public class FireAttribute : AttributeBase, IOnHitEffect
 
         for (int i = 0; i < cnt; i++)
         {
-            if (cols[i].TryGetComponent<IDamagable>(out IDamagable target))
+            if (cols[i].TryGetComponent<IDamageable>(out IDamageable target))
             {
                 if (damagable == target) continue;
 

@@ -23,7 +23,7 @@ public class PoisonAttribute : AttributeBase, IOnHitEffect
     /// </summary>
     /// <param name="dmg"></param>
     /// <param name="origin"></param>
-    public void OnHit(IDamagable dmg, Vector3 origin)
+    public void OnHit(IDamageable dmg, Vector3 origin)
     {
         dmg.OnDamage(user, data);
     }

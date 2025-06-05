@@ -37,7 +37,7 @@ public class FrozenAttribute : AttributeBase, IOnIntervalEffect
 
         foreach (var col in cols)
         {
-            if (col.TryGetComponent<IDamagable>(out IDamagable dmg))
+            if (col.TryGetComponent<IDamageable>(out IDamageable dmg))
             {
                 dmg.OnDamage(user, data);
             }

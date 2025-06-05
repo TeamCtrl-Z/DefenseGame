@@ -21,7 +21,7 @@ public abstract class AttackBase : IAttack
     /// <summary>
     /// 외부에게 몬스터를 피격시켰다고 알려주는 이벤트
     /// </summary>
-    public event Action<IDamagable, Vector3> OnHit;
+    public event Action<IDamageable, Vector3> OnHit;
 
     /// <summary>
     /// 공격에 필요한 초기화
@@ -40,7 +40,7 @@ public abstract class AttackBase : IAttack
     /// </summary>
     /// <param name="dmg"></param>
     /// <param name="origin"></param>
-    protected virtual void NotifyOnHit(IDamagable dmg, Vector3 origin)
+    protected virtual void NotifyOnHit(IDamageable dmg, Vector3 origin)
     {
         Debug.Log(this.GetType() + " : OnHit");
         dmg.OnDamage(attacker.gameObject, data);

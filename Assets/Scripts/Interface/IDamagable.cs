@@ -3,7 +3,7 @@ using UnityEngine;
 /// <summary>
 /// 피격 당할 수 있는 인터페이스
 /// </summary>
-public interface IDamagable
+public interface IDamageable
 {
     /// <summary>
     /// 피격 당했을 때 실행하는 함수

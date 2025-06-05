@@ -27,11 +27,9 @@ public class LoginManager : MonoBehaviour
     public Button deleteAccountButton;
 
     private FirebaseAuth auth;
-
-    private const string baseUrl = "https://121.130.77.123:5001/api";
-    private string registerUrl = baseUrl + "/user/register";
-    private string loginUrl = baseUrl + "/user/login";
-    private string deleteUrl = baseUrl + "/user/delete";  // 계정 삭제용 엔드포인트
+    private string registerUrl = "/user/register";
+    private string loginUrl = "/user/login";
+    private string deleteUrl = "/user/delete";  // 계정 삭제용 엔드포인트
 
     private UserAccount currentAccount;
     private string accountFilePath;
@@ -150,101 +148,78 @@ public class LoginManager : MonoBehaviour
             provider = "guest",
             deviceId = deviceId
         };
-        string registerJson = JsonConvert.SerializeObject(registerRequestData);
-        byte[] postData = Encoding.UTF8.GetBytes(registerJson);
+        Network network = new Network(registerUrl, "POST");
+        network.SetRequestData(registerRequestData);
 
-        using (UnityWebRequest request = new UnityWebRequest(registerUrl, "POST"))
+        yield return network.SendRequest();
+
+        if (!string.IsNullOrEmpty(network.Error))
         {
-            request.certificateHandler = new AcceptAllCerts();
-            request.disposeCertificateHandlerOnDispose = true;
-
-            request.uploadHandler = new UploadHandlerRaw(postData);
-            request.downloadHandler = new DownloadHandlerBuffer();
-            request.SetRequestHeader("Content-Type", "application/json");
-            request.SetRequestHeader("Authorization", $"Bearer {idToken}");
-
-            yield return request.SendWebRequest();
-
-            if (request.result != UnityWebRequest.Result.Success)
-            {
-                Debug.LogError($"[LoginManager] 게스트 등록 실패: {request.error}");
-                Debug.LogError($"서버 응답 바디: {request.downloadHandler.text}");
-                statusText.text = "회원가입 실패. 요청 형식을 확인하세요.";
-                yield break;
-            }
-
-            // 회원가입 성공 → 서버 응답 JSON 파싱
-            string responseJson = request.downloadHandler.text;
-            Debug.Log($"[LoginManager] Register Response: {responseJson}");
-            try
-            {
-                currentAccount = JsonConvert.DeserializeObject<UserAccount>(responseJson);
-            }
-            catch (Exception e)
-            {
-                Debug.LogError($"[LoginManager] JSON 파싱 오류(가입): {e}");
-                statusText.text = "서버 응답 파싱 오류.";
-                yield break;
-            }
-
-            if (currentAccount.firebaseUid != firebaseUid)
-                Debug.LogWarning("[LoginManager] 서버 응답 UID와 Firebase 익명 UID가 다릅니다.");
-
-            // 로컬 JSON(guest_account.json) 에는 “변하지 않는 정보”만 저장
-            SaveAccountToJson();
-
-            yield return StartCoroutine(LoginAfterRegister(idToken));
+            Debug.LogError($"[LoginManager] 게스트 등록 실패: {network.Error}");
+            Debug.LogError($"서버 응답(문제가 있는 경우): {network.ResponseText}");
+            statusText.text = "회원가입 실패. 요청 형식을 확인하세요.";
+            yield break;
         }
+        // 회원가입 성공 → 서버 응답 JSON 파싱
+        string responseJson = network.ResponseText;
+
+        Debug.Log($"[LoginManager] Register Response: {responseJson}");
+        try
+        {
+            currentAccount = JsonConvert.DeserializeObject<UserAccount>(responseJson);
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($"[LoginManager] JSON 파싱 오류(가입): {e}");
+            statusText.text = "서버 응답 파싱 오류.";
+            yield break;
+        }
+
+        if (currentAccount.firebaseUid != firebaseUid)
+            Debug.LogWarning("[LoginManager] 서버 응답 UID와 Firebase 익명 UID가 다릅니다.");
+
+        // 로컬 JSON(guest_account.json) 에는 “변하지 않는 정보”만 저장
+        SaveAccountToJson();
+
+        yield return StartCoroutine(LoginAfterRegister());
     }
 
-    private IEnumerator LoginAfterRegister(string idToken)
+    private IEnumerator LoginAfterRegister()
     {
         statusText.text = "가입 완료, 로그인 중…";
 
-        var loginRequestData = new { idToken = idToken };
-        string loginJson = JsonConvert.SerializeObject(loginRequestData);
-        byte[] postData = Encoding.UTF8.GetBytes(loginJson);
+        var loginRequestData = new {};
+        Network network = new Network(loginUrl, "POST");
+        network.SetRequestData(loginRequestData);
+        yield return network.SendRequest();
 
-        using (UnityWebRequest request = new UnityWebRequest(loginUrl, "POST"))
+        if (!string.IsNullOrEmpty(network.Error))
         {
-            request.certificateHandler = new AcceptAllCerts();
-            request.disposeCertificateHandlerOnDispose = true;
+            Debug.LogError($"[LoginManager] 가입 후 로그인 실패: {network.Error}");
+            Debug.LogError($"서버 응답 바디: {network.ResponseText}");
+            statusText.text = "가입 후 로그인 실패.";
+            yield break;
+        }
 
-            request.uploadHandler = new UploadHandlerRaw(postData);
-            request.downloadHandler = new DownloadHandlerBuffer();
-            request.SetRequestHeader("Content-Type", "application/json");
-            request.SetRequestHeader("Authorization", $"Bearer {idToken}");
+        string responseJson = network.ResponseText;
+        Debug.Log($"[LoginManager] LoginAfterRegister Response: {responseJson}");
+        try
+        {
+            currentAccount = JsonConvert.DeserializeObject<UserAccount>(responseJson);
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($"[LoginManager] JSON 파싱 오류(가입 후 로그인): {e}");
+            statusText.text = "서버 응답 파싱 오류.";
+            yield break;
+        }
 
-            yield return request.SendWebRequest();
+        SaveAccountToJson();
 
-            if (request.result != UnityWebRequest.Result.Success)
-            {
-                Debug.LogError($"[LoginManager] 가입 후 로그인 실패: {request.error}");
-                Debug.LogError($"서버 응답 바디: {request.downloadHandler.text}");
-                statusText.text = "가입 후 로그인 실패.";
-                yield break;
-            }
-
-            string responseJson = request.downloadHandler.text;
-            Debug.Log($"[LoginManager] LoginAfterRegister Response: {responseJson}");
-            try
-            {
-                currentAccount = JsonConvert.DeserializeObject<UserAccount>(responseJson);
-            }
-            catch (Exception e)
-            {
-                Debug.LogError($"[LoginManager] JSON 파싱 오류(가입 후 로그인): {e}");
-                statusText.text = "서버 응답 파싱 오류.";
-                yield break;
-            }
-
-            SaveAccountToJson();
-
-            string shortUid = currentAccount.firebaseUid.Length >= 8
+        string shortUid = currentAccount.firebaseUid.Length >= 8
                 ? currentAccount.firebaseUid.Substring(0, 8)
                 : currentAccount.firebaseUid;
-            ShowMainUI($"환영합니다, 게스트님!\n(UID: {shortUid})");
-        }
+        ShowMainUI($"환영합니다, 게스트님!\n(UID: {shortUid})");
     }
 
     #endregion
@@ -255,65 +230,36 @@ public class LoginManager : MonoBehaviour
     private IEnumerator LoginWithFirebaseSession()
     {
         statusText.text = "자동 로그인 중…";
+        Network network = new Network(loginUrl, "POST");
+        network.SetRequestData(new { });
+        yield return network.SendRequest();
 
-        // 1) Firebase.CurrentUser로부터 항상 “최신” ID 토큰을 받아온다
-        var tokenTask = auth.CurrentUser.TokenAsync(forceRefresh: true);
-        yield return new WaitUntil(() => tokenTask.IsCompleted);
-
-        if (tokenTask.Exception != null)
+        if (!string.IsNullOrEmpty(network.Error))
         {
-            Debug.LogWarning($"[LoginManager] 자동 로그인용 토큰 요청 실패: {tokenTask.Exception}");
+            Debug.LogWarning(network.Error);
+            yield break;
+        }
+
+        string responseJson = network.ResponseText;
+        Debug.Log($"[LoginManager] Login Response: {responseJson}");
+        try
+        {
+            currentAccount = JsonConvert.DeserializeObject<UserAccount>(responseJson);
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($"[LoginManager] JSON 파싱 오류(로그인): {e}");
             ShowLoginUI();
             yield break;
         }
 
-        string freshIdToken = tokenTask.Result;
+        // 로컬 JSON에 “변하지 않는” 정보만 덮어써서 저장
+        SaveAccountToJson();
 
-        // 2) 서버 /user/login 호출
-        var loginRequestData = new { idToken = freshIdToken };
-        string loginJson = JsonConvert.SerializeObject(loginRequestData);
-        byte[] postData = Encoding.UTF8.GetBytes(loginJson);
-
-        using (UnityWebRequest request = new UnityWebRequest(loginUrl, "POST"))
-        {
-            request.certificateHandler = new AcceptAllCerts();
-            request.disposeCertificateHandlerOnDispose = true;
-
-            request.uploadHandler = new UploadHandlerRaw(postData);
-            request.downloadHandler = new DownloadHandlerBuffer();
-            request.SetRequestHeader("Content-Type", "application/json");
-            request.SetRequestHeader("Authorization", $"Bearer {freshIdToken}");
-
-            yield return request.SendWebRequest();
-
-            if (request.result != UnityWebRequest.Result.Success)
-            {
-                Debug.LogWarning($"[LoginManager] 자동 로그인 실패 (서버): {request.error}");
-                ShowLoginUI();
-                yield break;
-            }
-
-            string responseJson = request.downloadHandler.text;
-            Debug.Log($"[LoginManager] Login Response: {responseJson}");
-            try
-            {
-                currentAccount = JsonConvert.DeserializeObject<UserAccount>(responseJson);
-            }
-            catch (Exception e)
-            {
-                Debug.LogError($"[LoginManager] JSON 파싱 오류(로그인): {e}");
-                ShowLoginUI();
-                yield break;
-            }
-
-            // 로컬 JSON에 “변하지 않는” 정보만 덮어써서 저장
-            SaveAccountToJson();
-
-            string shortUid = currentAccount.firebaseUid.Length >= 8
-                ? currentAccount.firebaseUid.Substring(0, 8)
-                : currentAccount.firebaseUid;
-            ShowMainUI($"자동 로그인 성공!\nUID: {shortUid}");
-        }
+        string shortUid = currentAccount.firebaseUid.Length >= 8
+            ? currentAccount.firebaseUid.Substring(0, 8)
+            : currentAccount.firebaseUid;
+        ShowMainUI($"자동 로그인 성공!\nUID: {shortUid}");
     }
 
     #endregion
@@ -347,47 +293,22 @@ public class LoginManager : MonoBehaviour
             yield break;
         }
 
-        var tokenTask = firebaseUser.TokenAsync(forceRefresh: true);
-        yield return new WaitUntil(() => tokenTask.IsCompleted);
-
-        if (tokenTask.Exception != null)
+        var deleteRequestData = new {};
+        Network network = new Network(deleteUrl, "POST");
+        network.SetRequestData(deleteRequestData);
+        yield return network.SendRequest();
+        if (!string.IsNullOrEmpty(network.ResponseText))
         {
-            Debug.LogWarning($"[LoginManager] 삭제용 토큰 요청 실패: {tokenTask.Exception}");
-            statusText.text = "알 수 없는 오류가 발생했습니다.";
+            Debug.LogError($"[LoginManager] 가입 후 로그인 실패: {network.Error}");
+            Debug.LogError($"서버 응답 바디: {network.ResponseText}");
+            statusText.text = "가입 후 로그인 실패.";
             yield break;
         }
 
-        string idToken = tokenTask.Result;
 
-        // 서버 삭제 요청: { idToken: "..." } 형식의 간단한 body
-        var deleteRequestData = new { idToken = idToken };
-        string deleteJson = JsonConvert.SerializeObject(deleteRequestData);
-        byte[] postData = Encoding.UTF8.GetBytes(deleteJson);
-
-        using (UnityWebRequest request = new UnityWebRequest(deleteUrl, "POST"))
-        {
-            request.certificateHandler = new AcceptAllCerts();
-            request.disposeCertificateHandlerOnDispose = true;
-
-            request.uploadHandler = new UploadHandlerRaw(postData);
-            request.downloadHandler = new DownloadHandlerBuffer();
-            request.SetRequestHeader("Content-Type", "application/json");
-            request.SetRequestHeader("Authorization", $"Bearer {idToken}");
-
-            yield return request.SendWebRequest();
-
-            if (request.result != UnityWebRequest.Result.Success)
-            {
-                Debug.LogError($"[LoginManager] 서버 삭제 요청 실패: {request.error}");
-                Debug.LogError($"서버 응답 바디: {request.downloadHandler.text}");
-                statusText.text = "계정 삭제 실패. 다시 시도하세요.";
-                yield break;
-            }
-
-            // 삭제가 성공적으로 완료된 경우
-            Debug.Log("[LoginManager] 서버 계정 삭제 성공");
-            PerformLocalDeletion();
-        }
+        // 삭제가 성공적으로 완료된 경우
+        Debug.Log("[LoginManager] 서버 계정 삭제 성공");
+        PerformLocalDeletion();
     }
 
     /// <summary>
@@ -465,12 +386,4 @@ public class UserAccount
     public string lastLoginAt;
     public string deviceId;
     // 필요에 따라 이메일, displayName 같은 필드를 추가해도 됩니다.
-}
-
-/// <summary>
-/// 개발/테스트용: SSL 인증서를 무조건 통과시키는 CertificateHandler
-/// </summary>
-public class AcceptAllCerts : CertificateHandler
-{
-    protected override bool ValidateCertificate(byte[] certificateData) => true;
 }

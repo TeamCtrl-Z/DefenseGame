@@ -48,14 +48,14 @@ public class ElectronicAttribute : AttributeBase, IOnHitEffect
     /// </summary>
     /// <param name="damagable"> 피격 받은 몬스터 </param>
     /// <param name="origin"> 피격 받은 위치 </param>
-    public void OnHit(IDamagable damagable, Vector3 origin)
+    public void OnHit(IDamageable damagable, Vector3 origin)
     {
         var allInRange = targeting.TargetsInRange;
 
         var secondaryCandidates = allInRange
             .Where(t =>
             {
-                var dmg = t.Transform.GetComponent<IDamagable>();
+                var dmg = t.Transform.GetComponent<IDamageable>();
                 return dmg != damagable;
             });
 
@@ -63,7 +63,7 @@ public class ElectronicAttribute : AttributeBase, IOnHitEffect
 
         for (int i = 1; i < picked.Count; i++)
         {
-            if (picked[i].TryGetComponent<IDamagable>(out var dmg))
+            if (picked[i].TryGetComponent<IDamageable>(out var dmg))
             {
                 if (dmg == damagable) continue;
                 Factory.Instance.GetLightning(picked[i].position);

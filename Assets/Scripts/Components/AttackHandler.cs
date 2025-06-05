@@ -51,7 +51,7 @@ public class AttackHandler : MonoBehaviour
     /// <summary>
     /// 외부에 공격했다는 것을 알리기 위한 이벤트
     /// </summary>
-    public event Action<IDamagable, Vector3> OnHit;
+    public event Action<IDamageable, Vector3> OnHit;
 
     private void Awake()
     {
@@ -109,7 +109,7 @@ public class AttackHandler : MonoBehaviour
     /// </summary>
     /// <param name="dmg"> 데미지를 받은 피격체 </param>
     /// <param name="origin"> 데미지를 입은 위치 </param>
-    private void OnHitRecieved(IDamagable dmg, Vector3 origin)
+    private void OnHitRecieved(IDamageable dmg, Vector3 origin)
     {
         Debug.Log(this.transform.parent.name + ": " + this.GetType() + " : OnHit");
         OnHit?.Invoke(dmg, origin);

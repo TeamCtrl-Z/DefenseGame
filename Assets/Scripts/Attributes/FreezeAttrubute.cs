@@ -31,7 +31,7 @@ public class FreezeAttribute : AttributeBase, IOnHitEffect
     /// </summary>
     /// <param name="dmg"> 피격당한 적 </param>
     /// <param name="origin"> 피격당한 위치 </param>
-    public void OnHit(IDamagable dmg, Vector3 origin)
+    public void OnHit(IDamageable dmg, Vector3 origin)
     {
         IStatusEffectProvider statusEf = dmg.GetStatusEffectProvider();
         if (statusEf == null)
