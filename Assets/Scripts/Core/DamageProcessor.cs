@@ -74,9 +74,9 @@ public class DamageProcessor : MonoBehaviour
     /// <param name="slowRatio"> 슬로우 비율 </param>
     public void ApplySlowDebuff(IMoveStatus move, float slowRatio)
     {
-        // TODO : 슬로우 디버프
-        if (move.MoveSpeedMultiplier > slowRatio)
-            move.MoveSpeedMultiplier = slowRatio;
+        float realSlowRatio = Mathf.Min((1 - slowRatio), 1);
+        if (move.MoveSpeedMultiplier > realSlowRatio)
+            move.MoveSpeedMultiplier = realSlowRatio;
     }
 
     /// <summary>

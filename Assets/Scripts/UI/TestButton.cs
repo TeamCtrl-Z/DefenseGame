@@ -9,7 +9,7 @@ using UnityEngine;
 public class TestButton : MonoBehaviour
 {
     [SerializeField] private NodeObject nodeObject;
-    [SerializeField] private Vector2 enemyTypeRange;
+    [SerializeField] private FairyType fairyType;
     [SerializeField] private int currentChapterIndex = 0;
     [SerializeField] private int currentStageIndex = 0;
 
@@ -19,9 +19,9 @@ public class TestButton : MonoBehaviour
     {
         if (count >= 9) return;
         
-        int key = UnityEngine.Random.Range(Mathf.RoundToInt(enemyTypeRange.x), Mathf.RoundToInt(enemyTypeRange.y) + 1);
-        Debug.Log(key);
-        FairyController fairy = Factory.Instance.GetFariyByType((FairyType)key, Vector2.zero);
+        //int key = UnityEngine.Random.Range(Mathf.RoundToInt(enemyTypeRange.x), Mathf.RoundToInt(enemyTypeRange.y) + 1);
+        //Debug.Log(key);
+        FairyController fairy = Factory.Instance.GetFariyByType(fairyType, Vector2.zero);
         PlaceableObject placeable = fairy.GetComponent<PlaceableObject>();
         int nodeIdx;
         do

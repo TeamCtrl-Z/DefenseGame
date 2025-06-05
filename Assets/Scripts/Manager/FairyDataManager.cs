@@ -1,33 +1,33 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 /// <summary>
-/// FairyData를 관리하는 매니저 클래스
+/// 페어리의 데이터들을 관리하는 클래스(CSV파일 로드 데이터)
 /// </summary>
 public class FairyDataManager : Singleton<FairyDataManager>
 {
     /// <summary>
-    /// 페어리의 Status 데이터를 담고 있는 딕셔너리
+    /// 페어리 status 데이터 테이블 - k : fid, v : FairyStatusData
     /// </summary>
     private Dictionary<int, FairyStatusData> statusTable;
 
     /// <summary>
-    /// FairyDataManager의 초기화 메소드(FairyDataManager가 처음 생성될 때 1번 호출됨)
+    /// 페어리 attribute 데이터 테이블 - k : fid, v : FairyStatusData
     /// </summary>
-    protected override void OnPreInitialize()
-    {
-        base.OnPreInitialize();
+    private Dictionary<int, FairyAttributeData> attributeTable;
 
-        statusTable = CsvLoader.LoadTable<FairyStatusData>("FairyStatus");
-    }
-
+    #region StatusData
     /// <summary>
-    /// Fairy의 ID에 해당하는 Status 데이터를 가져오는 메소드
+    /// StatusData를 얻는 함수
     /// </summary>
-    /// <param name="fid">Fairy ID</param>
-    /// <param name="statData">Fairy Stat Data</param>
-    /// <returns>true면 성공 false면 실패</returns>
-    public bool TryGetValue(int fid, out FairyStatusData statData)
+    /// <param name="fid"> 페어리 아이디 </param>
+    /// <param name="statData"> 해당 statusData </param>
+    /// <returns>성공 실패</returns>
+    public bool TryGetStatData(int fid, out FairyStatusData statData)
     {
+        if (statusTable == null)
+            statusTable = CsvLoader.LoadTable<FairyStatusData>("table_fairyStatus");
+
         statData = null;
         if (!statusTable.ContainsKey(fid))
             return false;
@@ -37,13 +37,16 @@ public class FairyDataManager : Singleton<FairyDataManager>
     }
 
     /// <summary>
-    /// Fairy의 ID에 해당하는 TargetingType을 가져오는 메소드
+    /// 해당 페어리의 타겟팅 타입을 얻는 함수
     /// </summary>
-    /// <param name="fid">Fairy ID</param>
-    /// <param name="targetingType">타겟팅 타입</param>
-    /// <returns>true면 성공, false면 실패</returns>
+    /// <param name="fid"> 페어리 아이디 </param>
+    /// <param name="targetingType"> 해당 타겟팅 타입 </param>
+    /// <returns> 성공 실패 </returns>
     public bool TryGetTargetingType(int fid, out TargetingType targetingType)
     {
+        if (statusTable == null)
+            statusTable = CsvLoader.LoadTable<FairyStatusData>("table_fairyStatus");
+
         targetingType = TargetingType.Nearest;
         if (!statusTable.ContainsKey(fid))
             return false;
@@ -52,7 +55,30 @@ public class FairyDataManager : Singleton<FairyDataManager>
         if (statData == null)
             return false;
 
-        targetingType = (TargetingType)statData.Target;
+        targetingType = statData.Target;
         return true;
     }
+    #endregion
+
+    #region AttributeData
+
+    /// <summary>
+    /// AttributeData(Csv파일 데이터 저장본)을 얻는 함수
+    /// </summary>
+    /// <param name="fid"> 페어리 아이디 </param>
+    /// <param name="attributeData"> 속성 데이터 </param>
+    /// <returns>성공 실패</returns>
+    public bool TryGetAttributeData(int fid, out FairyAttributeData attributeData)
+    {
+        if (attributeTable == null)
+            attributeTable = CsvLoader.LoadTable<FairyAttributeData>("table_fairyAttribute");
+
+        attributeData = null;
+        if (!attributeTable.ContainsKey(fid))
+            return false;
+
+        attributeData = attributeTable[fid];
+        return true;
+    }
+    #endregion
 }

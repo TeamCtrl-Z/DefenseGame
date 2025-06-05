@@ -4,18 +4,25 @@ using UnityEngine;
 /// <summary>
 /// 눈보라 속성
 /// </summary>
-[CreateAssetMenu(fileName = "FrozenAttribute", menuName = "Attribute/FrozenAttribute")]
 public class FrozenAttribute : AttributeBase, IOnIntervalEffect
 {
     /// <summary>
     /// 눈보라 속성 피격 데이터
     /// </summary>
-    [SerializeField] private HittingData attributeData;
+    public HittingData data;
 
     /// <summary>
     /// 눈보라 발현 간격
     /// </summary>
-    [field: SerializeField] public float Interval { get; set; }
+    public float Interval { get; set; }
+
+    public override void Initialize(GameObject user)
+    {
+        base.Initialize(user);
+
+        data = new HittingData { Damage = value1, Debuff = DebuffType.Frozen };
+        Interval = value2;
+    }
 
     /// <summary>
     /// 일정 시간마다 눈보라를 발현시켜 전체 적에게 슬로우를 걸어주는 함수
@@ -30,9 +37,9 @@ public class FrozenAttribute : AttributeBase, IOnIntervalEffect
 
         foreach (var col in cols)
         {
-            if (col.TryGetComponent<IDamagable>(out IDamagable dmg))
+            if (col.TryGetComponent<IDamageable>(out IDamageable dmg))
             {
-                dmg.OnDamage(user, attributeData);
+                dmg.OnDamage(user, data);
             }
         }
     }

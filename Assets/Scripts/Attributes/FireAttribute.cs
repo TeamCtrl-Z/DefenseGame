@@ -4,13 +4,12 @@ using UnityEngine;
 /// <summary>
 /// 불 속성
 /// </summary>
-[CreateAssetMenu(fileName = "FireAttribute", menuName = "Attribute/FireAttribute")]
 public class FireAttribute : AttributeBase, IOnHitEffect
 {
     /// <summary>
     /// 스플래시 데미지 범위
     /// </summary>
-    public float Radius;
+    public const float Radius = 2.0f;
 
     /// <summary>
     /// 불속성 공격 데이터
@@ -21,13 +20,20 @@ public class FireAttribute : AttributeBase, IOnHitEffect
     /// 스플래시 데미지를 받을 적 후보군들 캐싱을 위한 Collider 배열
     /// </summary>
     private Collider2D[] cols = new Collider2D[16];
+
+    public override void Initialize(GameObject user)
+    {
+        base.Initialize(user);
+
+        data = new HittingData { Damage = value1 };
+    }
     
     /// <summary>
     /// 몬스터가 피격 당했을 때 스플래시 데미지 적용하는 함수
     /// </summary>
     /// <param name="damagable"> 피격 당한 적 </param>
     /// <param name="origin"> 피격 당한 위치 </param>
-    public void OnHit(IDamagable damagable, Vector3 origin)
+    public void OnHit(IDamageable damagable, Vector3 origin)
     {
         Debug.Log($"FireAttribute : OnHit {origin}");
         Factory.Instance.GetFireExplosion(origin);
@@ -36,7 +42,7 @@ public class FireAttribute : AttributeBase, IOnHitEffect
 
         for (int i = 0; i < cnt; i++)
         {
-            if (cols[i].TryGetComponent<IDamagable>(out IDamagable target))
+            if (cols[i].TryGetComponent<IDamageable>(out IDamageable target))
             {
                 if (damagable == target) continue;
 

@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using UnityEditor;
 using UnityEngine;
 
 /// <summary>
@@ -11,15 +13,22 @@ public class AttributeManager : MonoBehaviour
     /// </summary>
     [SerializeField] private AttributeBase attribute;
 
+    private ICharacterIdentity id;
+    private FairyAttributeData attributeData;
     private void Awake()
     {
-        attribute = Instantiate(attribute);
+        id = GetComponentInParent<ICharacterIdentity>();
+
+        if (FairyDataManager.Instance.TryGetAttributeData(id.ID, out attributeData) == false)
+        {
+            Debug.Log("존재하지 않은 fid입니다.");
+        }
+
+        attribute = AttributeFactory.CreateAttribute(attributeData, this.gameObject);
     }
 
     private void OnEnable()
     {
-        attribute.Initialize(this.gameObject);
-
         if (attribute is IOnHitEffect hitAttribute)
         {
             AttackHandler attack = GetComponent<AttackHandler>();

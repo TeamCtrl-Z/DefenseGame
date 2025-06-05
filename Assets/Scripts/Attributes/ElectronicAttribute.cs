@@ -6,8 +6,7 @@ using UnityEngine;
 /// <summary>
 /// 전기 속성
 /// </summary>
-[CreateAssetMenu(fileName = "EletronicAttribute", menuName = "Attribute/EletronicAttribute")]
-public class EletronicAttribute : AttributeBase, IOnHitEffect
+public class ElectronicAttribute : AttributeBase, IOnHitEffect
 {
     /// <summary>
     /// 타겟팅을 위한 컴포넌트 
@@ -17,12 +16,14 @@ public class EletronicAttribute : AttributeBase, IOnHitEffect
     /// <summary>
     /// 타겟팅 전략
     /// </summary>
-    public TargetingStrategyData targetingStrategy;
+    public NearestTargeting targetingStrategy;
 
     /// <summary>
     /// 전기속성 데이터
     /// </summary>
-    public HittingData[] datas;
+    public HittingData[] data;
+
+    public readonly float[] DamageRatio = new float[2] { 0.7f, 0.3f };
 
     /// <summary>
     /// 초기화 함수
@@ -33,6 +34,13 @@ public class EletronicAttribute : AttributeBase, IOnHitEffect
         base.Initialize(user);
 
         targeting = user.GetComponent<TargetingComponent>();
+        targetingStrategy = ScriptableObject.CreateInstance<NearestTargeting>();
+        data = new HittingData[3]
+        {
+            new HittingData{Damage = value1},
+            new HittingData{Damage = value1 * DamageRatio[0]},
+            new HittingData{Damage = value1 * DamageRatio[1]},
+        };
     }
 
     /// <summary>
@@ -40,26 +48,26 @@ public class EletronicAttribute : AttributeBase, IOnHitEffect
     /// </summary>
     /// <param name="damagable"> 피격 받은 몬스터 </param>
     /// <param name="origin"> 피격 받은 위치 </param>
-    public void OnHit(IDamagable damagable, Vector3 origin)
+    public void OnHit(IDamageable damagable, Vector3 origin)
     {
         var allInRange = targeting.TargetsInRange;
 
         var secondaryCandidates = allInRange
             .Where(t =>
             {
-                var dmg = t.Transform.GetComponent<IDamagable>();
+                var dmg = t.Transform.GetComponent<IDamageable>();
                 return dmg != damagable;
             });
 
-        var picked = targetingStrategy.SelectTargets(user.transform, allInRange, datas.Length + 1);
+        var picked = targetingStrategy.SelectTargets(user.transform, allInRange, data.Length + 1);
 
         for (int i = 1; i < picked.Count; i++)
         {
-            if (picked[i].TryGetComponent<IDamagable>(out var dmg))
+            if (picked[i].TryGetComponent<IDamageable>(out var dmg))
             {
                 if (dmg == damagable) continue;
                 Factory.Instance.GetLightning(picked[i].position);
-                dmg.OnDamage(user.gameObject, datas[i - 1]);
+                dmg.OnDamage(user.gameObject, data[i - 1]);
             }
         }
     }

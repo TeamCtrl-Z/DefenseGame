@@ -41,6 +41,8 @@ public class FairyStatusComponent : MonoBehaviour, IBattleStatus, ICharacterIden
     /// </summary>
     [field: SerializeField] public float AttackPowerFactor { get; private set; } = 1f;
 
+    private TargetingType type;
+
     /// <summary>
     /// 페어리 Status 데이터(CSV파일 불러온 데이터)
     /// </summary>
@@ -58,7 +60,7 @@ public class FairyStatusComponent : MonoBehaviour, IBattleStatus, ICharacterIden
 
     private void Start()
     {
-        if (!FairyDataManager.Instance.TryGetValue(ID, out statData))
+        if (!FairyDataManager.Instance.TryGetStatData(ID, out statData))
         {
             Debug.LogError("Not Found");
             return;
@@ -74,6 +76,8 @@ public class FairyStatusComponent : MonoBehaviour, IBattleStatus, ICharacterIden
     {
         attackPower = statData.AttackPower;
         attackSpeed = statData.AttackSpeed;
+
+        Debug.Log(statData.Target);
     }
 
     /// <summary>

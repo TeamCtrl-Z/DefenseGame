@@ -365,7 +365,7 @@ public class Factory : Singleton<Factory>
             case FairyType.Light: return fairyLight.GetObject(position, new Vector3(0, 0, angle));
             case FairyType.Freeze: return fairyFreeze.GetObject(position, new Vector3(0, 0, angle));
             case FairyType.Frozen: return fairyFrozen.GetObject(position, new Vector3(0, 0, angle));
-            case FairyType.Eletronic: return fairyEletronic.GetObject(position, new Vector3(0, 0, angle));
+            case FairyType.Electronic: return fairyEletronic.GetObject(position, new Vector3(0, 0, angle));
             default: return null;
         }
     }
