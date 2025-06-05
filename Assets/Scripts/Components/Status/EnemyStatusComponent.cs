@@ -1,3 +1,4 @@
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,6 +13,11 @@ public class EnemyStatusComponent : MonoBehaviour, IMoveStatus, IHealthStatus, I
     /// HP가 변경될 때 호출되는 이벤트 델리게이트
     /// </summary>
     public event Action<float> OnHPChanged;
+
+    /// <summary>
+    /// Enemy가 죽을 때 호출되는 이벤트 델리게이트
+    /// </summary>
+    public event Action OnDie;
 
     /// <summary>
     /// Enemy 고유 ID
@@ -86,5 +92,10 @@ public class EnemyStatusComponent : MonoBehaviour, IMoveStatus, IHealthStatus, I
         CurrentHP += amount;
         CurrentHP = Mathf.Clamp(CurrentHP, 0, MaxHP);
         OnHPChanged?.Invoke(CurrentHP / MaxHP);
+
+        if (CurrentHP <= 0)
+        {
+            OnDie?.Invoke();
+        }
     }
 }

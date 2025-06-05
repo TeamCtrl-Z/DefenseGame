@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 /// <summary>
 /// 페어리 Status 컴포넌트
@@ -16,12 +15,20 @@ public class FairyStatusComponent : MonoBehaviour, IBattleStatus, ICharacterIden
     /// 공격 속도(쿨타임)
     /// </summary>
     private float attackSpeed;
+
+    /// <summary>
+    /// 공격 속도를 반환하는 프로퍼티
+    /// </summary>
     public float AttackSpeed => attackSpeed * AttackSpeedFactor;
 
     /// <summary>
     /// 공격력(기본 공격)
     /// </summary>
     private float attackPower;
+
+    /// <summary>
+    /// 공격력을 반환하는 프로퍼티
+    /// </summary>
     public float AttackPower => attackPower * AttackPowerFactor;
 
     /// <summary>
@@ -43,6 +50,7 @@ public class FairyStatusComponent : MonoBehaviour, IBattleStatus, ICharacterIden
     /// 공격력이 변경되었을 때 호출되는 이벤트
     /// </summary>
     public event Action<float> OnAttackPowerChanged;
+
     /// <summary>
     /// 공격속도가 변경되었을 때 호출되는 이벤트
     /// </summary>

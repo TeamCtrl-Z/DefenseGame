@@ -30,33 +30,42 @@ public abstract class CustomSMB : StateMachineBehaviour
     {
         SMBExit(animator, layerIndex);
     }
-    
+
+    /// <summary>
+    /// 애니메이션이 시작될 때 호출되는 함수
+    /// </summary>
+    /// <param name="animator">애니메이터</param>
+    /// <param name="layerIndex">레이어 인덱스</param>
     protected virtual void SMBEnter(Animator animator, int layerIndex) { }
 
     /// <summary>
     /// 애니메이션이 전환될 떼 호출되는 함수
     /// </summary>
-    /// <param name="animator"></param>
-    /// <param name="stateInfo"></param>
-    /// <param name="layerIndex"></param>
+    /// <param name="animator">애니메이터</param>
+    /// <param name="stateInfo">상태 정보</param>
+    /// <param name="layerIndex">레이어 인덱스</param>
     protected virtual void SMBTransitionUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) { }
 
     /// <summary>
     /// 애니메이션이 전환되지 않을 때 호출되는 함수
     /// </summary>
-    /// <param name="animator"></param>
-    /// <param name="stateInfo"></param>
-    /// <param name="layerIndex"></param>
+    /// <param name="animator">애니메이터</param>
+    /// <param name="stateInfo">상태 정보</param>
+    /// <param name="layerIndex">레이어 인덱스</param>
     protected virtual void SMBNoTransitionUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) { }
 
     /// <summary>
     /// 애니메이션 실행중에 호출되는 함수
     /// </summary>
-    /// <param name="animator"></param>
-    /// <param name="layerIndex"></param>
+    /// <param name="animator">애니메이터</param>
+    /// <param name="layerIndex">레이어 인덱스</param>
     protected virtual void SMBUpdate(Animator animator, int layerIndex) { }
 
-
+    /// <summary>
+    /// 애니메이션이 종료될 때 호출되는 함수
+    /// </summary>
+    /// <param name="animator">애니메이터</param>
+    /// <param name="layerIndex">레이어 인덱스</param>
     protected virtual void SMBExit(Animator animator, int layerIndex) { }
 
 }

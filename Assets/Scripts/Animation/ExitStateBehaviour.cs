@@ -18,6 +18,11 @@ public class ExitStateBehaviour : CustomSMB
     /// </summary>
     protected bool isCompletelyFinished;
 
+    /// <summary>
+    /// 애니메이션이 시작될 때 호출되는 함수
+    /// </summary>
+    /// <param name="animator">애니메이션을 가진 애니메이터</param>
+    /// <param name="layerIndex">애니메이션의 레이어 번호</param>
     protected override void SMBEnter(Animator animator, int layerIndex)
     {
         isCompletelyFinished = false;

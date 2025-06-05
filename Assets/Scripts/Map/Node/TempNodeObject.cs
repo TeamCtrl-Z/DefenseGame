@@ -28,6 +28,10 @@ public class TempNodeObject : NodeObjectBase
             Fairy.Place(tempNodeIndex);
     }
 
+    /// <summary>
+    /// Node에 페어리를 배치하는 함수
+    /// </summary>
+    /// <param name="fairy">배치할 Fairy</param>
     public override void PlaceNode(IPlaceable fairy)
     {
         if (fairy != null)

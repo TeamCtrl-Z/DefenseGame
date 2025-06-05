@@ -11,5 +11,8 @@ public interface IPlaceable
     /// <param name="index">배치하는 노드의 번호</param>
     public void Place(uint index);
 
+    /// <summary>
+    /// 배치가 완료되었을 때 호출되는 이벤트
+    /// </summary>
     public event Action<uint> OnPlaced;
 }

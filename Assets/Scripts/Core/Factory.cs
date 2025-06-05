@@ -61,14 +61,38 @@ public class Factory : Singleton<Factory>
     private ProjectilePool projectile;
 
     /// <summary>
-    /// Fairy풀
+    /// FairyBasic 풀
     /// </summary>
     private FairyBasicPool fairyBasic;
+
+    /// <summary>
+    /// FairyFire 풀
+    /// </summary>
     private FairyFirePool fairyFire;
+
+    /// <summary>
+    /// FairyPosion 풀
+    /// </summary>
     private FairyPoisonPool fairyPoison;
+
+    /// <summary>
+    /// FairyLight 풀
+    /// </summary>
     private FairyLightPool fairyLight;
+
+    /// <summary>
+    /// FairyFreeze 풀
+    /// </summary>
     private FairyFreezePool fairyFreeze;
+
+    /// <summary>
+    /// FairyFrozen 풀
+    /// </summary>
     private FairyFrozenPool fairyFrozen;
+
+    /// <summary>
+    /// FairyEletronic 풀
+    /// </summary>
     private FairyEletronicPool fairyEletronic;
 
     /// <summary>
@@ -92,7 +116,37 @@ public class Factory : Singleton<Factory>
     private MarkerPool marker;
 
     /// <summary>
-    /// 초기화 함수
+    /// Gold 재화 풀
+    /// </summary>
+    private GoldPool gold;
+
+    /// <summary>
+    /// Gem 재화 풀
+    /// </summary>
+    private GemPool gem;
+
+    /// <summary>
+    /// Diamond 재화 풀
+    /// </summary>
+    private DiamondPool diamond;
+
+    /// <summary>
+    /// GoldSparkle 풀
+    /// </summary>
+    private GoldSparklePool goldSparkle;
+
+    /// <summary>
+    /// GemSparkle 풀
+    /// </summary>
+    private GemSparklePool gemSparkle;
+
+    /// <summary>
+    /// DiamondSparkle 풀
+    /// </summary>
+    private DiamondSparklePool diamondSparkle;
+
+    /// <summary>
+    /// Factory 초기화 함수
     /// </summary>
     protected override void OnInitialize()
     {
@@ -161,8 +215,27 @@ public class Factory : Singleton<Factory>
 
         if (this.TryGetComponentInChildren<MarkerPool>(out marker))
             marker.Initialize();
+
+        if (this.TryGetComponentInChildren<GoldPool>(out gold))
+            gold.Initialize();
+
+        if (this.TryGetComponentInChildren<GemPool>(out gem))
+            gem.Initialize();
+
+        if (this.TryGetComponentInChildren<DiamondPool>(out diamond))
+            diamond.Initialize();
+
+        if (this.TryGetComponentInChildren<GoldSparklePool>(out goldSparkle))
+            goldSparkle.Initialize();
+
+        if (this.TryGetComponentInChildren<GemSparklePool>(out gemSparkle))
+            gemSparkle.Initialize();
+
+        if (this.TryGetComponentInChildren<DiamondSparklePool>(out diamondSparkle))
+            diamondSparkle.Initialize();
     }
 
+    #region Enemy Pool
     /// <summary>
     /// 캐릭터를 소환하는 함수
     /// </summary>
@@ -173,7 +246,7 @@ public class Factory : Singleton<Factory>
     {
         return enemy_000.GetObject(position, new Vector3(0, 0, angle));
     }
-    #region Enemy Pool
+    
     /// <summary>
     /// 캐릭터를 소환하는 함수
     /// </summary>
@@ -379,9 +452,98 @@ public class Factory : Singleton<Factory>
         return enemyDieEffect.GetObject(position, new Vector3(0, 0, angle));
     }
 
+    /// <summary>
+    /// WireCircleMarker를 소환하는 함수
+    /// </summary>
+    /// <param name="position">소환 위치</param>
+    /// <param name="angle">소환 각도</param>
+    /// <returns>소환된 WireCircleMaker</returns>
     public WireCircleMarker GetWireCircleMarker(Vector2 position, float angle = 0.0f)
     {
         return marker.GetObject(position, new Vector3(0, 0, angle));
+    }
+
+    /// <summary>
+    /// GoldSparkle 이펙트를 소환하는 함수
+    /// </summary>
+    /// <param name="position">소환 위치</param>
+    /// <param name="angle">소환 각도</param>
+    /// <returns>소환된 GoldSparkle</returns>
+    public Effect GetGoldSparkle(Vector2 position, float angle = 0.0f)
+    {
+        return goldSparkle.GetObject(position, new Vector3(0, 0, angle));
+    }
+
+    /// <summary>
+    /// GemSparkle 이펙트를 소환하는 함수
+    /// </summary>
+    /// <param name="position">소환 위치</param>
+    /// <param name="angle">소환 각도</param>
+    /// <returns>소환된 GemSparkle</returns>
+    public Effect GetGemSparkle(Vector2 position, float angle = 0.0f)
+    {
+        return gemSparkle.GetObject(position, new Vector3(0, 0, angle));
+    }
+
+    /// <summary>
+    /// DiamondSparkle 이펙트를 소환하는 함수
+    /// </summary>
+    /// <param name="position">소환 위치</param>
+    /// <param name="angle">소환 각도</param>
+    /// <returns>소환된 DiamondSparkle</returns>
+    public Effect GetDiamondSparkle(Vector2 position, float angle = 0.0f)
+    {
+        return diamondSparkle.GetObject(position, new Vector3(0, 0, angle));
+    }
+    #endregion
+
+    #region Currency Pool
+    /// <summary>
+    /// Gold 재화를 소환하는 함수
+    /// </summary>
+    /// <param name="position">소환 위치</param>
+    /// <param name="angle">소환 각도</param>
+    /// <param name="goldAmount">Gold 양</param>
+    /// <returns>소환된 Gold</returns>
+    public CurrencyDrop GetGold(Vector2 position, float angle = 0.0f, uint goldAmount = 0)
+    {
+        Vector2 rand = Random.insideUnitCircle * 0.5f;
+        position += rand;
+        CurrencyDrop Gold = gold.GetObject(position, new Vector3(0, 0, angle));
+        Gold.SetDropInfo(goldAmount);
+        return Gold;
+    }
+
+    /// <summary>
+    /// Gem 재화를 소환하는 함수
+    /// </summary>
+    /// <param name="position">소환 위치</param>
+    /// <param name="angle">소환 각도</param>
+    /// <param name="gemAmount">Gem 양</param>
+    /// <returns>소환된 Gem</returns>
+    public CurrencyDrop GetGem(Vector2 position, float angle = 0.0f, uint gemAmount = 0)
+    {
+        Vector2 rand = Random.insideUnitCircle * 0.5f;
+        position += rand;
+        CurrencyDrop Gem = gem.GetObject(position, new Vector3(0, 0, angle));
+        Gem.SetDropInfo(gemAmount);
+        return Gem;
+    }
+
+    /// <summary>
+    /// Diamond 재화를 소환하는 함수
+    /// </summary>
+    /// <param name="position">소환 위치</param>
+    /// <param name="angle">소환 각도</param>
+    /// <param name="diamondAmount">Diamond 양</param>
+    /// <returns>소환된 Diamond</returns>
+    public CurrencyDrop GetDiamond(Vector2 position, float angle = 0.0f, uint diamondAmount = 0)
+    {
+        Vector2 rand = Random.insideUnitCircle * 0.5f;
+        position += rand;
+        CurrencyDrop Diamond = diamond.GetObject(position, new Vector3(0, 0, angle));
+        Diamond.SetDropInfo(diamondAmount);
+        return Diamond;
     }
     #endregion
 }
