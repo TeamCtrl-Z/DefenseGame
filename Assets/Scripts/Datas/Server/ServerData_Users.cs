@@ -6,6 +6,9 @@ using UnityEngine;
 
 public class ServerData_Users : ServerData
 {
+    /// <summary>
+    /// ServerData_Users 싱글톤 인스턴스
+    /// </summary>
     public static new ServerData_Users Instance
     {
         get
@@ -14,6 +17,12 @@ public class ServerData_Users : ServerData
         }
     }
 
+    /// <summary>
+    /// 회원가입을 요청하는 코루틴 함수
+    /// </summary>
+    /// <param name="success">성공 시 실행되는 이벤트</param>
+    /// <param name="fail">실패 시 실행되는 이벤트</param>
+    /// <returns></returns>
     public IEnumerator RequestRegister(Action success, Action fail)
     {
         string deviceId = SystemInfo.deviceUniqueIdentifier;
@@ -45,6 +54,12 @@ public class ServerData_Users : ServerData
         success?.Invoke();
     }
 
+    /// <summary>
+    /// 서버에 로그인 요청을 보내는 코루틴 함수
+    /// </summary>
+    /// <param name="success">성공 시 실행되는 이벤트</param>
+    /// <param name="fail">실패 시 실행되는 이벤트</param>
+    /// <returns></returns>
     public IEnumerator RequestLogin(Action success, Action fail)
     {
         string loginUrl = "/user/login";
@@ -65,6 +80,12 @@ public class ServerData_Users : ServerData
         success?.Invoke();
     }
 
+    /// <summary>
+    /// 서버에 계정 삭제 요청을 보내는 코루틴 함수
+    /// </summary>
+    /// <param name="success">성공 시 실행되는 이벤트</param>
+    /// <param name="fail">실패 시 실행되는 이벤트</param>
+    /// <returns></returns>
     public IEnumerator RequestDelete(Action success, Action fail)
     {
         string deleteUrl = "/user/delete";

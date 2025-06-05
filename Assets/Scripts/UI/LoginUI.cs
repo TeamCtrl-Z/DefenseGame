@@ -39,10 +39,26 @@ public class LoginUI : MonoBehaviour
     [SerializeField]
     private CanvasGroup loadingGroup;
 
+    /// <summary>
+    /// 로그인 매니저
+    /// </summary>
+    [SerializeField]
+    private LoginManager loginManager;
+
     private void Start()
     {
         HideRegisterPanel();
         HideLoadingPanel();
+
+        loginManager.OnStatusChange += RefreshStatus;
+        loginManager.OnRegister += ShowRegisterPanel;
+        loginManager.OnLoading += ShowLoadingPanel;
+
+
+        guestLoginButton.onClick.AddListener(() =>
+        {
+            loginManager.OnGuestLoginButtonClicked();
+        });
     }
 
     /// <summary>
@@ -50,6 +66,7 @@ public class LoginUI : MonoBehaviour
     /// </summary>
     private void ShowRegisterPanel()
     {
+        HideLoadingPanel();
         registerGroup.alpha = 1f;
         registerGroup.interactable = true;
         registerGroup.blocksRaycasts = true;
@@ -70,6 +87,7 @@ public class LoginUI : MonoBehaviour
     /// </summary>
     private void ShowLoadingPanel()
     {
+        HideRegisterPanel();
         loadingGroup.alpha = 1f;
         loadingGroup.interactable = true;
         loadingGroup.blocksRaycasts = true;
@@ -88,16 +106,8 @@ public class LoginUI : MonoBehaviour
     /// <summary>
     /// 진행 상태(Text)를 갱신하는 메서드
     /// </summary>
-    private void RefreshStatus()
+    private void RefreshStatus(string status)
     {
-
-    }
-
-    /// <summary>
-    /// 진행 퍼센트(Text)를 갱신하는 메서드
-    /// </summary>
-    private void RefreshPercentText()
-    {
-
+        statusText.text = status;
     }
 }

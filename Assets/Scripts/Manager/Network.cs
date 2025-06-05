@@ -3,9 +3,6 @@ using System.Collections;
 using System.Text;
 using Firebase.Auth;
 using Newtonsoft.Json;
-using Unity.VisualScripting;
-using UnityEditor.PackageManager;
-using UnityEditor.PackageManager.Requests;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -39,6 +36,11 @@ public class Network
     /// </summary>
     public string Error { get; private set; } = "";
 
+    /// <summary>
+    /// Network 생성자
+    /// </summary>
+    /// <param name="relativeUrl">서버 주소</param>
+    /// <param name="httpMethod">접속 방법</param>
     public Network(string relativeUrl, string httpMethod)
     {
         if (string.IsNullOrEmpty(relativeUrl))
@@ -51,8 +53,12 @@ public class Network
         webRequest.disposeCertificateHandlerOnDispose = true;
     }
 
+    /// <summary>
+    /// 서버에 요청할 때 실어보낼 데이터가 없으면 실행하는 함수
+    /// </summary>
     public void SetRequestData()
     {
+        webRequest.downloadHandler = new DownloadHandlerBuffer();
         isRequestInitialized = true;
     }
 
