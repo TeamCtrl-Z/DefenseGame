@@ -1,4 +1,6 @@
+using Newtonsoft.Json;
 using System;
+using UnityEngine;
 
 /// <summary>
 /// 유저 데이터 관리 클래스
@@ -6,14 +8,19 @@ using System;
 public class UserDataManager : Singleton<UserDataManager>
 {
     /// <summary>
+    /// 유저 데이터
+    /// </summary>
+    public UserData User { get; private set; }
+
+    /// <summary>
     /// Gold가 변경되었을 때 구독자가 받는 이벤트 델리게이트
     /// </summary>
-    public event Action<uint> OnCurrencyGoldChanged;
+    public event Action<ulong> OnCurrencyGoldChanged;
 
     /// <summary>
     /// Gem가 변경되었을 때 구독자가 받는 이벤트 델리게이트
     /// </summary>
-    public event Action<uint> OnCurrencyGemChanged;
+    public event Action<ulong> OnCurrencyGemChanged;
 
     /// <summary>
     /// Diamond가 변경되었을 때 구독자가 받는 이벤트 델리게이트
@@ -23,12 +30,12 @@ public class UserDataManager : Singleton<UserDataManager>
     /// <summary>
     /// 플레이어가 가지고 있는 Gold
     /// </summary>
-    private uint currency_Gold;
+    private ulong currency_Gold;
 
     /// <summary>
     /// 플레이어가 가지고 있는 Gold의 프로퍼티(get은 public, set은 private)
     /// </summary>
-    public uint Currency_Gold
+    public ulong Currency_Gold
     {
         get => currency_Gold;
         private set
@@ -41,12 +48,12 @@ public class UserDataManager : Singleton<UserDataManager>
     /// <summary>
     /// 플레이어가 가지고 있는 Gem
     /// </summary>
-    private uint currency_Gem;
+    private ulong currency_Gem;
 
     /// <summary>
     /// 플레이어가 가지고 있는 Gem의 프로퍼티(get은 public, set은 private)
     /// </summary>
-    public uint Currency_Gem
+    public ulong Currency_Gem
     {
         get => currency_Gem;
         private set
@@ -72,6 +79,11 @@ public class UserDataManager : Singleton<UserDataManager>
             currency_Diamond = value;
             OnCurrencyDiamondChanged?.Invoke(currency_Diamond);
         }
+    }
+
+    private void OnDisable()
+    {
+        SaveToDB(); 
     }
 
     /// <summary>
@@ -183,6 +195,20 @@ public class UserDataManager : Singleton<UserDataManager>
         return true;
     }
 
+    
+    public void LoadUserData(string jsonData)
+    {
+        User = JsonConvert.DeserializeObject<UserData>(jsonData);
+        Currency_Gold = User.gold;
+        Currency_Gem = User.gem;
+        Currency_Diamond = User.diamond;
+    }
+
+    public void LoadFromJson(string json)
+    {
+        User = JsonUtility.FromJson<UserData>(json);
+    }
+
     /// <summary>
     /// DB에서 재화 정보를 불러오는 함수
     /// </summary>
@@ -196,6 +222,5 @@ public class UserDataManager : Singleton<UserDataManager>
     /// </summary>
     private void SaveToDB()
     {
-        // 현재 Currency 값을 DB에 저장
     }
 }
