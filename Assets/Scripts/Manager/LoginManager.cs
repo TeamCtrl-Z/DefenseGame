@@ -157,7 +157,7 @@ public class LoginManager : MonoBehaviour
         Debug.Log($"[LoginManager] Register Response: {responseJson}");
         try
         {
-            currentAccount = JsonConvert.DeserializeObject<UserAccount>(responseJson);
+            UserDataManager.Instance.LoadUserData(responseJson);
         }
         catch (Exception e)
         {
@@ -165,9 +165,6 @@ public class LoginManager : MonoBehaviour
             statusText.text = "서버 응답 파싱 오류.";
             yield break;
         }
-
-        if (currentAccount.firebaseUid != firebaseUid)
-            Debug.LogWarning("[LoginManager] 서버 응답 UID와 Firebase 익명 UID가 다릅니다.");
 
         // 로컬 JSON(guest_account.json) 에는 “변하지 않는 정보”만 저장
         SaveAccountToJson();
@@ -179,7 +176,7 @@ public class LoginManager : MonoBehaviour
     {
         statusText.text = "가입 완료, 로그인 중…";
 
-        var loginRequestData = new {};
+        var loginRequestData = new { };
         Network network = new Network(loginUrl, "POST");
         network.SetRequestData(loginRequestData);
         yield return network.SendRequest();
@@ -196,7 +193,8 @@ public class LoginManager : MonoBehaviour
         Debug.Log($"[LoginManager] LoginAfterRegister Response: {responseJson}");
         try
         {
-            currentAccount = JsonConvert.DeserializeObject<UserAccount>(responseJson);
+            UserDataManager.Instance.LoadUserData(responseJson);
+            SceneManager.LoadScene("MainScene");
         }
         catch (Exception e)
         {
@@ -207,9 +205,9 @@ public class LoginManager : MonoBehaviour
 
         SaveAccountToJson();
 
-        string shortUid = currentAccount.firebaseUid.Length >= 8
-                ? currentAccount.firebaseUid.Substring(0, 8)
-                : currentAccount.firebaseUid;
+        string shortUid = UserDataManager.Instance.User.firebaseUID.Length >= 8
+                ? UserDataManager.Instance.User.firebaseUID.Substring(0, 8)
+                : UserDataManager.Instance.User.firebaseUID;
         ShowMainUI($"환영합니다, 게스트님!\n(UID: {shortUid})");
     }
     #endregion
@@ -234,7 +232,8 @@ public class LoginManager : MonoBehaviour
         Debug.Log($"[LoginManager] Login Response: {responseJson}");
         try
         {
-            currentAccount = JsonConvert.DeserializeObject<UserAccount>(responseJson);
+            UserDataManager.Instance.LoadUserData(responseJson);
+            SceneManager.LoadScene("MainScene");
         }
         catch (Exception e)
         {
@@ -245,10 +244,9 @@ public class LoginManager : MonoBehaviour
 
         // 로컬 JSON에 “변하지 않는” 정보만 덮어써서 저장
         SaveAccountToJson();
-
-        string shortUid = currentAccount.firebaseUid.Length >= 8
-            ? currentAccount.firebaseUid.Substring(0, 8)
-            : currentAccount.firebaseUid;
+        string shortUid = UserDataManager.Instance.User.firebaseUID.Length >= 8
+                        ? UserDataManager.Instance.User.firebaseUID.Substring(0, 8)
+                        : UserDataManager.Instance.User.firebaseUID;
         ShowMainUI($"자동 로그인 성공!\nUID: {shortUid}");
     }
 
@@ -282,7 +280,7 @@ public class LoginManager : MonoBehaviour
             yield break;
         }
 
-        var deleteRequestData = new {};
+        var deleteRequestData = new { };
         Network network = new Network(deleteUrl, "POST");
         network.SetRequestData(deleteRequestData);
         yield return network.SendRequest();
@@ -366,6 +364,8 @@ public class UserData
     public string provider;
     public string playerID;
     public string lastLoginAt;
-    public string deviceId;
+    public ulong gold;
+    public ulong gem;
+    public uint diamond;
     // 필요에 따라 이메일, displayName 같은 필드를 추가해도 됩니다.
 }
