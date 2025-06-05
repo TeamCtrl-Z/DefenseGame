@@ -13,8 +13,15 @@ public class EnemyController : RecycleObject, IDamageable, ITargetable
     /// StateMachine
     /// </summary>
     private EnemyStateMachine enemyStateMachine;
+
+    /// <summary>
+    /// Status Component의 프로퍼티
+    /// </summary>
     public EnemyStatusComponent StatusComponent { get; private set; }
 
+    /// <summary>
+    /// 이 Enemy의 Transform을 반환하는 프로퍼티
+    /// </summary>
     public Transform Transform => transform;
 
     /// <summary>
@@ -44,16 +51,16 @@ public class EnemyController : RecycleObject, IDamageable, ITargetable
     protected override void OnEnable()
     {
         base.OnEnable();
-        StatusComponent.OnHPChanged += HandleHpChanged;
+        StatusComponent.OnDie += Die;
     }
 
     protected override void OnDisable()
     {
+        StatusComponent.OnDie -= Die;
         base.OnDisable();
-        StatusComponent.OnHPChanged -= HandleHpChanged;
     }
 
-    void Start()
+    private void Start()
     {
         enemyStateMachine = new EnemyStateMachine(this);
     }
@@ -64,18 +71,20 @@ public class EnemyController : RecycleObject, IDamageable, ITargetable
         enemyStateMachine.Update();
     }
 
+    /// <summary>
+    /// 데미지를 입는 함수
+    /// </summary>
+    /// <param name="attacker">공격한 오브젝트</param>
+    /// <param name="data">히팅 데이터</param>
     public void OnDamage(GameObject attacker, HittingData data)
     {
         statusEffect.AddStack(data.Debuff);
         damageProcessor.DamageFuncs[data.Debuff](StatusComponent, data.Damage);
     }
 
-    private void HandleHpChanged(float hp)
-    {
-        if (IsAlive == false)
-            enemyStateMachine.TransitionTo(enemyStateMachine.Die);
-    }
-
+    /// <summary>
+    /// Enemy가 죽었을 때 호출되는 함수
+    /// </summary>
     public void Die()
     {
         GameManager.Instance.ChapterManager.KillCount++;
@@ -83,6 +92,10 @@ public class EnemyController : RecycleObject, IDamageable, ITargetable
         gameObject.SetActive(false);
     }
 
+    /// <summary>
+    /// 디버프 스택 조회용 함수(EnemyController)
+    /// </summary>
+    /// <returns></returns>
     public IStatusEffectProvider GetStatusEffectProvider()
     {
         return statusEffect as IStatusEffectProvider;

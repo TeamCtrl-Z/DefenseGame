@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 상태 패턴Machine 클래스
+/// </summary>
+/// <typeparam name="T">제네릭 클래스</typeparam>
 public class StateMachine<T>
 {
     /// <summary>

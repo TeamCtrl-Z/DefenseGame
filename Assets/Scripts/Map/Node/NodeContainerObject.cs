@@ -202,6 +202,12 @@ public class NodeContainerObject : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Node 인덱스에 있는 페어리를 가져오는 함수
+    /// </summary>
+    /// <param name="index">Node의 인덱스</param>
+    /// <param name="fairy">페어리</param>
+    /// <returns>true면 성공, false면 실패</returns>
     public bool TryGetFairyAt(uint index, out IPlaceable fairy)
     {
         fairy = null;

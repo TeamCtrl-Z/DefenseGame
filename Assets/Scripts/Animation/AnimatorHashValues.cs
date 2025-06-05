@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace AnimatorHash
@@ -9,7 +7,9 @@ namespace AnimatorHash
     /// </summary>
     public static class Fairy
     {
-        // 해시 값
+        /// <summary>
+        /// 페어리 Attack 애니메이션의 해시 값
+        /// </summary>
         public static readonly int AttackTrigger = Animator.StringToHash("Attack");
     }
 }

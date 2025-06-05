@@ -11,6 +11,10 @@ public class RecycleObject : MonoBehaviour
     /// 재활용 오브젝트가 비활성화 될 때 실행되는 델리게이트
     /// </summary>
     public Action onDisable = null;
+
+    /// <summary>
+    /// 풀의 트랜스폼
+    /// </summary>
     private Transform poolTransform;
 
     protected virtual void Awake()
@@ -47,11 +51,18 @@ public class RecycleObject : MonoBehaviour
         StartCoroutine(LifeOver(time));
     }
 
+    /// <summary>
+    /// 시간이 지난 후에 게임 오브젝트를 비활성화시키는 코루틴
+    /// </summary>
+    /// <param name="time"></param>
+    /// <returns></returns>
     IEnumerator LifeOver(float time = 0.0f)
     {
         yield return new WaitForSeconds(time);
+
         if (transform.parent != poolTransform)
             ReturnToPool();
+
         gameObject.SetActive(false);
     }
 

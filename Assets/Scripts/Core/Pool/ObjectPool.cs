@@ -1,6 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 오브젝트 풀 클래스
+/// </summary>
+/// <typeparam name="T">제네릭 클래스</typeparam>
 public class ObjectPool<T> : MonoBehaviour where T : RecycleObject  // T는 반드시 RecycleObject를 상속받은 오브젝트다
 {
     /// <summary>

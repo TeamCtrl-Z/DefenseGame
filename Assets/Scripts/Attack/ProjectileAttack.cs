@@ -10,6 +10,11 @@ public class ProjectileAttack : AttackBase
     /// </summary>
     [SerializeField] private GameObject projectilePrefab;
 
+    /// <summary>
+    /// ProjectileAttack 클래스 생성자
+    /// </summary>
+    /// <param name="soData">공격 SO Data</param>
+    /// <param name="attacker">공격하는 오브젝트</param>
     public ProjectileAttack(ProjectileAttackData soData, FairyController attacker) : base(soData, attacker)
     {
         if (soData.ProjectilePrefab != null)
@@ -19,7 +24,7 @@ public class ProjectileAttack : AttackBase
     /// <summary>
     /// 투사체를 소환하여 적을 공격하는 함수
     /// </summary>
-    /// <param name="target"></param>
+    /// <param name="target">공격당하는 오브젝트</param>
     public override void DoAttack(Transform target)
     {
         Debug.Log(attacker);

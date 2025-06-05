@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Enemy의 HP바를 관리하는 클래스
+/// </summary>
 public class EnemyHPBar : MonoBehaviour
 {
     /// <summary>

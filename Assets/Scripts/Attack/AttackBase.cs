@@ -33,6 +33,10 @@ public abstract class AttackBase : IAttack
         this.attacker = attacker;
     }
 
+    /// <summary>
+    /// 공격하는 함수(추상 메소드)
+    /// </summary>
+    /// <param name="target">공격하는 대상</param>
     public abstract void DoAttack(Transform target);
 
     /// <summary>

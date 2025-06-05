@@ -1,0 +1,80 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7a27bdef829d254a87fc7cabff708ad, type: 3}
+  m_Name: Stage03-03
+  m_EditorClassIdentifier: 
+  stageName: Stage03-03
+  stageSpawnCount: 21
+  spawnInfos:
+  - spawnType: 2
+    spawnTime: 0
+    spawnPosition: {x: 10, y: 2}
+  - spawnType: 2
+    spawnTime: 1
+    spawnPosition: {x: 10, y: 1.5}
+  - spawnType: 2
+    spawnTime: 2
+    spawnPosition: {x: 10, y: 1}
+  - spawnType: 5
+    spawnTime: 3
+    spawnPosition: {x: 10, y: 0.5}
+  - spawnType: 5
+    spawnTime: 4
+    spawnPosition: {x: 10, y: 0}
+  - spawnType: 2
+    spawnTime: 9
+    spawnPosition: {x: 10, y: -2}
+  - spawnType: 2
+    spawnTime: 10
+    spawnPosition: {x: 10, y: -1.5}
+  - spawnType: 2
+    spawnTime: 11
+    spawnPosition: {x: 10, y: -1}
+  - spawnType: 5
+    spawnTime: 12
+    spawnPosition: {x: 10, y: -0.5}
+  - spawnType: 5
+    spawnTime: 13
+    spawnPosition: {x: 10, y: 0}
+  - spawnType: 2
+    spawnTime: 16
+    spawnPosition: {x: 10, y: -2}
+  - spawnType: 2
+    spawnTime: 16
+    spawnPosition: {x: 10, y: -1.5}
+  - spawnType: 2
+    spawnTime: 17
+    spawnPosition: {x: 10, y: -1}
+  - spawnType: 5
+    spawnTime: 18
+    spawnPosition: {x: 10, y: 0}
+  - spawnType: 5
+    spawnTime: 19
+    spawnPosition: {x: 10, y: 0}
+  - spawnType: 2
+    spawnTime: 23
+    spawnPosition: {x: 10, y: -2}
+  - spawnType: 2
+    spawnTime: 23
+    spawnPosition: {x: 10, y: 0}
+  - spawnType: 2
+    spawnTime: 23
+    spawnPosition: {x: 10, y: 2}
+  - spawnType: 5
+    spawnTime: 25
+    spawnPosition: {x: 10, y: 1}
+  - spawnType: 5
+    spawnTime: 25
+    spawnPosition: {x: 10, y: -1}
+  - spawnType: 8
+    spawnTime: 30
+    spawnPosition: {x: 10, y: 0}
