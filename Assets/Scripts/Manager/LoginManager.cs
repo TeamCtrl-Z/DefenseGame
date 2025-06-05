@@ -28,10 +28,6 @@ public class LoginManager : MonoBehaviour
     public Button deleteAccountButton;
 
     private FirebaseAuth auth;
-    private string registerUrl = "/user/register";
-    private string loginUrl = "/user/login";
-    private string deleteUrl = "/user/delete";  // 계정 삭제용 엔드포인트
-
     private string accountFilePath;
 
     private void Awake()
@@ -60,7 +56,7 @@ public class LoginManager : MonoBehaviour
                 if (auth.CurrentUser != null)
                 {
                     // 세션이 살아 있다면, 항상 최신 ID 토큰으로 /user/login 호출해서 프로필 갱신
-                    StartCoroutine(LoginWithFirebaseSession());
+                    StartCoroutine(LoginProcess());
                     return;
                 }
                 else
@@ -126,128 +122,50 @@ public class LoginManager : MonoBehaviour
         string idToken = tokenTask.Result;
 
         // 3) 서버에 회원가입 요청
-        yield return StartCoroutine(RegisterWithServer(idToken, firebaseUser.UserId));
+        StartCoroutine(RegisterWithServer(idToken, firebaseUser.UserId));
     }
 
     private IEnumerator RegisterWithServer(string idToken, string firebaseUid)
     {
         statusText.text = "서버 회원가입 중…";
 
-        string deviceId = SystemInfo.deviceUniqueIdentifier;
-        var registerRequestData = new
+        void fail()
         {
-            provider = "guest",
-            deviceId = deviceId
-        };
-        Network network = new Network(registerUrl, "POST");
-        network.SetRequestData(registerRequestData);
-
-        yield return network.SendRequest();
-
-        if (!string.IsNullOrEmpty(network.Error))
-        {
-            Debug.LogError($"[LoginManager] 게스트 등록 실패: {network.Error}");
-            Debug.LogError($"서버 응답(문제가 있는 경우): {network.ResponseText}");
             statusText.text = "회원가입 실패. 요청 형식을 확인하세요.";
-            yield break;
         }
-        // 회원가입 성공 → 서버 응답 JSON 파싱
-        string responseJson = network.ResponseText;
 
-        Debug.Log($"[LoginManager] Register Response: {responseJson}");
-        try
+        void success()
         {
-            UserDataManager.Instance.LoadUserData(responseJson);
-        }
-        catch (Exception e)
-        {
-            Debug.LogError($"[LoginManager] JSON 파싱 오류(가입): {e}");
-            statusText.text = "서버 응답 파싱 오류.";
-            yield break;
+            SaveAccountToJson();
+
+            StartCoroutine(LoginProcess());
         }
 
-        // 로컬 JSON(guest_account.json) 에는 “변하지 않는 정보”만 저장
-        SaveAccountToJson();
-
-        yield return StartCoroutine(LoginAfterRegister());
-    }
-
-    private IEnumerator LoginAfterRegister()
-    {
-        statusText.text = "가입 완료, 로그인 중…";
-
-        var loginRequestData = new { };
-        Network network = new Network(loginUrl, "POST");
-        network.SetRequestData(loginRequestData);
-        yield return network.SendRequest();
-
-        if (!string.IsNullOrEmpty(network.Error))
-        {
-            Debug.LogError($"[LoginManager] 가입 후 로그인 실패: {network.Error}");
-            Debug.LogError($"서버 응답 바디: {network.ResponseText}");
-            statusText.text = "가입 후 로그인 실패.";
-            yield break;
-        }
-
-        string responseJson = network.ResponseText;
-        Debug.Log($"[LoginManager] LoginAfterRegister Response: {responseJson}");
-        try
-        {
-            UserDataManager.Instance.LoadUserData(responseJson);
-            SceneManager.LoadScene("MainScene");
-        }
-        catch (Exception e)
-        {
-            Debug.LogError($"[LoginManager] JSON 파싱 오류(가입 후 로그인): {e}");
-            statusText.text = "서버 응답 파싱 오류.";
-            yield break;
-        }
-
-        SaveAccountToJson();
-
-        string shortUid = UserDataManager.Instance.User.firebaseUID.Length >= 8
-                ? UserDataManager.Instance.User.firebaseUID.Substring(0, 8)
-                : UserDataManager.Instance.User.firebaseUID;
-        ShowMainUI($"환영합니다, 게스트님!\n(UID: {shortUid})");
+        yield return ServerData_Users.Instance.RequestRegister(success, fail);
     }
     #endregion
 
 
-    #region ■ 자동 로그인 (/user/login)
+    #region ■ 로그인 (/user/login)
 
-    private IEnumerator LoginWithFirebaseSession()
+    private IEnumerator LoginProcess()
     {
-        statusText.text = "자동 로그인 중…";
-        Network network = new Network(loginUrl, "POST");
-        network.SetRequestData(new { });
-        yield return network.SendRequest();
-
-        if (!string.IsNullOrEmpty(network.Error))
+        statusText.text = "로그인 중…";
+        void successCB()
         {
-            Debug.LogWarning(network.Error);
-            yield break;
-        }
-
-        string responseJson = network.ResponseText;
-        Debug.Log($"[LoginManager] Login Response: {responseJson}");
-        try
-        {
-            UserDataManager.Instance.LoadUserData(responseJson);
-            SceneManager.LoadScene("MainScene");
-        }
-        catch (Exception e)
-        {
-            Debug.LogError($"[LoginManager] JSON 파싱 오류(로그인): {e}");
-            ShowLoginUI();
-            yield break;
-        }
-
-        // 로컬 JSON에 “변하지 않는” 정보만 덮어써서 저장
-        SaveAccountToJson();
-        string shortUid = UserDataManager.Instance.User.firebaseUID.Length >= 8
+            SaveAccountToJson();
+            string shortUid = UserDataManager.Instance.User.firebaseUID.Length >= 8
                         ? UserDataManager.Instance.User.firebaseUID.Substring(0, 8)
                         : UserDataManager.Instance.User.firebaseUID;
-        ShowMainUI($"자동 로그인 성공!\nUID: {shortUid}");
+            ShowMainUI($"자동 로그인 성공!\nUID: {shortUid}");
+        }
+
+        void failCB()
+        {
+            ShowLoginUI();
+        }
+
+        yield return ServerData_Users.Instance.RequestLogin(successCB, failCB);
     }
 
     #endregion
@@ -279,23 +197,19 @@ public class LoginManager : MonoBehaviour
             PerformLocalDeletion();
             yield break;
         }
-
-        var deleteRequestData = new { };
-        Network network = new Network(deleteUrl, "POST");
-        network.SetRequestData(deleteRequestData);
-        yield return network.SendRequest();
-        if (!string.IsNullOrEmpty(network.ResponseText))
+        void fail()
         {
-            Debug.LogError($"[LoginManager] 가입 후 로그인 실패: {network.Error}");
-            Debug.LogError($"서버 응답 바디: {network.ResponseText}");
             statusText.text = "가입 후 로그인 실패.";
-            yield break;
         }
 
+        void success()
+        {
+            // 삭제가 성공적으로 완료된 경우
+            Debug.Log("[LoginManager] 서버 계정 삭제 성공");
+            PerformLocalDeletion();
+        }
 
-        // 삭제가 성공적으로 완료된 경우
-        Debug.Log("[LoginManager] 서버 계정 삭제 성공");
-        PerformLocalDeletion();
+        ServerData_Users.Instance.RequestDelete(success, fail);
     }
 
     /// <summary>

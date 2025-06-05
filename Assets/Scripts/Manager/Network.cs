@@ -9,6 +9,9 @@ using UnityEditor.PackageManager.Requests;
 using UnityEngine;
 using UnityEngine.Networking;
 
+/// <summary>
+/// 서버와 통신을 도와주는 API제공 클래스
+/// </summary>
 public class Network
 {
     /// <summary>
@@ -48,6 +51,11 @@ public class Network
         webRequest.disposeCertificateHandlerOnDispose = true;
     }
 
+    public void SetRequestData()
+    {
+        isRequestInitialized = true;
+    }
+
     /// <summary>
     /// 서버에 요청할 때 실어보낼 데이터를 설정.
     /// 반드시 SendRequest()를 호출하기 전에 한 번 호출해야 함.
@@ -64,11 +72,21 @@ public class Network
         isRequestInitialized = true;
     }
 
+    /// <summary>
+    /// 헤더 설정
+    /// </summary>
+    /// <param name="key"> 어떤 헤더 </param>
+    /// <param name="value"> 헤더에 설정할 값 </param>
     public void SetRequestHeader(string key, string value)
     {
         webRequest.SetRequestHeader(key, value);
     }
 
+    /// <summary>
+    /// 서버에 요청을 보내는 코루틴 함수
+    /// </summary>
+    /// <returns></returns>
+    /// <exception cref="InvalidOperationException"></exception>
     public IEnumerator SendRequest()
     {
         if (!isRequestInitialized)
@@ -101,12 +119,8 @@ public class Network
 
         yield return webRequest.SendWebRequest();
 
-#if UNITY_2020_1_OR_NEWER
         if (webRequest.result == UnityWebRequest.Result.ConnectionError ||
             webRequest.result == UnityWebRequest.Result.ProtocolError)
-#else
-        if (_webRequest.isNetworkError || _webRequest.isHttpError)
-#endif
         {
             // 오류가 발생한 경우
             long statusCode = webRequest.responseCode; // 0 이면 네트워크 연결 조차 안 된 상태
