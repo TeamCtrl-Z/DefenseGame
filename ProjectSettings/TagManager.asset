@@ -41,6 +41,9 @@ TagManager:
   - name: Background
     uniqueID: 3284831275
     locked: 0
+  - name: Currency
+    uniqueID: 2503544303
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

@@ -33,6 +33,9 @@ public class LoginUI : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI percentText;
 
+    /// <summary>
+    /// 로딩 슬라이더
+    /// </summary>
     [SerializeField]
     private Slider loadingSlider;
 
@@ -133,7 +136,7 @@ public class LoginUI : MonoBehaviour
         float progressValue = 0f;
         while (progressValue < slowdownThreshold)
         {
-            progressValue += Time.deltaTime * 7.5f;
+            progressValue += Time.deltaTime * 10f;
             progressValue = Mathf.Min(progressValue, slowdownThreshold);
             loadingSlider.value = progressValue;
             percentText.text = $"{(int)progressValue}%";
@@ -152,10 +155,10 @@ public class LoginUI : MonoBehaviour
             loadingSlider.value = progressValue;
             percentText.text = $"{(int)progressValue}%";
 
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.2f);
         }
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
 
         asyncLoad.allowSceneActivation = true;
     }

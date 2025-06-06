@@ -136,7 +136,6 @@ public class ChapterManager : MonoBehaviour, IInitialize
         if (!CurrentStage.isClear)
         {
             currentStage.isClear = true;
-            KillCount = 0;
             UserDataManager.Instance.AddCurrency_Gold(currentStage.reward_Gold);
             UserDataManager.Instance.AddCurrency_Gem(currentStage.reward_Gem);
             StartCoroutine(StageClearRewardWithServer());
