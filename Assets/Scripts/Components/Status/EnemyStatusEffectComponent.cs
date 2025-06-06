@@ -17,8 +17,6 @@ public class EnemyStatusEffectComponent : MonoBehaviour, IStatusEffectProvider
     /// </summary>
     public Dictionary<DebuffType, int> Stacks => stacks;
 
-    private Dictionary<DebuffType, Action<Vector2, int>> debuffMethod;
-
     private void Awake()
     {
         for (int i = 0; i < (int)DebuffType.Max; i++)

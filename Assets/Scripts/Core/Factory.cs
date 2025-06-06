@@ -56,6 +56,11 @@ public class Factory : Singleton<Factory>
     private EnemyDieEffectPool enemyDieEffect;
 
     /// <summary>
+    /// EnemyHit 풀
+    /// </summary>
+    private EnemyHitPool enemyHit;
+
+    /// <summary>
     /// Projectile 풀
     /// </summary>
     private ProjectilePool projectile;
@@ -179,6 +184,9 @@ public class Factory : Singleton<Factory>
 
         if (this.TryGetComponentInChildren<EnemyDieEffectPool>(out enemyDieEffect))
             enemyDieEffect.Initialize();
+
+        if (this.TryGetComponentInChildren<EnemyHitPool>(out enemyHit))
+            enemyHit.Initialize();
 
         if (this.TryGetComponentInChildren<ProjectilePool>(out projectile))
             projectile.Initialize();
@@ -450,6 +458,19 @@ public class Factory : Singleton<Factory>
     public Effect GetEnemyDieEffect(Vector2 position, float angle = 0.0f)
     {
         return enemyDieEffect.GetObject(position, new Vector3(0, 0, angle));
+    }
+
+    /// <summary>
+    /// 적이 맞을 떄 이펙트를 소환하는 함수
+    /// </summary>
+    /// <param name="position">소환 위치</param>
+    /// <param name="angle">소환 각도</param>
+    /// <returns>소환된 이펙트</returns>
+    public Effect GetEnemyHit(Vector2 position, float angle = 0.0f)
+    {
+        Vector2 rand = Random.insideUnitCircle * 0.1f;
+        position += rand;
+        return enemyHit.GetObject(position, new Vector3(0, 0, angle));
     }
 
     /// <summary>

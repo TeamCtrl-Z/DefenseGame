@@ -80,6 +80,7 @@ public class EnemyController : RecycleObject, IDamageable, ITargetable
     {
         statusEffect.AddStack(data.Debuff);
         damageProcessor.DamageFuncs[data.Debuff](StatusComponent, data.Damage);
+        Factory.Instance.GetEnemyHit(transform.position);
     }
 
     /// <summary>
