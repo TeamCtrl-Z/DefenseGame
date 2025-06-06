@@ -8,40 +8,48 @@ using UnityEngine;
 public class EnemyIdleState : EnemyBaseState
 {
     /// <summary>
-    /// EnemyIdleState 생성자
+    /// Idle 상태에서 기다리는 시간
     /// </summary>
-    /// <param name="stateMachine">EnemyStateMachine</param>
-    public EnemyIdleState(EnemyStateMachine stateMachine) : base(stateMachine)
-    {}
+    private float m_waitTime = 0.0f;
 
     /// <summary>
-    /// Enemy가 Idle 상태에 들어갈 때 호출되는 함수
+    /// EnemyIdleState 생성자
     /// </summary>
-    /// <param name="sender">EnemyController</param>
+    /// <param name="stateMachine">Enemy의 StateMachine</param>
+    public EnemyIdleState(EnemyStateMachine stateMachine) : base(stateMachine) { }
+
+    /// <summary>
+    /// Enemy의 Idle 상태에 들어오면 실행되는 함수
+    /// </summary>
+    /// <param name="sender">Enemy의 Controller</param>
     public override void Enter(EnemyController sender)
     {
         base.Enter(sender);
 
-        stateMachine.Rigidbody.velocity = Vector2.zero;
+        m_waitTime = stateMachine.BattleStatus.AttackSpeed;
+
     }
 
     /// <summary>
-    /// Enemy가 Idle 상태 중일 때 매 프레임마다 호출되는 함수
+    /// Enemy의 Idle 상태 중에 매 프레임 실행되는 함수
     /// </summary>
-    /// <param name="sender">EnemyController</param>
+    /// <param name="sender">Enemy의 Controller</param>
     public override void UpdateState(EnemyController sender)
     {
         base.UpdateState(sender);
-        if (stateMachine.BlockComponent.IsBlocked == false)
+
+        m_waitTime -= Time.deltaTime;
+
+        if (m_waitTime < 0.0f)
         {
-            stateMachine.TransitionTo(stateMachine.Move);
+            stateMachine.TransitionTo(stateMachine.Attack);
         }
     }
 
     /// <summary>
-    /// Enemy가 Idle 상태에서 벗어날 때 호출되는 함수
+    /// Enemy의 Idle 상태가 끝나면 실행되는 함수
     /// </summary>
-    /// <param name="sender">EnemyController</param>
+    /// <param name="sender">Enemy의 Controller</param>
     public override void Exit(EnemyController sender)
     {
         base.Exit(sender);

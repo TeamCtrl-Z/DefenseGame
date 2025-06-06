@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,6 +16,8 @@ public class EnemyStatusEffectComponent : MonoBehaviour, IStatusEffectProvider
     /// K : 디버프, V : 표식 갯수를 가지고 있는 딕셔너리를 반환하는 프로퍼티
     /// </summary>
     public Dictionary<DebuffType, int> Stacks => stacks;
+
+    private Dictionary<DebuffType, Action<Vector2, int>> debuffMethod;
 
     private void Awake()
     {

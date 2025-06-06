@@ -41,6 +41,9 @@ public class FairyStatusComponent : MonoBehaviour, IBattleStatus, ICharacterIden
     /// </summary>
     [field: SerializeField] public float AttackPowerFactor { get; private set; } = 1f;
 
+    /// <summary>
+    /// Fairy의 TargetingType
+    /// </summary>
     private TargetingType type;
 
     /// <summary>
@@ -81,7 +84,7 @@ public class FairyStatusComponent : MonoBehaviour, IBattleStatus, ICharacterIden
     }
 
     /// <summary>
-    /// 공격력 적용 함수
+    /// Fairy의 공격력 적용 함수
     /// </summary>
     /// <param name="delta"> 조정할 양 </param>
     public void AdjustAttackPower(float delta)
@@ -95,7 +98,7 @@ public class FairyStatusComponent : MonoBehaviour, IBattleStatus, ICharacterIden
     }
 
     /// <summary>
-    /// 공격 속도 적용 함수
+    /// Fairy의 공격 속도 적용 함수
     /// </summary>
     /// <param name="amount"> 조정할 양 </param>
     public void AdjustAttackSpeed(float amount)

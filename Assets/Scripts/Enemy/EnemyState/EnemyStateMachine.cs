@@ -7,53 +7,72 @@ using UnityEngine;
 /// </summary>
 public class EnemyStateMachine : StateMachine<EnemyController>
 {
-    #region Caching States
+    #region States Caching
 
     /// <summary>
-    /// 적 Idle 상태를 가져오는 프로퍼티(읽기 전용)
+    /// Enemy의 Idle 상태 클래스
     /// </summary>
     public EnemyIdleState Idle { get; private set; }
 
     /// <summary>
-    /// 적 Move 상태를 가져오는 프로퍼티(읽기 전용)
+    /// Enemy의 Move 상태 클래스
     /// </summary>
     public EnemyMoveState Move { get; private set; }
 
     /// <summary>
-    /// 적 Attack 상태를 가져오는 프로퍼티(읽기 전용)
+    /// Enemy의 Attack 상태 클래스
     /// </summary>
     public EnemyAttackState Attack { get; private set; }
     #endregion
 
     /// <summary>
-    /// 적 Rigidbody2D 컴포넌트를 가져오는 프로퍼티(읽기 전용)
+    /// Enemy의 Rigidbody
     /// </summary>
     public Rigidbody2D Rigidbody { get; private set; }
 
     /// <summary>
-    /// 적 BlockComponent를 가져오는 프로퍼티(읽기 전용)
+    /// Enemy의 BlockComponent
     /// </summary>
     public EnemyBlockComponent BlockComponent { get; private set; }
 
     /// <summary>
-    /// 적 Animator 컴포넌트를 가져오는 프로퍼티(읽기 전용)
+    /// Enemy의 Animator
     /// </summary>
     public Animator Animator { get; private set; }
 
     /// <summary>
-    /// EnemyStateMachine 생성자
+    /// IBattleStatus 인터페이스를 구현한 BattleStatus를 불러오는 프로퍼티(읽기 전용)
     /// </summary>
-    /// <param name="sender">EnemyController</param>
+    public IBattleStatus BattleStatus { get; private set; }
+
+    /// <summary>
+    /// EnemyStateMachine의 생성자
+    /// </summary>
+    /// <param name="sender">Enemy의 Controller</param>
     public EnemyStateMachine(EnemyController sender) : base(sender)
     {
-        Idle = new(this);
-        Move = new(this);
-        Attack = new(this);
+        Idle = new EnemyIdleState(this);
+        Move = new EnemyMoveState(this);
+        Attack = new EnemyAttackState(this);
 
         Rigidbody = sender.GetComponent<Rigidbody2D>();
         BlockComponent = sender.GetComponent<EnemyBlockComponent>();
         Animator = sender.GetComponent<Animator>();
+        BattleStatus = sender.GetComponent<IBattleStatus>();
+
+        var behaviour = Animator.GetBehaviour<ExitStateBehaviour>();
+        behaviour.OnStateExitEvent += OnStateExit;
 
         TransitionTo(Move);
+    }
+
+    /// <summary>
+    /// State가 종료될 때 호출되는 메서드
+    /// </summary>
+    /// <param name="animator">Fairy의 Animator</param>
+    /// <param name="layerIndex">Animator의 레이어 번호</param>
+    private void OnStateExit(Animator animator, int layerIndex)
+    {
+        TransitionTo(Idle);
     }
 }
