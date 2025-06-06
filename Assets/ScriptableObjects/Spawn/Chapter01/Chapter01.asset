@@ -12,7 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99f1209e45a72ec4883e34a4f1d21ada, type: 3}
   m_Name: Chapter01
   m_EditorClassIdentifier: 
+  ChapterID: 1
   chapterName: Chapter01
+  isClear: 0
+  reward_Gold: 10000
+  reward_Gem: 5000
   stages:
   - {fileID: 11400000, guid: 433e688a8280f954c8d5878f919773e0, type: 2}
   - {fileID: 11400000, guid: a90049821c96bbe4ea8b0b670bc0cf57, type: 2}

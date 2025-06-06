@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 /// <summary>
@@ -9,6 +10,11 @@ using UnityEngine.UI;
 /// </summary>
 public class LoginUI : MonoBehaviour
 {
+    /// <summary>
+    /// 로딩 속도를 느리게 기작할 기준 퍼센트
+    /// </summary>
+    private float slowdownThreshold = 70.0f;
+
     /// <summary>
     /// 게스트로 로그인 버튼
     /// </summary>
@@ -26,6 +32,9 @@ public class LoginUI : MonoBehaviour
     /// </summary>
     [SerializeField]
     private TextMeshProUGUI percentText;
+
+    [SerializeField]
+    private Slider loadingSlider;
 
     /// <summary>
     /// 회원가입 Group
@@ -91,6 +100,7 @@ public class LoginUI : MonoBehaviour
         loadingGroup.alpha = 1f;
         loadingGroup.interactable = true;
         loadingGroup.blocksRaycasts = true;
+        StartCoroutine(UpdateLoadingProgress());
     }
 
     /// <summary>
@@ -109,5 +119,44 @@ public class LoginUI : MonoBehaviour
     private void RefreshStatus(string status)
     {
         statusText.text = status;
+    }
+
+    /// <summary>
+    /// 로딩 진행 상황을 업데이트하는 코루틴
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator UpdateLoadingProgress()
+    {
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("MainScene");
+        asyncLoad.allowSceneActivation = false;
+
+        float progressValue = 0f;
+        while (progressValue < slowdownThreshold)
+        {
+            progressValue += Time.deltaTime * 7.5f;
+            progressValue = Mathf.Min(progressValue, slowdownThreshold);
+            loadingSlider.value = progressValue;
+            percentText.text = $"{(int)progressValue}%";
+
+            yield return null;
+        }
+
+        progressValue = slowdownThreshold;
+
+
+        while (progressValue < 100f)
+        {
+            progressValue += 1f;
+            progressValue = Mathf.Min(progressValue, 100f);
+
+            loadingSlider.value = progressValue;
+            percentText.text = $"{(int)progressValue}%";
+
+            yield return new WaitForSeconds(0.5f);
+        }
+
+        yield return new WaitForSeconds(2f);
+
+        asyncLoad.allowSceneActivation = true;
     }
 }

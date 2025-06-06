@@ -175,6 +175,7 @@ MonoBehaviour:
   guestLoginButton: {fileID: 2077070422}
   statusText: {fileID: 1067112083}
   percentText: {fileID: 1343926674}
+  loadingSlider: {fileID: 292097270}
   registerGroup: {fileID: 1583955534}
   loadingGroup: {fileID: 1214227432}
   loginManager: {fileID: 1365498527}
@@ -261,9 +262,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
+  m_MaxValue: 100
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []

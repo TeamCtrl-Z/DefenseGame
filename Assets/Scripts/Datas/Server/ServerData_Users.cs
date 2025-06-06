@@ -78,8 +78,8 @@ public class ServerData_Users : ServerData
         }
 
         string responseJson = network.ResponseText;
-        UserDataManager.Instance.LoadUserData(responseJson);
-        ApplyCommonResponse(responseJson);
+        //UserDataManager.Instance.LoadUserData(responseJson);
+        //ApplyCommonResponse(responseJson);
         success?.Invoke();
     }
 
