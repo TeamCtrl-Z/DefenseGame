@@ -1,10 +1,11 @@
 using System.Collections.Generic;
+using Newtonsoft.Json.Linq;
 using UnityEngine;
 
 /// <summary>
 /// 페어리의 데이터들을 관리하는 클래스(CSV파일 로드 데이터)
 /// </summary>
-public class FairyDataManager : Singleton<FairyDataManager>
+public class FairyDataManager : MonoBehaviour, IServerData
 {
     /// <summary>
     /// 페어리 status 데이터 테이블 - k : fid, v : FairyStatusData
@@ -80,5 +81,11 @@ public class FairyDataManager : Singleton<FairyDataManager>
         attributeData = attributeTable[fid];
         return true;
     }
+
     #endregion
+    public void ApplyServerData(JObject res)
+    {
+        if (res["fairy"] == null)
+            return;
+    }
 }

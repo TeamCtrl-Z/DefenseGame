@@ -45,7 +45,7 @@ public class EnemyRewardComponent : MonoBehaviour, IReward
     /// </summary>
     public void LoadRewardData()
     {
-        EnemyDataManager.Instance.TryGetRewardData(characterIdentity.ID, out EnemyRewardData rewardData);
+        DataService.Instance.EnemyDataManager.TryGetRewardData(characterIdentity.ID, out EnemyRewardData rewardData);
 
         Gold = rewardData.gold;
         Gem = rewardData.gem;
@@ -59,5 +59,26 @@ public class EnemyRewardComponent : MonoBehaviour, IReward
     {
         Factory.Instance.GetGold(transform.position, 0, Gold);
         Factory.Instance.GetGem(transform.position, 0, Gem);
+        ApplyCurrencyToPlayer(CurrencyType.Gold, Gold);
+        ApplyCurrencyToPlayer(CurrencyType.Gem, Gem);
+    }
+    
+    /// <summary>
+    /// 플레이어 데이터 매니저에 맞는 재화를 실제로 추가하는 함수
+    /// </summary>
+    private void ApplyCurrencyToPlayer(CurrencyType currencyType, ulong amount)
+    {
+        switch (currencyType)
+        {
+            case CurrencyType.Gold:
+                DataService.Instance.UserDataManager.AddCurrency_Gold(amount);
+                break;
+            case CurrencyType.Gem:
+                DataService.Instance.UserDataManager.AddCurrency_Gem(amount);
+                break;
+            case CurrencyType.Diamond:
+                DataService.Instance.UserDataManager.AddCurrency_Diamond((uint)amount);
+                break;
+        }
     }
 }

@@ -26,32 +26,32 @@ public class CurrencyUI : MonoBehaviour
 
     private void OnEnable()
     {
-        if (UserDataManager.Instance != null)
+        if (DataService.Instance != null)
         {
-            UserDataManager.Instance.OnCurrencyGoldChanged += RefreshGoldText;
-            UserDataManager.Instance.OnCurrencyGemChanged += RefreshGemText;
-            UserDataManager.Instance.OnCurrencyDiamondChanged += RefreshDiamondText;
+            DataService.Instance.UserDataManager.OnCurrencyGoldChanged += RefreshGoldText;
+            DataService.Instance.UserDataManager.OnCurrencyGemChanged += RefreshGemText;
+            DataService.Instance.UserDataManager.OnCurrencyDiamondChanged += RefreshDiamondText;
         }
     }
 
     private void OnDisable()
     {
-        if (UserDataManager.Instance != null)
+        if (DataService.Instance != null)
         {
-            UserDataManager.Instance.OnCurrencyGoldChanged -= RefreshGoldText;
-            UserDataManager.Instance.OnCurrencyGemChanged -= RefreshGemText;
-            UserDataManager.Instance.OnCurrencyDiamondChanged -= RefreshDiamondText;
+            DataService.Instance.UserDataManager.OnCurrencyGoldChanged -= RefreshGoldText;
+            DataService.Instance.UserDataManager.OnCurrencyGemChanged -= RefreshGemText;
+            DataService.Instance.UserDataManager.OnCurrencyDiamondChanged -= RefreshDiamondText;
         }
     }
 
     private void Start()
     {
         // 초기값 세팅
-        if (UserDataManager.Instance != null)
+        if (DataService.Instance != null)
         {
-            RefreshGoldText(UserDataManager.Instance.Currency_Gold);
-            RefreshGemText(UserDataManager.Instance.Currency_Gem);
-            RefreshDiamondText(UserDataManager.Instance.Currency_Diamond);
+            RefreshGoldText(DataService.Instance.UserDataManager.Currency_Gold);
+            RefreshGemText(DataService.Instance.UserDataManager.Currency_Gem);
+            RefreshDiamondText(DataService.Instance.UserDataManager.Currency_Diamond);
         }
     }
 

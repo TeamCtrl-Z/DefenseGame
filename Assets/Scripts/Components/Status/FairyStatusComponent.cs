@@ -63,7 +63,7 @@ public class FairyStatusComponent : MonoBehaviour, IBattleStatus, ICharacterIden
 
     private void Start()
     {
-        if (!FairyDataManager.Instance.TryGetStatData(ID, out statData))
+        if (!DataService.Instance.FairyDataManager.TryGetStatData(ID, out statData))
         {
             Debug.LogError("Not Found");
             return;

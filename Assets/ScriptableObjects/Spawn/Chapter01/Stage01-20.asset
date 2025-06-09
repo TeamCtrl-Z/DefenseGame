@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Stage01-20
   m_EditorClassIdentifier: 
   StageID: 120
+  ParentChapterID: 1
   stageName: Stage01-20
   isClear: 0
   reward_Gold: 3000

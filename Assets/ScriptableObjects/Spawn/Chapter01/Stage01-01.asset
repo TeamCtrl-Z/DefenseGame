@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Stage01-01
   m_EditorClassIdentifier: 
   StageID: 101
+  ParentChapterID: 1
   stageName: Stage01-01
-  isClear: 0
+  isClear: 1
   reward_Gold: 1100
   reward_Gem: 550
   stageSpawnCount: 21

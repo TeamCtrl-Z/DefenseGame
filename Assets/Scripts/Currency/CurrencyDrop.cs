@@ -100,7 +100,7 @@ public class CurrencyDrop : RecycleObject
             yield return null;
         }
 
-        ApplyCurrencyToPlayer();
+        //ApplyCurrencyToPlayer();
         ReturnToPool();
     }
 
@@ -112,13 +112,13 @@ public class CurrencyDrop : RecycleObject
         switch (currencyType)
         {
             case CurrencyType.Gold:
-                UserDataManager.Instance.AddCurrency_Gold(amount);
+                DataService.Instance.UserDataManager.AddCurrency_Gold(amount);
                 break;
             case CurrencyType.Gem:
-                UserDataManager.Instance.AddCurrency_Gem(amount);
+                DataService.Instance.UserDataManager.AddCurrency_Gem(amount);
                 break;
             case CurrencyType.Diamond:
-                UserDataManager.Instance.AddCurrency_Diamond((uint)amount);
+                DataService.Instance.UserDataManager.AddCurrency_Diamond((uint)amount);
                 break;
         }
     }

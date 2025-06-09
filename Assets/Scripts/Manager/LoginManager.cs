@@ -54,8 +54,10 @@ public class LoginManager : MonoBehaviour
         if (File.Exists(accountFilePath))
         {
             bool loaded = LoadAccountFromJson();
+            Debug.Log("자동로그인 가능");
             if (loaded)
             {
+                Debug.Log("Json파일 불러옴");
                 // 2) Firebase 세션이 살아 있는지 확인
                 if (auth.CurrentUser != null)
                 {
@@ -158,9 +160,9 @@ public class LoginManager : MonoBehaviour
         void successCB()
         {
             SaveAccountToJson();
-            string shortUid = UserDataManager.Instance.User.firebaseUID.Length >= 8
-                        ? UserDataManager.Instance.User.firebaseUID.Substring(0, 8)
-                        : UserDataManager.Instance.User.firebaseUID;
+            string shortUid = DataService.Instance.UserDataManager.User.firebaseUID.Length >= 8
+                        ? DataService.Instance.UserDataManager.User.firebaseUID.Substring(0, 8)
+                        : DataService.Instance.UserDataManager.User.firebaseUID;
             OnLoading?.Invoke();
         }
 
@@ -239,8 +241,8 @@ public class LoginManager : MonoBehaviour
         try
         {
             string json = File.ReadAllText(accountFilePath, Encoding.UTF8);
-            UserDataManager.Instance.LoadFromJson(json);
-            return (UserDataManager.Instance.User != null && !string.IsNullOrEmpty(UserDataManager.Instance.User.firebaseUID));
+            DataService.Instance.UserDataManager.LoadFromJson(json);
+            return (DataService.Instance.UserDataManager.User != null && !string.IsNullOrEmpty(DataService.Instance.UserDataManager.User.firebaseUID));
         }
         catch
         {
@@ -254,12 +256,12 @@ public class LoginManager : MonoBehaviour
     /// <returns></returns>
     private bool SaveAccountToJson()
     {
-        if (UserDataManager.Instance.User == null)
+        if (DataService.Instance.UserDataManager.User == null)
             return false;
 
         try
         {
-            string json = JsonConvert.SerializeObject(UserDataManager.Instance.User, Formatting.Indented);
+            string json = JsonConvert.SerializeObject(DataService.Instance.UserDataManager.User, Formatting.Indented);
             File.WriteAllText(accountFilePath, json, Encoding.UTF8);
             return true;
         }

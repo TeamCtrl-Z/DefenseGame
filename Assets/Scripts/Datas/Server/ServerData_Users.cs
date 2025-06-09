@@ -1,4 +1,5 @@
 using Firebase.Auth;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,19 +8,8 @@ using UnityEngine;
 /// <summary>
 /// 유저 정보를 요청하는 서버 데이터 클래스
 /// </summary>
-public class ServerData_Users : ServerData
+public class ServerData_Users : Singleton<ServerData_Users>
 {
-    /// <summary>
-    /// ServerData_Users 싱글톤 인스턴스
-    /// </summary>
-    public static new ServerData_Users Instance
-    {
-        get
-        {
-            return ServerData.Instance as ServerData_Users;
-        }
-    }
-
     /// <summary>
     /// 회원가입을 요청하는 코루틴 함수
     /// </summary>
@@ -52,8 +42,8 @@ public class ServerData_Users : ServerData
 
         // 회원가입 성공 → 서버 응답 JSON 파싱
         string responseJson = network.ResponseText;
-        UserDataManager.Instance.LoadUserData(responseJson);
-        ApplyCommonResponse(responseJson);
+        JObject res = JObject.Parse(responseJson);
+        DataService.Instance.ApplyCommonResponse(res);
         success?.Invoke();
     }
 
@@ -78,8 +68,8 @@ public class ServerData_Users : ServerData
         }
 
         string responseJson = network.ResponseText;
-        //UserDataManager.Instance.LoadUserData(responseJson);
-        //ApplyCommonResponse(responseJson);
+        JObject res = JObject.Parse(responseJson);
+        DataService.Instance.ApplyCommonResponse(res);
         success?.Invoke();
     }
 

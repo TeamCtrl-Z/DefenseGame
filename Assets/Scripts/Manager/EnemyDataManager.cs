@@ -1,9 +1,11 @@
 using System.Collections.Generic;
+using Newtonsoft.Json.Linq;
+using UnityEngine;
 
 /// <summary>
 /// 적 데이터를 관리하는 매니저 클래스
 /// </summary>
-public class EnemyDataManager : Singleton<EnemyDataManager>
+public class EnemyDataManager : MonoBehaviour
 {
     /// <summary>
     /// 적 데이터를 담고 있는 딕셔너리
@@ -16,17 +18,6 @@ public class EnemyDataManager : Singleton<EnemyDataManager>
     private Dictionary<int, EnemyRewardData> rewardTable;
 
     /// <summary>
-    /// EnemyDataManager의 초기화 메서드(싱글톤 생성 시 1번 호출)
-    /// </summary>
-    protected override void OnPreInitialize()
-    {
-        base.OnPreInitialize();
-
-        statusTable = CsvLoader.LoadTable<EnemyStatusData>("EnemyStatus");
-        rewardTable = CsvLoader.LoadTable<EnemyRewardData>("EnemyReward");
-    }
-
-    /// <summary>
     /// 스텟 데이터를 가져오는 메서드
     /// </summary>
     /// <param name="eid">Enemy ID</param>
@@ -34,6 +25,10 @@ public class EnemyDataManager : Singleton<EnemyDataManager>
     /// <returns>true면 성공, false면 실패</returns>
     public bool TryGetStatData(int eid, out EnemyStatusData statData)
     {
+        // 늦은 초기화
+        if (statusTable == null)
+            statusTable = CsvLoader.LoadTable<EnemyStatusData>("EnemyStatus");
+        
         statData = null;
         if (!statusTable.ContainsKey(eid))
             return false;
@@ -50,6 +45,10 @@ public class EnemyDataManager : Singleton<EnemyDataManager>
     /// <returns>true면 성공, false면 실패</returns>
     public bool TryGetRewardData(int eid, out EnemyRewardData rewardData)
     {
+        // 늦은 초기화
+        if (rewardTable == null)
+            rewardTable = CsvLoader.LoadTable<EnemyRewardData>("EnemyReward");
+        
         rewardData = null;
         if (!rewardTable.ContainsKey(eid))
             return false;

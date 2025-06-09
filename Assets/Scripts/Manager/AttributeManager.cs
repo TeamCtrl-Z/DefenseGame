@@ -19,7 +19,7 @@ public class AttributeManager : MonoBehaviour
     {
         id = GetComponentInParent<ICharacterIdentity>();
 
-        if (FairyDataManager.Instance.TryGetAttributeData(id.ID, out attributeData) == false)
+        if (DataService.Instance.FairyDataManager.TryGetAttributeData(id.ID, out attributeData) == false)
         {
             Debug.Log("존재하지 않은 fid입니다.");
         }

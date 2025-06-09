@@ -78,6 +78,7 @@ public class EnemyController : RecycleObject, IDamageable, ITargetable
     /// <param name="data">히팅 데이터</param>
     public void OnDamage(GameObject attacker, HittingData data)
     {
+        if (gameObject.activeSelf == false) return;
         statusEffect.AddStack(data.Debuff);
         damageProcessor.DamageFuncs[data.Debuff](StatusComponent, data.Damage);
         Factory.Instance.GetEnemyHit(transform.position);

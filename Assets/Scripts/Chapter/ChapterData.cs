@@ -10,7 +10,7 @@ public class ChapterData : ScriptableObject
     /// 챕터 고유 아이디
     /// </summary>
     public uint ChapterID;
-    
+
     /// <summary>
     /// 챕터 이름
     /// </summary>

@@ -10,6 +10,11 @@ public class StageData : ScriptableObject
     /// 스테이지 고유 아이디
     /// </summary>
     public uint StageID;
+
+    /// <summary>
+    /// 소속 챕터 ID
+    /// </summary>
+    public uint ParentChapterID;
     
     /// <summary>
     /// 스테이지 이름
