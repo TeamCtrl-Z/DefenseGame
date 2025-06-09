@@ -1,4 +1,3 @@
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,7 +6,7 @@ using UnityEngine;
 /// <summary>
 /// 적 Status 컴포넌트
 /// </summary>
-public class EnemyStatusComponent : MonoBehaviour, IMoveStatus, IHealthStatus, ICharacterIdentity
+public class EnemyStatusComponent : MonoBehaviour, IMoveStatus, IHealthStatus, ICharacterIdentity, IBattleStatus
 {
     /// <summary>
     /// HP가 변경될 때 호출되는 이벤트 델리게이트
@@ -18,6 +17,16 @@ public class EnemyStatusComponent : MonoBehaviour, IMoveStatus, IHealthStatus, I
     /// Enemy가 죽을 때 호출되는 이벤트 델리게이트
     /// </summary>
     public event Action OnDie;
+
+    /// <summary>
+    /// Enemy의 공격력이 바뀌면 실행되는 델리게이트
+    /// </summary>
+    public event Action<float> OnAttackPowerChanged;
+
+    /// <summary>
+    /// Enemy의 공격속도가 바뀌면 실행되는 델리게이트
+    /// </summary>
+    public event Action<float> OnAttackSpeedChanged;
 
     /// <summary>
     /// Enemy 고유 ID
@@ -50,6 +59,16 @@ public class EnemyStatusComponent : MonoBehaviour, IMoveStatus, IHealthStatus, I
     public float MaxHP { get; private set; }
 
     /// <summary>
+    /// Enemy의 공격력
+    /// </summary>
+    public float AttackPower { get; private set; }
+
+    /// <summary>
+    /// Enemy의 공격 속도
+    /// </summary>
+    public float AttackSpeed { get; private set; }
+
+    /// <summary>
     /// Enemy Status 정보 모듈
     /// </summary>
     private EnemyStatusData statData;
@@ -72,6 +91,8 @@ public class EnemyStatusComponent : MonoBehaviour, IMoveStatus, IHealthStatus, I
         moveSpeed = statData.MoveSpeed;
         MaxHP = statData.HP;
         CurrentHP = MaxHP;
+        AttackPower = statData.AttackPower;
+        AttackSpeed = statData.AttackSpeed;
     }
 
     /// <summary>
@@ -97,5 +118,33 @@ public class EnemyStatusComponent : MonoBehaviour, IMoveStatus, IHealthStatus, I
         {
             OnDie?.Invoke();
         }
+    }
+
+    /// <summary>
+    /// Enemy의 공격력 적용 함수
+    /// </summary>
+    /// <param name="delta"> 조정할 양 </param>
+    public void AdjustAttackPower(float delta)
+    {
+        AttackPower += delta;
+
+        if (AttackPower < 0)
+            AttackPower = 0;
+
+        OnAttackPowerChanged?.Invoke(AttackPower);
+    }
+
+    /// <summary>
+    /// Enemy의 공격 속도 적용 함수
+    /// </summary>
+    /// <param name="delta"> 조정할 양 </param>
+    public void AdjustAttackSpeed(float delta)
+    {
+        AttackSpeed = delta;
+
+        if (AttackSpeed < 0)
+            AttackSpeed = 0;
+
+        OnAttackSpeedChanged?.Invoke(AttackSpeed);
     }
 }

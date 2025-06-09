@@ -75,7 +75,7 @@ public class UserDataManager : MonoBehaviour, IServerData
     /// <summary>
     /// Gold 추가 함수
     /// </summary>
-    public void AddCurrency_Gold(uint amount)
+    public void AddCurrency_Gold(ulong amount)
     {
         if (amount <= 0) return;
         Currency_Gold += amount;
@@ -86,7 +86,7 @@ public class UserDataManager : MonoBehaviour, IServerData
     /// <summary>
     /// Gold 사용(차감) 함수
     /// </summary>
-    public bool ConsumeCurrency_Gold(uint amount)
+    public bool ConsumeCurrency_Gold(ulong amount)
     {
         if (amount <= 0 || amount > Currency_Gold)
             return false;
@@ -101,7 +101,7 @@ public class UserDataManager : MonoBehaviour, IServerData
     /// <summary>
     /// Gold 추가 함수
     /// </summary>
-    public void AddCurrency_Gem(uint amount)
+    public void AddCurrency_Gem(ulong amount)
     {
         if (amount <= 0) return;
         Currency_Gem += amount;
@@ -112,7 +112,7 @@ public class UserDataManager : MonoBehaviour, IServerData
     /// <summary>
     /// Gold 사용(차감) 함수
     /// </summary>
-    public bool ConsumeCurrency_Gem(uint amount)
+    public bool ConsumeCurrency_Gem(ulong amount)
     {
         if (amount <= 0 || amount > Currency_Gem)
             return false;

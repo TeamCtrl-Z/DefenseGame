@@ -14,6 +14,11 @@ public class StateMachine<T>
     private T sender;
 
     /// <summary>
+    /// sender의 프로퍼티(읽기 전용)
+    /// </summary>
+    public T Sender => sender;
+
+    /// <summary>
     /// 오브젝트의 현재 상태를 저장하는 프로퍼티
     /// </summary>
     public IState<T> Current { get; private set; }

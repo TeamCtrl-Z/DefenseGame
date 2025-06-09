@@ -3,12 +3,12 @@ using System.Collections;
 using System.Text;
 using Firebase.Auth;
 using Newtonsoft.Json;
-using Unity.VisualScripting;
-using UnityEditor.PackageManager;
-using UnityEditor.PackageManager.Requests;
 using UnityEngine;
 using UnityEngine.Networking;
 
+/// <summary>
+/// 서버와 통신을 도와주는 API제공 클래스
+/// </summary>
 public class Network
 {
     /// <summary>
@@ -36,6 +36,11 @@ public class Network
     /// </summary>
     public string Error { get; private set; } = "";
 
+    /// <summary>
+    /// Network 생성자
+    /// </summary>
+    /// <param name="relativeUrl">서버 주소</param>
+    /// <param name="httpMethod">접속 방법</param>
     public Network(string relativeUrl, string httpMethod)
     {
         if (string.IsNullOrEmpty(relativeUrl))
@@ -46,6 +51,15 @@ public class Network
         webRequest = new UnityWebRequest(fullUrl, httpMethod.ToUpper());
         webRequest.certificateHandler = new AcceptAllCerts();
         webRequest.disposeCertificateHandlerOnDispose = true;
+    }
+
+    /// <summary>
+    /// 서버에 요청할 때 실어보낼 데이터가 없으면 실행하는 함수
+    /// </summary>
+    public void SetRequestData()
+    {
+        webRequest.downloadHandler = new DownloadHandlerBuffer();
+        isRequestInitialized = true;
     }
 
     /// <summary>
@@ -64,11 +78,21 @@ public class Network
         isRequestInitialized = true;
     }
 
+    /// <summary>
+    /// 헤더 설정
+    /// </summary>
+    /// <param name="key"> 어떤 헤더 </param>
+    /// <param name="value"> 헤더에 설정할 값 </param>
     public void SetRequestHeader(string key, string value)
     {
         webRequest.SetRequestHeader(key, value);
     }
 
+    /// <summary>
+    /// 서버에 요청을 보내는 코루틴 함수
+    /// </summary>
+    /// <returns></returns>
+    /// <exception cref="InvalidOperationException"></exception>
     public IEnumerator SendRequest()
     {
         if (!isRequestInitialized)
@@ -101,12 +125,8 @@ public class Network
 
         yield return webRequest.SendWebRequest();
 
-#if UNITY_2020_1_OR_NEWER
         if (webRequest.result == UnityWebRequest.Result.ConnectionError ||
             webRequest.result == UnityWebRequest.Result.ProtocolError)
-#else
-        if (_webRequest.isNetworkError || _webRequest.isHttpError)
-#endif
         {
             // 오류가 발생한 경우
             long statusCode = webRequest.responseCode; // 0 이면 네트워크 연결 조차 안 된 상태

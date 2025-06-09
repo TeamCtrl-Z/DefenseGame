@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2091370467045203932
+--- !u!1 &1697869291816754157
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,24 +8,24 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5688752364250196265}
-  - component: {fileID: 2572257326895940604}
-  - component: {fileID: 5349766581673892499}
-  - component: {fileID: 3106637879169695885}
+  - component: {fileID: 1724145305118402084}
+  - component: {fileID: 3702979895441867370}
+  - component: {fileID: 180220838396792791}
+  - component: {fileID: 7172705435660596510}
   m_Layer: 0
-  m_Name: GemSparkle
+  m_Name: GoldSparkle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5688752364250196265
+--- !u!4 &1724145305118402084
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2091370467045203932}
+  m_GameObject: {fileID: 1697869291816754157}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -34,13 +34,13 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!198 &2572257326895940604
+--- !u!198 &3702979895441867370
 ParticleSystem:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2091370467045203932}
+  m_GameObject: {fileID: 1697869291816754157}
   serializedVersion: 8
   lengthInSec: 1
   simulationSpeed: 1
@@ -1367,10 +1367,10 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 0.8796247, g: 1, b: 0.8235294, a: 1}
-        key1: {r: 0.8807228, g: 1, b: 0.35686278, a: 1}
-        key2: {r: 0.75918365, g: 1, b: 0.34509802, a: 0}
-        key3: {r: 0.935308, g: 1, b: 0.8235294, a: 0}
+        key0: {r: 1, g: 0.89457506, b: 0.8235294, a: 1}
+        key1: {r: 1, g: 0.58168024, b: 0.357175, a: 1}
+        key2: {r: 1, g: 0.57357734, b: 0.34509802, a: 0}
+        key3: {r: 1, g: 0.89457506, b: 0.8235294, a: 0}
         key4: {r: 1, g: 0.89457506, b: 0.8235294, a: 0}
         key5: {r: 0, g: 0, b: 0, a: 0}
         key6: {r: 0, g: 0, b: 0, a: 0}
@@ -1392,7 +1392,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
-        m_ColorSpace: 0
+        m_ColorSpace: -1
         m_NumColorKeys: 4
         m_NumAlphaKeys: 2
       minGradient:
@@ -4810,14 +4810,14 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!199 &5349766581673892499
+--- !u!199 &180220838396792791
 ParticleSystemRenderer:
   serializedVersion: 6
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2091370467045203932}
+  m_GameObject: {fileID: 1697869291816754157}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -4849,8 +4849,8 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1791422993
+  m_SortingLayer: -1
   m_SortingOrder: 0
   m_RenderMode: 0
   m_MeshDistribution: 0
@@ -4884,13 +4884,13 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!114 &3106637879169695885
+--- !u!114 &7172705435660596510
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2091370467045203932}
+  m_GameObject: {fileID: 1697869291816754157}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3bf350509827fe249b5efbeaa458642e, type: 3}

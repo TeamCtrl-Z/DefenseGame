@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 /// <summary>
@@ -9,6 +10,11 @@ using UnityEngine.UI;
 /// </summary>
 public class LoginUI : MonoBehaviour
 {
+    /// <summary>
+    /// 로딩 속도를 느리게 기작할 기준 퍼센트
+    /// </summary>
+    private float slowdownThreshold = 70.0f;
+
     /// <summary>
     /// 게스트로 로그인 버튼
     /// </summary>
@@ -28,6 +34,12 @@ public class LoginUI : MonoBehaviour
     private TextMeshProUGUI percentText;
 
     /// <summary>
+    /// 로딩 슬라이더
+    /// </summary>
+    [SerializeField]
+    private Slider loadingSlider;
+
+    /// <summary>
     /// 회원가입 Group
     /// </summary>
     [SerializeField]
@@ -39,10 +51,26 @@ public class LoginUI : MonoBehaviour
     [SerializeField]
     private CanvasGroup loadingGroup;
 
+    /// <summary>
+    /// 로그인 매니저
+    /// </summary>
+    [SerializeField]
+    private LoginManager loginManager;
+
     private void Start()
     {
         HideRegisterPanel();
         HideLoadingPanel();
+
+        loginManager.OnStatusChange += RefreshStatus;
+        loginManager.OnRegister += ShowRegisterPanel;
+        loginManager.OnLoading += ShowLoadingPanel;
+
+
+        guestLoginButton.onClick.AddListener(() =>
+        {
+            loginManager.OnGuestLoginButtonClicked();
+        });
     }
 
     /// <summary>
@@ -50,6 +78,7 @@ public class LoginUI : MonoBehaviour
     /// </summary>
     private void ShowRegisterPanel()
     {
+        HideLoadingPanel();
         registerGroup.alpha = 1f;
         registerGroup.interactable = true;
         registerGroup.blocksRaycasts = true;
@@ -70,9 +99,11 @@ public class LoginUI : MonoBehaviour
     /// </summary>
     private void ShowLoadingPanel()
     {
+        HideRegisterPanel();
         loadingGroup.alpha = 1f;
         loadingGroup.interactable = true;
         loadingGroup.blocksRaycasts = true;
+        StartCoroutine(UpdateLoadingProgress());
     }
 
     /// <summary>
@@ -88,16 +119,47 @@ public class LoginUI : MonoBehaviour
     /// <summary>
     /// 진행 상태(Text)를 갱신하는 메서드
     /// </summary>
-    private void RefreshStatus()
+    private void RefreshStatus(string status)
     {
-
+        statusText.text = status;
     }
 
     /// <summary>
-    /// 진행 퍼센트(Text)를 갱신하는 메서드
+    /// 로딩 진행 상황을 업데이트하는 코루틴
     /// </summary>
-    private void RefreshPercentText()
+    /// <returns></returns>
+    private IEnumerator UpdateLoadingProgress()
     {
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("MainScene");
+        asyncLoad.allowSceneActivation = false;
 
+        float progressValue = 0f;
+        while (progressValue < slowdownThreshold)
+        {
+            progressValue += Time.deltaTime * 10f;
+            progressValue = Mathf.Min(progressValue, slowdownThreshold);
+            loadingSlider.value = progressValue;
+            percentText.text = $"{(int)progressValue}%";
+
+            yield return null;
+        }
+
+        progressValue = slowdownThreshold;
+
+
+        while (progressValue < 100f)
+        {
+            progressValue += 1f;
+            progressValue = Mathf.Min(progressValue, 100f);
+
+            loadingSlider.value = progressValue;
+            percentText.text = $"{(int)progressValue}%";
+
+            yield return new WaitForSeconds(0.2f);
+        }
+
+        yield return new WaitForSeconds(1f);
+
+        asyncLoad.allowSceneActivation = true;
     }
 }

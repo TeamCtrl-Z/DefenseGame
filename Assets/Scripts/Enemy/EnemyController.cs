@@ -81,6 +81,7 @@ public class EnemyController : RecycleObject, IDamageable, ITargetable
         if (gameObject.activeSelf == false) return;
         statusEffect.AddStack(data.Debuff);
         damageProcessor.DamageFuncs[data.Debuff](StatusComponent, data.Damage);
+        Factory.Instance.GetEnemyHit(transform.position);
     }
 
     /// <summary>

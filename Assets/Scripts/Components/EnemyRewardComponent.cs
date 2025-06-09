@@ -10,17 +10,17 @@ public class EnemyRewardComponent : MonoBehaviour, IReward
     /// <summary>
     /// Gold 양을 반환하는 프로퍼티
     /// </summary>
-    public uint Gold { get; private set; }
+    public ulong Gold { get; private set; }
 
     /// <summary>
     /// Gem 양을 반환하는 프로퍼티
     /// </summary>
-    public uint Gem { get; private set; }
+    public ulong Gem { get; private set; }
 
     /// <summary>
     /// Exp 양을 반환하는 프로퍼티
     /// </summary>
-    public uint Exp { get; private set; }
+    public ulong Exp { get; private set; }
 
     /// <summary>
     /// 캐릭터의 고유 ID를 가져오는 인터페이스

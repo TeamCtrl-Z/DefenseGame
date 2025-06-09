@@ -25,16 +25,13 @@ public class EnemyBlockComponent : MonoBehaviour
     private void FixedUpdate()
     {
         Vector3 direction = Vector2.left;
-        //Debug.DrawRay(transform.position, direction * distance, Color.red);
         RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, distance, blockLayer);
         if (hit.collider != null)
         {
-            //Debug.Log("block");
             IsBlocked = true;
         }
         else
         {
-            //Debug.Log("not block");
             IsBlocked = false;
         }
     }
