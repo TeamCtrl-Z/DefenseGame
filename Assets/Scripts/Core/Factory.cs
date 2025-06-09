@@ -66,6 +66,11 @@ public class Factory : Singleton<Factory>
     private ProjectilePool projectile;
 
     /// <summary>
+    /// Melee 풀
+    /// </summary>
+    private MeleePool melee;
+
+    /// <summary>
     /// FairyBasic 풀
     /// </summary>
     private FairyBasicPool fairyBasic;
@@ -190,6 +195,9 @@ public class Factory : Singleton<Factory>
 
         if (this.TryGetComponentInChildren<ProjectilePool>(out projectile))
             projectile.Initialize();
+
+        if (this.TryGetComponentInChildren<MeleePool>(out melee))
+            melee.Initialize();
 
         if (this.TryGetComponentInChildren<FairyBasicPool>(out fairyBasic))
             fairyBasic.Initialize();
@@ -353,6 +361,17 @@ public class Factory : Singleton<Factory>
     public Projectile GetProjectile(Vector2 position, float angle = 0.0f)
     {
         return projectile.GetObject(position, new Vector3(0, 0, angle));
+    }
+
+    /// <summary>
+    /// Melee를 소환하는 함수
+    /// </summary>
+    /// <param name="position">소환 위치</param>
+    /// <param name="angle">소환 각도</param>
+    /// <returns>소환된 Melee</returns>
+    public Melee GetMelee(Vector2 position, float angle = 0.0f)
+    {
+        return melee.GetObject(position, new Vector3(0, 0, angle));
     }
 
     #region Fairy Pool

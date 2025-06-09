@@ -12,10 +12,12 @@ public enum TargetingType
     /// 가장 가까운 적
     /// </summary>
     Nearest,
+
     /// <summary>
     /// 랜덤
     /// </summary>
     Random,
+
     /// <summary>
     /// 가장 체력이 많은 적
     /// </summary>
@@ -71,7 +73,6 @@ public class TargetingComponent : MonoBehaviour
         col.isTrigger = true;
         col.radius = AttackRange;
     }
-
 
     /// <summary>
     /// 적 타겟을 가져오는 메서드

@@ -14,7 +14,7 @@ public class AttackHandler : MonoBehaviour
     /// <summary>
     /// Fairy가 사용할 공격
     /// </summary>
-    [SerializeField] private AttackData attackSO;
+    [SerializeField] private FairyAttackData attackSO;
 
     /// <summary>
     /// 고유 공격 클래스

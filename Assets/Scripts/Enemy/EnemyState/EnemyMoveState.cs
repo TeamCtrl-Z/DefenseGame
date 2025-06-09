@@ -33,7 +33,7 @@ public class EnemyMoveState : EnemyBaseState
         float speed = sender.StatusComponent.MoveSpeed;
         stateMachine.Rigidbody.velocity = new Vector2(-speed, 0f);
 
-        if (stateMachine.BlockComponent.IsBlocked)
+        if (stateMachine.AttackHandler.CanAttack)
         {
             stateMachine.TransitionTo(stateMachine.Attack);
         }

@@ -24,6 +24,7 @@ public class EnemyAttackState : EnemyBaseState
         stateMachine.Rigidbody.velocity = Vector2.zero;
 
         stateMachine.Animator.SetTrigger(AnimatorHash.Enemy.AttackTrigger);
+        stateMachine.AttackHandler.EnemyAttack();
     }
 
     /// <summary>

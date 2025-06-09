@@ -27,4 +27,9 @@ public class EnemyStatusData
     /// 적 공격 속도
     /// </summary>
     public float AttackSpeed;
+
+    /// <summary>
+    /// 적 공격 범위
+    /// </summary>
+    public float AttackRange;
 }

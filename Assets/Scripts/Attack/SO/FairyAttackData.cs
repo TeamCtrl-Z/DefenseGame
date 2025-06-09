@@ -3,7 +3,7 @@ using UnityEngine;
 /// <summary>
 /// 공격에 필요한 데이터를 저장하기 위한 SO
 /// </summary>
-public abstract class AttackData : ScriptableObject
+public abstract class FairyAttackData : ScriptableObject
 {
     /// <summary>
     /// 피격 데이터

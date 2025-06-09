@@ -33,7 +33,7 @@ public class EnemyStateMachine : StateMachine<EnemyController>
     /// <summary>
     /// Enemy의 BlockComponent
     /// </summary>
-    public EnemyBlockComponent BlockComponent { get; private set; }
+    public EnemyAttackHandler AttackHandler { get; private set; }
 
     /// <summary>
     /// Enemy의 Animator
@@ -56,7 +56,7 @@ public class EnemyStateMachine : StateMachine<EnemyController>
         Attack = new EnemyAttackState(this);
 
         Rigidbody = sender.GetComponent<Rigidbody2D>();
-        BlockComponent = sender.GetComponent<EnemyBlockComponent>();
+        AttackHandler = sender.GetComponentInChildren<EnemyAttackHandler>();
         Animator = sender.GetComponent<Animator>();
         BattleStatus = sender.GetComponent<IBattleStatus>();
 
