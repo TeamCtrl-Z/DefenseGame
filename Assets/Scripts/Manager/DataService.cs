@@ -27,6 +27,9 @@ public class DataService : Singleton<DataService>
     /// </summary>
     public ContentsDataManager ContentsDataManager { get; private set; }
 
+    /// <summary>
+    /// 서버 데이터를 받아서 관리해야하는 데이터 메니저 리스트
+    /// </summary>
     private List<IServerData> serverDataMgrs;
 
     /// <summary>

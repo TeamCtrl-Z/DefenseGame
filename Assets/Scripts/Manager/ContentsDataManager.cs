@@ -5,6 +5,9 @@ using System.Linq;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
 
+/// <summary>
+/// 방치형 컨텐츠를 위한 데이터 매니저
+/// </summary>
 public class ContentsDataManager : MonoBehaviour, IServerData
 {
     /// <summary>
@@ -58,7 +61,7 @@ public class ContentsDataManager : MonoBehaviour, IServerData
     /// 현재 진행중인 스테이지
     /// </summary>
     private StageData currentStage;
-    
+
     /// <summary>
     /// 현재 진행중인 스테이지 프로퍼티
     /// </summary>
@@ -75,6 +78,10 @@ public class ContentsDataManager : MonoBehaviour, IServerData
         }
     }
 
+    /// <summary>
+    /// 초기화 함수
+    /// </summary>
+    /// <exception cref="InvalidOperationException"></exception>
     public void Initialize()
     {
         chapterTable = chapters.ToDictionary(c => c.ChapterID);
@@ -86,6 +93,10 @@ public class ContentsDataManager : MonoBehaviour, IServerData
             ?? throw new InvalidOperationException($"No StageData in Chapter {CurrentChapter.ChapterID}.");
     }
 
+    /// <summary>
+    /// 서버 데이터 적용
+    /// </summary>
+    /// <param name="res"></param>
     public void ApplyServerData(JObject res)
     {
         if (res["contents"] == null)
@@ -101,6 +112,10 @@ public class ContentsDataManager : MonoBehaviour, IServerData
         NextStage();
     }
 
+    /// <summary>
+    /// 챕터 아이디로 챕터 적용 함수
+    /// </summary>
+    /// <param name="chapterId"></param>
     public void SetChapter(uint chapterId)
     {
         if (chapterTable.TryGetValue(chapterId, out var chapter))
@@ -117,6 +132,10 @@ public class ContentsDataManager : MonoBehaviour, IServerData
         }
     }
 
+    /// <summary>
+    /// 스테이지 아이디로 스테이지 적용 함수
+    /// </summary>
+    /// <param name="stageId"></param>
     public void SetStage(uint stageId)
     {
         if (stageTable.TryGetValue(stageId, out var stage))

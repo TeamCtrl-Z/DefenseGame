@@ -40,6 +40,11 @@ public class ChapterUI : MonoBehaviour
         killMonsterText.text = $"처치 몬스터 : {killCount} / {totalCount}";
     }
 
+    /// <summary>
+    /// 클리어 UI 등장 코루틴 함수
+    /// </summary>
+    /// <param name="name"></param>
+    /// <returns></returns>
     private IEnumerator AppendClearText(string name)
     {
         clearText.gameObject.SetActive(true);
@@ -69,7 +74,7 @@ public class ChapterUI : MonoBehaviour
             clearText.color = color;
             yield return null;
         }
-        
+
         clearText.gameObject.SetActive(false);
     }
 }

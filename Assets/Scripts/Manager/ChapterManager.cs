@@ -51,9 +51,21 @@ public class ChapterManager : MonoBehaviour, IInitialize
         }
     }
 
+    /// <summary>
+    /// 현재 챕터 getter
+    /// </summary>
     private ChapterData currentChapter => dataManager.CurrentChapter;
+
+    /// <summary>
+    /// 현재 스테이지 getter
+    /// </summary>
     private StageData currentStage => dataManager.CurrentStage;
+
+    /// <summary>
+    /// 컨텐츠 데이터 매니저(ChapterData, StageData 참조용)
+    /// </summary>
     private ContentsDataManager dataManager => DataService.Instance.ContentsDataManager;
+    
     /// <summary>
     /// ChapterManager를 초기화 하는 함수
     /// </summary>
