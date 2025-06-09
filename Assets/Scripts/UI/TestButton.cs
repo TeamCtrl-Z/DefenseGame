@@ -10,8 +10,6 @@ public class TestButton : MonoBehaviour
 {
     [SerializeField] private NodeObject nodeObject;
     [SerializeField] private FairyType fairyType;
-    [SerializeField] private uint currentChapterId = 0;
-    [SerializeField] private uint currentStageId = 0;
 
     private int count = 0;
 

@@ -56,7 +56,7 @@ public class EnemyAttackHandler : MonoBehaviour
         Attack = attackSO.CreateAttack(GetComponentInParent<EnemyController>());
         EnemyStatusComponent status = GetComponentInParent<EnemyStatusComponent>();
 
-        if (!EnemyDataManager.Instance.TryGetStatData(status.ID, out statData))
+        if (!DataService.Instance.EnemyDataManager.TryGetStatData(status.ID, out statData))
         {
             Debug.LogError("Not Found");
             return;

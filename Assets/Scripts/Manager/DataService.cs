@@ -28,6 +28,11 @@ public class DataService : Singleton<DataService>
     public ContentsDataManager ContentsDataManager { get; private set; }
 
     /// <summary>
+    /// Boat 데이터 관리자
+    /// </summary>
+    public BoatDataManager BoatDataManager { get; private set; }
+
+    /// <summary>
     /// 서버 데이터를 받아서 관리해야하는 데이터 메니저 리스트
     /// </summary>
     private List<IServerData> serverDataMgrs;
@@ -53,6 +58,9 @@ public class DataService : Singleton<DataService>
             ContentsDataManager = contentsDataMgr;
             ContentsDataManager.Initialize();
         }
+
+        if (this.TryGetComponentInChildren<BoatDataManager>(out BoatDataManager boatDataManager))
+            BoatDataManager = boatDataManager;
 
         serverDataMgrs = GetComponentsInChildren<IServerData>().ToList();
     }

@@ -84,7 +84,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 376a55214d8a32b43af770e4f31bcdab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chapters:
-  - {fileID: 11400000, guid: 8681a7f6a51c46f49ab18a517e94daee, type: 2}
-  - {fileID: 11400000, guid: 4e12eb662c0a0d349a11cb33a4297469, type: 2}
-  - {fileID: 11400000, guid: 198635d3c936aeb438b65a2c5be23e4d, type: 2}
