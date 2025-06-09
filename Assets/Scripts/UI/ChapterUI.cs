@@ -11,12 +11,18 @@ public class ChapterUI : MonoBehaviour
     public TextMeshProUGUI stageText;
     public TextMeshProUGUI chapterText;
     public TextMeshProUGUI killMonsterText;
+    public TextMeshProUGUI clearText;
 
     private void Start()
     {
-        GameManager.Instance.ChapterManager.onStageChange += RefreshStage;
-        GameManager.Instance.ChapterManager.onChapterChange += RefreshChapter;
+        DataService.Instance.ContentsDataManager.onStageChange += RefreshStage;
+        DataService.Instance.ContentsDataManager.onChapterChange += RefreshChapter;
         GameManager.Instance.ChapterManager.onKillCountChange += RefreshKillMonster;
+        GameManager.Instance.ChapterManager.OnStageClear += (data) => StartCoroutine(AppendClearText(data.stageName));
+        GameManager.Instance.ChapterManager.OnChapterClear += (data) => StartCoroutine(AppendClearText(data.chapterName));
+
+        RefreshStage(DataService.Instance.ContentsDataManager.CurrentStage);
+        RefreshChapter(DataService.Instance.ContentsDataManager.CurrentChapter);
     }
 
     private void RefreshStage(StageData currentStage)
@@ -32,5 +38,38 @@ public class ChapterUI : MonoBehaviour
     private void RefreshKillMonster(int killCount, int totalCount)
     {
         killMonsterText.text = $"처치 몬스터 : {killCount} / {totalCount}";
+    }
+
+    private IEnumerator AppendClearText(string name)
+    {
+        clearText.gameObject.SetActive(true);
+        clearText.text = $"{name} Clear";
+
+        // 컬러 알파 0으로 조정
+        Color color = clearText.color;
+        color.a = 0.0f;
+        clearText.color = color;
+
+        // fade in
+        while (clearText.color.a < 0.9f)
+        {
+            color.a += Time.deltaTime * 2f;
+            clearText.color = color;
+            yield return null;
+        }
+
+        color.a = 1f;
+        clearText.color = color;
+        yield return new WaitForSeconds(3.0f);
+
+        // fade out
+        while (clearText.color.a > 0.1f)
+        {
+            color.a -= Time.deltaTime * 2f;
+            clearText.color = color;
+            yield return null;
+        }
+        
+        clearText.gameObject.SetActive(false);
     }
 }

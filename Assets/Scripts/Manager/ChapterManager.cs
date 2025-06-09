@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
@@ -9,30 +10,24 @@ using UnityEngine;
 public class ChapterManager : MonoBehaviour, IInitialize
 {
     /// <summary>
-    /// Chapter가 변경되면 실행되는 이벤트 델리게이트
-    /// </summary>
-    public event Action<ChapterData> onChapterChange;
-
-    /// <summary>
-    /// Stage가 변경되면 실행되는 이벤트 델리게이트
-    /// </summary>
-    public event Action<StageData> onStageChange;
-
-    /// <summary>
     /// Kill Count가 변경되면 실행되는 이벤트 델리게이트
     /// </summary>
     public event Action<int, int> onKillCountChange;
 
     /// <summary>
-    /// Chapter 리스트
-    /// </summary>
-    [Header("챕터 리스트")]
-    [SerializeField] private ChapterData[] chapters;
-
-    /// <summary>
     /// 스폰 메소드 Dictionary
     /// </summary>
     private Dictionary<SpawnType, Action<Vector2, float>> spawnMethod;
+
+    /// <summary>
+    /// 스테이지가 클리어되면 실행되는 이벤트
+    /// </summary>
+    public event Action<StageData> OnStageClear;
+
+    /// <summary>
+    /// 챕터가 클리어되면 실행되는 이벤트
+    /// </summary>
+    public event Action<ChapterData> OnChapterClear;
 
     /// <summary>
     /// 현재 Stage의 킬 카운트
@@ -48,56 +43,17 @@ public class ChapterManager : MonoBehaviour, IInitialize
         set
         {
             killCount = value;
-            onKillCountChange?.Invoke(killCount, CurrentStage.stageSpawnCount);
-            if (killCount == CurrentStage.stageSpawnCount)
+            onKillCountChange?.Invoke(killCount, currentStage.stageSpawnCount);
+            if (killCount == currentStage.stageSpawnCount)
             {
-                ClearStage();
+                StartCoroutine(ClearStage());
             }
         }
     }
 
-    /// <summary>
-    /// 현재 ChapterData
-    /// </summary>
-    private ChapterData currentChapter;
-
-    /// <summary>
-    /// 현재 ChpaterData 프로퍼티
-    /// </summary>
-    public ChapterData CurrentChapter
-    {
-        get => currentChapter;
-        private set
-        {
-            if (value != currentChapter)
-            {
-                currentChapter = value;
-                onChapterChange?.Invoke(currentChapter);
-            }
-        }
-    }
-
-    /// <summary>
-    /// 현재 StageData
-    /// </summary>
-    private StageData currentStage;
-
-    /// <summary>
-    /// 현재 StageData 프로퍼티
-    /// </summary>
-    public StageData CurrentStage
-    {
-        get => currentStage;
-        private set
-        {
-            if (value != currentStage)
-            {
-                currentStage = value;
-                onStageChange?.Invoke(currentStage);
-            }
-        }
-    }
-
+    private ChapterData currentChapter => dataManager.CurrentChapter;
+    private StageData currentStage => dataManager.CurrentStage;
+    private ContentsDataManager dataManager => DataService.Instance.ContentsDataManager;
     /// <summary>
     /// ChapterManager를 초기화 하는 함수
     /// </summary>
@@ -118,30 +74,87 @@ public class ChapterManager : MonoBehaviour, IInitialize
     }
 
     /// <summary>
+    /// 원하는 스테이지를 시작하는 함수
+    /// </summary>
+    public void StartStage(uint chapterId, uint stageId)
+    {
+        dataManager.SetChapter(chapterId);
+        dataManager.SetStage(stageId);
+        KillCount = 0;
+        StartCoroutine(RunStage(dataManager.CurrentStage));
+    }
+
+    /// <summary>
     /// 현재 스테이지를 시작하는 함수
     /// </summary>
-    public void StartStage(int currentChapter, int currentStage)
+    public void StartCurrentStage()
     {
-        CurrentChapter = chapters[currentChapter];
-        CurrentStage = CurrentChapter.stages[currentStage];
         KillCount = 0;
-        StartCoroutine(RunStage(chapters[currentChapter].stages[currentStage]));
+        StartCoroutine(RunStage(dataManager.CurrentStage));
     }
 
     /// <summary>
     /// 스테이지를 클리어하면 실행되는 함수
     /// </summary>
-    public void ClearStage()
+    public IEnumerator ClearStage()
     {
-        KillCount = 0;
+        if (!currentStage.isClear)
+        {
+            Debug.Log("StageClear요청 준비");
+
+            DataService.Instance.UserDataManager.AddCurrency_Gold(currentStage.reward_Gold);
+            DataService.Instance.UserDataManager.AddCurrency_Gem(currentStage.reward_Gem);
+
+            yield return new WaitForSeconds(0.5f);
+
+            void fail()
+            {
+                Debug.LogWarning("스테이지 보상 받기 실패");
+            }
+
+            void success()
+            {
+                Debug.Log("스테이지 보상 받기 성공");
+                currentStage.isClear = true;
+                OnStageClear?.Invoke(currentStage);
+                DataService.Instance.ContentsDataManager.NextStage();
+            }
+
+            yield return ServerData_Contents.Instance.RequestStageClear(success, fail);
+
+            if (currentChapter.stages[currentChapter.stages.Length - 1] == currentStage)
+            {
+                yield return ClearChapter();
+            }
+        }
     }
 
     /// <summary>
     /// 챕터를 클리어하면 실행되는 함수
     /// </summary>
-    public void ClearChapter()
+    public IEnumerator ClearChapter()
     {
-        
+        if (!currentChapter.isClear)
+        {
+            DataService.Instance.UserDataManager.AddCurrency_Gold(currentChapter.reward_Gold);
+            DataService.Instance.UserDataManager.AddCurrency_Gem(currentChapter.reward_Gem);            
+
+            void fail()
+            {
+                Debug.LogWarning("챕터 보상 받기 실패");
+            }
+
+            void success()
+            {
+                Debug.Log("챕터 보상 받기 성공");
+                currentChapter.isClear = true;
+                OnChapterClear?.Invoke(currentChapter);
+                DataService.Instance.ContentsDataManager.NextStage();
+            }
+
+            yield return ServerData_Contents.Instance.RequestChapterClear(success, fail);
+        }
+
     }
 
     /// <summary>

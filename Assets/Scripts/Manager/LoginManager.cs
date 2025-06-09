@@ -15,37 +15,37 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class LoginManager : MonoBehaviour
 {
-    [Header("— UI Panels —")]
-    public GameObject loginPanel;
-    public GameObject mainPanel;
+    /// <summary>
+    /// 진행 상태 변경 이벤트
+    /// </summary>
+    public event Action<string> OnStatusChange;
 
-    [Header("— LoginPanel Components —")]
-    public Button guestLoginButton;
-    public TextMeshProUGUI statusText;
+    /// <summary>
+    /// 회원가입 시작 이벤트
+    /// </summary>
+    public event Action OnRegister;
 
-    [Header("— MainPanel Components —")]
-    public TextMeshProUGUI welcomeText;
-    public Button deleteAccountButton;
+    /// <summary>
+    /// 로딩 시작 이벤트
+    /// </summary>
+    public event Action OnLoading;
 
+    /// <summary>
+    /// Firebase 경로
+    /// </summary>
     private FirebaseAuth auth;
-    private string registerUrl = "/user/register";
-    private string loginUrl = "/user/login";
-    private string deleteUrl = "/user/delete";  // 계정 삭제용 엔드포인트
 
+    /// <summary>
+    /// 계정 정보 파일 경로
+    /// </summary>
     private string accountFilePath;
 
     private void Awake()
     {
         auth = FirebaseAuth.DefaultInstance;
-        accountFilePath = Path.Combine(Application.persistentDataPath, "guest_account.json");
+        accountFilePath = Path.Combine(Application.persistentDataPath, "UserData.json");
 
-        guestLoginButton.onClick.AddListener(OnGuestLoginButtonClicked);
-        deleteAccountButton.onClick.AddListener(OnDeleteAccountButtonClicked);
-
-        loginPanel.SetActive(false);
-        mainPanel.SetActive(false);
-        statusText.text = "";
-        welcomeText.text = "";
+        OnStatusChange?.Invoke("");
     }
 
     private void Start()
@@ -54,13 +54,15 @@ public class LoginManager : MonoBehaviour
         if (File.Exists(accountFilePath))
         {
             bool loaded = LoadAccountFromJson();
+            Debug.Log("자동로그인 가능");
             if (loaded)
             {
+                Debug.Log("Json파일 불러옴");
                 // 2) Firebase 세션이 살아 있는지 확인
                 if (auth.CurrentUser != null)
                 {
                     // 세션이 살아 있다면, 항상 최신 ID 토큰으로 /user/login 호출해서 프로필 갱신
-                    StartCoroutine(LoginWithFirebaseSession());
+                    StartCoroutine(LoginProcess());
                     return;
                 }
                 else
@@ -74,31 +76,23 @@ public class LoginManager : MonoBehaviour
                 File.Delete(accountFilePath);
             }
         }
-        ShowLoginUI();
-    }
-
-    private void ShowLoginUI()
-    {
-        loginPanel.SetActive(true);
-        mainPanel.SetActive(false);
-        statusText.text = "게스트로 로그인하려면 버튼을 누르세요.";
-    }
-
-    private void ShowMainUI(string message)
-    {
-        loginPanel.SetActive(false);
-        mainPanel.SetActive(true);
-        welcomeText.text = message;
+        OnRegister?.Invoke();
     }
 
     #region ■ 게스트 로그인 → Firebase 익명 인증 → 서버 회원가입
 
-    private void OnGuestLoginButtonClicked()
+    /// <summary>
+    /// Guest 버튼을 누르면 실행되는 함수
+    /// </summary>
+    public void OnGuestLoginButtonClicked()
     {
-        statusText.text = "Firebase 익명 로그인 중…";
+        OnStatusChange?.Invoke("Firebase 익명 로그인 중…");
         StartCoroutine(SignInAnonymouslyAndRegister());
     }
 
+    /// <summary>
+    /// 회원가입 하기 전에 Firebase 익명 로그인 및 ID 토큰 요청을 처리하는 함수
+    /// </summary>
     private IEnumerator SignInAnonymouslyAndRegister()
     {
         // 1) Firebase 익명 로그인
@@ -107,7 +101,7 @@ public class LoginManager : MonoBehaviour
 
         if (authTask.Exception != null || authTask.Result == null)
         {
-            statusText.text = "익명 로그인 실패. Firebase 콘솔에서 확인하세요.";
+            OnStatusChange?.Invoke("익명 로그인 실패. Firebase 콘솔에서 확인하세요.");
             yield break;
         }
 
@@ -119,137 +113,65 @@ public class LoginManager : MonoBehaviour
 
         if (tokenTask.Exception != null)
         {
-            statusText.text = "토큰 요청 실패. 다시 시도하세요.";
+            OnStatusChange?.Invoke("토큰 요청 실패. 다시 시도하세요.");
             yield break;
         }
 
         string idToken = tokenTask.Result;
 
         // 3) 서버에 회원가입 요청
-        yield return StartCoroutine(RegisterWithServer(idToken, firebaseUser.UserId));
+        StartCoroutine(RegisterWithServer(idToken, firebaseUser.UserId));
     }
 
+    /// <summary>
+    /// 서버에 회원가입 요청을 보내는 코루틴 함수
+    /// </summary>
+    /// <param name="idToken">아이디 토큰</param>
+    /// <param name="firebaseUid">UID</param>
     private IEnumerator RegisterWithServer(string idToken, string firebaseUid)
     {
-        statusText.text = "서버 회원가입 중…";
+        OnStatusChange?.Invoke("서버 회원가입 중…");
 
-        string deviceId = SystemInfo.deviceUniqueIdentifier;
-        var registerRequestData = new
+        void fail()
         {
-            provider = "guest",
-            deviceId = deviceId
-        };
-        Network network = new Network(registerUrl, "POST");
-        network.SetRequestData(registerRequestData);
-
-        yield return network.SendRequest();
-
-        if (!string.IsNullOrEmpty(network.Error))
-        {
-            Debug.LogError($"[LoginManager] 게스트 등록 실패: {network.Error}");
-            Debug.LogError($"서버 응답(문제가 있는 경우): {network.ResponseText}");
-            statusText.text = "회원가입 실패. 요청 형식을 확인하세요.";
-            yield break;
-        }
-        // 회원가입 성공 → 서버 응답 JSON 파싱
-        string responseJson = network.ResponseText;
-
-        Debug.Log($"[LoginManager] Register Response: {responseJson}");
-        try
-        {
-            currentAccount = JsonConvert.DeserializeObject<UserAccount>(responseJson);
-        }
-        catch (Exception e)
-        {
-            Debug.LogError($"[LoginManager] JSON 파싱 오류(가입): {e}");
-            statusText.text = "서버 응답 파싱 오류.";
-            yield break;
+            OnStatusChange?.Invoke("회원가입 실패. 요청 형식을 확인하세요.");
         }
 
-        if (currentAccount.firebaseUid != firebaseUid)
-            Debug.LogWarning("[LoginManager] 서버 응답 UID와 Firebase 익명 UID가 다릅니다.");
-
-        // 로컬 JSON(guest_account.json) 에는 “변하지 않는 정보”만 저장
-        SaveAccountToJson();
-
-        yield return StartCoroutine(LoginAfterRegister());
-    }
-
-    private IEnumerator LoginAfterRegister()
-    {
-        statusText.text = "가입 완료, 로그인 중…";
-
-        var loginRequestData = new {};
-        Network network = new Network(loginUrl, "POST");
-        network.SetRequestData(loginRequestData);
-        yield return network.SendRequest();
-
-        if (!string.IsNullOrEmpty(network.Error))
+        void success()
         {
-            Debug.LogError($"[LoginManager] 가입 후 로그인 실패: {network.Error}");
-            Debug.LogError($"서버 응답 바디: {network.ResponseText}");
-            statusText.text = "가입 후 로그인 실패.";
-            yield break;
+            SaveAccountToJson();
+
+            StartCoroutine(LoginProcess());
         }
 
-        string responseJson = network.ResponseText;
-        Debug.Log($"[LoginManager] LoginAfterRegister Response: {responseJson}");
-        try
-        {
-            currentAccount = JsonConvert.DeserializeObject<UserAccount>(responseJson);
-        }
-        catch (Exception e)
-        {
-            Debug.LogError($"[LoginManager] JSON 파싱 오류(가입 후 로그인): {e}");
-            statusText.text = "서버 응답 파싱 오류.";
-            yield break;
-        }
-
-        SaveAccountToJson();
-
-        string shortUid = currentAccount.firebaseUid.Length >= 8
-                ? currentAccount.firebaseUid.Substring(0, 8)
-                : currentAccount.firebaseUid;
-        ShowMainUI($"환영합니다, 게스트님!\n(UID: {shortUid})");
+        yield return ServerData_Users.Instance.RequestRegister(success, fail);
     }
     #endregion
 
 
-    #region ■ 자동 로그인 (/user/login)
+    #region ■ 로그인 (/user/login)
 
-    private IEnumerator LoginWithFirebaseSession()
+    /// <summary>
+    /// 로그인을 시도하는 코루틴 함수
+    /// </summary>
+    private IEnumerator LoginProcess()
     {
-        statusText.text = "자동 로그인 중…";
-        Network network = new Network(loginUrl, "POST");
-        network.SetRequestData(new { });
-        yield return network.SendRequest();
-
-        if (!string.IsNullOrEmpty(network.Error))
+        OnStatusChange?.Invoke("로그인 중…");
+        void successCB()
         {
-            Debug.LogWarning(network.Error);
-            yield break;
+            SaveAccountToJson();
+            string shortUid = DataService.Instance.UserDataManager.User.firebaseUID.Length >= 8
+                        ? DataService.Instance.UserDataManager.User.firebaseUID.Substring(0, 8)
+                        : DataService.Instance.UserDataManager.User.firebaseUID;
+            OnLoading?.Invoke();
         }
 
-        string responseJson = network.ResponseText;
-        Debug.Log($"[LoginManager] Login Response: {responseJson}");
-        try
+        void failCB()
         {
-            currentAccount = JsonConvert.DeserializeObject<UserAccount>(responseJson);
-        }
-        catch (Exception e)
-        {
-            Debug.LogError($"[LoginManager] JSON 파싱 오류(로그인): {e}");
-            ShowLoginUI();
-            yield break;
+            OnRegister?.Invoke();
         }
 
-        // 로컬 JSON에 “변하지 않는” 정보만 덮어써서 저장
-        SaveAccountToJson();
-
-        string shortUid = currentAccount.firebaseUid.Length >= 8
-            ? currentAccount.firebaseUid.Substring(0, 8)
-            : currentAccount.firebaseUid;
-        ShowMainUI($"자동 로그인 성공!\nUID: {shortUid}");
+        yield return ServerData_Users.Instance.RequestLogin(successCB, failCB);
     }
 
     #endregion
@@ -257,21 +179,13 @@ public class LoginManager : MonoBehaviour
 
     #region ■ 계정 삭제
 
-    private void OnDeleteAccountButtonClicked()
-    {
-        if (UserDataManager.Instance.User == null)
-        {
-            statusText.text = "삭제할 계정이 없습니다.";
-            return;
-        }
-
-        // 1) 서버에 삭제 요청을 먼저 보낸다.
-        StartCoroutine(DeleteAccountFromServer());
-    }
-
+    /// <summary>
+    /// 계정을 삭제하는 코루틴 함수
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator DeleteAccountFromServer()
     {
-        statusText.text = "계정 삭제 중…";
+        OnStatusChange?.Invoke("계정 삭제 중…");
 
         // FirebaseUser가 살아 있다면, 최신 ID 토큰을 다시 받아온다.
         var firebaseUser = auth.CurrentUser;
@@ -281,27 +195,23 @@ public class LoginManager : MonoBehaviour
             PerformLocalDeletion();
             yield break;
         }
-
-        var deleteRequestData = new {};
-        Network network = new Network(deleteUrl, "POST");
-        network.SetRequestData(deleteRequestData);
-        yield return network.SendRequest();
-        if (!string.IsNullOrEmpty(network.ResponseText))
+        void fail()
         {
-            Debug.LogError($"[LoginManager] 가입 후 로그인 실패: {network.Error}");
-            Debug.LogError($"서버 응답 바디: {network.ResponseText}");
-            statusText.text = "가입 후 로그인 실패.";
-            yield break;
+            OnStatusChange?.Invoke("계정 삭제 실패.");
         }
 
+        void success()
+        {
+            // 삭제가 성공적으로 완료된 경우
+            Debug.Log("[LoginManager] 서버 계정 삭제 성공");
+            PerformLocalDeletion();
+        }
 
-        // 삭제가 성공적으로 완료된 경우
-        Debug.Log("[LoginManager] 서버 계정 삭제 성공");
-        PerformLocalDeletion();
+        ServerData_Users.Instance.RequestDelete(success, fail);
     }
 
     /// <summary>
-    /// 서버 삭제가 완료된 후 로컬 데이터까지 깨끗하게 지웁니다.
+    /// 로컬 데이터에 있는 계정을 삭제하는 함수
     /// </summary>
     private void PerformLocalDeletion()
     {
@@ -314,21 +224,25 @@ public class LoginManager : MonoBehaviour
         // (선택 사항) 
         // auth.CurrentUser?.DeleteAsync();
 
-        ShowLoginUI();
-        statusText.text = "계정이 삭제되었습니다.";
+        OnLoading?.Invoke();
+        OnStatusChange?.Invoke("계정이 삭제되었습니다.");
     }
     #endregion
 
 
     #region ■ JSON 읽기/쓰기 헬퍼
 
+    /// <summary>
+    /// json 파일에서 계정 정보를 읽어오는 함수
+    /// </summary>
+    /// <returns></returns>
     private bool LoadAccountFromJson()
     {
         try
         {
             string json = File.ReadAllText(accountFilePath, Encoding.UTF8);
-            UserDataManager.Instance.LoadFromJson(json);
-            return (UserDataManager.Instance.User != null && !string.IsNullOrEmpty(UserDataManager.Instance.User.firebaseUID));
+            DataService.Instance.UserDataManager.LoadFromJson(json);
+            return (DataService.Instance.UserDataManager.User != null && !string.IsNullOrEmpty(DataService.Instance.UserDataManager.User.firebaseUID));
         }
         catch
         {
@@ -336,14 +250,18 @@ public class LoginManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 불러온 계정 정보를 json 파일에 저장하는 함수
+    /// </summary>
+    /// <returns></returns>
     private bool SaveAccountToJson()
     {
-        if (UserDataManager.Instance.User == null)
+        if (DataService.Instance.UserDataManager.User == null)
             return false;
 
         try
         {
-            string json = JsonConvert.SerializeObject(UserDataManager.Instance.User, Formatting.Indented);
+            string json = JsonConvert.SerializeObject(DataService.Instance.UserDataManager.User, Formatting.Indented);
             File.WriteAllText(accountFilePath, json, Encoding.UTF8);
             return true;
         }
@@ -366,6 +284,7 @@ public class UserData
     public string provider;
     public string playerID;
     public string lastLoginAt;
-    public string deviceId;
-    // 필요에 따라 이메일, displayName 같은 필드를 추가해도 됩니다.
+    public ulong gold;
+    public ulong gem;
+    public uint diamond;
 }

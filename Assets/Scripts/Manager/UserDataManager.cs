@@ -1,11 +1,12 @@
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using UnityEngine;
 
 /// <summary>
 /// 유저 데이터 관리 클래스
 /// </summary>
-public class UserDataManager : Singleton<UserDataManager>
+public class UserDataManager : MonoBehaviour, IServerData
 {
     /// <summary>
     /// 유저 데이터
@@ -28,93 +29,47 @@ public class UserDataManager : Singleton<UserDataManager>
     public event Action<uint> OnCurrencyDiamondChanged;
 
     /// <summary>
-    /// 플레이어가 가지고 있는 Gold
-    /// </summary>
-    private ulong currency_Gold;
-
-    /// <summary>
     /// 플레이어가 가지고 있는 Gold의 프로퍼티(get은 public, set은 private)
     /// </summary>
     public ulong Currency_Gold
     {
-        get => currency_Gold;
+        get => User.gold;
         private set
         {
-            currency_Gold = value;
-            OnCurrencyGoldChanged?.Invoke(currency_Gold);
+            User.gold = value;
+            OnCurrencyGoldChanged?.Invoke(User.gold);
         }
     }
-
-    /// <summary>
-    /// 플레이어가 가지고 있는 Gem
-    /// </summary>
-    private ulong currency_Gem;
 
     /// <summary>
     /// 플레이어가 가지고 있는 Gem의 프로퍼티(get은 public, set은 private)
     /// </summary>
     public ulong Currency_Gem
     {
-        get => currency_Gem;
+        get => User.gem;
         private set
         {
-            currency_Gem = value;
-            OnCurrencyGemChanged?.Invoke(currency_Gem);
+            User.gem = value;
+            OnCurrencyGemChanged?.Invoke(User.gem);
         }
     }
-
-    /// <summary>
-    /// 플레이어가 가지고 있는 Diamond
-    /// </summary>
-    private uint currency_Diamond;
 
     /// <summary>
     /// 플레이어가 가지고 있는 Diamond의 프로퍼티(get은 public, set은 private)
     /// </summary>
     public uint Currency_Diamond
     {
-        get => currency_Diamond;
+        get => User.diamond;
         private set
         {
-            currency_Diamond = value;
-            OnCurrencyDiamondChanged?.Invoke(currency_Diamond);
+            User.diamond = value;
+            OnCurrencyDiamondChanged?.Invoke(User.diamond);
         }
     }
 
     private void OnDisable()
     {
-        SaveToDB(); 
-    }
-
-    /// <summary>
-    /// 재화 초기화 작업(싱글톤이 만들어질 때 단 한번만 호출)
-    /// </summary>
-    protected override void OnPreInitialize()
-    {
-        base.OnPreInitialize();
-        InitializeData();
-    }
-
-    /// <summary>
-    /// 재화 초기화 작업(씬이 로드 될때마다 호출, Addive제외)
-    /// </summary>
-    protected override void OnInitialize()
-    {
-        base.OnInitialize();
-
-        // 씬 전환 시 반복해서 실행할 초기화 로직이 있으면 여기에 작성
-    }
-
-    /// <summary>
-    /// 재화 초기값 세팅 (추후 DB 연동 시 이 부분을 확장하거나 교체)
-    /// </summary>
-    private void InitializeData()
-    {
-        Currency_Gold = 0;
-        Currency_Gem = 0;
-        Currency_Diamond = 0;
-
-        LoadFromDB();
+        SaveToDB();
     }
 
     /// <summary>
@@ -195,26 +150,31 @@ public class UserDataManager : Singleton<UserDataManager>
         return true;
     }
 
-    
-    public void LoadUserData(string jsonData)
+    /// <summary>
+    /// 서베에서 내려온 값을 적용
+    /// </summary>
+    /// <param name="res"></param>
+    public void ApplyServerData(JObject res)
     {
-        User = JsonConvert.DeserializeObject<UserData>(jsonData);
-        Currency_Gold = User.gold;
-        Currency_Gem = User.gem;
-        Currency_Diamond = User.diamond;
+        if (res["user"] == null)
+            return;
+
+        // 처음 서버에서 데이터를 내려받았을 때
+        if (User == null)
+        {
+            User = res["user"].ToObject<UserData>();
+        }
+        else
+        {
+            JsonConvert.PopulateObject(res["user"].ToString(), User);
+        }
+
+        Debug.Log("유저 데이터 받음");
     }
 
     public void LoadFromJson(string json)
     {
         User = JsonUtility.FromJson<UserData>(json);
-    }
-
-    /// <summary>
-    /// DB에서 재화 정보를 불러오는 함수
-    /// </summary>
-    private void LoadFromDB()
-    {
-        // DB에서 불러온 값을 Currency에 할당
     }
 
     /// <summary>

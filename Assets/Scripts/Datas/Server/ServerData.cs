@@ -1,27 +1,23 @@
 using Firebase.Auth;
+using Newtonsoft.Json.Linq;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.IO;
 using UnityEngine;
 
+/// <summary>
+/// 서버에 요청하여 받은 데이터를 처리하는 클래스
+/// </summary>
 public class ServerData : Singleton<ServerData>
 {
-    private const string baseUrl = "https://121.130.77.123:5001/api";
-
-    protected FirebaseAuth auth;
-    protected string accountFilePath;
-    protected override void OnPreInitialize()
+    /// <summary>
+    /// 서버데이터로 부터 받은 데이터에 공통적인 것을 처리하는 함수
+    /// </summary>
+    /// <param name="res"></param>
+    protected virtual void ApplyCommonResponse(JObject res)
     {
-        base.OnPreInitialize();
-        auth = FirebaseAuth.DefaultInstance;
-        accountFilePath = accountFilePath = Path.Combine(Application.persistentDataPath, "user_data.json");
+        DataService.Instance.ApplyCommonResponse(res);
     }
-
-    protected virtual void ApplyCommonResponse(string data)
-    {
-    }
-
-    
-    // ApplyCommonResponse : 공통적인 Data를 클라에 저장하는 작업
 
 }

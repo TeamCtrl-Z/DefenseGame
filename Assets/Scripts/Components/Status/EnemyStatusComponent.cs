@@ -56,7 +56,7 @@ public class EnemyStatusComponent : MonoBehaviour, IMoveStatus, IHealthStatus, I
 
     private void Start()
     {
-        if (!EnemyDataManager.Instance.TryGetStatData(ID, out statData))
+        if (!DataService.Instance.EnemyDataManager.TryGetStatData(ID, out statData))
         {
             Debug.LogError("Not Found");
             return;

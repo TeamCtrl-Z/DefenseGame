@@ -1,39 +1,100 @@
 using Firebase.Auth;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ServerData_Users : ServerData
+/// <summary>
+/// 유저 정보를 요청하는 서버 데이터 클래스
+/// </summary>
+public class ServerData_Users : Singleton<ServerData_Users>
 {
-
-
-    private IEnumerator SignInAnonymouslyAndRegister()
+    /// <summary>
+    /// 회원가입을 요청하는 코루틴 함수
+    /// </summary>
+    /// <param name="success">성공 시 실행되는 이벤트</param>
+    /// <param name="fail">실패 시 실행되는 이벤트</param>
+    /// <returns></returns>
+    public IEnumerator RequestRegister(Action success, Action fail)
     {
-        // 1) Firebase 익명 로그인
-        var authTask = auth.SignInAnonymouslyAsync();
-        yield return new WaitUntil(() => authTask.IsCompleted);
+        string deviceId = SystemInfo.deviceUniqueIdentifier;
 
-        if (authTask.Exception != null || authTask.Result == null)
+        var registerRequestData = new
         {
+            provider = "guest",
+            deviceId = deviceId
+        };
+
+        string registerUrl = "/user/register";
+        Network network = new Network(registerUrl, "POST");
+        network.SetRequestData(registerRequestData);
+
+        yield return network.SendRequest();
+
+        if (!string.IsNullOrEmpty(network.Error))
+        {
+            Debug.LogError($"[LoginManager] 게스트 등록 실패: {network.Error}");
+            Debug.LogError($"서버 응답(문제가 있는 경우): {network.ResponseText}");
+            fail?.Invoke();
             yield break;
         }
 
-        FirebaseUser firebaseUser = authTask.Result.User;
-
-        // 2) 항상 “최신” ID 토큰을 요청
-        var tokenTask = firebaseUser.TokenAsync(forceRefresh: true);
-        yield return new WaitUntil(() => tokenTask.IsCompleted);
-
-        if (tokenTask.Exception != null)
-        {
-            yield break;
-        }
-
-        string idToken = tokenTask.Result;
-
-        // 3) 서버에 회원가입 요청
-        //yield return StartCoroutine(RegisterWithServer(idToken, firebaseUser.UserId));
+        // 회원가입 성공 → 서버 응답 JSON 파싱
+        string responseJson = network.ResponseText;
+        JObject res = JObject.Parse(responseJson);
+        DataService.Instance.ApplyCommonResponse(res);
+        success?.Invoke();
     }
 
+    /// <summary>
+    /// 서버에 로그인 요청을 보내는 코루틴 함수
+    /// </summary>
+    /// <param name="success">성공 시 실행되는 이벤트</param>
+    /// <param name="fail">실패 시 실행되는 이벤트</param>
+    /// <returns></returns>
+    public IEnumerator RequestLogin(Action success, Action fail)
+    {
+        string loginUrl = "/user/login";
+        Network network = new Network(loginUrl, "POST");
+        network.SetRequestData();
+        yield return network.SendRequest();
 
+        if (!string.IsNullOrEmpty(network.Error))
+        {
+            Debug.LogWarning(network.Error);
+            fail?.Invoke();
+            yield break;
+        }
+
+        string responseJson = network.ResponseText;
+        JObject res = JObject.Parse(responseJson);
+        DataService.Instance.ApplyCommonResponse(res);
+        success?.Invoke();
+    }
+
+    /// <summary>
+    /// 서버에 계정 삭제 요청을 보내는 코루틴 함수
+    /// </summary>
+    /// <param name="success">성공 시 실행되는 이벤트</param>
+    /// <param name="fail">실패 시 실행되는 이벤트</param>
+    /// <returns></returns>
+    public IEnumerator RequestDelete(Action success, Action fail)
+    {
+        string deleteUrl = "/user/delete";
+
+        var deleteRequestData = new { };
+        Network network = new Network(deleteUrl, "POST");
+        network.SetRequestData(deleteRequestData);
+        yield return network.SendRequest();
+        if (!string.IsNullOrEmpty(network.ResponseText))
+        {
+            Debug.LogError($"[LoginManager] 삭제 실패 : {network.Error}");
+            Debug.LogError($"서버 응답 바디: {network.ResponseText}");
+            fail?.Invoke();
+            yield break;
+        }
+
+        success?.Invoke();
+    }
 }

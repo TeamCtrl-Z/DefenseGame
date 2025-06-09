@@ -10,8 +10,8 @@ public class TestButton : MonoBehaviour
 {
     [SerializeField] private NodeObject nodeObject;
     [SerializeField] private FairyType fairyType;
-    [SerializeField] private int currentChapterIndex = 0;
-    [SerializeField] private int currentStageIndex = 0;
+    [SerializeField] private uint currentChapterId = 0;
+    [SerializeField] private uint currentStageId = 0;
 
     private int count = 0;
 
@@ -41,6 +41,7 @@ public class TestButton : MonoBehaviour
 
     public void OnStartClick()
     {
-        GameManager.Instance.ChapterManager.StartStage(currentChapterIndex, currentStageIndex);
+        //GameManager.Instance.ChapterManager.StartStage(currentChapterId, currentStageId);
+        GameManager.Instance.ChapterManager.StartCurrentStage();
     }
 }

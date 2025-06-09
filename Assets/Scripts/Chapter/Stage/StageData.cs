@@ -7,9 +7,34 @@ using UnityEngine;
 public class StageData : ScriptableObject
 {
     /// <summary>
+    /// 스테이지 고유 아이디
+    /// </summary>
+    public uint StageID;
+
+    /// <summary>
+    /// 소속 챕터 ID
+    /// </summary>
+    public uint ParentChapterID;
+    
+    /// <summary>
     /// 스테이지 이름
     /// </summary>
     public string stageName;
+
+    /// <summary>
+    /// 스테이지 클리어 여부
+    /// </summary>
+    public bool isClear = false;
+
+    /// <summary>
+    /// 스테이지 클리어 보상(Gold)
+    /// </summary>
+    public ulong reward_Gold;
+
+    /// <summary>
+    /// 스테이지 클리어 보상(Gem)
+    /// </summary>
+    public ulong reward_Gem;
 
     /// <summary>
     /// 전체 몬스터 수

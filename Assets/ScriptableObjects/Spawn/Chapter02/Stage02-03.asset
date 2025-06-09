@@ -12,7 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7a27bdef829d254a87fc7cabff708ad, type: 3}
   m_Name: Stage02-03
   m_EditorClassIdentifier: 
+  StageID: 203
+  ParentChapterID: 2
   stageName: Stage02-03
+  isClear: 0
+  reward_Gold: 3300
+  reward_Gem: 1650
   stageSpawnCount: 21
   spawnInfos:
   - spawnType: 1

@@ -17,7 +17,7 @@ public class CurrencyDrop : RecycleObject
     /// <summary>
     /// 드랍되는 재화 양
     /// </summary>
-    private uint amount = 1;
+    private ulong amount = 1;
 
     /// <summary>
     /// 오브젝트가 사라지기까지 시간
@@ -71,7 +71,7 @@ public class CurrencyDrop : RecycleObject
     /// <summary>
     /// 외부(몬스터)에서 드랍 타입과 양을 세팅해 주는 메서드
     /// </summary>
-    public void SetDropInfo(uint dropAmount)
+    public void SetDropInfo(ulong dropAmount)
     {
         amount = dropAmount;
     }
@@ -100,7 +100,7 @@ public class CurrencyDrop : RecycleObject
             yield return null;
         }
 
-        ApplyCurrencyToPlayer();
+        //ApplyCurrencyToPlayer();
         ReturnToPool();
     }
 
@@ -112,13 +112,13 @@ public class CurrencyDrop : RecycleObject
         switch (currencyType)
         {
             case CurrencyType.Gold:
-                UserDataManager.Instance.AddCurrency_Gold(amount);
+                DataService.Instance.UserDataManager.AddCurrency_Gold(amount);
                 break;
             case CurrencyType.Gem:
-                UserDataManager.Instance.AddCurrency_Gem(amount);
+                DataService.Instance.UserDataManager.AddCurrency_Gem(amount);
                 break;
             case CurrencyType.Diamond:
-                UserDataManager.Instance.AddCurrency_Diamond(amount);
+                DataService.Instance.UserDataManager.AddCurrency_Diamond((uint)amount);
                 break;
         }
     }
