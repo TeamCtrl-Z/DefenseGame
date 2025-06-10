@@ -78,8 +78,6 @@ public class FairyStatusComponent : MonoBehaviour, IBattleStatus, ICharacterIden
         attackPower = statData.AttackPower;
         attackSpeed = statData.AttackSpeed;
         AttackType = statData.AttackType;
-
-        Debug.Log(statData.AttackType);
     }
 
     /// <summary>
