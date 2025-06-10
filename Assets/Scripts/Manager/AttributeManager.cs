@@ -13,7 +13,14 @@ public class AttributeManager : MonoBehaviour
     /// </summary>
     [SerializeField] private AttributeBase attribute;
 
+    /// <summary>
+    /// FID 저장 변수
+    /// </summary>
     private ICharacterIdentity id;
+
+    /// <summary>
+    /// 페어리 속성 데이터
+    /// </summary>
     private FairyAttributeData attributeData;
     private void Awake()
     {

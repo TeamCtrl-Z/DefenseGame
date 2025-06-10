@@ -10,10 +10,25 @@ public class FreezeAttribute : AttributeBase, IOnHitEffect
     /// 얼음 속성 피격 데이터 배열 
     /// </summary>
     public HittingData[] data;
+
+    /// <summary>
+    /// 표식 갯수마다 슬로우 하는 비율
+    /// </summary>
     public readonly float[] SlowRatio = { 0.1f, 0.3f };
+
+    /// <summary>
+    /// 최대 표식 갯수
+    /// </summary>
     public const int MaxDebuffCount = 3;
+
+    /// <summary>
+    /// 최대 슬로우 비율
+    /// </summary>
     private const float MaxSlowRatio = 0.5f;
 
+    /// <summary>
+    /// 초기화 함수
+    /// </summary>   
     public override void Initialize(GameObject user)
     {
         base.Initialize(user);

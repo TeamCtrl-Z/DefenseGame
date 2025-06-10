@@ -23,6 +23,9 @@ public class ElectronicAttribute : AttributeBase, IOnHitEffect
     /// </summary>
     public HittingData[] data;
 
+    /// <summary>
+    /// 적 마다 데미지 비율(가까운 순으로)
+    /// </summary>
     public readonly float[] DamageRatio = new float[2] { 0.7f, 0.3f };
 
     /// <summary>

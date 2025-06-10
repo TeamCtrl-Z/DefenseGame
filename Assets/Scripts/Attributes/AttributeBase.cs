@@ -9,7 +9,15 @@ public abstract class AttributeBase
     /// csv파일 데이터와 연동 용 변수(참조 용도 사용X)
     /// </summary>
     [SerializeField] protected float value1;
+
+    /// <summary>
+    /// csv파일 데이터와 연동 용 변수(참조 용도 사용X)
+    /// </summary>
     [SerializeField] protected float value2;
+
+    /// <summary>
+    /// csv파일 데이터와 연동 용 변수(참조 용도 사용X)
+    /// </summary>
     [SerializeField] protected float value3;
 
     /// <summary>

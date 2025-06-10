@@ -16,6 +16,10 @@ public class FrozenAttribute : AttributeBase, IOnIntervalEffect
     /// </summary>
     public float Interval { get; set; }
 
+    /// <summary>
+    /// 초기화
+    /// </summary>
+    /// <param name="user"> 속성 유저 </param>
     public override void Initialize(GameObject user)
     {
         base.Initialize(user);

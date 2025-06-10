@@ -83,6 +83,11 @@ public class FairyDataManager : MonoBehaviour, IServerData
     }
 
     #endregion
+
+    /// <summary>
+    /// 서버 데이터 적용
+    /// </summary>
+    /// <param name="res"></param>
     public void ApplyServerData(JObject res)
     {
         if (res["fairy"] == null)

@@ -11,6 +11,10 @@ public class PoisonAttribute : AttributeBase, IOnHitEffect
     /// </summary>
     public HittingData data;
 
+    /// <summary>
+    /// 초기화 함수
+    /// </summary>
+    /// <param name="user"> 속성 사용자 </param>
     public override void Initialize(GameObject user)
     {
         base.Initialize(user);

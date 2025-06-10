@@ -397,36 +397,78 @@ public class Factory : Singleton<Factory>
         }
     }
 
+    /// <summary>
+    /// 페어리 소환 함수
+    /// </summary>
+    /// <param name="position">소환 위치</param>
+    /// <param name="angle">소환 각</param>
+    /// <returns></returns>
     public FairyController GetFairyBasic(Vector2 position, float angle = 0.0f)
     {
         return fairyBasic.GetObject(position, new Vector3(0, 0, angle));
     }
 
+    /// <summary>
+    /// 페어리 소환 함수
+    /// </summary>
+    /// <param name="position">소환 위치</param>
+    /// <param name="angle">소환 각</param>
+    /// <returns></returns>
     public FairyController GetFariyFire(Vector2 position, float angle = 0.0f)
     {
         return fairyFire.GetObject(position, new Vector3(0, 0, angle));
     }
 
+    /// <summary>
+    /// 페어리 소환 함수
+    /// </summary>
+    /// <param name="position">소환 위치</param>
+    /// <param name="angle">소환 각</param>
+    /// <returns></returns>
     public FairyController GetFariyPoison(Vector2 position, float angle = 0.0f)
     {
         return fairyPoison.GetObject(position, new Vector3(0, 0, angle));
     }
 
+    /// <summary>
+    /// 페어리 소환 함수
+    /// </summary>
+    /// <param name="position">소환 위치</param>
+    /// <param name="angle">소환 각</param>
+    /// <returns></returns> 
     public FairyController GetFariyLight(Vector2 position, float angle = 0.0f)
     {
         return fairyLight.GetObject(position, new Vector3(0, 0, angle));
     }
 
+    /// <summary>
+    /// 페어리 소환 함수
+    /// </summary>
+    /// <param name="position">소환 위치</param>
+    /// <param name="angle">소환 각</param>
+    /// <returns></returns>
     public FairyController GetFariyFreeze(Vector2 position, float angle = 0.0f)
     {
         return fairyFreeze.GetObject(position, new Vector3(0, 0, angle));
     }
 
+    /// <summary>
+    /// 페어리 소환 함수
+    /// </summary>
+    /// <param name="position">소환 위치</param>
+    /// <param name="angle">소환 각</param>
+    /// <returns></returns>
     public FairyController GetFariyFrozen(Vector2 position, float angle = 0.0f)
     {
         return fairyFrozen.GetObject(position, new Vector3(0, 0, angle));
     }
 
+    /// <summary>
+    /// 페어리 소환 함수
+    /// </summary>
+    /// <param name="position">소환 위치</param>
+    /// <param name="angle">소환 각</param>
+    /// <returns></returns>
     public FairyController GetFariyEletronic(Vector2 position, float angle = 0.0f)
     {
         return fairyEletronic.GetObject(position, new Vector3(0, 0, angle));

@@ -21,6 +21,10 @@ public class FireAttribute : AttributeBase, IOnHitEffect
     /// </summary>
     private Collider2D[] cols = new Collider2D[16];
 
+    /// <summary>
+    /// 초기화
+    /// </summary>
+    /// <param name="user"></param>
     public override void Initialize(GameObject user)
     {
         base.Initialize(user);
