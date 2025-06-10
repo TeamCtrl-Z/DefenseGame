@@ -123,7 +123,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Enemy_000_Run_0
+      name: Mob_000_Run_0
       rect:
         serializedVersion: 2
         x: 0
@@ -131,20 +131,20 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 21aadf69b1790c443b7286720b13fac6
-      internalID: -465816570
+      spriteID: 8720e25466ef92b4cbf187b753ba9bb6
+      internalID: -750538969
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy_000_Run_1
+      name: Mob_000_Run_1
       rect:
         serializedVersion: 2
         x: 48
@@ -152,20 +152,20 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c327be1b047219f4688039a83f45f1f6
-      internalID: 2043097185
+      spriteID: 214e4501d38371047aeef7840ff1b798
+      internalID: -1265580628
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy_000_Run_2
+      name: Mob_000_Run_2
       rect:
         serializedVersion: 2
         x: 96
@@ -173,20 +173,20 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6069cc2de67cd544db10ddc9324650d9
-      internalID: 108435674
+      spriteID: 336c29883d14e1f429a8a68d1dcf6e3f
+      internalID: -1600583681
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy_000_Run_3
+      name: Mob_000_Run_3
       rect:
         serializedVersion: 2
         x: 144
@@ -194,14 +194,14 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bbf12fa500714204b9037b22026f65c2
-      internalID: 1840125928
+      spriteID: 6fe6041a51120f5468be77061155ea7e
+      internalID: -860372028
       vertices: []
       indices: 
       edges: []
@@ -217,10 +217,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Enemy_000_Run_0: -465816570
-      Enemy_000_Run_1: 2043097185
-      Enemy_000_Run_2: 108435674
-      Enemy_000_Run_3: 1840125928
+      Mob_000_Run_0: -750538969
+      Mob_000_Run_1: -1265580628
+      Mob_000_Run_2: -1600583681
+      Mob_000_Run_3: -860372028
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

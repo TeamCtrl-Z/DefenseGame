@@ -9,7 +9,7 @@ AnimatorOverrideController:
   m_Name: Enemy_200AC
   m_Controller: {fileID: 9100000, guid: 30ef11de94a8105429df586a729560d9, type: 2}
   m_Clips:
-  - m_OriginalClip: {fileID: 7400000, guid: 9a97f8dd977bc814da0a6729c4bee834, type: 2}
-    m_OverrideClip: {fileID: 7400000, guid: f8a55b57b1fdf374e83a3d2d4d0aa1b9, type: 2}
   - m_OriginalClip: {fileID: 7400000, guid: 083dd7822ec4a714f98f3e11e701870b, type: 2}
     m_OverrideClip: {fileID: 7400000, guid: 3e5a14b505b26d34e97f87c3925a917e, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 9a97f8dd977bc814da0a6729c4bee834, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: f8a55b57b1fdf374e83a3d2d4d0aa1b9, type: 2}

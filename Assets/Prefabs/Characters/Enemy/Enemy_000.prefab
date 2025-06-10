@@ -51,18 +51,18 @@ PrefabInstance:
     - target: {fileID: 800074536531206415, guid: 17dc89fc874e29846b61e8f76d5ca374, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -465816570, guid: d234330d1332ec243bc93cca82a9b278, type: 3}
+      objectReference: {fileID: -750538969, guid: d234330d1332ec243bc93cca82a9b278, type: 3}
     - target: {fileID: 800074536531206415, guid: 17dc89fc874e29846b61e8f76d5ca374, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 985742445938415812, guid: 17dc89fc874e29846b61e8f76d5ca374, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 1.45
       objectReference: {fileID: 0}
     - target: {fileID: 985742445938415812, guid: 17dc89fc874e29846b61e8f76d5ca374, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.06
       objectReference: {fileID: 0}
     - target: {fileID: 985742445938415812, guid: 17dc89fc874e29846b61e8f76d5ca374, type: 3}
       propertyPath: m_LocalPosition.z
@@ -105,7 +105,8 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 22100000, guid: 51fa049d893b94f4d9039f6c22849945, type: 2}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 7911750186970873347, guid: 17dc89fc874e29846b61e8f76d5ca374, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 985742445938415812, guid: 17dc89fc874e29846b61e8f76d5ca374, type: 3}
       insertIndex: -1

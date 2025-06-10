@@ -256,18 +256,18 @@ public class Factory : Singleton<Factory>
     /// 캐릭터를 소환하는 함수
     /// </summary>
     /// <param name="position">소환 위치</param>
-    /// <param name="eulerAngles">소환 각도</param>
+    /// <param name="angle">소환 각도</param>
     /// <returns>소환한 캐릭터</returns>
     public EnemyController GetEnemy_000(Vector2 position, float angle = 0.0f)
     {
         return enemy_000.GetObject(position, new Vector3(0, 0, angle));
     }
-    
+
     /// <summary>
     /// 캐릭터를 소환하는 함수
     /// </summary>
     /// <param name="position">소환 위치</param>
-    /// <param name="eulerAngles">소환 각도</param>
+    /// <param name="angle">소환 각도</param>
     /// <returns>소환한 캐릭터</returns>
     public EnemyController GetEnemy_001(Vector2 position, float angle = 0.0f)
     {
@@ -278,7 +278,7 @@ public class Factory : Singleton<Factory>
     /// 캐릭터를 소환하는 함수
     /// </summary>
     /// <param name="position">소환 위치</param>
-    /// <param name="eulerAngles">소환 각도</param>
+    /// <param name="angle">소환 각도</param>
     /// <returns>소환한 캐릭터</returns>
     public EnemyController GetEnemy_002(Vector2 position, float angle = 0.0f)
     {
@@ -289,7 +289,7 @@ public class Factory : Singleton<Factory>
     /// 캐릭터를 소환하는 함수
     /// </summary>
     /// <param name="position">소환 위치</param>
-    /// <param name="eulerAngles">소환 각도</param>
+    /// <param name="angle">소환 각도</param>
     /// <returns>소환한 캐릭터</returns>
     public EnemyController GetEnemy_100(Vector2 position, float angle = 0.0f)
     {
@@ -300,7 +300,7 @@ public class Factory : Singleton<Factory>
     /// 캐릭터를 소환하는 함수
     /// </summary>
     /// <param name="position">소환 위치</param>
-    /// <param name="eulerAngles">소환 각도</param>
+    /// <param name="angle">소환 각도</param>
     /// <returns>소환한 캐릭터</returns>
     public EnemyController GetEnemy_101(Vector2 position, float angle = 0.0f)
     {
@@ -311,7 +311,7 @@ public class Factory : Singleton<Factory>
     /// 캐릭터를 소환하는 함수
     /// </summary>
     /// <param name="position">소환 위치</param>
-    /// <param name="eulerAngles">소환 각도</param>
+    /// <param name="angle">소환 각도</param>
     /// <returns>소환한 캐릭터</returns>
     public EnemyController GetEnemy_102(Vector2 position, float angle = 0.0f)
     {
@@ -322,7 +322,7 @@ public class Factory : Singleton<Factory>
     /// 캐릭터를 소환하는 함수
     /// </summary>
     /// <param name="position">소환 위치</param>
-    /// <param name="eulerAngles">소환 각도</param>
+    /// <param name="angle">소환 각도</param>
     /// <returns>소환한 캐릭터</returns>
     public EnemyController GetEnemy_200(Vector2 position, float angle = 0.0f)
     {
@@ -333,7 +333,7 @@ public class Factory : Singleton<Factory>
     /// 캐릭터를 소환하는 함수
     /// </summary>
     /// <param name="position">소환 위치</param>
-    /// <param name="eulerAngles">소환 각도</param>
+    /// <param name="angle">소환 각도</param>
     /// <returns>소환한 캐릭터</returns>
     public EnemyController GetEnemy_201(Vector2 position, float angle = 0.0f)
     {
@@ -344,7 +344,7 @@ public class Factory : Singleton<Factory>
     /// 캐릭터를 소환하는 함수
     /// </summary>
     /// <param name="position">소환 위치</param>
-    /// <param name="eulerAngles">소환 각도</param>
+    /// <param name="angle">소환 각도</param>
     /// <returns>소환한 캐릭터</returns>
     public EnemyController GetEnemy_202(Vector2 position, float angle = 0.0f)
     {
@@ -356,7 +356,7 @@ public class Factory : Singleton<Factory>
     /// Projectile을 소환하는 함수
     /// </summary>
     /// <param name="position">소환 위치</param>
-    /// <param name="eulerAngles">소환 각도</param>
+    /// <param name="angle">소환 각도</param>
     /// <returns>소환한 Projectile</returns>
     public Projectile GetProjectile(Vector2 position, float angle = 0.0f)
     {

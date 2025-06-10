@@ -41,18 +41,7 @@ public class BoatStatusComponent : MonoBehaviour, IHealthStatus
 
     private void Start()
     {
-        Debug.Log($"[BoatStatus] DataService.Instance = {DataService.Instance}");
-        if (DataService.Instance != null)
-            Debug.Log($"[BoatStatus] BoatDataManager = {DataService.Instance.BoatDataManager}");
-
-        if (DataService.Instance == null || DataService.Instance.BoatDataManager == null)
-        {
-            Debug.LogError("DataService 혹은 BoatDataManager가 null입니다!");
-            return;
-        }
-
-        if (!DataService.Instance.BoatDataManager
-                .TryGetStatData(Level, out statData))
+        if (!DataService.Instance.BoatDataManager.TryGetStatData(Level, out statData))
         {
             Debug.LogError("Not Found");
             return;

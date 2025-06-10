@@ -123,7 +123,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Enemy_202_Attack_0
+      name: Mob_202_Atk_0
       rect:
         serializedVersion: 2
         x: 0
@@ -137,14 +137,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7efd1311740ab3a48bae3b87cc517173
-      internalID: -107673432
+      spriteID: cf82246299bb96e4ebce93aee4fce7b6
+      internalID: 905374573
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy_202_Attack_1
+      name: Mob_202_Atk_1
       rect:
         serializedVersion: 2
         x: 96
@@ -158,14 +158,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b0f13bddb79d1ed46802e24d30d95642
-      internalID: 1898729209
+      spriteID: 7f906abd626940c4b9a81798a5d23595
+      internalID: 2018483568
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy_202_Attack_2
+      name: Mob_202_Atk_2
       rect:
         serializedVersion: 2
         x: 192
@@ -179,8 +179,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f5828f9727bc7bd4e998369f87ffab53
-      internalID: 1736878319
+      spriteID: 8bd7891b53032e4458eb92de75a4c769
+      internalID: 848593995
       vertices: []
       indices: 
       edges: []
@@ -196,9 +196,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Enemy_202_Attack_0: -107673432
-      Enemy_202_Attack_1: 1898729209
-      Enemy_202_Attack_2: 1736878319
+      Mob_202_Atk_0: 905374573
+      Mob_202_Atk_1: 2018483568
+      Mob_202_Atk_2: 848593995
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

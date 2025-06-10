@@ -23,7 +23,7 @@ public class BoatDataManager : MonoBehaviour
     {
         // 늦은 초기화
         if (statusTable == null)
-            statusTable = CsvLoader.LoadTable<BoatStatusData>("BoatStatus");
+            statusTable = CsvLoader.LoadTable<BoatStatusData>("table_BoatStatus");
 
         statData = null;
         if (!statusTable.ContainsKey(level))

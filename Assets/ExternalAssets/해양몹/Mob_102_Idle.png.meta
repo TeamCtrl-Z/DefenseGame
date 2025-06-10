@@ -123,7 +123,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Enemy_102_Idle_0
+      name: Mob_102_Idle_0
       rect:
         serializedVersion: 2
         x: 0
@@ -137,14 +137,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 995e097fccd121e4fa825ddcd35a356d
-      internalID: -1144226769
+      spriteID: bc4f45aa09774db438134a16803379ef
+      internalID: -896863080
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy_102_Idle_1
+      name: Mob_102_Idle_1
       rect:
         serializedVersion: 2
         x: 48
@@ -158,14 +158,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2f84530922a91e0499bc2a492fb097f9
-      internalID: -1097674001
+      spriteID: 08121117e16b79e4b855d741623f2e22
+      internalID: 1922978447
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy_102_Idle_2
+      name: Mob_102_Idle_2
       rect:
         serializedVersion: 2
         x: 96
@@ -179,14 +179,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 51b85b646efdd424da9475889ddf452d
-      internalID: -1960863177
+      spriteID: 418b7ba740587e948847c1fead9c90e1
+      internalID: 1942434098
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy_102_Idle_3
+      name: Mob_102_Idle_3
       rect:
         serializedVersion: 2
         x: 144
@@ -200,8 +200,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 35617afdf03b16a4e92732097d5a46ea
-      internalID: -1324936487
+      spriteID: f70fe43cd4e83cd45aa8424a6222052f
+      internalID: 1543539841
       vertices: []
       indices: 
       edges: []
@@ -217,10 +217,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Enemy_102_Idle_0: -1144226769
-      Enemy_102_Idle_1: -1097674001
-      Enemy_102_Idle_2: -1960863177
-      Enemy_102_Idle_3: -1324936487
+      Mob_102_Idle_0: -896863080
+      Mob_102_Idle_1: 1922978447
+      Mob_102_Idle_2: 1942434098
+      Mob_102_Idle_3: 1543539841
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

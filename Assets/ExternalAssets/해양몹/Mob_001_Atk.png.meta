@@ -123,7 +123,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Enemy_001_Attack_0
+      name: Mob_001_Atk_0
       rect:
         serializedVersion: 2
         x: 0
@@ -131,20 +131,20 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b4cee592062429a4aae094eddceeed7c
-      internalID: 507606008
+      spriteID: f82105fa67bfdb84e9656db198f5159e
+      internalID: -227848854
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy_001_Attack_1
+      name: Mob_001_Atk_1
       rect:
         serializedVersion: 2
         x: 48
@@ -152,20 +152,20 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ceb936d6e70ff104f9c9197031ec3e59
-      internalID: 1627779794
+      spriteID: 0f99f9eed4ac90748b1b5d77273823b1
+      internalID: -389142497
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy_001_Attack_2
+      name: Mob_001_Atk_2
       rect:
         serializedVersion: 2
         x: 96
@@ -173,14 +173,14 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4fd3f92cc2faeda44bf996a5fe6e43dc
-      internalID: -437724797
+      spriteID: 2d8ce102ccc591e419f9dd477519f935
+      internalID: -411054748
       vertices: []
       indices: 
       edges: []
@@ -196,9 +196,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Enemy_001_Attack_0: 507606008
-      Enemy_001_Attack_1: 1627779794
-      Enemy_001_Attack_2: -437724797
+      Mob_001_Atk_0: -227848854
+      Mob_001_Atk_1: -389142497
+      Mob_001_Atk_2: -411054748
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

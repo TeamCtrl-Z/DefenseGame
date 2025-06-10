@@ -123,7 +123,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Enemy_202_Run_0
+      name: Mob_202_Run_0
       rect:
         serializedVersion: 2
         x: 0
@@ -137,14 +137,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2fefb007dcf7ab047ad9d46aacbb7c17
-      internalID: -2061754618
+      spriteID: f8eb40bb132121c449f9b686f9f0fab2
+      internalID: 1176971481
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy_202_Run_1
+      name: Mob_202_Run_1
       rect:
         serializedVersion: 2
         x: 96
@@ -158,14 +158,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 41952e9cede584a48be034db23b22e1e
-      internalID: -1078058352
+      spriteID: 18d9d241a6aa39d46ac24d44a5806f2c
+      internalID: 472510115
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy_202_Run_2
+      name: Mob_202_Run_2
       rect:
         serializedVersion: 2
         x: 192
@@ -179,14 +179,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6d98dae74f5353448af993adb4978ce7
-      internalID: -1824561591
+      spriteID: 2c4932fa7114d614c8ad8291fda25c9d
+      internalID: -1627580802
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy_202_Run_3
+      name: Mob_202_Run_3
       rect:
         serializedVersion: 2
         x: 288
@@ -200,14 +200,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6b1ed09e9f128bf4d9f2557f21ffc013
-      internalID: 1619709276
+      spriteID: 80f96acd6b43152479d3e33e62346b63
+      internalID: 1918170427
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy_202_Run_4
+      name: Mob_202_Run_4
       rect:
         serializedVersion: 2
         x: 384
@@ -221,14 +221,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0b2ed3586b00cdd4d91917834b2ccc00
-      internalID: 2061914819
+      spriteID: 3daeb20451f8a94439a3bb2c21db18ee
+      internalID: -2044900729
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy_202_Run_5
+      name: Mob_202_Run_5
       rect:
         serializedVersion: 2
         x: 480
@@ -242,8 +242,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a6a43dc1e3d6436458c42997a8d740f7
-      internalID: 495001887
+      spriteID: af59e12a17bea5640afea68be92f371c
+      internalID: -600614907
       vertices: []
       indices: 
       edges: []
@@ -259,12 +259,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Enemy_202_Run_0: -2061754618
-      Enemy_202_Run_1: -1078058352
-      Enemy_202_Run_2: -1824561591
-      Enemy_202_Run_3: 1619709276
-      Enemy_202_Run_4: 2061914819
-      Enemy_202_Run_5: 495001887
+      Mob_202_Run_0: 1176971481
+      Mob_202_Run_1: 472510115
+      Mob_202_Run_2: -1627580802
+      Mob_202_Run_3: 1918170427
+      Mob_202_Run_4: -2044900729
+      Mob_202_Run_5: -600614907
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

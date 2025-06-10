@@ -27,7 +27,7 @@ public class EnemyDataManager : MonoBehaviour
     {
         // 늦은 초기화
         if (statusTable == null)
-            statusTable = CsvLoader.LoadTable<EnemyStatusData>("EnemyStatus");
+            statusTable = CsvLoader.LoadTable<EnemyStatusData>("table_EnemyStatus");
         
         statData = null;
         if (!statusTable.ContainsKey(eid))
@@ -47,7 +47,7 @@ public class EnemyDataManager : MonoBehaviour
     {
         // 늦은 초기화
         if (rewardTable == null)
-            rewardTable = CsvLoader.LoadTable<EnemyRewardData>("EnemyReward");
+            rewardTable = CsvLoader.LoadTable<EnemyRewardData>("table_EnemyReward");
         
         rewardData = null;
         if (!rewardTable.ContainsKey(eid))
