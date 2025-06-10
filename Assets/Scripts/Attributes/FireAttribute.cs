@@ -37,7 +37,7 @@ public class FireAttribute : AttributeBase, IOnHitEffect
     /// </summary>
     /// <param name="damagable"> 피격 당한 적 </param>
     /// <param name="origin"> 피격 당한 위치 </param>
-    public void OnHit(IDamageable damagable, Vector3 origin)
+    public void OnHit(IDamageableWithDebuff damagable, Vector3 origin)
     {
         Debug.Log($"FireAttribute : OnHit {origin}");
         Factory.Instance.GetFireExplosion(origin);

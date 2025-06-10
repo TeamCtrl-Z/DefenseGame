@@ -7,7 +7,7 @@ using UnityEngine;
 /// </summary>
 [RequireComponent(typeof(DamageProcessor))]
 [RequireComponent(typeof(EnemyStatusEffectComponent))]
-public class EnemyController : RecycleObject, IDamageable, ITargetable
+public class EnemyController : RecycleObject, IDamageableWithDebuff, ITargetable
 {
     /// <summary>
     /// StateMachine

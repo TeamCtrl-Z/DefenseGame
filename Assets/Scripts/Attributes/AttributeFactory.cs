@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 
+/// <summary>
+/// Attribute인스턴스 만들어주는 팩토리 클래스
+/// </summary>
 public static class AttributeFactory
 {
     /// <summary>
@@ -35,6 +38,9 @@ public static class AttributeFactory
         return attr;
     }
 
+    /// <summary>
+    /// 페어리 타입과 
+    /// </summary>
     private static readonly Dictionary<FairyType, Type> _map = new Dictionary<FairyType, Type>
     {
         { FairyType.Fire,       typeof(FireAttribute) },

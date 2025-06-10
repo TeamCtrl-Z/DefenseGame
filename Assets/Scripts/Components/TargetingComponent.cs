@@ -39,7 +39,7 @@ public class TargetingComponent : MonoBehaviour
     /// <summary>
     /// 사용할 타겟팅 전략
     /// </summary>
-    [SerializeField] private TargetingStrategyData targetingStrategy;
+    [SerializeField] private TargetingType targetingType;
 
     /// <summary>
     /// 선택 조건
@@ -67,11 +67,45 @@ public class TargetingComponent : MonoBehaviour
     /// </summary>
     public event Action<ITargetable> OnTargetExitRange;
 
+    /// <summary>
+    /// 페어리 아이디 가져오는 변수
+    /// </summary>
+    private ICharacterIdentity id;
+
+    /// <summary>
+    /// 사용하는 타겟팅 전략
+    /// </summary>
+    private TargetingStrategyBase targetingStrategy;
+
     private void Awake()
     {
         CircleCollider2D col = GetComponent<CircleCollider2D>();
         col.isTrigger = true;
         col.radius = AttackRange;
+        id = GetComponentInParent<ICharacterIdentity>();
+
+        if (DataService.Instance.FairyDataManager.TryGetTargetingType(id.ID, out targetingType) == false)
+        {
+            Debug.LogError($"{this.name} : 유효하지 않은 페어리 아이디 {id.ID} 입니다.");
+            return;
+        }
+
+        BuildTargetingStrategy(targetingType);
+    }
+
+    /// <summary>
+    /// 타겟팅 타입을 이용하여 전략을 인스턴스화 시켜주는 함수
+    /// </summary>
+    /// <param name="targetingType"> 타겟팅 전략 타입 </param>
+    private void BuildTargetingStrategy(TargetingType targetingType)
+    {
+        targetingStrategy = targetingType switch
+        {
+            TargetingType.Nearest => new NearestTargeting(),
+            TargetingType.Random => new RandomTargeting(),
+            TargetingType.Healthiest => new HealthiestTargeting(),
+            _ => null
+        };
     }
 
     /// <summary>

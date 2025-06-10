@@ -5,7 +5,7 @@ using UnityEngine;
 /// 타겟팅을 사용 X (Null 패턴)
 /// </summary>
 [CreateAssetMenu(fileName = "NoneTargeting", menuName = "Targeting/NoneTargeting")]
-public class NoneTargeting : TargetingStrategyData
+public class NoneTargeting : TargetingStrategyBase
 {
     /// <summary>
     /// 타겟을 고르는 함수(사용 X이므로 빈함수)

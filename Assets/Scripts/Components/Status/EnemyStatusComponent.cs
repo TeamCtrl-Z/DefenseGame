@@ -68,6 +68,8 @@ public class EnemyStatusComponent : MonoBehaviour, IMoveStatus, IHealthStatus, I
     /// </summary>
     public float AttackSpeed { get; private set; }
 
+    public AttackType AttackType { get; private set; }
+
     /// <summary>
     /// Enemy Status 정보 모듈
     /// </summary>

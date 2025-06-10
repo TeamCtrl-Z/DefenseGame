@@ -37,7 +37,7 @@ public class ElectronicAttribute : AttributeBase, IOnHitEffect
         base.Initialize(user);
 
         targeting = user.GetComponent<TargetingComponent>();
-        targetingStrategy = ScriptableObject.CreateInstance<NearestTargeting>();
+        targetingStrategy = new NearestTargeting();
         data = new HittingData[3]
         {
             new HittingData{Damage = value1},
@@ -51,7 +51,7 @@ public class ElectronicAttribute : AttributeBase, IOnHitEffect
     /// </summary>
     /// <param name="damagable"> 피격 받은 몬스터 </param>
     /// <param name="origin"> 피격 받은 위치 </param>
-    public void OnHit(IDamageable damagable, Vector3 origin)
+    public void OnHit(IDamageableWithDebuff damagable, Vector3 origin)
     {
         var allInRange = targeting.TargetsInRange;
 

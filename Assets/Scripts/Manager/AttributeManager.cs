@@ -34,13 +34,16 @@ public class AttributeManager : MonoBehaviour
         attribute = AttributeFactory.CreateAttribute(attributeData, this.gameObject);
     }
 
-    private void OnEnable()
+    private void Start()
     {
         if (attribute is IOnHitEffect hitAttribute)
         {
             AttackHandler attack = GetComponent<AttackHandler>();
-            attack.OnHit -= hitAttribute.OnHit;
-            attack.OnHit += hitAttribute.OnHit;
+            attack.OnHit += (dmg, origin) =>
+            {
+                if (dmg is IDamageableWithDebuff dmgDb)
+                    hitAttribute.OnHit(dmgDb, origin);
+            };
         }
 
         if (attribute is IOnIntervalEffect intervalAttribute)

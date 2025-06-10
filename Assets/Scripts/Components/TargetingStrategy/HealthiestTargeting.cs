@@ -5,8 +5,7 @@ using UnityEngine;
 /// <summary>
 /// 가장 체력 많은 적 타겟팅
 /// </summary>
-[CreateAssetMenu(fileName = "HealthiestTargeting", menuName = "Targeting/HealthiestTargeting")]
-public class HealthiestTargeting : TargetingStrategyData
+public class HealthiestTargeting : TargetingStrategyBase
 {  
     /// <summary>
     /// 가장 체력이 많은 적 고르는 함수

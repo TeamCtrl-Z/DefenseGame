@@ -59,6 +59,7 @@ public class Singleton<T> : MonoBehaviour where T : Component
             // 첫번째로 만들어진 싱글톤
             instance = this as T;   // this를 T타입으로 캐스팅. 캐스팅이 안되면 null
             DontDestroyOnLoad(instance.gameObject);
+            OnPreInitialize();
         }
         else
         {
@@ -90,7 +91,7 @@ public class Singleton<T> : MonoBehaviour where T : Component
         if (!isInitialize)
         {
             // 한번도 초기화 되지 않았으면
-            OnPreInitialize();  // 한번만 실행하는 초기화 함수 실행
+            //OnPreInitialize();  // 한번만 실행하는 초기화 함수 실행
         }
         if (mode != LoadSceneMode.Additive)
         {

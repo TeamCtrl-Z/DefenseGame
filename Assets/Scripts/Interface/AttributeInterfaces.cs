@@ -10,7 +10,7 @@ public interface IOnHitEffect
     /// </summary>
     /// <param name="damagable"> 피격체 </param>
     /// <param name="origin"> 피격당한 위치 </param>
-    public void OnHit(IDamageable damagable, Vector3 origin);
+    public void OnHit(IDamageableWithDebuff damagable, Vector3 origin);
 }
 
 /// <summary>

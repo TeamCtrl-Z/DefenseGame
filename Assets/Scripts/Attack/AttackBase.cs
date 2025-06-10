@@ -26,10 +26,11 @@ public abstract class AttackBase : IAttack
     /// <summary>
     /// 공격에 필요한 초기화
     /// </summary>
-    /// <param name="attacker"></param>
-    protected AttackBase(FairyAttackData soData, FairyController attacker)
+    /// <param name="attacker">피격 데이터</param>
+    /// <param name="attacker">공격자</param>
+    protected AttackBase(HittingData data, FairyController attacker)
     {
-        data = soData.data;
+        this.data = data;
         this.attacker = attacker;
     }
 

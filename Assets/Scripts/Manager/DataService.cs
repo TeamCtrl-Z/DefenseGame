@@ -1,10 +1,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json.Linq;
+using UnityEngine;
 
 /// <summary>
 /// 데이터 매니저들을 다루는 서비스 클래스
 /// </summary>
+[DefaultExecutionOrder(ExcutionOrder.Load)]
 public class DataService : Singleton<DataService>
 {
     /// <summary>

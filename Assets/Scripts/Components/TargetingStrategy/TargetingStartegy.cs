@@ -27,7 +27,7 @@ public interface ITargetingStrategy
 /// <summary>
 /// 타겟팅 전략 SO
 /// </summary>
-public abstract class TargetingStrategyData : ScriptableObject, ITargetingStrategy
+public abstract class TargetingStrategyBase : ITargetingStrategy
 {
     /// <summary>
     /// 적을 선택하는 함수

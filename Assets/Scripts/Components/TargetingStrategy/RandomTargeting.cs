@@ -4,8 +4,7 @@ using UnityEngine;
 /// <summary>
 /// 무작위 타겟팅
 /// </summary>
-[CreateAssetMenu(fileName = "RandomTargeting", menuName = "Targeting/RandomTargeting")]
-public class RandomTargeting : TargetingStrategyData
+public class RandomTargeting : TargetingStrategyBase
 {
     /// <summary>
     /// 적 후보군들 중 무작위로 한 명 선택하는 함수

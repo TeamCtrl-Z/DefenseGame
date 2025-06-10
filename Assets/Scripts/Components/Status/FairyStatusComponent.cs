@@ -4,6 +4,7 @@ using UnityEngine;
 /// <summary>
 /// 페어리 Status 컴포넌트
 /// </summary>
+[DefaultExecutionOrder(ExcutionOrder.Init)]
 public class FairyStatusComponent : MonoBehaviour, IBattleStatus, ICharacterIdentity, IBuffStatus
 {
     /// <summary>
@@ -41,10 +42,7 @@ public class FairyStatusComponent : MonoBehaviour, IBattleStatus, ICharacterIden
     /// </summary>
     [field: SerializeField] public float AttackPowerFactor { get; private set; } = 1f;
 
-    /// <summary>
-    /// Fairy의 TargetingType
-    /// </summary>
-    private TargetingType type;
+    public AttackType AttackType { get; private set; }
 
     /// <summary>
     /// 페어리 Status 데이터(CSV파일 불러온 데이터)
@@ -61,7 +59,7 @@ public class FairyStatusComponent : MonoBehaviour, IBattleStatus, ICharacterIden
     /// </summary>
     public event Action<float> OnAttackSpeedChanged;
 
-    private void Start()
+    void Awake()
     {
         if (!DataService.Instance.FairyDataManager.TryGetStatData(ID, out statData))
         {
@@ -73,14 +71,15 @@ public class FairyStatusComponent : MonoBehaviour, IBattleStatus, ICharacterIden
     }
 
     /// <summary>
-    /// EnemyStatusData 적용
+    /// FairyStatusData 적용
     /// </summary>
     private void ApplyStatusData()
     {
         attackPower = statData.AttackPower;
         attackSpeed = statData.AttackSpeed;
+        AttackType = statData.AttackType;
 
-        Debug.Log(statData.Target);
+        Debug.Log(statData.AttackType);
     }
 
     /// <summary>

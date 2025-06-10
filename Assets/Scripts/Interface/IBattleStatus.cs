@@ -9,6 +9,11 @@ using UnityEngine;
 public interface IBattleStatus
 {
     /// <summary>
+    /// 페어리의 공격 유형
+    /// </summary>
+    public AttackType AttackType { get; }
+    
+    /// <summary>
     /// 기본 공격력
     /// </summary>
     public float AttackPower { get; }

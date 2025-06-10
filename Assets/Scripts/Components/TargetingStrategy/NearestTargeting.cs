@@ -5,8 +5,7 @@ using UnityEngine;
 /// <summary>
 /// 가장 가까운 타겟 선택
 /// </summary>
-[CreateAssetMenu(fileName = "NearestTargeting", menuName = "Targeting/NearestTargeting")]
-public class NearestTargeting : TargetingStrategyData
+public class NearestTargeting : TargetingStrategyBase
 {
     /// <summary>
     /// 가장 가까운 적을 고르는 함수

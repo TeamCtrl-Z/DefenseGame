@@ -7,7 +7,7 @@ public class FairyStatusData
     /// Fairy의 ID
     /// </summary>
     public int FID;
-    
+
     /// <summary>
     /// Fairy의 공격력
     /// </summary>
@@ -22,4 +22,9 @@ public class FairyStatusData
     /// Fairy의 대상 지정 타입
     /// </summary>
     public TargetingType Target;
+
+    /// <summary>
+    /// Fairy의 공격 타입
+    /// </summary>
+    public AttackType AttackType;
 }

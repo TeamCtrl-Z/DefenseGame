@@ -9,13 +9,9 @@ using UnityEngine;
 /// 페어리의 공격을 처리하는 컴포넌트
 /// </summary>
 [RequireComponent(typeof(TargetingComponent))]
+[DefaultExecutionOrder(ExcutionOrder.Main)]
 public class AttackHandler : MonoBehaviour
 {
-    /// <summary>
-    /// Fairy가 사용할 공격
-    /// </summary>
-    [SerializeField] private FairyAttackData attackSO;
-
     /// <summary>
     /// 고유 공격 클래스
     /// </summary>
@@ -61,12 +57,23 @@ public class AttackHandler : MonoBehaviour
         status = GetComponentInParent<IBattleStatus>();
         targeting = GetComponent<TargetingComponent>();
         animator = GetComponentInParent<Animator>();
+        BuildAttack();
+    }
 
-        if (attackSO == null)
+    private void BuildAttack()
+    {
+        HittingData data = new HittingData();
+        data.Damage = status.AttackPower;
+        Debug.Log($"{transform.parent.name} : 어택 파워 {data.Damage}");
+
+        attack = status.AttackType switch
         {
-            Debug.LogError("AttackHandler: attackSO가 에디터에 할당되지 않았습니다.");
-        }
-        attack = attackSO.CreateAttack(GetComponentInParent<FairyController>());
+            AttackType.Projectile => new ProjectileAttack(data, GetComponent<FairyController>(), 0),
+            _ => null
+        };
+
+        if (attack == null)
+            Debug.LogError($"{transform.parent.name} : {status.AttackType}은 존재하지 않습니다.");
     }
 
     private void OnEnable()
