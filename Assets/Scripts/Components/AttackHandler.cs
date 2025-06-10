@@ -64,11 +64,10 @@ public class AttackHandler : MonoBehaviour
     {
         HittingData data = new HittingData();
         data.Damage = status.AttackPower;
-        Debug.Log($"{transform.parent.name} : 어택 파워 {data.Damage}");
 
         attack = status.AttackType switch
         {
-            AttackType.Projectile => new ProjectileAttack(data, GetComponent<FairyController>(), 0),
+            AttackType.Projectile => new ProjectileAttack(data, GetComponentInParent<FairyController>(), 0),
             _ => null
         };
 
