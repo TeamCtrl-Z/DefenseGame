@@ -9,9 +9,9 @@ using UnityEngine;
 public abstract class AttackBase : IAttack
 {
     /// <summary>
-    /// 공격하는 페어리
+    /// 공격하는 엔티티
     /// </summary>
-    protected FairyController attacker;
+    protected EntityController attacker;
 
     /// <summary>
     /// 피격 데이터
@@ -26,9 +26,9 @@ public abstract class AttackBase : IAttack
     /// <summary>
     /// 공격에 필요한 초기화
     /// </summary>
-    /// <param name="attacker">피격 데이터</param>
+    /// <param name="data">피격 데이터</param>
     /// <param name="attacker">공격자</param>
-    protected AttackBase(HittingData data, FairyController attacker)
+    protected AttackBase(HittingData data, EntityController attacker)
     {
         this.data = data;
         this.attacker = attacker;
@@ -41,7 +41,7 @@ public abstract class AttackBase : IAttack
     public abstract void DoAttack(Transform target);
 
     /// <summary>
-    /// 공격을 하는 주체가 몬스터를 공격했을 때 발동되는 이벤트 함수
+    /// 공격을 하는 주체가 공격했을 때 발동되는 이벤트 함수
     /// </summary>
     /// <param name="dmg"></param>
     /// <param name="origin"></param>

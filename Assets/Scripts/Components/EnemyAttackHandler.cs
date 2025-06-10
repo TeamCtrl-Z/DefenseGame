@@ -7,9 +7,9 @@ using UnityEngine;
 public class EnemyAttackHandler : MonoBehaviour
 {
     /// <summary>
-    /// Enemy가 사용할 공격
+    /// 고유 공격 클래스
     /// </summary>
-    [SerializeField] private EnemyAttackData attackSO;
+    private AttackBase attack;
 
     /// <summary>
     /// 장애물 감지 레이어
@@ -22,11 +22,6 @@ public class EnemyAttackHandler : MonoBehaviour
     public float AttackRange { get; private set; }
 
     /// <summary>
-    /// 고유 공격 클래스
-    /// </summary>
-    public EnemyAttack Attack { get; private set; }
-
-    /// <summary>
     /// 공격이 가능한지 알리는 프로퍼티
     /// </summary>
     public bool CanAttack { get; private set; }
@@ -34,6 +29,7 @@ public class EnemyAttackHandler : MonoBehaviour
     /// <summary>
     /// 공격 Transform
     /// </summary>
+    [field: SerializeField]
     public Transform Target { get; private set; }
 
     /// <summary>
@@ -42,31 +38,17 @@ public class EnemyAttackHandler : MonoBehaviour
     public event Action OnAttack;
 
     /// <summary>
-    /// Enemy Status 정보 모듈
+    /// 공격속도와 공격력을 알아내기 위한 변수
     /// </summary>
-    private EnemyStatusData statData;
+    private EnemyStatusComponent status;
 
     private void Start()
     {
-        if (attackSO == null)
-        {
-            Debug.LogError("AttackHandler: attackSO가 에디터에 할당되지 않았습니다.");
-        }
-
-        Attack = attackSO.CreateAttack(GetComponentInParent<EnemyController>());
-        EnemyStatusComponent status = GetComponentInParent<EnemyStatusComponent>();
-
-        if (!DataService.Instance.EnemyDataManager.TryGetStatData(status.ID, out statData))
-        {
-            Debug.LogError("Not Found");
-            return;
-        }
-
-        AttackRange = statData.AttackRange;
-
-        CircleCollider2D col = GetComponent<CircleCollider2D>();
-        col.isTrigger = true;
-        col.radius = AttackRange;
+        status = GetComponentInParent<EnemyStatusComponent>();
+        AttackRange = status.AttackRange;
+        CircleCollider2D collider = GetComponent<CircleCollider2D>();
+        collider.radius = AttackRange;
+        BuildAttack();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -74,7 +56,6 @@ public class EnemyAttackHandler : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("Boat"))
         {
             CanAttack = true;
-            Target = other.gameObject.transform;
         }
     }
 
@@ -87,11 +68,31 @@ public class EnemyAttackHandler : MonoBehaviour
     }
 
     /// <summary>
+    /// 적 공격을 만드는 함수
+    /// </summary>
+    private void BuildAttack()
+    {
+        HittingData data = new HittingData();
+        data.Damage = status.AttackPower;
+        Debug.Log($"{transform.parent.name} : 어택 파워 {data.Damage}");
+
+        attack = status.AttackType switch
+        {
+            AttackType.Melee => new MeleeAttack(data, GetComponentInParent<EnemyController>(), 0),
+            AttackType.Ranged => new RangedAttack(data, GetComponentInParent<EnemyController>(), 0),
+            _ => null
+        };
+
+        if (attack == null)
+            Debug.LogError($"{transform.parent.name} : {status.AttackType}은 존재하지 않습니다.");
+    }
+
+    /// <summary>
     /// 공격 하는 함수
     /// </summary>
-    public void EnemyAttack()
+    public void DoAttack()
     {
-        Attack.DoAttack(Target);
+        attack.DoAttack(Target);
         OnAttack?.Invoke();
     }
 }

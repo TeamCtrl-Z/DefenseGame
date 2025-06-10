@@ -19,7 +19,10 @@ public class Melee : RecycleObject
     { 
         if (collision.TryGetComponent<IDamageable>(out IDamageable dmg))
         {
-            OnHit?.Invoke(dmg, transform.position);
+            Debug.Log($"{dmg}");
+            Vector2 pos = collision.ClosestPoint(transform.position);
+            Factory.Instance.GetBoatHit(pos);
+            OnHit?.Invoke(dmg, pos);
             gameObject.SetActive(false);
         }
     }

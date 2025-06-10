@@ -68,6 +68,14 @@ public class EnemyStatusComponent : MonoBehaviour, IMoveStatus, IHealthStatus, I
     /// </summary>
     public float AttackSpeed { get; private set; }
 
+    /// <summary>
+    /// Enemy의 공격 범위
+    /// </summary>
+    public float AttackRange { get; private set; }
+
+    /// <summary>
+    /// Enemy의 공격 유형
+    /// </summary>
     public AttackType AttackType { get; private set; }
 
     /// <summary>
@@ -95,6 +103,8 @@ public class EnemyStatusComponent : MonoBehaviour, IMoveStatus, IHealthStatus, I
         CurrentHP = MaxHP;
         AttackPower = statData.AttackPower;
         AttackSpeed = statData.AttackSpeed;
+        AttackRange = statData.AttackRange;
+        AttackType = statData.AttackType;
     }
 
     /// <summary>

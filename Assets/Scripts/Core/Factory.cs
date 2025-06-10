@@ -6,49 +6,169 @@ using UnityEngine;
 public class Factory : Singleton<Factory>
 {
     /// <summary>
-    /// Enemy 풀
+    /// Enemy_000 풀
     /// </summary>
     private Enemy_000Pool enemy_000;
 
     /// <summary>
-    /// Enemy 풀
+    /// Enemy_001 풀
     /// </summary>
     private Enemy_001Pool enemy_001;
 
     /// <summary>
-    /// Enemy 풀
+    /// Enemy_002 풀
     /// </summary>
     private Enemy_002Pool enemy_002;
 
     /// <summary>
-    /// Enemy 풀
+    /// Enemy_003 풀
+    /// </summary>
+    private Enemy_003Pool enemy_003;
+
+    /// <summary>
+    /// Enemy_004 풀
+    /// </summary>
+    private Enemy_004Pool enemy_004;
+
+    /// <summary>
+    /// Enemy_005 풀
+    /// </summary>
+    private Enemy_005Pool enemy_005;
+
+    /// <summary>
+    /// Enemy_006 풀
+    /// </summary>
+    private Enemy_006Pool enemy_006;
+
+    /// <summary>
+    /// Enemy_007 풀
+    /// </summary>
+    private Enemy_007Pool enemy_007;
+
+    /// <summary>
+    /// Enemy_008 풀
+    /// </summary>
+    private Enemy_008Pool enemy_008;
+
+    /// <summary>
+    /// Enemy_009 풀
+    /// </summary>
+    private Enemy_009Pool enemy_009;
+
+    /// <summary>
+    /// Enemy_010 풀
+    /// </summary>
+    private Enemy_010Pool enemy_010;
+
+    /// <summary>
+    /// Enemy_011 풀
+    /// </summary>
+    private Enemy_011Pool enemy_011;
+
+    /// <summary>
+    /// Enemy_012 풀
+    /// </summary>
+    private Enemy_012Pool enemy_012;
+
+    /// <summary>
+    /// Enemy _013 풀
+    /// </summary>
+    private Enemy_013Pool enemy_013;
+
+    /// <summary>
+    /// Enemy_014 풀
+    /// </summary>
+    private Enemy_014Pool enemy_014;
+
+    /// <summary>
+    /// Enemy_015 풀
+    /// </summary>
+    private Enemy_015Pool enemy_015;
+
+    /// <summary>
+    /// Enemy_016 풀
+    /// </summary>
+    private Enemy_016Pool enemy_016;
+
+    /// <summary>
+    /// Enemy_017 풀
+    /// </summary>
+    private Enemy_017Pool enemy_017;
+
+    /// <summary>
+    /// Enemy_018 풀
+    /// </summary>
+    private Enemy_018Pool enemy_018;
+
+    /// <summary>
+    /// Enemy_019 풀
+    /// </summary>
+    private Enemy_019Pool enemy_019;
+
+    /// <summary>
+    /// Enemy_020 풀
+    /// </summary>
+    private Enemy_020Pool enemy_020;
+
+    /// <summary>
+    /// Enemy_021 풀
+    /// </summary>
+    private Enemy_021Pool enemy_021;
+
+    /// <summary>
+    /// Enemy_100 풀
     /// </summary>
     private Enemy_100Pool enemy_100;
 
     /// <summary>
-    /// Enemy 풀
+    /// Enemy_101 풀
     /// </summary>
     private Enemy_101Pool enemy_101;
 
     /// <summary>
-    /// Enemy 풀
+    /// Enemy_102 풀
     /// </summary>
     private Enemy_102Pool enemy_102;
 
     /// <summary>
-    /// Enemy 풀
+    /// Enemy_200 풀
     /// </summary>
     private Enemy_200Pool enemy_200;
 
     /// <summary>
-    /// Enemy 풀
+    /// Enemy_201 풀
     /// </summary>
     private Enemy_201Pool enemy_201;
 
     /// <summary>
-    /// Enemy 풀
+    /// Enemy_202 풀
     /// </summary>
     private Enemy_202Pool enemy_202;
+
+    /// <summary>
+    /// Enemy_203 풀
+    /// </summary>
+    private Enemy_203Pool enemy_203;
+
+    /// <summary>
+    /// Enemy_204 풀
+    /// </summary>
+    private Enemy_204Pool enemy_204;
+
+    /// <summary>
+    /// Enemy_205 풀
+    /// </summary>
+    private Enemy_205Pool enemy_205;
+
+    /// <summary>
+    /// Enemy_206 풀
+    /// </summary>
+    private Enemy_206Pool enemy_206;
+
+    /// <summary>
+    /// Enemy_207 풀
+    /// </summary>
+    private Enemy_207Pool enemy_207;
 
     /// <summary>
     /// EnemyDieEffect 풀
@@ -61,6 +181,11 @@ public class Factory : Singleton<Factory>
     private EnemyHitPool enemyHit;
 
     /// <summary>
+    /// BoatHit 풀
+    /// </summary>
+    private BoatHitPool boatHit;
+
+    /// <summary>
     /// Projectile 풀
     /// </summary>
     private ProjectilePool projectile;
@@ -69,6 +194,11 @@ public class Factory : Singleton<Factory>
     /// Melee 풀
     /// </summary>
     private MeleePool melee;
+
+    /// <summary>
+    /// Arrow 풀
+    /// </summary>
+    private ArrowPool arrow;
 
     /// <summary>
     /// FairyBasic 풀
@@ -169,6 +299,63 @@ public class Factory : Singleton<Factory>
         if (this.TryGetComponentInChildren<Enemy_002Pool>(out enemy_002))
             enemy_002.Initialize();
 
+        if (this.TryGetComponentInChildren<Enemy_003Pool>(out enemy_003))
+            enemy_003.Initialize();
+
+        if (this.TryGetComponentInChildren<Enemy_004Pool>(out enemy_004))
+            enemy_004.Initialize();
+
+        if (this.TryGetComponentInChildren<Enemy_005Pool>(out enemy_005))
+            enemy_005.Initialize();
+
+        if (this.TryGetComponentInChildren<Enemy_006Pool>(out enemy_006))
+            enemy_006.Initialize();
+
+        if (this.TryGetComponentInChildren<Enemy_007Pool>(out enemy_007))
+            enemy_007.Initialize();
+
+        if (this.TryGetComponentInChildren<Enemy_008Pool>(out enemy_008))
+            enemy_008.Initialize();
+
+        if (this.TryGetComponentInChildren<Enemy_009Pool>(out enemy_009))
+            enemy_009.Initialize();
+
+        if (this.TryGetComponentInChildren<Enemy_010Pool>(out enemy_010))
+            enemy_010.Initialize();
+
+        if (this.TryGetComponentInChildren<Enemy_011Pool>(out enemy_011))
+            enemy_011.Initialize();
+
+        if (this.TryGetComponentInChildren<Enemy_012Pool>(out enemy_012))
+            enemy_012.Initialize();
+
+        if (this.TryGetComponentInChildren<Enemy_013Pool>(out enemy_013))
+            enemy_013.Initialize();
+
+        if (this.TryGetComponentInChildren<Enemy_014Pool>(out enemy_014))
+            enemy_014.Initialize();
+
+        if (this.TryGetComponentInChildren<Enemy_015Pool>(out enemy_015))
+            enemy_015.Initialize();
+
+        if (this.TryGetComponentInChildren<Enemy_016Pool>(out enemy_016))
+            enemy_016.Initialize();
+
+        if (this.TryGetComponentInChildren<Enemy_017Pool>(out enemy_017))
+            enemy_017.Initialize();
+
+        if (this.TryGetComponentInChildren<Enemy_018Pool>(out enemy_018))
+            enemy_018.Initialize();
+
+        if (this.TryGetComponentInChildren<Enemy_019Pool>(out enemy_019))
+            enemy_019.Initialize();
+
+        if (this.TryGetComponentInChildren<Enemy_020Pool>(out enemy_020))
+            enemy_020.Initialize();
+
+        if (this.TryGetComponentInChildren<Enemy_021Pool>(out enemy_021))
+            enemy_021.Initialize();
+
         if (this.TryGetComponentInChildren<Enemy_100Pool>(out enemy_100))
             enemy_100.Initialize();
 
@@ -187,17 +374,38 @@ public class Factory : Singleton<Factory>
         if (this.TryGetComponentInChildren<Enemy_202Pool>(out enemy_202))
             enemy_202.Initialize();
 
+        if (this.TryGetComponentInChildren<Enemy_203Pool>(out enemy_203))
+            enemy_203.Initialize();
+
+        if (this.TryGetComponentInChildren<Enemy_204Pool>(out enemy_204))
+            enemy_204.Initialize();
+
+        if (this.TryGetComponentInChildren<Enemy_205Pool>(out enemy_205))
+            enemy_205.Initialize();
+
+        if (this.TryGetComponentInChildren<Enemy_206Pool>(out enemy_206))
+            enemy_206.Initialize();
+
+        if (this.TryGetComponentInChildren<Enemy_207Pool>(out enemy_207))
+            enemy_207.Initialize();
+
         if (this.TryGetComponentInChildren<EnemyDieEffectPool>(out enemyDieEffect))
             enemyDieEffect.Initialize();
 
         if (this.TryGetComponentInChildren<EnemyHitPool>(out enemyHit))
             enemyHit.Initialize();
 
+        if (this.TryGetComponentInChildren<BoatHitPool>(out boatHit))
+            boatHit.Initialize();
+
         if (this.TryGetComponentInChildren<ProjectilePool>(out projectile))
             projectile.Initialize();
 
         if (this.TryGetComponentInChildren<MeleePool>(out melee))
             melee.Initialize();
+
+        if (this.TryGetComponentInChildren<ArrowPool>(out arrow))
+            arrow.Initialize();
 
         if (this.TryGetComponentInChildren<FairyBasicPool>(out fairyBasic))
             fairyBasic.Initialize();
@@ -253,102 +461,366 @@ public class Factory : Singleton<Factory>
 
     #region Enemy Pool
     /// <summary>
-    /// 캐릭터를 소환하는 함수
+    /// Enemy_000을 소환하는 함수
     /// </summary>
     /// <param name="position">소환 위치</param>
     /// <param name="angle">소환 각도</param>
-    /// <returns>소환한 캐릭터</returns>
+    /// <returns>소환한 Enemy_000</returns>
     public EnemyController GetEnemy_000(Vector2 position, float angle = 0.0f)
     {
         return enemy_000.GetObject(position, new Vector3(0, 0, angle));
     }
 
     /// <summary>
-    /// 캐릭터를 소환하는 함수
+    /// Enemy_001을 소환하는 함수
     /// </summary>
     /// <param name="position">소환 위치</param>
     /// <param name="angle">소환 각도</param>
-    /// <returns>소환한 캐릭터</returns>
+    /// <returns>소환한 Enemy_001</returns>
     public EnemyController GetEnemy_001(Vector2 position, float angle = 0.0f)
     {
         return enemy_001.GetObject(position, new Vector3(0, 0, angle));
     }
 
     /// <summary>
-    /// 캐릭터를 소환하는 함수
+    /// Enemy_002를 소환하는 함수
     /// </summary>
     /// <param name="position">소환 위치</param>
     /// <param name="angle">소환 각도</param>
-    /// <returns>소환한 캐릭터</returns>
+    /// <returns>소환한 Enemy_002</returns>
     public EnemyController GetEnemy_002(Vector2 position, float angle = 0.0f)
     {
         return enemy_002.GetObject(position, new Vector3(0, 0, angle));
     }
 
     /// <summary>
-    /// 캐릭터를 소환하는 함수
+    /// Enemy_003을 소환하는 함수
     /// </summary>
     /// <param name="position">소환 위치</param>
     /// <param name="angle">소환 각도</param>
-    /// <returns>소환한 캐릭터</returns>
+    /// <returns>소환한 Enemy_003</returns>
+    public EnemyController GetEnemy_003(Vector2 position, float angle = 0.0f)
+    {
+        return enemy_003.GetObject(position, new Vector3(0, 0, angle));
+    }
+
+    /// <summary>
+    /// Enemy_004를 소환하는 함수
+    /// </summary>
+    /// <param name="position">소환 위치</param>
+    /// <param name="angle">소환 각도</param>
+    /// <returns>소환한 Enemy_004</returns>
+    public EnemyController GetEnemy_004(Vector2 position, float angle = 0.0f)
+    {
+        return enemy_004.GetObject(position, new Vector3(0, 0, angle));
+    }
+
+    /// <summary>
+    /// Enemy_005를 소환하는 함수
+    /// </summary>
+    /// <param name="position">소환 위치</param>
+    /// <param name="angle">소환 각도</param>
+    /// <returns>소환한 Enemy_005</returns>
+    public EnemyController GetEnemy_005(Vector2 position, float angle = 0.0f)
+    {
+        return enemy_005.GetObject(position, new Vector3(0, 0, angle));
+    }
+
+    /// <summary>
+    /// Enemy_006을 소환하는 함수
+    /// </summary>
+    /// <param name="position">소환 위치</param>
+    /// <param name="angle">소환 각도</param>
+    /// <returns>소환한 Enemy_006</returns>
+    public EnemyController GetEnemy_006(Vector2 position, float angle = 0.0f)
+    {
+        return enemy_006.GetObject(position, new Vector3(0, 0, angle));
+    }
+
+    /// <summary>
+    /// Enemy_007을 소환하는 함수
+    /// </summary>
+    /// <param name="position">소환 위치</param>
+    /// <param name="angle">소환 각도</param>
+    /// <returns>소환한 Enemy_007</returns>
+    public EnemyController GetEnemy_007(Vector2 position, float angle = 0.0f)
+    {
+        return enemy_007.GetObject(position, new Vector3(0, 0, angle));
+    }
+
+    /// <summary>
+    /// Enemy_008을 소환하는 함수
+    /// </summary>
+    /// <param name="position">소환 위치</param>
+    /// <param name="angle">소환 각도</param>
+    /// <returns>소환한 Enemy_008</returns>
+    public EnemyController GetEnemy_008(Vector2 position, float angle = 0.0f)
+    {
+        return enemy_008.GetObject(position, new Vector3(0, 0, angle));
+    }
+
+    /// <summary>
+    /// Enemy_009를 소환하는 함수
+    /// </summary>
+    /// <param name="position">소환 위치</param>
+    /// <param name="angle">소환 각도</param>
+    /// <returns>소환한 Enemy_009</returns>
+    public EnemyController GetEnemy_009(Vector2 position, float angle = 0.0f)
+    {
+        return enemy_009.GetObject(position, new Vector3(0, 0, angle));
+    }
+
+    /// <summary>
+    /// Enemy_010을 소환하는 함수
+    /// </summary>
+    /// <param name="position">소환 위치</param>
+    /// <param name="angle">소환 각도</param>
+    /// <returns>소환한 Enemy_010</returns>
+    public EnemyController GetEnemy_010(Vector2 position, float angle = 0.0f)
+    {
+        return enemy_010.GetObject(position, new Vector3(0, 0, angle));
+    }
+
+    /// <summary>
+    /// Enemy_011을 소환하는 함수
+    /// </summary>
+    /// <param name="position">소환 위치</param>
+    /// <param name="angle">소환 각도</param>
+    /// <returns>소환한 Enemy_011</returns>
+    public EnemyController GetEnemy_011(Vector2 position, float angle = 0.0f)
+    {
+        return enemy_011.GetObject(position, new Vector3(0, 0, angle));
+    }
+
+    /// <summary>
+    /// Enemy_012를 소환하는 함수
+    /// </summary>
+    /// <param name="position">소환 위치</param>
+    /// <param name="angle">소환 각도</param>
+    /// <returns>소환한 Enemy_012</returns>
+    public EnemyController GetEnemy_012(Vector2 position, float angle = 0.0f)
+    {
+        return enemy_012.GetObject(position, new Vector3(0, 0, angle));
+    }
+
+    /// <summary>
+    /// Enemy_013을 소환하는 함수
+    /// </summary>
+    /// <param name="position">소환 위치</param>
+    /// <param name="angle">소환 각도</param>
+    /// <returns>소환한 Enemy_013</returns>
+    public EnemyController GetEnemy_013(Vector2 position, float angle = 0.0f)
+    {
+        return enemy_013.GetObject(position, new Vector3(0, 0, angle));
+    }
+
+    /// <summary>
+    /// Enemy_014를 소환하는 함수
+    /// </summary>
+    /// <param name="position">소환 위치</param>
+    /// <param name="angle">소환 각도</param>
+    /// <returns>소환한 Enemy_014</returns>
+    public EnemyController GetEnemy_014(Vector2 position, float angle = 0.0f)
+    {
+        return enemy_014.GetObject(position, new Vector3(0, 0, angle));
+    }
+
+    /// <summary>
+    /// Enemy_015를 소환하는 함수
+    /// </summary>
+    /// <param name="position">소환 위치</param>
+    /// <param name="angle">소환 각도</param>
+    /// <returns>소환한 Enemy_015</returns>
+    public EnemyController GetEnemy_015(Vector2 position, float angle = 0.0f)
+    {
+        return enemy_015.GetObject(position, new Vector3(0, 0, angle));
+    }
+
+    /// <summary>
+    /// Enemy_016을 소환하는 함수
+    /// </summary>
+    /// <param name="position">소환 위치</param>
+    /// <param name="angle">소환 각도</param>
+    /// <returns>소환한 Enemy_016</returns>
+    public EnemyController GetEnemy_016(Vector2 position, float angle = 0.0f)
+    {
+        return enemy_016.GetObject(position, new Vector3(0, 0, angle));
+    }
+
+    /// <summary>
+    /// Enemy_017을 소환하는 함수
+    /// </summary>
+    /// <param name="position">소환 위치</param>
+    /// <param name="angle">소환 각도</param>
+    /// <returns>소환한 Enemy_017</returns>
+    public EnemyController GetEnemy_017(Vector2 position, float angle = 0.0f)
+    {
+        return enemy_017.GetObject(position, new Vector3(0, 0, angle));
+    }
+
+    /// <summary>
+    /// Enemy_018을 소환하는 함수
+    /// </summary>
+    /// <param name="position">소환 위치</param>
+    /// <param name="angle">소환 각도</param>
+    /// <returns>소환한 Enemy_018</returns>
+    public EnemyController GetEnemy_018(Vector2 position, float angle = 0.0f)
+    {
+        return enemy_018.GetObject(position, new Vector3(0, 0, angle));
+    }
+
+    /// <summary>
+    /// Enemy_019를 소환하는 함수
+    /// </summary>
+    /// <param name="position">소환 위치</param>
+    /// <param name="angle">소환 각도</param>
+    /// <returns>소환한 Enemy_019</returns>
+    public EnemyController GetEnemy_019(Vector2 position, float angle = 0.0f)
+    {
+        return enemy_019.GetObject(position, new Vector3(0, 0, angle));
+    }
+
+    /// <summary>
+    /// Enemy_020을 소환하는 함수
+    /// </summary>
+    /// <param name="position">소환 위치</param>
+    /// <param name="angle">소환 각도</param>
+    /// <returns>소환한 Enemy_020</returns>
+    public EnemyController GetEnemy_020(Vector2 position, float angle = 0.0f)
+    {
+        return enemy_020.GetObject(position, new Vector3(0, 0, angle));
+    }
+
+    /// <summary>
+    /// Enemy_021을 소환하는 함수
+    /// </summary>
+    /// <param name="position">소환 위치</param>
+    /// <param name="angle">소환 각도</param>
+    /// <returns>소환한 Enemy_021</returns>
+    public EnemyController GetEnemy_021(Vector2 position, float angle = 0.0f)
+    {
+        return enemy_021.GetObject(position, new Vector3(0, 0, angle));
+    }
+
+    /// <summary>
+    /// Enemy_100을 소환하는 함수
+    /// </summary>
+    /// <param name="position">소환 위치</param>
+    /// <param name="angle">소환 각도</param>
+    /// <returns>소환한 Enemy_100</returns>
     public EnemyController GetEnemy_100(Vector2 position, float angle = 0.0f)
     {
         return enemy_100.GetObject(position, new Vector3(0, 0, angle));
     }
 
     /// <summary>
-    /// 캐릭터를 소환하는 함수
+    /// Enemy_101을 소환하는 함수
     /// </summary>
     /// <param name="position">소환 위치</param>
     /// <param name="angle">소환 각도</param>
-    /// <returns>소환한 캐릭터</returns>
+    /// <returns>소환한 Enemy_101</returns>
     public EnemyController GetEnemy_101(Vector2 position, float angle = 0.0f)
     {
         return enemy_101.GetObject(position, new Vector3(0, 0, angle));
     }
 
     /// <summary>
-    /// 캐릭터를 소환하는 함수
+    /// Enemy_102를 소환하는 함수
     /// </summary>
     /// <param name="position">소환 위치</param>
     /// <param name="angle">소환 각도</param>
-    /// <returns>소환한 캐릭터</returns>
+    /// <returns>소환한 Enemy_102</returns>
     public EnemyController GetEnemy_102(Vector2 position, float angle = 0.0f)
     {
         return enemy_102.GetObject(position, new Vector3(0, 0, angle));
     }
 
     /// <summary>
-    /// 캐릭터를 소환하는 함수
+    /// Enemy_200을 소환하는 함수
     /// </summary>
     /// <param name="position">소환 위치</param>
     /// <param name="angle">소환 각도</param>
-    /// <returns>소환한 캐릭터</returns>
+    /// <returns>소환한 Enemy_200</returns>
     public EnemyController GetEnemy_200(Vector2 position, float angle = 0.0f)
     {
         return enemy_200.GetObject(position, new Vector3(0, 0, angle));
     }
 
     /// <summary>
-    /// 캐릭터를 소환하는 함수
+    /// Enemy_201을 소환하는 함수
     /// </summary>
     /// <param name="position">소환 위치</param>
     /// <param name="angle">소환 각도</param>
-    /// <returns>소환한 캐릭터</returns>
+    /// <returns>소환한 Enemy_201</returns>
     public EnemyController GetEnemy_201(Vector2 position, float angle = 0.0f)
     {
         return enemy_201.GetObject(position, new Vector3(0, 0, angle));
     }
 
     /// <summary>
-    /// 캐릭터를 소환하는 함수
+    /// Enemy_202를 소환하는 함수
     /// </summary>
     /// <param name="position">소환 위치</param>
     /// <param name="angle">소환 각도</param>
-    /// <returns>소환한 캐릭터</returns>
+    /// <returns>소환한 Enemy_202</returns>
     public EnemyController GetEnemy_202(Vector2 position, float angle = 0.0f)
     {
         return enemy_202.GetObject(position, new Vector3(0, 0, angle));
+    }
+
+    /// <summary>
+    /// Enemy_203을 소환하는 함수
+    /// </summary>
+    /// <param name="position">소환 위치</param>
+    /// <param name="angle">소환 각도</param>
+    /// <returns>소환한 Enemy_203</returns>
+    public EnemyController GetEnemy_203(Vector2 position, float angle = 0.0f)
+    {
+        return enemy_203.GetObject(position, new Vector3(0, 0, angle));
+    }
+
+    /// <summary>
+    /// Enemy_204를 소환하는 함수
+    /// </summary>
+    /// <param name="position">소환 위치</param>
+    /// <param name="angle">소환 각도</param>
+    /// <returns>소환한 Enemy_204</returns>
+    public EnemyController GetEnemy_204(Vector2 position, float angle = 0.0f)
+    {
+        return enemy_204.GetObject(position, new Vector3(0, 0, angle));
+    }
+
+    /// <summary>
+    /// Enemy_205를 소환하는 함수
+    /// </summary>
+    /// <param name="position">소환 위치</param>
+    /// <param name="angle">소환 각도</param>
+    /// <returns>소환한 Enemy_205</returns>
+    public EnemyController GetEnemy_205(Vector2 position, float angle = 0.0f)
+    {
+        return enemy_205.GetObject(position, new Vector3(0, 0, angle));
+    }
+
+    /// <summary>
+    /// Enemy_206을 소환하는 함수
+    /// </summary>
+    /// <param name="position">소환 위치</param>
+    /// <param name="angle">소환 각도</param>
+    /// <returns>소환한 Enemy_206</returns>
+    public EnemyController GetEnemy_206(Vector2 position, float angle = 0.0f)
+    {
+        return enemy_206.GetObject(position, new Vector3(0, 0, angle));
+    }
+
+    /// <summary>
+    /// Enemy_207을 소환하는 함수
+    /// </summary>
+    /// <param name="position">소환 위치</param>
+    /// <param name="angle">소환 각도</param>
+    /// <returns>소환한 Enemy_207</returns>
+    public EnemyController GetEnemy_207(Vector2 position, float angle = 0.0f)
+    {
+        return enemy_207.GetObject(position, new Vector3(0, 0, angle));
     }
     #endregion
 
@@ -372,6 +844,17 @@ public class Factory : Singleton<Factory>
     public Melee GetMelee(Vector2 position, float angle = 0.0f)
     {
         return melee.GetObject(position, new Vector3(0, 0, angle));
+    }
+
+    /// <summary>
+    /// Arrow를 소환하는 함수
+    /// </summary>
+    /// <param name="position">소환 위치</param>
+    /// <param name="angle">소환 각도</param>
+    /// <returns>소환된 Arrow</returns>
+    public Ranged GetArrow(Vector2 position, float angle = 0.0f)
+    {
+        return arrow.GetObject(position, new Vector3(0, 0, angle));
     }
 
     #region Fairy Pool
@@ -532,6 +1015,19 @@ public class Factory : Singleton<Factory>
         Vector2 rand = Random.insideUnitCircle * 0.1f;
         position += rand;
         return enemyHit.GetObject(position, new Vector3(0, 0, angle));
+    }
+
+    /// <summary>
+    /// 보트가 맞을 때 이펙트를 소환하는 함수
+    /// </summary>
+    /// <param name="position">소환 함수</param>
+    /// <param name="angle">소환 각도</param>
+    /// <returns>소환된 이펙트</returns>
+    public Effect GetBoatHit(Vector2 position, float angle = 0.0f)
+    {
+        Vector2 rand = Random.insideUnitCircle * 0.1f;
+        position += rand;
+        return boatHit.GetObject(position, new Vector3(0, 0, angle));
     }
 
     /// <summary>

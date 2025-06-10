@@ -22,6 +22,7 @@ public class AttributeManager : MonoBehaviour
     /// 페어리 속성 데이터
     /// </summary>
     private FairyAttributeData attributeData;
+
     private void Awake()
     {
         id = GetComponentInParent<ICharacterIdentity>();
@@ -38,7 +39,7 @@ public class AttributeManager : MonoBehaviour
     {
         if (attribute is IOnHitEffect hitAttribute)
         {
-            AttackHandler attack = GetComponent<AttackHandler>();
+            FairyAttackHandler attack = GetComponent<FairyAttackHandler>();
             attack.OnHit += (dmg, origin) =>
             {
                 if (dmg is IDamageableWithDebuff dmgDb)
