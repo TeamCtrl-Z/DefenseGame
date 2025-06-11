@@ -48,7 +48,6 @@ public class BoatController : MonoBehaviour, IDamageable
     public void OnDamage(GameObject attacker, HittingData data)
     {
         boatStatus.ChangeHP(data.Damage);
-        Factory.Instance.GetEnemyHit(transform.position);
     }
 
     /// <summary>

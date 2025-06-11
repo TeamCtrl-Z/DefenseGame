@@ -32,4 +32,9 @@ public class EnemyStatusData
     /// 적 공격 범위
     /// </summary>
     public float AttackRange;
+
+    /// <summary>
+    /// 적 공격 유형
+    /// </summary>
+    public AttackType AttackType;
 }

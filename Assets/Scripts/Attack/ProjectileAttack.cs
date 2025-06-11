@@ -13,10 +13,10 @@ public class ProjectileAttack : AttackBase
     /// <summary>
     /// ProjectileAttack 클래스 생성자
     /// </summary>
-    /// <param name="soData">공격 SO Data</param>
+    /// <param name="data">공격 Hitting Data</param>
     /// <param name="attacker">공격하는 오브젝트</param>
     /// <param name="projectileId">공격에 사용될 프로젝타일 아이디</param>
-    public ProjectileAttack(HittingData data, FairyController attacker, uint projectileId) : base(data, attacker)
+    public ProjectileAttack(HittingData data, EntityController attacker, uint projectileId) : base(data, attacker)
     {
         this.projectileId = projectileId;
     }

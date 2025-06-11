@@ -42,6 +42,9 @@ public class FairyStatusComponent : MonoBehaviour, IBattleStatus, ICharacterIden
     /// </summary>
     [field: SerializeField] public float AttackPowerFactor { get; private set; } = 1f;
 
+    /// <summary>
+    /// 페어리의 공격 유형
+    /// </summary>
     public AttackType AttackType { get; private set; }
 
     /// <summary>
