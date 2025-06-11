@@ -79,6 +79,11 @@ public class EnemyStatusComponent : MonoBehaviour, IMoveStatus, IHealthStatus, I
     public AttackType AttackType { get; private set; }
 
     /// <summary>
+    /// Enemy의 공격 ID
+    /// </summary>
+    public uint AttackId { get; private set; }
+
+    /// <summary>
     /// Enemy Status 정보 모듈
     /// </summary>
     private EnemyStatusData statData;
@@ -105,6 +110,7 @@ public class EnemyStatusComponent : MonoBehaviour, IMoveStatus, IHealthStatus, I
         AttackSpeed = statData.AttackSpeed;
         AttackRange = statData.AttackRange;
         AttackType = statData.AttackType;
+        AttackId = statData.AttackId;
     }
 
     /// <summary>

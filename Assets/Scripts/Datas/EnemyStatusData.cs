@@ -37,4 +37,9 @@ public class EnemyStatusData
     /// 적 공격 유형
     /// </summary>
     public AttackType AttackType;
+
+    /// <summary>
+    /// 적 공격 아이디
+    /// </summary>
+    public uint AttackId;
 }

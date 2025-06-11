@@ -29,7 +29,7 @@ MonoBehaviour:
   - spawnType: 0
     spawnTime: 1
     spawnPosition: {x: 10, y: -1.5}
-  - spawnType: 3
+  - spawnType: 100
     spawnTime: 2
     spawnPosition: {x: 10, y: 1}
   - spawnType: 3
