@@ -78,8 +78,8 @@ public class EnemyAttackHandler : MonoBehaviour
 
         attack = status.AttackType switch
         {
-            AttackType.Melee => new MeleeAttack(data, GetComponentInParent<EnemyController>(), 0),
-            AttackType.Ranged => new RangedAttack(data, GetComponentInParent<EnemyController>(), 0),
+            AttackType.Melee => new MeleeAttack(data, GetComponentInParent<EnemyController>(), status.AttackId),
+            AttackType.Ranged => new RangedAttack(data, GetComponentInParent<EnemyController>(), status.AttackId),
             _ => null
         };
 

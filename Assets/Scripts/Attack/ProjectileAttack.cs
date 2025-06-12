@@ -29,8 +29,7 @@ public class ProjectileAttack : AttackBase
     {
         Debug.Log(attacker);
 
-        // TODO : 추후에 projectile ID로 꺼내오는것으로 바꿔야함.
-        Projectile projectile = Factory.Instance.GetProjectile(attacker.transform.position);
+        Projectile projectile = Factory.Instance.GetProjectile(attacker.transform.position, projectileId);
         projectile.OnHit += NotifyOnHit;
         projectile.onDisable += () => projectile.OnHit -= NotifyOnHit;
         projectile.Shoot(target);

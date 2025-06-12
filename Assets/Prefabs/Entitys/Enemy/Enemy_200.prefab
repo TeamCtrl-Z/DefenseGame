@@ -487,6 +487,22 @@ PrefabInstance:
       propertyPath: <ID>k__BackingField
       value: 200
       objectReference: {fileID: 0}
+    - target: {fileID: 323485556540205448, guid: 17dc89fc874e29846b61e8f76d5ca374, type: 3}
+      propertyPath: m_Size.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 323485556540205448, guid: 17dc89fc874e29846b61e8f76d5ca374, type: 3}
+      propertyPath: m_Size.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 323485556540205448, guid: 17dc89fc874e29846b61e8f76d5ca374, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 748808990, guid: a9f59139db12a724d8aa114229f3edef, type: 3}
+    - target: {fileID: 323485556540205448, guid: 17dc89fc874e29846b61e8f76d5ca374, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 800074536531206415, guid: 17dc89fc874e29846b61e8f76d5ca374, type: 3}
       propertyPath: m_Size.x
       value: 3
@@ -543,11 +559,23 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2540789544833075515, guid: 17dc89fc874e29846b61e8f76d5ca374, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.53
+      objectReference: {fileID: 0}
+    - target: {fileID: 2540789544833075515, guid: 17dc89fc874e29846b61e8f76d5ca374, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.14
+      objectReference: {fileID: 0}
     - target: {fileID: 4333508385416445607, guid: 17dc89fc874e29846b61e8f76d5ca374, type: 3}
       propertyPath: m_Name
       value: Enemy_200
       objectReference: {fileID: 0}
     - target: {fileID: 7256499425212340642, guid: 17dc89fc874e29846b61e8f76d5ca374, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 22100000, guid: 9cebb1d583ebd36439c004bdd3ed5eac, type: 2}
+    - target: {fileID: 7486016750516841252, guid: 17dc89fc874e29846b61e8f76d5ca374, type: 3}
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 22100000, guid: 9cebb1d583ebd36439c004bdd3ed5eac, type: 2}

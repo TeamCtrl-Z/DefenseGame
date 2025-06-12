@@ -1,8 +1,5 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
-using AnimatorHash;
 using UnityEngine;
 
 /// <summary>
@@ -20,7 +17,7 @@ public class FairyAttackHandler : MonoBehaviour
     /// <summary>
     /// 공격속도와 공격력을 알아내기 위한 변수
     /// </summary>
-    private IBattleStatus status;
+    private FairyStatusComponent status;
 
     /// <summary>
     /// 타겟을 선정하기 위한 변수
@@ -54,7 +51,7 @@ public class FairyAttackHandler : MonoBehaviour
 
     private void Awake()
     {
-        status = GetComponentInParent<IBattleStatus>();
+        status = GetComponentInParent<FairyStatusComponent>();
         targeting = GetComponent<TargetingComponent>();
         animator = GetComponentInParent<Animator>();
         BuildAttack();
@@ -70,7 +67,7 @@ public class FairyAttackHandler : MonoBehaviour
 
         attack = status.AttackType switch
         {
-            AttackType.Projectile => new ProjectileAttack(data, GetComponentInParent<FairyController>(), 0),
+            AttackType.Projectile => new ProjectileAttack(data, GetComponentInParent<FairyController>(), status.AttackId),
             _ => null
         };
 

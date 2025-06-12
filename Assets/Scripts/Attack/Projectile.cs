@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -62,6 +60,13 @@ public class Projectile : RecycleObject
         if (collision.TryGetComponent<IDamageable>(out IDamageable dmg))
         {
             OnHit?.Invoke(dmg, transform.position);
+
+            Vector2 pos = collision.ClosestPoint(transform.position);
+            Factory.Instance.GetEnemyHit(pos);
+
+            foreach (var te in GetComponentsInChildren<TrailEffect>())
+                te.FadeOutAndDetach();
+
             gameObject.SetActive(false);
         }
     }

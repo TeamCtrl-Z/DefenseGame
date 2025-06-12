@@ -3,5 +3,23 @@
 /// </summary>
 public enum FairyType
 {
-    Basic = 0, Fire, Poison, Freeze, Electronic, Idiot, Lock, Wind, Light, Mine, Broken, Thorn, Laser, Infection, Typhoon, Frozen, Sword, Hell, Max,
+    Basic = 0, 
+    Fire, 
+    Poison, 
+    Freeze, 
+    Electronic, 
+    Idiot, 
+    Lock, 
+    Wind,
+    Light,
+    Mine,
+    Broken,
+    Thorn,
+    Laser, 
+    Infection, 
+    Typhoon,
+    Frozen,
+    Sword, 
+    Hell, 
+    Max,
 }

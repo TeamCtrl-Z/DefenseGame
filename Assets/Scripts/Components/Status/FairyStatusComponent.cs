@@ -48,6 +48,11 @@ public class FairyStatusComponent : MonoBehaviour, IBattleStatus, ICharacterIden
     public AttackType AttackType { get; private set; }
 
     /// <summary>
+    /// 페어리의 공격 ID
+    /// </summary>
+    public uint AttackId { get; private set; }
+
+    /// <summary>
     /// 페어리 Status 데이터(CSV파일 불러온 데이터)
     /// </summary>
     private FairyStatusData statData;
@@ -81,6 +86,9 @@ public class FairyStatusComponent : MonoBehaviour, IBattleStatus, ICharacterIden
         attackPower = statData.AttackPower;
         attackSpeed = statData.AttackSpeed;
         AttackType = statData.AttackType;
+        AttackId = statData.AttackId;
+
+        Debug.Log(statData.AttackType);
     }
 
     /// <summary>

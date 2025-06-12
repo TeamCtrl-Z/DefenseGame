@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -30,9 +28,7 @@ public class RangedAttack : AttackBase
     public override void DoAttack(Transform target)
     {
         Debug.Log(attacker);
-
-        // TODO : 추후에 projectile ID로 꺼내오는것으로 바꿔야함.
-        Ranged ranged = Factory.Instance.GetArrow(attacker.transform.position);
+        Ranged ranged = Factory.Instance.GetRanged(target.position, rangedId);
         ranged.OnHit += NotifyOnHit;
         ranged.onDisable += () => ranged.OnHit -= NotifyOnHit;
     }
