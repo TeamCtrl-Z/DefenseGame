@@ -37,6 +37,11 @@ public class Network
     public string Error { get; private set; } = "";
 
     /// <summary>
+    /// 로그인 후 서버가 내려주는 쿠키를 여기 저장
+    /// </summary>
+    private static string _sessionCookie = null;
+
+    /// <summary>
     /// Network 생성자
     /// </summary>
     /// <param name="relativeUrl">서버 주소</param>
@@ -49,7 +54,6 @@ public class Network
         string fullUrl = BaseUrl.TrimEnd('/') + "/" + relativeUrl.TrimStart('/');
         Debug.Log(fullUrl);
         webRequest = new UnityWebRequest(fullUrl, httpMethod.ToUpper());
-        webRequest.certificateHandler = new AcceptAllCerts();
         webRequest.disposeCertificateHandlerOnDispose = true;
     }
 
@@ -100,28 +104,44 @@ public class Network
             throw new InvalidOperationException("SetRequestData<T>()를 먼저 호출해서 UploadHandler와 DownloadHandler를 설정해야 합니다.");
         }
 
-        FirebaseUser firebaseUser = FirebaseAuth.DefaultInstance.CurrentUser;
-        if (firebaseUser == null)
+        if (!string.IsNullOrEmpty(_sessionCookie))
         {
-            Error = "로그인된 사용자가 없습니다.";
-            yield break;
+            webRequest.SetRequestHeader("Cookie", _sessionCookie);
         }
-
-        var tokenTask = firebaseUser.TokenAsync(forceRefresh: false);
-        yield return new WaitUntil(() => tokenTask.IsCompleted);
-
-
-        if (tokenTask.Exception != null)
+        else
         {
-            AggregateException aggEx = tokenTask.Exception;
-            string msg = aggEx.InnerException != null ? aggEx.InnerException.Message : aggEx.Message;
-            Error = $"ID 토큰 요청 실패: {msg}";
-            yield break;
+            // 1) Firebase 초기화 의존성 체크
+            var depTask = Firebase.FirebaseApp.CheckAndFixDependenciesAsync();
+            yield return new WaitUntil(() => depTask.IsCompleted);
+
+            if (depTask.Result != Firebase.DependencyStatus.Available)
+            {
+                Debug.LogError($"Firebase 초기화 실패: {depTask.Result}");
+                yield break;  // 초기화가 안 됐으면 요청 자체를 중단
+            }
+            FirebaseUser firebaseUser = FirebaseAuth.DefaultInstance.CurrentUser;
+            if (firebaseUser == null)
+            {
+                Error = "로그인된 사용자가 없습니다.";
+                yield break;
+            }
+
+            var tokenTask = firebaseUser.TokenAsync(forceRefresh: true);
+            yield return new WaitUntil(() => tokenTask.IsCompleted);
+
+
+            if (tokenTask.Exception != null)
+            {
+                AggregateException aggEx = tokenTask.Exception;
+                string msg = aggEx.InnerException != null ? aggEx.InnerException.Message : aggEx.Message;
+                Error = $"ID 토큰 요청 실패: {msg}";
+                yield break;
+            }
+
+            string idToken = tokenTask.Result;
+
+            webRequest.SetRequestHeader("Authorization", $"Bearer {idToken}");
         }
-
-        string idToken = tokenTask.Result;
-
-        webRequest.SetRequestHeader("Authorization", $"Bearer {idToken}");
 
         yield return webRequest.SendWebRequest();
 
@@ -146,18 +166,27 @@ public class Network
             // 성공적으로 응답을 받았을 때
             Error = "";
             ResponseText = webRequest.downloadHandler.text;
+
+            // 로그인할땐 세션 쿠키 저장
+            if (webRequest.url.EndsWith("/user/login", StringComparison.OrdinalIgnoreCase))
+            {
+                Debug.Log($"[Network] 세션 쿠키 저장 시도");
+                var setCookie = webRequest.GetResponseHeader("Set-Cookie");
+                if (!string.IsNullOrEmpty(setCookie))
+                {
+                    var parts = setCookie.Split(';', 2);
+                    _sessionCookie = parts[0];
+                    Debug.Log($"[Network] 세션 쿠키 저장: {_sessionCookie}");
+                }
+                else
+                {
+                    Debug.Log($"[Network] 세션 쿠키 저장 실패");
+                }
+            }
             Debug.Log("요청 성공");
         }
 
         // 5) 사용 후 UnityWebRequest가 더 이상 필요 없으면 자원 해제
         webRequest.Dispose();
     }
-}
-
-/// <summary>
-/// 개발/테스트용: SSL 인증서를 무조건 통과시키는 CertificateHandler
-/// </summary>
-public class AcceptAllCerts : CertificateHandler
-{
-    protected override bool ValidateCertificate(byte[] certificateData) => true;
 }

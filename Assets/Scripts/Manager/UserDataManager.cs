@@ -167,6 +167,11 @@ public class UserDataManager : MonoBehaviour, IServerData
         else
         {
             JsonConvert.PopulateObject(res["user"].ToString(), User);
+
+            // 재화 이벤트 호출 용
+            Currency_Gold = User.gold;
+            Currency_Gem = User.gem;
+            Currency_Diamond = User.diamond;
         }
 
         Debug.Log("유저 데이터 받음");

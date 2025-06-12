@@ -59,8 +59,6 @@ public class EnemyRewardComponent : MonoBehaviour, IReward
     {
         Factory.Instance.GetGold(transform.position, 0, Gold);
         Factory.Instance.GetGem(transform.position, 0, Gem);
-        ApplyCurrencyToPlayer(CurrencyType.Gold, Gold);
-        ApplyCurrencyToPlayer(CurrencyType.Gem, Gem);
     }
     
     /// <summary>
