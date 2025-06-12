@@ -138,9 +138,6 @@ public class ChapterManager : MonoBehaviour, IInitialize
         {
             Debug.Log("StageClear요청 준비");
 
-            DataService.Instance.UserDataManager.AddCurrency_Gold(currentStage.reward_Gold);
-            DataService.Instance.UserDataManager.AddCurrency_Gem(currentStage.reward_Gem);
-
             yield return new WaitForSeconds(0.5f);
 
             void fail()

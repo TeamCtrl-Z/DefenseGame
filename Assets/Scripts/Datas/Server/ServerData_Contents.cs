@@ -22,8 +22,6 @@ public class ServerData_Contents : Singleton<ServerData_Contents>
         Network network = new Network(url, "POST");
         network.SetRequestData(new
         {
-            gold = DataService.Instance.UserDataManager.Currency_Gold,
-            gem = DataService.Instance.UserDataManager.Currency_Gem,
             stageId = DataService.Instance.ContentsDataManager.CurrentStage.StageID
         });
         yield return network.SendRequest();
@@ -53,8 +51,6 @@ public class ServerData_Contents : Singleton<ServerData_Contents>
         Network network = new Network(url, "POST");
         network.SetRequestData(new
         {
-            gold = DataService.Instance.UserDataManager.Currency_Gold,
-            gem = DataService.Instance.UserDataManager.Currency_Gem,
             chapterId = DataService.Instance.ContentsDataManager.CurrentChapter.ChapterID
         });
         yield return network.SendRequest();
