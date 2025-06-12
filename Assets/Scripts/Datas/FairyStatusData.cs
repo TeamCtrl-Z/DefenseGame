@@ -27,4 +27,9 @@ public class FairyStatusData
     /// Fairy의 공격 타입
     /// </summary>
     public AttackType AttackType;
+
+    /// <summary>
+    /// Fairy의 AttackID
+    /// </summary>
+    public uint AttackId;
 }

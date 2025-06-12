@@ -635,7 +635,12 @@ Transform:
   - {fileID: 5280785328022212194}
   - {fileID: 8160281068174721915}
   - {fileID: 5894634517577008712}
-  - {fileID: 514303676543505169}
+  - {fileID: 7645891351293570315}
+  - {fileID: 5594208233566059035}
+  - {fileID: 7565866077914757392}
+  - {fileID: 254716424523012893}
+  - {fileID: 4689292046216748340}
+  - {fileID: 8320291367035916273}
   - {fileID: 2399269677790636829}
   - {fileID: 4277181085786324334}
   - {fileID: 4123648768317031852}
@@ -853,7 +858,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c88c76b2aa8dc24ca32e40a196dc518, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 1717769099378389128, guid: 5ac59a977a043554cb0d2e4525371f18, type: 3}
+  prefab: {fileID: 5261304465877487142, guid: 5a97dc458d4eff44f9ef0c93bde890e1, type: 3}
   poolSize: 64
 --- !u!1 &2064804375534894155
 GameObject:
@@ -1499,6 +1504,52 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 8364066463684178190, guid: 00a872b0e6365de4cab6bb79f0f9c56c, type: 3}
   poolSize: 64
+--- !u!1 &3013119814662274386
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 254716424523012893}
+  - component: {fileID: 4421907083584780228}
+  m_Layer: 0
+  m_Name: Projectile_FreezePool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &254716424523012893
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3013119814662274386}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1527577420808434877}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4421907083584780228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3013119814662274386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f780b9f63e95b34ebd7fd31ad962385, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 3752354347270138294, guid: af84a4314e643254989519990895b670, type: 3}
+  poolSize: 64
 --- !u!1 &3178510868380053456
 GameObject:
   m_ObjectHideFlags: 0
@@ -1959,6 +2010,52 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 4445957847610486554, guid: 936c45a67d66a7e4fb331c87f366307c, type: 3}
   poolSize: 64
+--- !u!1 &3958470170023138390
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4689292046216748340}
+  - component: {fileID: 3066568907656987151}
+  m_Layer: 0
+  m_Name: Projectile_FrozenPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4689292046216748340
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3958470170023138390}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1527577420808434877}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3066568907656987151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3958470170023138390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0e3674f71dd61d47962bba0d87a759c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 5070013059151644927, guid: a2c4d773690a6a34e9efb359b5600a42, type: 3}
+  poolSize: 64
 --- !u!1 &3970661117847921376
 GameObject:
   m_ObjectHideFlags: 0
@@ -2373,7 +2470,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 5806846421179057254, guid: a55fc7081fb5c0d4ca2476a81321d22f, type: 3}
   poolSize: 64
---- !u!1 &5233883468079025462
+--- !u!1 &5249560337036341890
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2381,22 +2478,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 514303676543505169}
-  - component: {fileID: 5773305784761080397}
+  - component: {fileID: 8320291367035916273}
+  - component: {fileID: 5068181201652920921}
   m_Layer: 0
-  m_Name: ProjectilePool
+  m_Name: Projectile_ElectronicPool
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &514303676543505169
+--- !u!4 &8320291367035916273
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5233883468079025462}
+  m_GameObject: {fileID: 5249560337036341890}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -2405,19 +2502,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1527577420808434877}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5773305784761080397
+--- !u!114 &5068181201652920921
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5233883468079025462}
+  m_GameObject: {fileID: 5249560337036341890}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3265667a56d4dd468fc7705944c9a70, type: 3}
+  m_Script: {fileID: 11500000, guid: f8bf6427b19eb404a851efc51054c8ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 7998329793293827908, guid: 029bcb65cc580a84199e88327da28a20, type: 3}
+  prefab: {fileID: 6343527574963154041, guid: 1656039fdfcfcda43afd6a2b3b2d8ca9, type: 3}
   poolSize: 64
 --- !u!1 &5258997494777512955
 GameObject:
@@ -2510,6 +2607,52 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 4277913474186491831, guid: 2e3438af512a64c45853520c5299836d, type: 3}
+  poolSize: 64
+--- !u!1 &5494612546731937416
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7645891351293570315}
+  - component: {fileID: 7771118277366277595}
+  m_Layer: 0
+  m_Name: Projectile_BasicPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7645891351293570315
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5494612546731937416}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1527577420808434877}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7771118277366277595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5494612546731937416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a84f81b8fe9af4245b7b01eec4254459, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 4229061491368420041, guid: bb47981cd4bc93a4f861cfddcbb5c211, type: 3}
   poolSize: 64
 --- !u!1 &5697814361415250244
 GameObject:
@@ -2740,6 +2883,52 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 7814928831140784422, guid: 289dd2c1333baca4a80bc1718f5816d0, type: 3}
+  poolSize: 64
+--- !u!1 &6463383214384257549
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5594208233566059035}
+  - component: {fileID: 926670868232051034}
+  m_Layer: 0
+  m_Name: Projectile_FirePool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5594208233566059035
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6463383214384257549}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1527577420808434877}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &926670868232051034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6463383214384257549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 397473910a65ce8479db9c1349873aac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 9176090170436181266, guid: 160145cc4c48d5e439cbeb43e32d223a, type: 3}
   poolSize: 64
 --- !u!1 &7031249841331838895
 GameObject:
@@ -3246,6 +3435,52 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 2806132842441782123, guid: b7b355ef4a972eb49b4c1b8f32faf4d6, type: 3}
+  poolSize: 64
+--- !u!1 &7900085698158384219
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7565866077914757392}
+  - component: {fileID: 4675635821161040714}
+  m_Layer: 0
+  m_Name: Projectile_PoisonPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7565866077914757392
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7900085698158384219}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1527577420808434877}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4675635821161040714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7900085698158384219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6da073cb951412458d944fd9c29196f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 4256238096211143432, guid: 6f93765065c9fd643a56847029f8cfaa, type: 3}
   poolSize: 64
 --- !u!1 &7963256111554691458
 GameObject:

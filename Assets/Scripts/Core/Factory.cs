@@ -271,9 +271,34 @@ public class Factory : Singleton<Factory>
     private BoatHitPool boatHit;
 
     /// <summary>
-    /// Projectile 풀
+    /// Projectile_Basic 풀
     /// </summary>
-    private ProjectilePool projectile;
+    private Projectile_BasicPool projectile_Basic;
+
+    /// <summary>
+    /// Projectile_Fire 풀
+    /// </summary>
+    private Projectile_FirePool projectile_Fire;
+
+    /// <summary>
+    /// Projectile_Poison 풀
+    /// </summary>
+    private Projectile_PoisonPool projectile_Poison;
+
+    /// <summary>
+    /// Projectile_Freeze 풀
+    /// </summary>
+    private Projectile_FreezePool projectile_Freeze;
+
+    /// <summary>
+    /// Projectile_Electronic 풀
+    /// </summary>
+    private Projectile_ElectronicPool projectile_Electronic;
+
+    /// <summary>
+    /// Projectile_Frozen 풀
+    /// </summary>
+    private Projectile_FrozenPool projectile_Frozen;
 
     /// <summary>
     /// Melee 풀
@@ -544,8 +569,23 @@ public class Factory : Singleton<Factory>
         if (this.TryGetComponentInChildren<BoatHitPool>(out boatHit))
             boatHit.Initialize();
 
-        if (this.TryGetComponentInChildren<ProjectilePool>(out projectile))
-            projectile.Initialize();
+        if (this.TryGetComponentInChildren<Projectile_BasicPool>(out projectile_Basic))
+            projectile_Basic.Initialize();
+
+        if (this.TryGetComponentInChildren<Projectile_FirePool>(out projectile_Fire))
+            projectile_Fire.Initialize();
+
+        if (this.TryGetComponentInChildren<Projectile_PoisonPool>(out projectile_Poison))
+            projectile_Poison.Initialize();
+
+        if (this.TryGetComponentInChildren<Projectile_FreezePool>(out projectile_Freeze))
+            projectile_Freeze.Initialize();
+
+        if (this.TryGetComponentInChildren<Projectile_ElectronicPool>(out projectile_Electronic))
+            projectile_Electronic.Initialize();
+
+        if (this.TryGetComponentInChildren<Projectile_FrozenPool>(out projectile_Frozen))
+            projectile_Frozen.Initialize();
 
         if (this.TryGetComponentInChildren<MeleePool>(out melee))
             melee.Initialize();
@@ -1164,14 +1204,109 @@ public class Factory : Singleton<Factory>
     #endregion
 
     /// <summary>
-    /// Projectile을 소환하는 함수
+    /// Projectile 공격체를 소환하는 함수
+    /// </summary>
+    /// <param name="position">소환 위치</param>
+    /// <param name="rangedId">Projectile 아이디</param>
+    /// <returns>소환된 Projectile</returns>
+    public Projectile GetProjectile(Vector2 position, uint rangedId)
+    {
+        Projectile projectile = null;
+
+        switch (rangedId)
+        {
+            case 0:
+                projectile = GetProjectile_Basic(position);
+                break;
+
+            case 1:
+                projectile = GetProjectile_Fire(position);
+                break;
+
+            case 2:
+                projectile = GetProjectile_Poison(position);
+                break;
+
+            case 3:
+                projectile = GetProjectile_Freeze(position);
+                break;
+
+            case 4:
+                projectile = GetProjectile_Electronic(position);
+                break;
+
+            case 5:
+                projectile = GetProjectile_Frozen(position);
+                break;
+        }
+
+        return projectile;
+    }
+
+    /// <summary>
+    /// Projectile_Basic을 소환하는 함수
     /// </summary>
     /// <param name="position">소환 위치</param>
     /// <param name="angle">소환 각도</param>
-    /// <returns>소환한 Projectile</returns>
-    public Projectile GetProjectile(Vector2 position, float angle = 0.0f)
+    /// <returns>소환한 Projectile_Basic</returns>
+    public Projectile GetProjectile_Basic(Vector2 position, float angle = 0.0f)
     {
-        return projectile.GetObject(position, new Vector3(0, 0, angle));
+        return projectile_Basic.GetObject(position, new Vector3(0, 0, angle));
+    }
+
+    /// <summary>
+    /// Projectile_Fire를 소환하는 함수
+    /// </summary>
+    /// <param name="position">소환 위치</param>
+    /// <param name="angle">소환 각도</param>
+    /// <returns>소환한 Projectile_Fire</returns>
+    public Projectile GetProjectile_Fire(Vector2 position, float angle = 0.0f)
+    {
+        return projectile_Fire.GetObject(position, new Vector3(0, 0, angle));
+    }
+
+    /// <summary>
+    /// Projectile_Poison을 소환하는 함수
+    /// </summary>
+    /// <param name="position">소환 위치</param>
+    /// <param name="angle">소환 각도</param>
+    /// <returns>소환한 Projectile_Poison</returns>
+    public Projectile GetProjectile_Poison(Vector2 position, float angle = 0.0f)
+    {
+        return projectile_Poison.GetObject(position, new Vector3(0, 0, angle));
+    }
+
+    /// <summary>
+    /// Projectile_Freeze를 소환하는 함수
+    /// </summary>
+    /// <param name="position">소환 위치</param>
+    /// <param name="angle">소환 각도</param>
+    /// <returns>소환한 Projectile_Freeze</returns>
+    public Projectile GetProjectile_Freeze(Vector2 position, float angle = 0.0f)
+    {
+        return projectile_Freeze.GetObject(position, new Vector3(0, 0, angle));
+    }
+
+    /// <summary>
+    /// Projectile_Electronic을 소환하는 함수
+    /// </summary>
+    /// <param name="position">소환 위치</param>
+    /// <param name="angle">소환 각도</param>
+    /// <returns>소환한 Projectile_Electronic</returns>
+    public Projectile GetProjectile_Electronic(Vector2 position, float angle = 0.0f)
+    {
+        return projectile_Electronic.GetObject(position, new Vector3(0, 0, angle));
+    }
+
+    /// <summary>
+    /// Projectile_Frozen을 소환하는 함수
+    /// </summary>
+    /// <param name="position">소환 위치</param>
+    /// <param name="angle">소환 각도</param>
+    /// <returns>소환한 Projectile_Frozen</returns>
+    public Projectile GetProjectile_Frozen(Vector2 position, float angle = 0.0f)
+    {
+        return projectile_Frozen.GetObject(position, new Vector3(0, 0, angle));
     }
 
     /// <summary>

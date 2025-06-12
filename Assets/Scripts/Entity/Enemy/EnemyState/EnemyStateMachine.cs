@@ -57,7 +57,7 @@ public class EnemyStateMachine : StateMachine<EnemyController>
 
         Rigidbody = sender.GetComponent<Rigidbody2D>();
         AttackHandler = sender.GetComponentInChildren<EnemyAttackHandler>();
-        Animator = sender.GetComponent<Animator>();
+        Animator = sender.GetComponentInChildren<Animator>();
         BattleStatus = sender.GetComponent<IBattleStatus>();
 
         var behaviour = Animator.GetBehaviour<ExitStateBehaviour>();
