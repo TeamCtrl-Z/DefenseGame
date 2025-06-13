@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Enemy의 공격 상태를 나타내는 클래스
+/// Enemy의 공격상태를 나타내는 클래스
 /// </summary>
 public abstract class EnemyBaseState : IState<EnemyController>
 {
