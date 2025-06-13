@@ -1,7 +1,7 @@
 /// <summary>
-/// Fairy의 Status 데이터 클래스
+/// Fairy의 기본(고유) Status 데이터 클래스
 /// </summary>
-public class FairyStatusData
+public class FairyBaseStatusData
 {
     /// <summary>
     /// Fairy의 ID

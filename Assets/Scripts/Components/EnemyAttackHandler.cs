@@ -73,7 +73,7 @@ public class EnemyAttackHandler : MonoBehaviour
     private void BuildAttack()
     {
         HittingData data = new HittingData();
-        data.Damage = status.AttackPower;
+        data.Damage = status.RealAttackPower;
         Debug.Log($"{transform.parent.name} : 어택 파워 {data.Damage}");
 
         attack = status.AttackType switch

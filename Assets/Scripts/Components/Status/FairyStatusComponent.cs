@@ -13,34 +13,34 @@ public class FairyStatusComponent : MonoBehaviour, IBattleStatus, ICharacterIden
     [field: SerializeField] public int ID { get; private set; }
 
     /// <summary>
-    /// 공격 속도(쿨타임)
+    /// 페어리 강화정도, 아이템에 따른 공격속도 보정치
     /// </summary>
-    private float attackSpeed;
+    public float AttackSpeedModifier { get; private set; }
 
     /// <summary>
-    /// 공격 속도를 반환하는 프로퍼티
+    /// 실제 공격 속도를 반환하는 프로퍼티(계산 법 : 기본 페어리 고유 (stat + 추가 stat) * 버프 계수)
     /// </summary>
-    public float AttackSpeed => attackSpeed * AttackSpeedFactor;
+    public float RealAttackSpeed => Mathf.Max((statData.AttackSpeed + AttackSpeedModifier) * AttackSpeedBuffMultiflier, 0.0f);
 
     /// <summary>
-    /// 공격력(기본 공격)
+    /// 페어리 강화정도, 아이템에 따른 공격력 보정치
     /// </summary>
-    private float attackPower;
+    public float AttackPowerModifier { get; private set; }
 
     /// <summary>
     /// 공격력을 반환하는 프로퍼티
     /// </summary>
-    public float AttackPower => attackPower * AttackPowerFactor;
+    public float RealAttackPower => Mathf.Max((statData.AttackPower + AttackPowerModifier) * AttackPowerBuffMultiflier, 0.0f);
 
     /// <summary>
     /// 공격속도 배수(버프 용도)
     /// </summary>
-    [field: SerializeField] public float AttackSpeedFactor { get; private set; } = 1f;
+    [field: SerializeField] public float AttackSpeedBuffMultiflier { get; private set; } = 1f;
 
     /// <summary>
     /// 공격력 배수(버프 용도)
     /// </summary>
-    [field: SerializeField] public float AttackPowerFactor { get; private set; } = 1f;
+    [field: SerializeField] public float AttackPowerBuffMultiflier { get; private set; } = 1f;
 
     /// <summary>
     /// 페어리의 공격 유형
@@ -55,7 +55,7 @@ public class FairyStatusComponent : MonoBehaviour, IBattleStatus, ICharacterIden
     /// <summary>
     /// 페어리 Status 데이터(CSV파일 불러온 데이터)
     /// </summary>
-    private FairyStatusData statData;
+    private FairyBaseStatusData statData;
 
     /// <summary>
     /// 공격력이 변경되었을 때 호출되는 이벤트
@@ -83,10 +83,10 @@ public class FairyStatusComponent : MonoBehaviour, IBattleStatus, ICharacterIden
     /// </summary>
     private void ApplyStatusData()
     {
-        attackPower = statData.AttackPower;
-        attackSpeed = statData.AttackSpeed;
         AttackType = statData.AttackType;
         AttackId = statData.AttackId;
+
+        //AttackPowerModifier += DataService.Instance.FairyDataManager.DetailStatusData.
 
         Debug.Log(statData.AttackType);
     }
@@ -97,12 +97,7 @@ public class FairyStatusComponent : MonoBehaviour, IBattleStatus, ICharacterIden
     /// <param name="delta"> 조정할 양 </param>
     public void AdjustAttackPower(float delta)
     {
-        attackPower += delta;
-
-        if (AttackPower < 0)
-            attackPower = 0;
-
-        OnAttackPowerChanged?.Invoke(attackPower);
+        AttackPowerModifier += delta;
     }
 
     /// <summary>
@@ -111,12 +106,7 @@ public class FairyStatusComponent : MonoBehaviour, IBattleStatus, ICharacterIden
     /// <param name="amount"> 조정할 양 </param>
     public void AdjustAttackSpeed(float amount)
     {
-        attackSpeed = amount;
-
-        if (attackSpeed < 0)
-            attackSpeed = 0;
-
-        OnAttackSpeedChanged?.Invoke(attackSpeed);
+        AttackSpeedModifier += amount;
     }
 
     /// <summary>
@@ -127,9 +117,9 @@ public class FairyStatusComponent : MonoBehaviour, IBattleStatus, ICharacterIden
     public void BuffStatus(BuffType type, float amount)
     {
         if (type == BuffType.AttackSpeed)
-            AttackSpeedFactor = amount;
+            AttackSpeedBuffMultiflier = amount;
         else if (type == BuffType.AttackPower)
-            AttackPowerFactor = amount;
+            AttackPowerBuffMultiflier = amount;
     }
 
     /// <summary>
@@ -139,8 +129,8 @@ public class FairyStatusComponent : MonoBehaviour, IBattleStatus, ICharacterIden
     public void BuffStop(BuffType type)
     {
         if (type == BuffType.AttackSpeed)
-            AttackSpeedFactor = 1f;
+            AttackSpeedBuffMultiflier = 1f;
         else if (type == BuffType.AttackPower)
-            AttackPowerFactor = 1f;
+            AttackPowerBuffMultiflier = 1f;
     }
 }

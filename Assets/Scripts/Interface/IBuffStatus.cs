@@ -6,12 +6,12 @@ public interface IBuffStatus
     /// <summary>
     /// 공격 속도 배수
     /// </summary>
-    public float AttackSpeedFactor { get; }
+    public float AttackSpeedBuffMultiflier { get; }
 
     /// <summary>
     /// 공격력 배수
     /// </summary>
-    public float AttackPowerFactor { get; }
+    public float AttackPowerBuffMultiflier { get; }
 
     /// <summary>
     /// 버프해주는 함수

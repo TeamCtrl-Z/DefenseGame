@@ -32,7 +32,7 @@ public class FairyAttackHandler : MonoBehaviour
     /// <summary>
     /// 공격 쿨타임
     /// </summary>
-    private float coolTime => status.AttackSpeed;
+    private float coolTime => status.RealAttackSpeed;
 
     /// <summary>
     /// Fairy의 Animator
@@ -63,7 +63,7 @@ public class FairyAttackHandler : MonoBehaviour
     private void BuildAttack()
     {
         HittingData data = new HittingData();
-        data.Damage = status.AttackPower;
+        data.Damage = status.RealAttackPower;
 
         attack = status.AttackType switch
         {

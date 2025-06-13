@@ -35,6 +35,11 @@ public class DataService : Singleton<DataService>
     public BoatDataManager BoatDataManager { get; private set; }
 
     /// <summary>
+    /// 아이템 데이터 관리자
+    /// </summary>
+    public ItemDataManager ItemDataManager { get; private set; }
+
+    /// <summary>
     /// 서버 데이터를 받아서 관리해야하는 데이터 메니저 리스트
     /// </summary>
     private List<IServerData> serverDataMgrs;
@@ -50,7 +55,10 @@ public class DataService : Singleton<DataService>
             UserDataManager = userDataMgr;
 
         if (this.TryGetComponentInChildren<FairyDataManager>(out FairyDataManager fairyDataMgr))
+        {
             FairyDataManager = fairyDataMgr;
+            FairyDataManager.Initialize();
+        }
 
         if (this.TryGetComponentInChildren<EnemyDataManager>(out EnemyDataManager enemyDataMgr))
             EnemyDataManager = enemyDataMgr;
@@ -63,6 +71,12 @@ public class DataService : Singleton<DataService>
 
         if (this.TryGetComponentInChildren<BoatDataManager>(out BoatDataManager boatDataManager))
             BoatDataManager = boatDataManager;
+
+        if (this.TryGetComponentInChildren<ItemDataManager>(out ItemDataManager itemDataMgr))
+        {
+            ItemDataManager = itemDataMgr;
+            ItemDataManager.Initialize();
+        }
 
         serverDataMgrs = GetComponentsInChildren<IServerData>().ToList();
     }

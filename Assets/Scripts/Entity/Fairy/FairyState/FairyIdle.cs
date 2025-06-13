@@ -29,7 +29,7 @@ public class FairyIdle : FairyBase
     {
         base.Enter(sender);
 
-        m_waitTime = stateMachine.BattleStatus.AttackSpeed;
+        m_waitTime = stateMachine.BattleStatus.RealAttackSpeed;
     }
 
     /// <summary>

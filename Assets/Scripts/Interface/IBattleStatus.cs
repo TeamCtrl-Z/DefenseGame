@@ -16,12 +16,12 @@ public interface IBattleStatus
     /// <summary>
     /// 기본 공격력
     /// </summary>
-    public float AttackPower { get; }
+    public float RealAttackPower { get; }
 
     /// <summary>
     /// 기본 공격 속도
     /// </summary>
-    public float AttackSpeed { get; }
+    public float RealAttackSpeed { get; }
 
     /// <summary>
     /// 공격력을 delta만큼 가감

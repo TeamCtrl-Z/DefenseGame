@@ -61,12 +61,12 @@ public class EnemyStatusComponent : MonoBehaviour, IMoveStatus, IHealthStatus, I
     /// <summary>
     /// Enemy의 공격력
     /// </summary>
-    public float AttackPower { get; private set; }
+    public float RealAttackPower { get; private set; }
 
     /// <summary>
     /// Enemy의 공격 속도
     /// </summary>
-    public float AttackSpeed { get; private set; }
+    public float RealAttackSpeed { get; private set; }
 
     /// <summary>
     /// Enemy의 공격 범위
@@ -106,8 +106,8 @@ public class EnemyStatusComponent : MonoBehaviour, IMoveStatus, IHealthStatus, I
         moveSpeed = statData.MoveSpeed;
         MaxHP = statData.HP;
         CurrentHP = MaxHP;
-        AttackPower = statData.AttackPower;
-        AttackSpeed = statData.AttackSpeed;
+        RealAttackPower = statData.AttackPower;
+        RealAttackSpeed = statData.AttackSpeed;
         AttackRange = statData.AttackRange;
         AttackType = statData.AttackType;
         AttackId = statData.AttackId;
@@ -144,12 +144,12 @@ public class EnemyStatusComponent : MonoBehaviour, IMoveStatus, IHealthStatus, I
     /// <param name="delta"> 조정할 양 </param>
     public void AdjustAttackPower(float delta)
     {
-        AttackPower += delta;
+        RealAttackPower += delta;
 
-        if (AttackPower < 0)
-            AttackPower = 0;
+        if (RealAttackPower < 0)
+            RealAttackPower = 0;
 
-        OnAttackPowerChanged?.Invoke(AttackPower);
+        OnAttackPowerChanged?.Invoke(RealAttackPower);
     }
 
     /// <summary>
@@ -158,11 +158,11 @@ public class EnemyStatusComponent : MonoBehaviour, IMoveStatus, IHealthStatus, I
     /// <param name="delta"> 조정할 양 </param>
     public void AdjustAttackSpeed(float delta)
     {
-        AttackSpeed = delta;
+        RealAttackSpeed = delta;
 
-        if (AttackSpeed < 0)
-            AttackSpeed = 0;
+        if (RealAttackSpeed < 0)
+            RealAttackSpeed = 0;
 
-        OnAttackSpeedChanged?.Invoke(AttackSpeed);
+        OnAttackSpeedChanged?.Invoke(RealAttackSpeed);
     }
 }
