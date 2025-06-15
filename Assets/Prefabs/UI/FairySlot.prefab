@@ -134,7 +134,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -221,6 +221,7 @@ GameObject:
   - component: {fileID: 483453605022576487}
   - component: {fileID: 1190417159965177117}
   - component: {fileID: 4056796901335013552}
+  - component: {fileID: 974193959600554840}
   m_Layer: 0
   m_Name: FairySlot
   m_TagString: Untagged
@@ -331,3 +332,17 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &974193959600554840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4345980099339427353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aabc30c4cae404a4684375e99a1ca732, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fairyLevel: {fileID: 4131782794219452224}
+  fairyImage: {fileID: 1965321194970987099}

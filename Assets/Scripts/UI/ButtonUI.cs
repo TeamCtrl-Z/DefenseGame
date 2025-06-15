@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// 버튼 UI 클래스
+/// </summary>
 public class ButtonUI : MonoBehaviour
 {
     /// <summary>
@@ -19,10 +22,7 @@ public class ButtonUI : MonoBehaviour
 
     private void Start()
     {
-        fairyInfoButton.onClick.AddListener(() =>
-        {
-            OpenFairyInfoUI();
-        });
+        fairyInfoButton.onClick.AddListener(() => { OpenFairyInfoUI(); });
     }
 
     /// <summary>
@@ -30,18 +30,25 @@ public class ButtonUI : MonoBehaviour
     /// </summary>
     private void OpenFairyInfoUI()
     {
-        fairyInfoCG.alpha = 1f;
-        fairyInfoCG.interactable = true;
-        fairyInfoCG.blocksRaycasts = true;
+        StartCoroutine(OpenFairyInfoUICoroutine());
     }
 
     /// <summary>
-    /// 페어리 정보창을 닫는 함수
+    /// 페어리 정보창을 끄는 코루틴
     /// </summary>
-    private void CloseFairyInfoUI()
+    private IEnumerator OpenFairyInfoUICoroutine()
     {
-        fairyInfoCG.alpha = 0f;
-        fairyInfoCG.interactable = false;
-        fairyInfoCG.blocksRaycasts = false;
+        float timeElapsed = 0.0f;
+
+        while (timeElapsed < 0.2f)
+        {
+            timeElapsed += Time.deltaTime;
+            fairyInfoCG.alpha = timeElapsed * 5;
+            yield return null;
+        }
+
+        fairyInfoCG.alpha = 1f;
+        fairyInfoCG.interactable = true;
+        fairyInfoCG.blocksRaycasts = true;
     }
 }
