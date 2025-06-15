@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,40 +17,45 @@ public enum ItemType
 public class FairyEquipComponent : MonoBehaviour
 {
     /// <summary>
-    /// 페어리 데이터 메니저 참조용
+    /// 아이템 데이터 매니저 참조용
     /// </summary>
-    private FairyDataManager dataManager => DataService.Instance.FairyDataManager;
-
-    /// <summary>
-    /// 페어리 아이디 가져오기 위한 변수
-    /// </summary>
-    private ICharacterIdentity fid;
+    private ItemDataManager itemDataMgr => DataService.Instance.ItemDataManager;
 
     /// <summary>
     /// 착용 정보 테이블
     /// </summary>
-    private Dictionary<ItemType, uint> equipTable = new();
+    private Dictionary<ItemType, string> equipTable = new();
 
-    private void Awake()
+    /// <summary>
+    /// 읽기전용 착용한 아이템 테이블 프로퍼티
+    /// </summary>
+    public IReadOnlyDictionary<ItemType, string> GetEquipTable => equipTable;
+
+    /// <summary>
+    /// 페어리 소환 전 장착된 아이템 세팅(초기화)
+    /// </summary>
+    /// <param name="data"></param>
+    public void Initialize(FairyInstanceData data)
     {
-        fid = GetComponent<ICharacterIdentity>();
-
         for (int i = 0; i < (int)ItemType.Max; i++)
         {
-            equipTable[(ItemType)i] = 0;
+            equipTable[(ItemType)i] = null;
         }
 
-        if (dataManager.TryGetDetailStatData(fid.ID, out FairyDetailStatusData data))
+        foreach (string ioid in data.EquippedItemList)
         {
-            foreach (string ioid in data.ItemList)
+            if (itemDataMgr.TryGetItemDataByIoid(ioid, out ItemData itemData))
             {
-
+                equipTable[itemData.ItemType] = ioid;
             }
         }
     }
 
-    public void DoEquip(ItemType type, uint iid)
+    /// <summary>
+    /// 아이템 착용 최신화 함수
+    /// </summary>
+    public void RefreshEquipItems()
     {
-
+        // TODO : 착용 로직
     }
 }

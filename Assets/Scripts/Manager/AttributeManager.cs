@@ -21,13 +21,13 @@ public class AttributeManager : MonoBehaviour
     /// <summary>
     /// 페어리 속성 데이터
     /// </summary>
-    private FairyAttributeData attributeData;
+    private FairySkillData attributeData;
 
     private void Awake()
     {
         id = GetComponentInParent<ICharacterIdentity>();
 
-        if (DataService.Instance.FairyDataManager.TryGetAttributeData(id.ID, out attributeData) == false)
+        if (Table_Fairy.Instance.TryGetSkillData(id.ID, out attributeData) == false)
         {
             Debug.Log("존재하지 않은 fid입니다.");
         }

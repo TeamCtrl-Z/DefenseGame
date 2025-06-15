@@ -11,7 +11,7 @@ public class BoatDataManager : MonoBehaviour
     /// <summary>
     /// Boat 데이터를 담고 있는 딕셔너리
     /// </summary>
-    private Dictionary<int, BoatStatusData> statusTable;
+    private Dictionary<uint, BoatStatusData> statusTable;
 
     /// <summary>
     /// 스텟 데이터를 가져오는 메서드
@@ -19,7 +19,7 @@ public class BoatDataManager : MonoBehaviour
     /// <param name="level">보트 레벨</param>
     /// <param name="statData">보트 Stat Data</param>
     /// <returns>true면 성공, false면 실패</returns>
-    public bool TryGetStatData(int level, out BoatStatusData statData)
+    public bool TryGetStatData(uint level, out BoatStatusData statData)
     {
         // 늦은 초기화
         if (statusTable == null)

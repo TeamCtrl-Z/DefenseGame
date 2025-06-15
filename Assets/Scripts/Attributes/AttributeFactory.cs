@@ -14,7 +14,7 @@ public static class AttributeFactory
     /// <param name="data"> FairyAttributeData </param>
     /// <param name="user"> 속성 소유자(페어리) </param>
     /// <returns>Attribute 클래스</returns>
-    public static AttributeBase CreateAttribute(FairyAttributeData data, GameObject user)
+    public static AttributeBase CreateAttribute(FairySkillData data, GameObject user)
     {
         if ((FairyType)data.FID == FairyType.Basic || (FairyType)data.FID == FairyType.Light)
             return null;

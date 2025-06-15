@@ -17,7 +17,7 @@ public static class CsvLoader
     /// <typeparam name="T">CSV 각 행을 매핑할 클래스 타입 (public 프로퍼티/필드로 값이 주입될 것)</typeparam>
     /// <param name="resourceName">Resources/Data 폴더 아래에 있는 CSV 파일명 (확장자 제외)</param>
     /// <returns>첫 번째 컬럼(int) 값을 키로 하고, 해당 행을 T 타입으로 매핑한 값을 값으로 가지는 Dictionary</returns>
-    public static Dictionary<int, T> LoadTable<T>(string resourceName) where T : new()
+    public static Dictionary<uint, T> LoadTable<T>(string resourceName) where T : new()
     {
         // 1) Resources/Data/{resourceName}.csv 파일 로드
         var ta = Resources.Load<TextAsset>($"Data/{resourceName}");
@@ -102,7 +102,7 @@ public static class CsvLoader
         }
 
         // 6) 첫 번째 컬럼(keyColumnName)을 읽어올 수 있는 Func<T, int> 델리게이트 생성
-        Func<T, int> getKey = CreateKeyGetter<T>(keyColumnName);
+        Func<T, uint> getKey = CreateKeyGetter<T>(keyColumnName);
 
         // 7) List<T>를 Dictionary<int, T>로 변환하여 반환
         return list.ToDictionary(getKey);
@@ -110,13 +110,13 @@ public static class CsvLoader
 
     /// <summary>
     /// keyColumnName에 해당하는 프로퍼티 또는 필드를 찾아,
-    /// 해당 멤버가 int 형인 경우에만 객체에서 키 값을 꺼내는 델리게이트를 생성한다.
+    /// 해당 멤버가 uint 형인 경우에만 객체에서 키 값을 꺼내는 델리게이트를 생성한다.
     /// </summary>
     /// <typeparam name="T">객체 타입</typeparam>
     /// <param name="keyColumnName">키로 사용할 컬럼(프로퍼티/필드) 이름</param>
     /// <returns>obj => obj.[keyColumnName] 형태의 Func<T, int></returns>
     /// <exception cref="Exception">해당 타입에 int 형 키 컬럼이 없으면 던짐</exception>
-    private static Func<T, int> CreateKeyGetter<T>(string keyColumnName) where T : new()
+    private static Func<T, uint> CreateKeyGetter<T>(string keyColumnName) where T : new()
     {
         var type = typeof(T);
 
@@ -125,18 +125,18 @@ public static class CsvLoader
             keyColumnName,
             BindingFlags.Public | BindingFlags.Instance | BindingFlags.IgnoreCase
         );
-        if (prop != null && prop.PropertyType == typeof(int))
-            return obj => (int)prop.GetValue(obj);
+        if (prop != null && prop.PropertyType == typeof(uint))
+            return obj => (uint)prop.GetValue(obj);
 
         // 2) 필드에서 찾기 (대소문자 무시)
         var field = type.GetField(
             keyColumnName,
             BindingFlags.Public | BindingFlags.Instance | BindingFlags.IgnoreCase
         );
-        if (field != null && field.FieldType == typeof(int))
-            return obj => (int)field.GetValue(obj);
+        if (field != null && field.FieldType == typeof(uint))
+            return obj => (uint)field.GetValue(obj);
 
         throw new Exception(
-            $"'{type.Name}' 타입에 '{keyColumnName}'(int) 프로퍼티/필드가 없습니다.");
+            $"'{type.Name}' 타입에 '{keyColumnName}'(uint) 프로퍼티/필드가 없습니다.");
     }
 }

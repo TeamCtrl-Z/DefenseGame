@@ -32,7 +32,7 @@ public class BoatStatusComponent : MonoBehaviour, IHealthStatus
     /// Boat의 Level
     /// </summary>
     [field: SerializeField]
-    public int Level { get; private set; }
+    public uint Level { get; private set; }
 
     /// <summary>
     /// Boat의 StatusData

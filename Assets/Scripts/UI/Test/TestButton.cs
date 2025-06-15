@@ -19,7 +19,7 @@ public class TestButton : MonoBehaviour
         
         //int key = UnityEngine.Random.Range(Mathf.RoundToInt(enemyTypeRange.x), Mathf.RoundToInt(enemyTypeRange.y) + 1);
         //Debug.Log(key);
-        FairyController fairy = Factory.Instance.GetFariyByType(fairyType, Vector2.zero);
+        FairyController fairy = DataService.Instance.FairyDataManager.SpawnFairyByFid((uint)fairyType, Vector2.zero);
         PlaceableObject placeable = fairy.GetComponent<PlaceableObject>();
         int nodeIdx;
         do

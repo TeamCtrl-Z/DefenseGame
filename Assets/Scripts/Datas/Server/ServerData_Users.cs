@@ -8,7 +8,7 @@ using UnityEngine;
 /// <summary>
 /// 유저 정보를 요청하는 서버 데이터 클래스
 /// </summary>
-public class ServerData_Users : Singleton<ServerData_Users>
+public static class ServerData_Users
 {
     /// <summary>
     /// 회원가입을 요청하는 코루틴 함수
@@ -16,7 +16,7 @@ public class ServerData_Users : Singleton<ServerData_Users>
     /// <param name="success">성공 시 실행되는 이벤트</param>
     /// <param name="fail">실패 시 실행되는 이벤트</param>
     /// <returns></returns>
-    public IEnumerator RequestRegister(Action success, Action fail)
+    public static IEnumerator RequestRegister(Action success, Action fail)
     {
         string deviceId = SystemInfo.deviceUniqueIdentifier;
 
@@ -53,7 +53,7 @@ public class ServerData_Users : Singleton<ServerData_Users>
     /// <param name="success">성공 시 실행되는 이벤트</param>
     /// <param name="fail">실패 시 실행되는 이벤트</param>
     /// <returns></returns>
-    public IEnumerator RequestLogin(Action success, Action fail)
+    public static IEnumerator RequestLogin(Action success, Action fail)
     {
         string loginUrl = "/user/login";
         Network network = new Network(loginUrl, "POST");
@@ -79,7 +79,7 @@ public class ServerData_Users : Singleton<ServerData_Users>
     /// <param name="success">성공 시 실행되는 이벤트</param>
     /// <param name="fail">실패 시 실행되는 이벤트</param>
     /// <returns></returns>
-    public IEnumerator RequestDelete(Action success, Action fail)
+    public static IEnumerator RequestDelete(Action success, Action fail)
     {
         string deleteUrl = "/user/delete";
 

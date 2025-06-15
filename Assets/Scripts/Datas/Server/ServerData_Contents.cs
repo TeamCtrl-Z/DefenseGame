@@ -7,7 +7,7 @@ using UnityEngine;
 /// <summary>
 /// 방치형 게임에 관한 서버 데이터
 /// </summary>
-public class ServerData_Contents : Singleton<ServerData_Contents>
+public static class ServerData_Contents
 {
     /// <summary>
     /// 스테이지를 클리어할 때 요청하는 함수
@@ -15,7 +15,7 @@ public class ServerData_Contents : Singleton<ServerData_Contents>
     /// <param name="success"> 성공할 때 호출 </param>
     /// <param name="fail">실패할 때 호출</param>
     /// <returns></returns>
-    public IEnumerator RequestStageClear(Action success, Action fail)
+    public static IEnumerator RequestStageClear(Action success, Action fail)
     {
         Debug.Log("RequestStageClear 시작");
         string url = "/contents/stage/clear";
@@ -45,7 +45,7 @@ public class ServerData_Contents : Singleton<ServerData_Contents>
     /// <param name="success"> 성공할 때 호출 </param>
     /// <param name="fail">실패할 때 호출</param>
     /// <returns></returns>
-    public IEnumerator RequestChapterClear(Action success, Action fail)
+    public static IEnumerator RequestChapterClear(Action success, Action fail)
     {
         string url = "/contents/chapter/clear";
         Network network = new Network(url, "POST");

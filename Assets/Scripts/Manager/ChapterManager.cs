@@ -170,7 +170,7 @@ public class ChapterManager : MonoBehaviour, IInitialize
                 DataService.Instance.ContentsDataManager.NextStage();
             }
 
-            yield return ServerData_Contents.Instance.RequestStageClear(success, fail);
+            yield return ServerData_Contents.RequestStageClear(success, fail);
 
             if (currentChapter.stages[currentChapter.stages.Length - 1] == currentStage)
             {
@@ -202,7 +202,7 @@ public class ChapterManager : MonoBehaviour, IInitialize
                 DataService.Instance.ContentsDataManager.NextStage();
             }
 
-            yield return ServerData_Contents.Instance.RequestChapterClear(success, fail);
+            yield return ServerData_Contents.RequestChapterClear(success, fail);
         }
 
     }

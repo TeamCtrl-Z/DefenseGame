@@ -6,5 +6,5 @@ public interface ICharacterIdentity
     /// <summary>
     /// 캐릭터 ID
     /// </summary>
-    public int ID { get; }
+    public uint ID { get; }
 }

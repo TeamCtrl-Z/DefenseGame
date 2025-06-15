@@ -144,7 +144,7 @@ public class LoginManager : MonoBehaviour
             StartCoroutine(LoginProcess());
         }
 
-        yield return ServerData_Users.Instance.RequestRegister(success, fail);
+        yield return ServerData_Users.RequestRegister(success, fail);
     }
     #endregion
 
@@ -171,7 +171,7 @@ public class LoginManager : MonoBehaviour
             OnRegister?.Invoke();
         }
 
-        yield return ServerData_Users.Instance.RequestLogin(successCB, failCB);
+        yield return ServerData_Users.RequestLogin(successCB, failCB);
     }
 
     #endregion
@@ -207,7 +207,7 @@ public class LoginManager : MonoBehaviour
             PerformLocalDeletion();
         }
 
-        ServerData_Users.Instance.RequestDelete(success, fail);
+        ServerData_Users.RequestDelete(success, fail);
     }
 
     /// <summary>

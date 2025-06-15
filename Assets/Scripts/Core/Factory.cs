@@ -1383,11 +1383,12 @@ public class Factory : Singleton<Factory>
     /// <summary>
     /// FairyType을 입력하여 Fairy를 받아오는 함수
     /// </summary>
-    /// <param name="type"> Fairy 유형 </param>
+    /// <param name="type"> Fairy 유형(fid) </param>
+    /// <param name="FairyInstanceData"> 페어리 주입 데이터 </param>
     /// <param name="position"> 위치 </param>
     /// <param name="angle"> 각도 </param>
     /// <returns></returns>
-    public FairyController GetFariyByType(FairyType type, Vector2 position, float angle = 0.0f)
+    public FairyController GetFariyByType(FairyType type, FairyInstanceData data, Vector2 position, float angle = 0.0f)
     {
         switch (type)
         {
