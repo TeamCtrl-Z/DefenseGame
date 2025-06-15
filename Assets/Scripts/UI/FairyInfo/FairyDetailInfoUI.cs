@@ -91,7 +91,7 @@ public class FairyDetailInfoUI : MonoBehaviour
     /// </summary>
     /// <param name="baseStatusData">페어리 기본 스테이터스 데이터</param>
     /// <param name="detailFairyData">페어리 상세 스테이터스 데이터</param>
-    public void RefreshFairyDetailInfo(FairyBaseStatusData baseStatusData, FairyDetailStatusData detailFairyData)
+    public void RefreshFairyDetailInfo(FairyBaseStatusData baseStatusData, FairyInstanceData fairyInstanceData)
     {
         // 페어리 사진
         fairyNumber.text = $"No.{baseStatusData.FID.ToString("D4")}";

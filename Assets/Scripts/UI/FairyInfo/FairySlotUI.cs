@@ -30,12 +30,12 @@ public class FairySlotUI : MonoBehaviour
     /// <summary>
     /// 페어리 디테일 데이터
     /// </summary>
-    private FairyDetailStatusData fairyStatus;
+    private FairyInstanceData fairyData;
 
     /// <summary>
     /// 슬롯을 터치하면 실행되는 이벤트
     /// </summary>
-    public event Action<FairyDetailStatusData> onSlotTouch;
+    public event Action<FairyInstanceData> onSlotTouch;
 
     private void Awake()
     {
@@ -45,19 +45,19 @@ public class FairySlotUI : MonoBehaviour
     private void Start()
     {
         SlotButton.onClick.AddListener(() => { 
-            onSlotTouch?.Invoke(fairyStatus);
+            onSlotTouch?.Invoke(fairyData);
         });
     }
 
     /// <summary>
     /// 페어리 슬롯을 업데이트하는 함수
     /// </summary>
-    /// <param name="fairyStatus">페어리의 정보</param>
-    public void RefreshFairySlot(FairyDetailStatusData fairyStatus)
+    /// <param name="fairyData">페어리의 정보</param>
+    public void RefreshFairySlot(FairyInstanceData fairyData)
     {
-        this.fairyStatus = fairyStatus;
+        this.fairyData = fairyData;
         // 페어리 이미지 넣기
         // fairyImage = 
-        fairyLevel.text = $"Lv.{fairyStatus.Level}";
+        fairyLevel.text = $"Lv.{fairyData.Level}";
     }
 }
