@@ -37,7 +37,6 @@ public class FrozenAttribute : AttributeBase, IOnIntervalEffect
         float radius = Mathf.Abs(origin.x) + 9.0f;
         var cols = Physics2D.OverlapCircleAll(origin, radius, LayerMask.GetMask("Enemy"));
         Effect snow = Factory.Instance.GetSnow(new Vector2(0.0f, 4.0f));
-        snow.transform.SetParent(UIManager.Instance.FullScreenEffects.transform);
 
         foreach (var col in cols)
         {
