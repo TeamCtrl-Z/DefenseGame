@@ -8,62 +8,8 @@ using UnityEngine;
 public class UIManager : Singleton<UIManager>
 {
     /// <summary>
-    /// 배경 테두리 로고를 위한 캔버스
+    /// 페어리 상세 정보창
     /// </summary>
-    public Canvas StaticHUD;
-
-    /// <summary>
-    /// HP바, 테두리 같은 많이 바뀌는 UI를 위한 캔버스
-    /// </summary>
-    public Canvas DynamicHUD;
-
-    /// <summary>
-    /// 팝업창을 위한 캔버스
-    /// </summary>
-    public Canvas WindowPopups;
-
-    /// <summary>
-    /// 화면 전체를 덮을 이펙트 효과를 위한 캔버스
-    /// </summary>
-    public Canvas FullScreenEffects;
-
-    /// <summary>
-    /// UIManager가 초기화 되는 메서드(UIManager가 생성되면 1번 호출됨)
-    /// </summary>
-    protected override void OnPreInitialize()
-    {
-        base.OnPreInitialize();
-
-        if (StaticHUD == null)
-        {
-            if (transform.TryFindByName("Canvas_StaticHUD", out Transform t))
-            {
-                StaticHUD = t.GetComponent<Canvas>();
-            }
-        }
-
-        if (DynamicHUD == null)
-        {
-            if (transform.TryFindByName("Canvas_DynamicHUD", out Transform t))
-            {
-                DynamicHUD = t.GetComponent<Canvas>();
-            }
-        }
-
-        if (WindowPopups == null)
-        {
-            if (transform.TryFindByName("Canvas_WindowPopups", out Transform t))
-            {
-                WindowPopups = t.GetComponent<Canvas>();
-            }
-        }
-
-        if (FullScreenEffects == null)
-        {
-            if (transform.TryFindByName("Canvas_FullscreenEffects", out Transform t))
-            {
-                FullScreenEffects = t.GetComponent<Canvas>();
-            }
-        }
-    }
+    [field : SerializeField]
+    public FairyInfoUI FairyInfo {  get; private set; }
 }
