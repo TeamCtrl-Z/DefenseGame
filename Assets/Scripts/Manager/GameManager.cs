@@ -1,3 +1,6 @@
+using UnityEditor.SearchService;
+using UnityEngine.SceneManagement;
+
 /// <summary>
 /// 각종 매니저를 관리하는 게임 매니저
 /// </summary>
@@ -58,15 +61,33 @@ public class GameManager : Singleton<GameManager>
     }
 
     /// <summary>
+    /// 게임 시작 전 초기화 작업
+    /// </summary>
+    protected override void OnPreInitialize()
+    {
+        base.OnPreInitialize();
+
+        // 테이블 로드
+        {
+            Table_Fairy.Instance.LoadTable();
+            Table_Items.Instance.LoadTable();
+        }
+    }
+
+    /// <summary>
     /// 씬이 로드될때마다 실행하는 함수(Additive 제외)
     /// </summary>
     protected override void OnInitialize()
     {
         base.OnInitialize();
 
+
         inputManager = GetComponent<InputManager>();
         inputManager.Initialize();
 
+        if (SceneManager.GetActiveScene().name == "LoginScene")
+            return;
+        
         containerManager = GetComponent<ContainerManager>();
         containerManager.Initialize();
 

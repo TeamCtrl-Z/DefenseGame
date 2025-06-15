@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using UnityEngine;
 
 /// <summary>
@@ -10,27 +11,27 @@ public class FairyStatusComponent : MonoBehaviour, IBattleStatus, ICharacterIden
     /// <summary>
     /// Fairy ID
     /// </summary>
-    [field: SerializeField] public int ID { get; private set; }
+    [field: SerializeField] public uint ID { get; private set; }
 
     /// <summary>
-    /// 페어리 강화정도, 아이템에 따른 공격속도 보정치
+    /// 페어리 공격속도(버프 적용 전)
     /// </summary>
-    public float AttackSpeedModifier { get; private set; }
+    private float attackSpeed;
 
     /// <summary>
-    /// 실제 공격 속도를 반환하는 프로퍼티(계산 법 : 기본 페어리 고유 (stat + 추가 stat) * 버프 계수)
+    /// 페어리 공격력(버프 전용 전)
     /// </summary>
-    public float RealAttackSpeed => Mathf.Max((statData.AttackSpeed + AttackSpeedModifier) * AttackSpeedBuffMultiflier, 0.0f);
+    private float attackPower;
 
     /// <summary>
-    /// 페어리 강화정도, 아이템에 따른 공격력 보정치
+    /// 실제 공격 속도를 반환하는 프로퍼티
     /// </summary>
-    public float AttackPowerModifier { get; private set; }
+    public float RealAttackSpeed => Mathf.Max(attackSpeed * AttackSpeedBuffMultiflier, 0.0f);
 
     /// <summary>
-    /// 공격력을 반환하는 프로퍼티
+    /// 실제 공격력을 반환하는 프로퍼티
     /// </summary>
-    public float RealAttackPower => Mathf.Max((statData.AttackPower + AttackPowerModifier) * AttackPowerBuffMultiflier, 0.0f);
+    public float RealAttackPower => Mathf.Max(attackPower * AttackPowerBuffMultiflier, 0.0f);
 
     /// <summary>
     /// 공격속도 배수(버프 용도)
@@ -53,43 +54,42 @@ public class FairyStatusComponent : MonoBehaviour, IBattleStatus, ICharacterIden
     public uint AttackId { get; private set; }
 
     /// <summary>
-    /// 페어리 Status 데이터(CSV파일 불러온 데이터)
+    /// 페어리 소환시 주입된 데이터를 가지고 초기화 작업
     /// </summary>
-    private FairyBaseStatusData statData;
-
-    /// <summary>
-    /// 공격력이 변경되었을 때 호출되는 이벤트
-    /// </summary>
-    public event Action<float> OnAttackPowerChanged;
-
-    /// <summary>
-    /// 공격속도가 변경되었을 때 호출되는 이벤트
-    /// </summary>
-    public event Action<float> OnAttackSpeedChanged;
-
-    void Awake()
+    /// <param name="data"></param>
+    public void Initialize(FairyInstanceData data)
     {
-        if (!DataService.Instance.FairyDataManager.TryGetStatData(ID, out statData))
-        {
-            Debug.LogError("Not Found");
-            return;
-        }
-
-        ApplyStatusData();
+        attackPower = data.AttackPower;
+        attackSpeed = data.AttackSpeed;
+        AttackType = data.AttackType;
+        AttackId = data.AttackId;
     }
 
-    /// <summary>
-    /// FairyStatusData 적용
-    /// </summary>
-    private void ApplyStatusData()
-    {
-        AttackType = statData.AttackType;
-        AttackId = statData.AttackId;
+    // void Awake()
+    // {
+    //     // Stat Data 가져오기
+    //     {
+    //         if (!DataService.Instance.FairyDataManager.TryGetStatData(ID, out statData))
+    //         {
+    //             Debug.LogError("Not Found");
+    //             return;
+    //         }
 
-        //AttackPowerModifier += DataService.Instance.FairyDataManager.DetailStatusData.
+    //         if (!DataService.Instance.FairyDataManager.TryGetDetailStatData(ID, out detailStatData))
+    //         {
+    //             Debug.LogError("Not Found");
+    //             return;
+    //         }
+    //     }
 
-        Debug.Log(statData.AttackType);
-    }
+    //     // 필요한 컴포넌트 가져오기
+    //     {
+    //         equipComponent = GetComponent<FairyEquipComponent>();
+    //     }
+
+    //     // 가져온 StatData 적용
+    //     ApplyStatusData();
+    // }
 
     /// <summary>
     /// Fairy의 공격력 적용 함수
@@ -97,7 +97,7 @@ public class FairyStatusComponent : MonoBehaviour, IBattleStatus, ICharacterIden
     /// <param name="delta"> 조정할 양 </param>
     public void AdjustAttackPower(float delta)
     {
-        AttackPowerModifier += delta;
+        
     }
 
     /// <summary>
@@ -106,7 +106,7 @@ public class FairyStatusComponent : MonoBehaviour, IBattleStatus, ICharacterIden
     /// <param name="amount"> 조정할 양 </param>
     public void AdjustAttackSpeed(float amount)
     {
-        AttackSpeedModifier += amount;
+        
     }
 
     /// <summary>

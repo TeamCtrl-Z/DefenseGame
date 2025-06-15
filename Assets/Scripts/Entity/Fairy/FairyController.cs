@@ -9,20 +9,8 @@ using UnityEngine;
 [RequireComponent(typeof(FairyStatusComponent))]
 public class FairyController : EntityController
 {
-    /// <summary>
-    /// Fairy의 애니메이터
-    /// </summary>
-    private Animator animator;
-
-    /// <summary>
-    /// Fairy의 Status
-    /// </summary>
-    private FairyStatusComponent fairyStatusComponent;
-
-
-    protected override void Awake()
+    public void Initialize(FairyInstanceData data)
     {
-        animator = GetComponent<Animator>();
-        fairyStatusComponent = GetComponent<FairyStatusComponent>();
+        
     }
 }

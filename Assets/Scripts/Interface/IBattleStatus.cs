@@ -34,14 +34,4 @@ public interface IBattleStatus
     /// </summary>
     /// <param name="delta">양수: 증가, 음수: 감소</param>
     public void AdjustAttackSpeed(float delta);
-
-    /// <summary>
-    /// 공격력이 변경되면 알리는 이벤트
-    /// </summary>
-    public event Action<float> OnAttackPowerChanged;
-
-    /// <summary>
-    /// 공격 속도가 변경되면 알리는 이벤트
-    /// </summary>
-    public event Action<float> OnAttackSpeedChanged;
 }

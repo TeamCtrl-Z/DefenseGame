@@ -5,50 +5,26 @@ using Newtonsoft.Json.Linq;
 using UnityEngine;
 
 /// <summary>
-/// 페어리의 데이터들을 관리하는 클래스(CSV파일 로드 데이터)
+/// 페어리의 데이터들을 관리하는 클래스
 /// </summary>
 public class FairyDataManager : MonoBehaviour, IServerData
 {
     /// <summary>
-    /// 페어리 status 데이터 테이블 - k : fid, v : FairyStatusData
+    /// 내가 보유한 페어리 인스턴스 테이블- k : foid, v : FairyInstanceData
     /// </summary>
-    private Dictionary<int, FairyBaseStatusData> statusTable;
+    private Dictionary<string, FairyInstanceData> instanceFoidTable;
 
     /// <summary>
-    /// 페어리 attribute 데이터 테이블 - k : fid, v : FairyStatusData
+    /// 내가 보유한 페어리 인스턴스 테이블 (fid 버전)
     /// </summary>
-    private Dictionary<int, FairyAttributeData> attributeTable;
-
-    /// <summary>
-    /// 페어리 상세 정보(서버에서 가져온 값)
-    /// </summary>
-    private Dictionary<int, FairyDetailStatusData> detailStatusTable;
+    private Dictionary<uint, FairyInstanceData> instanceFidTable;
 
     /// <summary>
     /// 초기화
     /// </summary>
     public void Initialize()
     {
-        statusTable = CsvLoader.LoadTable<FairyBaseStatusData>("table_fairyStatus");
-        attributeTable = CsvLoader.LoadTable<FairyAttributeData>("table_fairyAttribute");
-        detailStatusTable = new();
-    }
-
-    #region StatusData
-    /// <summary>
-    /// StatusData를 얻는 함수
-    /// </summary>
-    /// <param name="fid"> 페어리 아이디 </param>
-    /// <param name="statData"> 해당 statusData </param>
-    /// <returns>성공 실패</returns>
-    public bool TryGetStatData(int fid, out FairyBaseStatusData statData)
-    {
-        statData = null;
-        if (!statusTable.ContainsKey(fid))
-            return false;
-
-        statData = statusTable[fid];
-        return true;
+        instanceFoidTable = new();
     }
 
     /// <summary>
@@ -57,56 +33,28 @@ public class FairyDataManager : MonoBehaviour, IServerData
     /// <param name="fid"> 패어리 아이디 </param>
     /// <param name="statData"> 해당 detailStatusData </param>
     /// <returns>성공 실패</returns>
-    public bool TryGetDetailStatData(int fid, out FairyDetailStatusData statData)
+    public bool TryGetInstanceData(string foid, out FairyInstanceData statData)
     {
         statData = null;
-        if (!statusTable.ContainsKey(fid))
+        if (!instanceFoidTable.ContainsKey(foid))
             return false;
 
-        statData = detailStatusTable[fid];
+        statData = instanceFoidTable[foid];
         return true;
     }
 
     /// <summary>
-    /// 해당 페어리의 타겟팅 타입을 얻는 함수
+    /// 페어리 소환 함수
     /// </summary>
-    /// <param name="fid"> 페어리 아이디 </param>
-    /// <param name="targetingType"> 해당 타겟팅 타입 </param>
-    /// <returns> 성공 실패 </returns>
-    public bool TryGetTargetingType(int fid, out TargetingType targetingType)
+    /// <param name="fid"> 소환하고 싶은 페어리 아이디 </param>
+    /// <param name="position"> 소환 위치 </param>
+    /// <param name="angle"> 소환 각도 </param>
+    /// <returns> 소환 페어리 </returns>
+    public FairyController SpawnFairyByFid(uint fid, Vector3 position, float angle = 0.0f)
     {
-        targetingType = TargetingType.Nearest;
-        if (!statusTable.ContainsKey(fid))
-            return false;
-
-        FairyBaseStatusData statData = statusTable[fid];
-        if (statData == null)
-            return false;
-
-        targetingType = statData.Target;
-        return true;
-    }
-    #endregion
-
-    #region AttributeData
-
-    /// <summary>
-    /// AttributeData(Csv파일 데이터 저장본)을 얻는 함수
-    /// </summary>
-    /// <param name="fid"> 페어리 아이디 </param>
-    /// <param name="attributeData"> 속성 데이터 </param>
-    /// <returns>성공 실패</returns>
-    public bool TryGetAttributeData(int fid, out FairyAttributeData attributeData)
-    {
-        attributeData = null;
-        if (!attributeTable.ContainsKey(fid))
-            return false;
-
-        attributeData = attributeTable[fid];
-        return true;
+        return instanceFidTable[fid].GetFairyInstance(position, angle);
     }
 
-    #endregion
     /// <summary>
     /// 서버 데이터 적용
     /// </summary>
@@ -121,17 +69,21 @@ public class FairyDataManager : MonoBehaviour, IServerData
 
         foreach (var item in fariyArray)
         {
-            int fid = item["fid"].Value<int>();
+            string foid = item["foid"].Value<string>();
 
-            if (detailStatusTable.ContainsKey(fid))
+            if (instanceFoidTable.ContainsKey(foid)) // 이미 있는 경우
             {
-                JsonConvert.PopulateObject(item.ToString(), detailStatusTable[fid]);
+                JsonConvert.PopulateObject(item.ToString(), instanceFoidTable[foid]);
             }
-            else
+            else // 처음 생성
             {
-                var data = item.ToObject<FairyDetailStatusData>();
+                var data = item.ToObject<FairyInstanceData>();
                 if (data != null)
-                    detailStatusTable[data.FID] = data;
+                {
+                    instanceFoidTable[data.FOID] = data;
+
+                    instanceFidTable[data.FID] = data;
+                }
             }
         }
     }

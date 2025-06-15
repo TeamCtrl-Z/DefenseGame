@@ -6,7 +6,17 @@ public class FairyBaseStatusData
     /// <summary>
     /// Fairy의 ID
     /// </summary>
-    public int FID;
+    public uint FID;
+
+    /// <summary>
+    /// 치명타 데미지
+    /// </summary>
+    public float CriticalDamage;
+
+    /// <summary>
+    /// 치명타 확률
+    /// </summary>
+    public float CiriticalRate;
 
     /// <summary>
     /// Fairy의 공격력

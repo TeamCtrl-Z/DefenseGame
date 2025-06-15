@@ -10,12 +10,12 @@ public class EnemyDataManager : MonoBehaviour
     /// <summary>
     /// 적 데이터를 담고 있는 딕셔너리
     /// </summary>
-    private Dictionary<int, EnemyStatusData> statusTable;
+    private Dictionary<uint, EnemyStatusData> statusTable;
 
     /// <summary>
     /// 적 처치시 보상 데이터를 담고 있는 딕셔너리
     /// </summary>
-    private Dictionary<int, EnemyRewardData> rewardTable;
+    private Dictionary<uint, EnemyRewardData> rewardTable;
 
     /// <summary>
     /// 스텟 데이터를 가져오는 메서드
@@ -23,7 +23,7 @@ public class EnemyDataManager : MonoBehaviour
     /// <param name="eid">Enemy ID</param>
     /// <param name="statData">Enemy Stat Data</param>
     /// <returns>true면 성공, false면 실패</returns>
-    public bool TryGetStatData(int eid, out EnemyStatusData statData)
+    public bool TryGetStatData(uint eid, out EnemyStatusData statData)
     {
         // 늦은 초기화
         if (statusTable == null)
@@ -43,7 +43,7 @@ public class EnemyDataManager : MonoBehaviour
     /// <param name="eid">Enemy ID</param>
     /// <param name="rewardData">EnemyRewardData</param>
     /// <returns>true면 성공, false면 실패</returns>
-    public bool TryGetRewardData(int eid, out EnemyRewardData rewardData)
+    public bool TryGetRewardData(uint eid, out EnemyRewardData rewardData)
     {
         // 늦은 초기화
         if (rewardTable == null)

@@ -31,7 +31,7 @@ public class EnemyStatusComponent : MonoBehaviour, IMoveStatus, IHealthStatus, I
     /// <summary>
     /// Enemy 고유 ID
     /// </summary>
-    [field: SerializeField] public int ID { get; private set; }
+    [field: SerializeField] public uint ID { get; private set; }
 
     /// <summary>
     /// Enemy 고유 이동 속도

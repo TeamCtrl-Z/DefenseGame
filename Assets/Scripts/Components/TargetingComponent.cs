@@ -84,7 +84,7 @@ public class TargetingComponent : MonoBehaviour
         col.radius = AttackRange;
         id = GetComponentInParent<ICharacterIdentity>();
 
-        if (DataService.Instance.FairyDataManager.TryGetTargetingType(id.ID, out targetingType) == false)
+        if (Table_Fairy.Instance.TryGetTargetingType(id.ID, out targetingType) == false)
         {
             Debug.LogError($"{this.name} : 유효하지 않은 페어리 아이디 {id.ID} 입니다.");
             return;
