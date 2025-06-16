@@ -39,6 +39,8 @@ public class EnemyController : EntityController, IDamageableWithDebuff, ITargeta
     /// </summary>
     public bool IsAlive => StatusComponent.CurrentHP > 0.0f;
 
+    public override float GetAttackPower() => StatusComponent.RealAttackPower;
+
 
     protected override void Awake()
     {

@@ -44,7 +44,8 @@ public class FairySlotUI : MonoBehaviour
 
     private void Start()
     {
-        SlotButton.onClick.AddListener(() => { 
+        SlotButton.onClick.AddListener(() =>
+        {
             onSlotTouch?.Invoke(fairyData);
         });
     }

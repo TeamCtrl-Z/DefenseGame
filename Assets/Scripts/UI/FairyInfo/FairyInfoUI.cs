@@ -17,13 +17,13 @@ public class FairyInfoUI : MonoBehaviour
     /// <summary>
     /// 페어리 정보창 닫기 버튼
     /// </summary>
-    [SerializeField]
+    [field: SerializeField]
     public Button CloseButton { get; private set; }
 
     /// <summary>
     /// 페어리 정보창 버튼(누르면 닫힘)
     /// </summary>
-    [SerializeField]
+    [field: SerializeField]
     public Button FairyInfoButton { get; private set; }
 
     /// <summary>

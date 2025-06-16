@@ -13,10 +13,9 @@ public class RangedAttack : AttackBase
     /// <summary>
     /// RangedAttack 클래스 생성자
     /// </summary>
-    /// <param name="data">공격 Hitting Data</param>
     /// <param name="attacker">공격하는 오브젝트</param>
     /// <param name="rangedId">공격에 사용될 랭지드 아이디</param>
-    public RangedAttack(HittingData data, EntityController attacker, uint rangedId) : base(data, attacker)
+    public RangedAttack(EntityController attacker, uint rangedId) : base(attacker)
     {
         this.rangedId = rangedId;
     }

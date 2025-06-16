@@ -24,7 +24,7 @@ public class FairyEquipComponent : MonoBehaviour
     /// <summary>
     /// 착용 정보 테이블
     /// </summary>
-    private Dictionary<ItemType, string> equipTable = new();
+    private Dictionary<ItemType, string> equipTable;
 
     /// <summary>
     /// 읽기전용 착용한 아이템 테이블 프로퍼티
@@ -42,13 +42,7 @@ public class FairyEquipComponent : MonoBehaviour
             equipTable[(ItemType)i] = null;
         }
 
-        foreach (string ioid in data.EquippedItemList)
-        {
-            if (itemDataMgr.TryGetItemDataByIoid(ioid, out ItemData itemData))
-            {
-                equipTable[itemData.ItemType] = ioid;
-            }
-        }
+        equipTable = data.EquipmentsBySlot;
     }
 
     /// <summary>

@@ -72,14 +72,10 @@ public class EnemyAttackHandler : MonoBehaviour
     /// </summary>
     private void BuildAttack()
     {
-        HittingData data = new HittingData();
-        data.Damage = status.RealAttackPower;
-        Debug.Log($"{transform.parent.name} : 어택 파워 {data.Damage}");
-
         attack = status.AttackType switch
         {
-            AttackType.Melee => new MeleeAttack(data, GetComponentInParent<EnemyController>(), status.AttackId),
-            AttackType.Ranged => new RangedAttack(data, GetComponentInParent<EnemyController>(), status.AttackId),
+            AttackType.Melee => new MeleeAttack(GetComponentInParent<EnemyController>(), status.AttackId),
+            AttackType.Ranged => new RangedAttack(GetComponentInParent<EnemyController>(), status.AttackId),
             _ => null
         };
 
