@@ -9,8 +9,20 @@ using UnityEngine;
 [RequireComponent(typeof(FairyStatusComponent))]
 public class FairyController : EntityController
 {
+    private FairyStatusComponent statusComponent;
+    private FairyEquipComponent equipComponent;
+
+    protected override void Awake()
+    {
+        statusComponent = GetComponent<FairyStatusComponent>();
+        equipComponent = GetComponent<FairyEquipComponent>();
+    }
+
+    public override float GetAttackPower() => statusComponent.RealAttackPower;
+
     public void Initialize(FairyInstanceData data)
     {
-        
+        statusComponent.Initialize(data);
+        equipComponent.Initialize(data);
     }
 }

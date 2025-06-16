@@ -65,32 +65,6 @@ public class FairyStatusComponent : MonoBehaviour, IBattleStatus, ICharacterIden
         AttackId = data.AttackId;
     }
 
-    // void Awake()
-    // {
-    //     // Stat Data 가져오기
-    //     {
-    //         if (!DataService.Instance.FairyDataManager.TryGetStatData(ID, out statData))
-    //         {
-    //             Debug.LogError("Not Found");
-    //             return;
-    //         }
-
-    //         if (!DataService.Instance.FairyDataManager.TryGetDetailStatData(ID, out detailStatData))
-    //         {
-    //             Debug.LogError("Not Found");
-    //             return;
-    //         }
-    //     }
-
-    //     // 필요한 컴포넌트 가져오기
-    //     {
-    //         equipComponent = GetComponent<FairyEquipComponent>();
-    //     }
-
-    //     // 가져온 StatData 적용
-    //     ApplyStatusData();
-    // }
-
     /// <summary>
     /// Fairy의 공격력 적용 함수
     /// </summary>

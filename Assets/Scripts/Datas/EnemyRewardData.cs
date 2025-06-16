@@ -6,7 +6,7 @@ public class EnemyRewardData
     /// <summary>
     /// Enemy ID
     /// </summary>
-    public int eid;
+    public uint eid;
     
     /// <summary>
     /// Enemy 처치 시 얻는 Gold

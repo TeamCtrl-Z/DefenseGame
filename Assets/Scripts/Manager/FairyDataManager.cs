@@ -25,6 +25,7 @@ public class FairyDataManager : MonoBehaviour, IServerData
     public void Initialize()
     {
         instanceFoidTable = new();
+        instanceFidTable = new();
     }
 
     /// <summary>
@@ -61,23 +62,23 @@ public class FairyDataManager : MonoBehaviour, IServerData
     /// <param name="res"></param>
     public void ApplyServerData(JObject res)
     {
-        if (res["fairy_list"] == null)
+        if (res["fairys"] == null)
             return;
 
         // 플레이어가 가진 페어리 리스트 
-        var fariyArray = res["fairy_list"] as JArray;
+        var fariyArray = res["fairys"] as JArray;
 
-        foreach (var item in fariyArray)
+        foreach (var fairy in fariyArray)
         {
-            string foid = item["foid"].Value<string>();
+            string foid = fairy["foid"].Value<string>();
 
             if (instanceFoidTable.ContainsKey(foid)) // 이미 있는 경우
             {
-                JsonConvert.PopulateObject(item.ToString(), instanceFoidTable[foid]);
+                JsonConvert.PopulateObject(fairy.ToString(), instanceFoidTable[foid]);
             }
             else // 처음 생성
             {
-                var data = item.ToObject<FairyInstanceData>();
+                var data = fairy.ToObject<FairyInstanceData>();
                 if (data != null)
                 {
                     instanceFoidTable[data.FOID] = data;
