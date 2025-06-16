@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: FairyGrade
+  m_EditorClassIdentifier: 
+  m_GroupName: FairyGrade
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 8774c581b35b4c443bc881f70eadb351
+  m_SerializeEntries:
+  - m_GUID: 246d3657f46316f408f3c197cacb4945
+    m_Address: FairyGrade/MagicFrame
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 70d2e1c64b9b1a0439953c1681ea2fab
+    m_Address: FairyGrade/LegendBG
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 750d2ddf0f1e8a145adbf640ebdee53c
+    m_Address: FairyGrade/NormalFrame
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7f860cf552aa4524a96f2807fff964c3
+    m_Address: FairyGrade/NormalBG
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8fa332bc937434e4f8cd6b63355c215b
+    m_Address: FairyGrade/UniqueBG
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 98cc59f8b621635488818788a6c1d524
+    m_Address: FairyGrade/RareBG
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a26dcb333177f7841b9750fa628f7d35
+    m_Address: FairyGrade/RareFrame
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c0fd8468ae07e5a45ba915a5de3113a4
+    m_Address: FairyGrade/MagicBG
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c558badd6c04a044c831ef0cf62c991a
+    m_Address: FairyGrade/LegendFrame
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f321a1694083023438c0fcaf3af12e5e
+    m_Address: FairyGrade/UniqueFrame
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 3c2ba5748792cb7409c5804d9bdaa50b, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: db33ccdecdeb6ae4fbebaecd4f49f8f6, type: 2}
+    - {fileID: 11400000, guid: f58d90fd254bdd3459a7373e5adaffd3, type: 2}
