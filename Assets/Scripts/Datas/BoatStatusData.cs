@@ -6,7 +6,7 @@ public class BoatStatusData
     /// <summary>
     /// Boat의 Level
     /// </summary>
-    public int Level;
+    public uint Level;
 
     /// <summary>
     /// Boat의 HP

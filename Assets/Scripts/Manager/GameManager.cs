@@ -9,7 +9,7 @@ public class GameManager : Singleton<GameManager>
     /// <summary>
     /// InputManager
     /// </summary>
-    private InputManager inputManager;
+    //private InputManager inputManager;
 
     /// <summary>
     /// ContainerManager
@@ -24,15 +24,15 @@ public class GameManager : Singleton<GameManager>
     /// <summary>
     /// InputManager를 반환하는 프로퍼티(읽기 전용)
     /// </summary>
-    public InputManager InputManager
-    {
-        get 
-        {
-            if (inputManager == null)
-                inputManager = GetComponent<InputManager>();
-            return inputManager;
-        }
-    }
+    // public InputManager InputManager
+    // {
+    //     get 
+    //     {
+    //         if (inputManager == null)
+    //             inputManager = GetComponent<InputManager>();
+    //         return inputManager;
+    //     }
+    // }
 
     /// <summary>
     /// ContainerManager를 반환하는 프로퍼티(읽기 전용)
@@ -80,11 +80,6 @@ public class GameManager : Singleton<GameManager>
     protected override void OnInitialize()
     {
         base.OnInitialize();
-
-
-        inputManager = GetComponent<InputManager>();
-        inputManager.Initialize();
-
         if (SceneManager.GetActiveScene().name == "LoginScene")
             return;
         

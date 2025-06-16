@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 /// <summary>
@@ -27,6 +28,11 @@ public class Table_Fairy : TableClass
     private Dictionary<uint, FairySkillData> skillTable;
 
     /// <summary>
+    /// 페어리 정보 데이터 테이블 - k: fid, v : FairyInfoData
+    /// </summary>
+    private Dictionary<uint, FairyInfoData> infoTable;
+
+    /// <summary>
     /// 생성자 막기 용도
     /// </summary>
     private Table_Fairy()
@@ -41,6 +47,7 @@ public class Table_Fairy : TableClass
 
         statusTable = CsvLoader.LoadTable<FairyBaseStatusData>("table_fairyStatus");
         skillTable = CsvLoader.LoadTable<FairySkillData>("table_fairySkill");
+        infoTable = CsvLoader.LoadTable<FairyInfoData>("table_fairyInfo");
     }
 
     #region StatusData
@@ -80,6 +87,11 @@ public class Table_Fairy : TableClass
         return true;
     }
 
+    /// <summary>
+    /// 페어리의 공격력을 알려주는 함수
+    /// </summary>
+    /// <param name="fid">페어리 종류</param>
+    /// <returns>공격력 (못찾으면 null)</returns>
     public float? GetFairyAttackPower(uint fid)
     {
         if (!statusTable.ContainsKey(fid))
@@ -91,6 +103,11 @@ public class Table_Fairy : TableClass
         return statusTable[fid].AttackPower;
     }
 
+    /// <summary>
+    /// 페어리의 공격 속도를 알려주는 함수
+    /// </summary>
+    /// <param name="fid"> 페어리 종류 </param>
+    /// <returns>공격 속도(못찾으면 null)</returns>
     public float? GetFairyAttackSpeed(uint fid)
     {
         if (!statusTable.ContainsKey(fid))
@@ -102,6 +119,11 @@ public class Table_Fairy : TableClass
         return statusTable[fid].AttackSpeed;
     }
 
+    /// <summary>
+    /// 페어리의 공격 타입을 알려주는 함수
+    /// </summary>
+    /// <param name="fid"> 해당 페어리 종류</param>
+    /// <returns>공격 타입(못찾으면 null)</returns>
     public AttackType? GetFairyAttackType(uint fid)
     {
         if (!statusTable.ContainsKey(fid))
@@ -113,6 +135,11 @@ public class Table_Fairy : TableClass
         return statusTable[fid].AttackType;
     }
 
+    /// <summary>
+    /// 페어리 Attack ID 반환 함수
+    /// </summary>
+    /// <param name="fid">해당 페어리 종류</param>
+    /// <returns>Attack ID(못찾으면 null)</returns>
     public uint? GetFairyAttackId(uint fid)
     {
         if (!statusTable.ContainsKey(fid))
@@ -141,6 +168,42 @@ public class Table_Fairy : TableClass
 
         attributeData = skillTable[fid];
         return true;
+    }
+
+    #endregion
+
+    #region Fairy Info
+    /// <summary>
+    /// 해당 페어리의 등급을 알려주는 함수
+    /// </summary>
+    /// <param name="fid">알고 싶은 페어리</param>
+    /// <returns>해당 등급</returns>
+    public FairyGrade? GetFairyGrade(uint fid)
+    {
+        if (!infoTable.ContainsKey(fid))
+            return null;
+        return infoTable[fid].Grade;
+    }
+
+    /// <summary>
+    /// 페어리의 모든 fid를 List로 반환해주는 함수
+    /// </summary>
+    /// <returns>fid 리스트</returns>
+    public List<uint> GetTotalFairyId()
+    {
+        return infoTable.Keys.ToList();
+    }
+
+    /// <summary>
+    /// 페어리 이름을 알려주는 함수
+    /// </summary>
+    /// <param name="fid">페어리 종류</param>
+    /// <returns>페어리 이름</returns>
+    public string GetFairyName(uint fid)
+    {
+        if (!infoTable.ContainsKey(fid))
+            return null;
+        return infoTable[fid].Name;
     }
 
     #endregion

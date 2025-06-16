@@ -6,7 +6,7 @@ public class EnemyStatusData
     /// <summary>
     /// 적 ID
     /// </summary>
-    public int eid;
+    public uint eid;
 
     /// <summary>
     /// 적 이동 속도

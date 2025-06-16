@@ -1388,17 +1388,17 @@ public class Factory : Singleton<Factory>
     /// <param name="position"> 위치 </param>
     /// <param name="angle"> 각도 </param>
     /// <returns></returns>
-    public FairyController GetFariyByType(FairyType type, FairyInstanceData data, Vector2 position, float angle = 0.0f)
+    public FairyController GetFairyByType(FairyType type, FairyInstanceData data, Vector2 position, float angle = 0.0f)
     {
         switch (type)
         {
-            case FairyType.Basic: return fairyBasic.GetObject(position, new Vector3(0, 0, angle));
-            case FairyType.Fire: return fairyFire.GetObject(position, new Vector3(0, 0, angle));
-            case FairyType.Poison: return fairyPoison.GetObject(position, new Vector3(0, 0, angle));
-            case FairyType.Light: return fairyLight.GetObject(position, new Vector3(0, 0, angle));
-            case FairyType.Freeze: return fairyFreeze.GetObject(position, new Vector3(0, 0, angle));
-            case FairyType.Frozen: return fairyFrozen.GetObject(position, new Vector3(0, 0, angle));
-            case FairyType.Electronic: return fairyEletronic.GetObject(position, new Vector3(0, 0, angle));
+            case FairyType.Basic: return fairyBasic.GetObject(data, position, new Vector3(0, 0, angle));
+            case FairyType.Fire: return fairyFire.GetObject(data, position, new Vector3(0, 0, angle));
+            case FairyType.Poison: return fairyPoison.GetObject(data, position, new Vector3(0, 0, angle));
+            case FairyType.Light: return fairyLight.GetObject(data, position, new Vector3(0, 0, angle));
+            case FairyType.Freeze: return fairyFreeze.GetObject(data, position, new Vector3(0, 0, angle));
+            case FairyType.Frozen: return fairyFrozen.GetObject(data, position, new Vector3(0, 0, angle));
+            case FairyType.Electronic: return fairyEletronic.GetObject(data, position, new Vector3(0, 0, angle));
             default: return null;
         }
     }

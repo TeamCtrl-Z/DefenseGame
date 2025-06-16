@@ -27,10 +27,10 @@ public class ItemDataManager : MonoBehaviour, IServerData
     /// <param name="res">서버 응답(json파일)</param>
     public void ApplyServerData(JObject res)
     {
-        if (res["item"] == null)
+        if (res["items"] == null)
             return;
 
-        var itemArray = res["item"] as JArray;
+        var itemArray = res["items"] as JArray;
 
         foreach (var item in itemArray)
         {

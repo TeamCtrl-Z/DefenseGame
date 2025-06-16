@@ -13,10 +13,9 @@ public class MeleeAttack : AttackBase
     /// <summary>
     /// MeleeAttack 클래스 생성자
     /// </summary>
-    /// <param name="data">공격 HittingData</param>
     /// <param name="attacker">공격하는 오브젝트</param>
     /// <param name="meleeId">공격에 사용될 Melee 아이디</param>
-    public MeleeAttack(HittingData data, EntityController attacker, uint meleeId) : base(data, attacker)
+    public MeleeAttack(EntityController attacker, uint meleeId) : base(attacker)
     {
         this.meleeId = meleeId;
     }

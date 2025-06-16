@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json;
 using UnityEngine;
 
 /// <summary>
@@ -35,7 +36,7 @@ public class FairyInstanceData
     /// <summary>
     /// 페어리 등급
     /// </summary>
-    public FairyGrade Grade;
+    public FairyGrade Grade => Table_Fairy.Instance.GetFairyGrade(FID) ?? FairyGrade.Normal;
 
     /// <summary>
     /// 페어리 레벨
@@ -43,19 +44,38 @@ public class FairyInstanceData
     public uint Level;
 
     /// <summary>
-    /// 페어리 합성 레벨(별 갯수)
+    /// 페어리 승급 레벨(별 갯수)
     /// </summary>
     public uint CompoundLevel;
 
     /// <summary>
-    /// 페어리 조각(승급 용)
+    /// 페어리 보유 수(승급 용)
     /// </summary>
-    public uint FairyPieceCount;
+    public uint Count;
 
     /// <summary>
-    /// 페어리가 착용한 아이템 리스트(ioid)
+    /// 페어리가 착용한 아이템 리스트
     /// </summary>
-    public List<string> EquippedItemList;
+    private List<EquipmentData> equipments = new();
+
+    /// <summary>
+    /// 착용한 아이템 리스트 프로퍼티
+    /// </summary>
+    public List<EquipmentData> Equipments
+    {
+        get => equipments;
+        set
+        {
+            equipments = value;
+            EquipmentsBySlot = value.ToDictionary(e => (ItemType)e.SlotType, e => e.IOID);
+        }
+    }
+
+    /// <summary>
+    /// 해당 슬롯에 장착된 아이템
+    /// </summary>
+    [JsonIgnore]
+    public Dictionary<ItemType, string> EquipmentsBySlot { get; private set; } = new();
 
     /// <summary>
     /// 페어리 기본 공격력
@@ -65,8 +85,8 @@ public class FairyInstanceData
     /// <summary>
     /// 추가 공격력
     /// </summary>
-    private float bonusAttackPower => EquippedItemList.Sum(ioid =>
-        DataService.Instance.ItemDataManager.TryGetItemDataByIoid(ioid, out var data) ? data.AttackPowerBonus : 0f);
+    private float bonusAttackPower => Equipments.Sum(equip =>
+        DataService.Instance.ItemDataManager.TryGetItemDataByIoid(equip.IOID, out var data) ? data.AttackPowerBonus : 0f);
 
     /// <summary>
     /// 페어리 공격력(기본 공격력 + 추가 공격력)
@@ -81,8 +101,8 @@ public class FairyInstanceData
     /// <summary>
     /// 추가 공격 스피드
     /// </summary>
-    private float bonusAttackSpeed => EquippedItemList.Sum(ioid =>
-        DataService.Instance.ItemDataManager.TryGetItemDataByIoid(ioid, out var data) ? data.AttackSpeedBonus : 0f);
+    private float bonusAttackSpeed => Equipments.Sum(equip =>
+        DataService.Instance.ItemDataManager.TryGetItemDataByIoid(equip.IOID, out var data) ? data.AttackSpeedBonus : 0f);
 
     /// <summary>
     /// 페어리 공격 스피드(기본 스피드 * 추가 스피드 속도 비율)
@@ -112,11 +132,11 @@ public class FairyInstanceData
     /// <summary>
     /// 페어리 인스턴스 가져오기
     /// </summary>
-    /// <param name="position"></param>
-    /// <param name="angle"></param>
-    /// <returns></returns>
+    /// <param name="position">소환 위치</param>
+    /// <param name="angle">소환 각도</param>
+    /// <returns>소환될 페어리</returns>
     public FairyController GetFairyInstance(Vector3 position, float angle)
     {
-        return Factory.Instance.GetFariyByType((FairyType)FID, this, position, angle);
+        return Factory.Instance.GetFairyByType((FairyType)FID, this, position, angle);
     }
 }

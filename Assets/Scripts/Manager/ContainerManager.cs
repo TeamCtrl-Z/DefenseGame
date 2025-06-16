@@ -21,6 +21,8 @@ public class ContainerManager : MonoBehaviour, IInitialize
     /// </summary>
     public void Initialize()
     {
+        boatNodeContainer = FindFirstObjectByType<NodeContainerObject>();
+        if (boatNodeContainer == null) return;
         boatNodeContainer.InitializeNodeContainer();
     }
 }

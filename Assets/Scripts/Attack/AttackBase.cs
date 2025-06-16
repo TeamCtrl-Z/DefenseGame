@@ -28,9 +28,9 @@ public abstract class AttackBase : IAttack
     /// </summary>
     /// <param name="data">피격 데이터</param>
     /// <param name="attacker">공격자</param>
-    protected AttackBase(HittingData data, EntityController attacker)
+    protected AttackBase(EntityController attacker)
     {
-        this.data = data;
+        data = new();
         this.attacker = attacker;
     }
 
@@ -48,6 +48,7 @@ public abstract class AttackBase : IAttack
     protected virtual void NotifyOnHit(IDamageable dmg, Vector3 origin)
     {
         Debug.Log(this.GetType() + " : OnHit");
+        data.Damage = attacker.GetAttackPower();
         dmg.OnDamage(attacker.gameObject, data);
         OnHit?.Invoke(dmg, origin);
     }

@@ -20,6 +20,11 @@ public class FairyAttackHandler : MonoBehaviour
     private FairyStatusComponent status;
 
     /// <summary>
+    /// fid를 알아내기 위한 변수
+    /// </summary>
+    private ICharacterIdentity id;
+
+    /// <summary>
     /// 타겟을 선정하기 위한 변수
     /// </summary>
     private TargetingComponent targeting;
@@ -54,6 +59,7 @@ public class FairyAttackHandler : MonoBehaviour
         status = GetComponentInParent<FairyStatusComponent>();
         targeting = GetComponent<TargetingComponent>();
         animator = GetComponentInParent<Animator>();
+        id = GetComponentInParent<ICharacterIdentity>();
         BuildAttack();
     }
 
@@ -62,12 +68,9 @@ public class FairyAttackHandler : MonoBehaviour
     /// </summary>
     private void BuildAttack()
     {
-        HittingData data = new HittingData();
-        data.Damage = status.RealAttackPower;
-
-        attack = status.AttackType switch
+        attack = Table_Fairy.Instance.GetFairyAttackType(id.ID) switch
         {
-            AttackType.Projectile => new ProjectileAttack(data, GetComponentInParent<FairyController>(), status.AttackId),
+            AttackType.Projectile => new ProjectileAttack(GetComponentInParent<FairyController>(), status.AttackId),
             _ => null
         };
 

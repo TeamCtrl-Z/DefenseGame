@@ -8,7 +8,7 @@ public abstract class FairyPool : ObjectPool<FairyController>
     /// <summary>
     /// 기존의 GetObject 함수 숨기기 용도
     /// </summary>
-    private new FairyController GetObject(Vector3? position = null, Vector3? eulerAngle = null) => null;
+    private new FairyController GetObject(Vector3? position = null, Vector3? eulerAngle = null) => base.GetObject(position, eulerAngle);
 
     /// <summary>
     /// 페어리전용 GetObject : 인스턴스 데이터를 주입 시킨 후 페어리를 소환
