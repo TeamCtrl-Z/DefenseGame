@@ -9,14 +9,19 @@ public enum FairyGrade
     Normal = 0,
 
     /// <summary>
+    /// 매직
+    /// </summary>
+    Magic,
+
+    /// <summary>
     /// 희귀
     /// </summary>
     Rare,
     
     /// <summary>
-    /// 영웅
+    /// 유니크
     /// </summary>
-    Epic,
+    Unique,
 
     /// <summary>
     /// 전설

@@ -87,4 +87,13 @@ public class FairyDataManager : MonoBehaviour, IServerData
             }
         }
     }
+
+    /// <summary>
+    /// 페어리의 모든 데이터를 리스트화 시켜서 반환하는 함수(FairyInfoUI용)
+    /// </summary>
+    /// <returns>페어리데이터 리스트</returns>
+    public List<FairyInstanceData> GetAllFairyInstanceData()
+    {
+        return new List<FairyInstanceData>(instanceFoidTable.Values);
+    }
 }

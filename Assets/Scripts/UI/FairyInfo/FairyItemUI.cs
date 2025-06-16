@@ -26,6 +26,24 @@ public class FairyItemUI : MonoBehaviour
     [SerializeField]
     private Image accessoryImage;
 
+    /// <summary>
+    /// 무기 버튼
+    /// </summary>
+    [SerializeField]
+    private Button weaponButton;
+
+    /// <summary>
+    /// 나침반 버튼
+    /// </summary>
+    [SerializeField]
+    private Button compassButton;
+
+    /// <summary>
+    /// 악세 버튼
+    /// </summary>
+    [SerializeField]
+    private Button accessoryButton;
+
     public void RefreshItemUI()
     {
         // 무기 이미지 넣기

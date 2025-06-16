@@ -18,6 +18,21 @@ public class FairyInstanceData
     public string FOID;
 
     /// <summary>
+    /// 페어리 이름
+    /// </summary>
+    public string Name;
+
+    /// <summary>
+    /// 페어리 타입
+    /// </summary>
+    public string Type;
+
+    /// <summary>
+    /// 페어리 일러스트 주소(Addressable)
+    /// </summary>
+    public string FairyImage;
+
+    /// <summary>
     /// 페어리 등급
     /// </summary>
     public FairyGrade Grade;
@@ -73,6 +88,16 @@ public class FairyInstanceData
     /// 페어리 공격 스피드(기본 스피드 * 추가 스피드 속도 비율)
     /// </summary>
     public float AttackSpeed => baseAttackSpeed * bonusAttackSpeed;
+
+    /// <summary>
+    /// 페어리 치명타율
+    /// </summary>
+    public float CriticalProbability;
+
+    /// <summary>
+    /// 페어리 치명타 데미지
+    /// </summary>
+    public float CirticalDamage;
 
     /// <summary>
     /// 페어리 공격 타입
