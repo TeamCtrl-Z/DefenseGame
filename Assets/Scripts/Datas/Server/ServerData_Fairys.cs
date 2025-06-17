@@ -4,7 +4,7 @@ using Newtonsoft.Json.Linq;
 using UnityEngine;
 
 /// <summary>
-/// 페어리 관련 서버 요청
+/// 페어리 관련 서버 데이터 요청
 /// </summary>
 public static class ServerData_Fairys
 {

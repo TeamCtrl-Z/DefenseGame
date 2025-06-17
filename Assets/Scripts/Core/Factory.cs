@@ -406,6 +406,11 @@ public class Factory : Singleton<Factory>
     private DiamondSparklePool diamondSparkle;
 
     /// <summary>
+    /// 토스트 메세지 풀
+    /// </summary>
+    private ToastMessagePool toastMessage;
+
+    /// <summary>
     /// Factory 초기화 함수
     /// </summary>
     protected override void OnInitialize()
@@ -649,6 +654,9 @@ public class Factory : Singleton<Factory>
 
         if (this.TryGetComponentInChildren<DiamondSparklePool>(out diamondSparkle))
             diamondSparkle.Initialize();
+
+        if (this.TryGetComponentInChildren<ToastMessagePool>(out toastMessage))
+            toastMessage.Initialize();
     }
 
     #region Enemy Pool
@@ -1515,7 +1523,7 @@ public class Factory : Singleton<Factory>
     {
         return lightning.GetObject(position, new Vector3(0, 0, angle));
     }
-    
+
     /// <summary>
     /// 적이 죽을 때 이펙트를 소환하는 함수
     /// </summary>
@@ -1645,6 +1653,13 @@ public class Factory : Singleton<Factory>
         CurrencyDrop Diamond = diamond.GetObject(position, new Vector3(0, 0, angle));
         Diamond.SetDropInfo(diamondAmount);
         return Diamond;
+    }
+    #endregion
+
+    #region Toast
+    public ToastMessageUI GetToastMessage(Vector2? position = null, float angle = 0.0f)
+    {
+        return toastMessage.GetObject();
     }
     #endregion
 }

@@ -15,14 +15,27 @@ public class ButtonUI : MonoBehaviour
     private Button fairyInfoButton;
 
     /// <summary>
+    /// 치트키 선택창 오픈 버튼
+    /// </summary>
+    [SerializeField]
+    private Button cheatOpenButton;
+
+    /// <summary>
     /// 페어리 정보UI(나중에 UI컴포넌트로 바꾸기)
     /// </summary>
     [SerializeField]
     private CanvasGroup fairyInfoCG;
 
+    /// <summary>
+    /// 치트키 선택창 UI의 CG
+    /// </summary>
+    [SerializeField]
+    private CanvasGroup cheatSelectCG;
+
     private void Start()
     {
         fairyInfoButton.onClick.AddListener(() => { OpenFairyInfoUI(); });
+        cheatOpenButton.onClick.AddListener(() => { OpenCheatSelectUI(); });
     }
 
     /// <summary>
@@ -30,25 +43,13 @@ public class ButtonUI : MonoBehaviour
     /// </summary>
     private void OpenFairyInfoUI()
     {
-        StartCoroutine(OpenFairyInfoUICoroutine());
+        StartCoroutine(UIUtility.OpenPopupUIWithCanvasGroup(fairyInfoCG));
     }
 
-    /// <summary>
-    /// 페어리 정보창을 끄는 코루틴
-    /// </summary>
-    private IEnumerator OpenFairyInfoUICoroutine()
+    private void OpenCheatSelectUI()
     {
-        float timeElapsed = 0.0f;
-
-        while (timeElapsed < 0.2f)
-        {
-            timeElapsed += Time.deltaTime;
-            fairyInfoCG.alpha = timeElapsed * 5;
-            yield return null;
-        }
-
-        fairyInfoCG.alpha = 1f;
-        fairyInfoCG.interactable = true;
-        fairyInfoCG.blocksRaycasts = true;
+        StartCoroutine(UIUtility.OpenPopupUIWithCanvasGroup(cheatSelectCG));
+        ToastManager.Instance.ShowToast("abasbabasdfasdfasfdasf");
     }
+
 }

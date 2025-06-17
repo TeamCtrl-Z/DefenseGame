@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: FairyImgae
+  m_EditorClassIdentifier: 
+  m_GroupName: FairyImgae
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 6904a85c04c2692458c00d6bf50b445f
+  m_SerializeEntries:
+  - m_GUID: 85d198c25e23b6a4a93cff91bc4f8aef
+    m_Address: FairyImage/Poison
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f5efb36b2d9f6ff48b2463b05cfd6621
+    m_Address: FairyImage/Frozen
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 3c2ba5748792cb7409c5804d9bdaa50b, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 8a39279075e3b834fa0e220b224a228a, type: 2}
+    - {fileID: 11400000, guid: cacd3eb85bcb86a40b83fb2239aa02b8, type: 2}

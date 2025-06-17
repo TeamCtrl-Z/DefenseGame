@@ -11,37 +11,38 @@ using UnityEngine.UI;
 public class FairyCheatSlotUI : MonoBehaviour
 {
     /// <summary>
-    /// 슬롯 버튼
-    /// </summary>
-    public Button SlotButton { get; private set; }
-
-    /// <summary>
     /// 페어리 이름 텍스트
     /// </summary>
     [SerializeField]
     private TextMeshProUGUI fairyName;
 
     /// <summary>
-    /// 슬롯을 터치하면 실행되는 이벤트
+    /// 등급 bg
     /// </summary>
-    public event Action<uint> onSlotTouch;
+    [SerializeField]
+    private Image bg;
 
     /// <summary>
-    /// 내 fid
+    /// 등급 프레임
     /// </summary>
-    private uint fid;
+    [SerializeField]
+    private Image frame;
+
+    /// <summary>
+    /// 페어리 이미지
+    /// </summary>
+    [SerializeField]
+    private Image fairyImage;
+
+    /// <summary>
+    /// 부여된 fid
+    /// </summary>
+    public uint FID { get; private set; }
 
     private void Awake()
     {
-        SlotButton = GetComponent<Button>();
-    }
-
-    private void Start()
-    {
-        SlotButton.onClick.AddListener(() =>
-        {
-            onSlotTouch?.Invoke(fid);
-        });
+        Toggle toggle = GetComponent<Toggle>();
+        toggle.onValueChanged.AddListener((isOn) => { Debug.Log($"[{toggle.name}] isOn: {isOn}"); });
     }
 
     /// <summary>
@@ -50,9 +51,20 @@ public class FairyCheatSlotUI : MonoBehaviour
     /// <param name="fid">페어리 종류</param>
     public void RefreshFairySlot(uint fid)
     {
-        this.fid = fid;
-        // TODO : 페어리 등급에 맞는 image 삽입(enum으로 처리)
-        // TODO : 페어리 이미지 넣기(Table_Fairy 참조)
-        // fairyName.text = Table_Fairy.Instance.GetFairyName(fid);
+        FID = fid;
+
+        string bgAddress = ConvertHelpers.GetFairyGradeBGAddress((FairyGrade)Table_Fairy.Instance.GetFairyGrade(fid));
+        string frameAddress = ConvertHelpers.GetFairyGradeFrameAddress((FairyGrade)Table_Fairy.Instance.GetFairyGrade(fid));
+        AddressableUtility.LoadSpriteByAddress(bgAddress, bg);
+        AddressableUtility.LoadSpriteByAddress(frameAddress, frame);
+
+        string fairyImageAddress = Table_Fairy.Instance.GetFairyProfileImageAddress(fid);
+        if (fairyImageAddress != string.Empty)
+        {
+            Debug.Log($"RefreshFairySlot : {fairyImageAddress}");
+            AddressableUtility.LoadSpriteByAddress(fairyImageAddress, fairyImage);
+        }
+
+        fairyName.text = Table_Fairy.Instance.GetFairyName(fid);
     }
 }

@@ -52,6 +52,18 @@ public class CheatSelectUI : MonoBehaviour
     private Button closeBtn;
 
     /// <summary>
+    /// 페어리 치트 창
+    /// </summary>
+    [SerializeField]
+    private GameObject fairyCheat;
+
+    /// <summary>
+    /// 재화 치트 창
+    /// </summary>
+    [SerializeField]
+    private GameObject currencyCheat;
+
+    /// <summary>
     /// 치트 선택창 CG
     /// </summary>
     private CanvasGroup canvasGroup;
@@ -84,7 +96,7 @@ public class CheatSelectUI : MonoBehaviour
 
     private void Start()
     {
-        closeBtn.onClick.AddListener(() => { StartCoroutine(CloseCheatUICoroutine()); });
+        closeBtn.onClick.AddListener(() => { StartCoroutine(UIUtility.ClosePopupUIWithCanvasGroup(canvasGroup)); });
 
         for (int i = 0; i < (int)CheatCommand.Max; i++)
         {
@@ -108,7 +120,7 @@ public class CheatSelectUI : MonoBehaviour
     /// </summary>
     private void OpenFairyCheatUI()
     {
-
+        fairyCheat.SetActive(true);
     }
 
     /// <summary>
@@ -116,7 +128,7 @@ public class CheatSelectUI : MonoBehaviour
     /// </summary>
     private void OpenCurrencyCheatUI()
     {
-
+        currencyCheat.SetActive(true);
     }
 
     /// <summary>
@@ -125,24 +137,5 @@ public class CheatSelectUI : MonoBehaviour
     private void OpenItemCheatUI()
     {
 
-    }
-
-    /// <summary>
-    /// 페어리 정보창을 끄는 코루틴
-    /// </summary>
-    private IEnumerator CloseCheatUICoroutine()
-    {
-        float timeElapsed = 0.2f;
-
-        while (timeElapsed > 0f)
-        {
-            timeElapsed -= Time.deltaTime;
-            canvasGroup.alpha = timeElapsed * 5;
-            yield return null;
-        }
-
-        canvasGroup.alpha = 0f;
-        canvasGroup.interactable = false;
-        canvasGroup.blocksRaycasts = false;
     }
 }

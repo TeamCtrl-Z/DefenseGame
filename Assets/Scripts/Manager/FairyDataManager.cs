@@ -68,6 +68,29 @@ public class FairyDataManager : MonoBehaviour, IServerData
         // 플레이어가 가진 페어리 리스트 
         var fariyArray = res["fairys"] as JArray;
 
+        // 단일 페어리 데이터
+        if (fariyArray == null)
+        {
+            var fairy = res["fairys"];
+            string foid = fairy["foid"].Value<string>();
+
+            if (instanceFoidTable.ContainsKey(foid)) // 이미 있는 경우
+            {
+                JsonConvert.PopulateObject(fairy.ToString(), instanceFoidTable[foid]);
+            }
+            else // 처음 생성
+            {
+                var data = fairy.ToObject<FairyInstanceData>();
+                if (data != null)
+                {
+                    instanceFoidTable[data.FOID] = data;
+
+                    instanceFidTable[data.FID] = data;
+                }
+            }
+            return;
+        }
+
         foreach (var fairy in fariyArray)
         {
             string foid = fairy["foid"].Value<string>();

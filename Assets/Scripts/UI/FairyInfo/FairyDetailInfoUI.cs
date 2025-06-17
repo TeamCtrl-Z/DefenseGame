@@ -89,14 +89,14 @@ public class FairyDetailInfoUI : MonoBehaviour
     /// <param name="instanceData">페어리 인스턴스 데이터</param>
     public void RefreshFairyDetailInfo(FairyInstanceData instanceData)
     {
-        RefreshFairyImage(instanceData.FairyImage);
+        RefreshFairyImage(instanceData.FairyIllustImage);
         fairyNumber.text = $"No.{instanceData.FID.ToString("D4")}";
         RefreshCompoundImage(instanceData.CompoundLevel);
         fairyName.text = $"{instanceData.Name}";
         fairyType.text = $"{instanceData.Type}";
         fairyAttackPower.text = $"공격력 : {instanceData.AttackPower:f0}";
-        fairyAttackSpeed.text = $"공격 속도 : {instanceData.AttackSpeed:f0}";
-        fairyCriticalProbability.text = $"치명타율 : {instanceData.CriticalProbability:f0}";
+        fairyAttackSpeed.text = $"공격 속도 : {instanceData.AttackSpeed}";
+        fairyCriticalProbability.text = $"치명타율 : {instanceData.CriticalProbability}";
         fairyCriticalDamage.text = $"치명타 데미지 : {instanceData.CirticalDamage:f0}";
         fairyLevel.text = $"Lv.{instanceData.Level}";
         fairyItemUI.RefreshItemUI();
@@ -121,17 +121,7 @@ public class FairyDetailInfoUI : MonoBehaviour
     /// <param name="address">페어리 이미지 주소</param>
     private void RefreshFairyImage(string address)
     {
-        Addressables.LoadAssetAsync<Sprite>(address).Completed += handle =>
-        {
-            if (handle.Status == AsyncOperationStatus.Succeeded)
-            {
-                Sprite loadedSprite = handle.Result;
-                fairyImage.sprite = loadedSprite;
-            }
-            else
-            {
-                Debug.LogError($"[Addressables] Sprite 로드 실패: {address}");
-            }
-        };
+        if (address == string.Empty) return;
+        AddressableUtility.LoadSpriteByAddress(address, fairyImage);
     }
 }

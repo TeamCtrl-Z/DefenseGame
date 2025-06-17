@@ -49,7 +49,7 @@ public static class CsvLoader
             for (int c = 0; c < headers.Length && c < cols.Length; c++)
             {
                 var header = headers[c];
-                var raw = cols[c].Trim();
+                var raw = cols[c].Trim().Trim('"');
 
                 // 5-1) 프로퍼티에 맞춰서 값 설정 (대소문자 무시)
                 var prop = props.FirstOrDefault(p => p.Name.Equals(header, StringComparison.OrdinalIgnoreCase));
@@ -64,35 +64,9 @@ public static class CsvLoader
                 var field = fields.FirstOrDefault(f => f.Name.Equals(header, StringComparison.OrdinalIgnoreCase));
                 if (field != null)
                 {
-                    // rawValue가 "-"일 경우 0으로 처리 (필요하다면 이 부분 유지)
-                    if (raw == "-")
-                        raw = "0";
-
                     var fieldType = field.FieldType;
 
-                    object convertedValue = null;
-
-                    if (fieldType.IsEnum)
-                    {
-                        // 1) 문자열(raw)이 enum 이름으로 들어왔을 때
-                        try
-                        {
-                            convertedValue = Enum.Parse(fieldType, raw, ignoreCase: true);
-                        }
-                        catch (ArgumentException)
-                        {
-                            // raw가 "0", "1"처럼 정수 문자열로 들어왔을 때
-                            // underlying 타입으로 먼저 변환 후,(enum) 캐스팅
-                            var underlyingType = Enum.GetUnderlyingType(fieldType);
-                            var numericValue = Convert.ChangeType(raw, underlyingType);
-                            convertedValue = Enum.ToObject(fieldType, numericValue);
-                        }
-                    }
-                    else
-                    {
-                        // 기본 타입: int, float, double, bool, string 등
-                        convertedValue = Convert.ChangeType(raw, fieldType);
-                    }
+                    object convertedValue = ConvertField(raw, fieldType);
 
                     field.SetValue(obj, convertedValue);
                 }
@@ -105,7 +79,26 @@ public static class CsvLoader
         Func<T, uint> getKey = CreateKeyGetter<T>(keyColumnName);
 
         // 7) List<T>를 Dictionary<int, T>로 변환하여 반환
-        return list.ToDictionary(getKey);
+        try
+        {
+            return list.ToDictionary(getKey);
+        }
+        catch (ArgumentException ex)
+        {
+            var duplicates = list
+                .GroupBy(getKey)
+                .Where(g => g.Count() > 1)
+                .Select(g => new { Key = g.Key, Count = g.Count() })
+                .ToList();
+
+            foreach (var dup in duplicates)
+            {
+                Debug.LogError($"[중복 키 발견] Key: {dup.Key}, Count: {dup.Count}");
+            }
+
+            Debug.LogError($"[Dictionary 변환 실패] 중복 키로 인해 ToDictionary 실패: {ex.Message}");
+            throw; // 또는 null 반환하거나 fallback 처리
+        }
     }
 
     /// <summary>
@@ -138,5 +131,52 @@ public static class CsvLoader
 
         throw new Exception(
             $"'{type.Name}' 타입에 '{keyColumnName}'(uint) 프로퍼티/필드가 없습니다.");
+    }
+
+    private static object ConvertField(string raw, Type fieldType)
+    {
+        // 1. "-"나 공백 문자열 → null 또는 기본값 처리
+        if (string.IsNullOrWhiteSpace(raw) || raw == "-")
+        {
+            if (fieldType == typeof(string))
+                return string.Empty;
+
+            if (Nullable.GetUnderlyingType(fieldType) != null)
+                return null;
+
+            return Activator.CreateInstance(fieldType);
+        }
+
+        // 2. Enum 처리
+        if (fieldType.IsEnum)
+            return ParseEnum(fieldType, raw);
+
+        // 3. 일반 기본 타입 처리
+        try
+        {
+            Type targetType = Nullable.GetUnderlyingType(fieldType) ?? fieldType;
+            return Convert.ChangeType(raw, targetType);
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"[변환 실패] raw: '{raw}', type: {fieldType.Name} → {ex.Message}");
+            throw;
+        }
+    }
+
+    private static object ParseEnum(Type enumType, string raw)
+    {
+        try
+        {
+            // 이름 기반 파싱
+            return Enum.Parse(enumType, raw, ignoreCase: true);
+        }
+        catch
+        {
+            // 숫자 문자열 기반 파싱
+            var underlyingType = Enum.GetUnderlyingType(enumType);
+            var numericValue = Convert.ChangeType(raw, underlyingType);
+            return Enum.ToObject(enumType, numericValue);
+        }
     }
 }

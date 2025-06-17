@@ -57,16 +57,20 @@ public class FairyInfoUI : MonoBehaviour
     private void Awake()
     {
         fairyInfoCG = GetComponent<CanvasGroup>();
+
+        sortingFairyUI.onSortingChanged += SetSortAndRefresh;
+        FairyInfoInitialize();
     }
 
     private void Start()
     {
         CloseButton.onClick.AddListener(() => { CloseFairyInfoUI(); });
         FairyInfoButton.onClick.AddListener(() => { CloseFairyInfoUI(); });
+    }
 
-        sortingFairyUI.onSortingChanged += SetSortAndRefresh;
-
-        FairyInfoInitialize();
+    private void OnEnable()
+    {
+        RefreshFairySlot();
     }
 
     /// <summary>
@@ -74,7 +78,7 @@ public class FairyInfoUI : MonoBehaviour
     /// </summary>
     private void CloseFairyInfoUI()
     {
-        StartCoroutine(CloseFairyInfoUICoroutine());
+        StartCoroutine(UIUtility.ClosePopupUIWithCanvasGroup(fairyInfoCG));
     }
 
     /// <summary>
@@ -86,8 +90,6 @@ public class FairyInfoUI : MonoBehaviour
         {
             slot.onSlotTouch += detailInfo.RefreshFairyDetailInfo;
         }
-
-        RefreshFairySlot();
     }
 
     /// <summary>
@@ -145,24 +147,5 @@ public class FairyInfoUI : MonoBehaviour
 
             return isAscending ? primary : -primary;
         });
-    }
-
-    /// <summary>
-    /// 페어리 정보창을 끄는 코루틴
-    /// </summary>
-    private IEnumerator CloseFairyInfoUICoroutine()
-    {
-        float timeElapsed = 0.2f;
-
-        while (timeElapsed > 0f)
-        {
-            timeElapsed -= Time.deltaTime;
-            fairyInfoCG.alpha = timeElapsed * 5;
-            yield return null;
-        }
-
-        fairyInfoCG.alpha = 0f;
-        fairyInfoCG.interactable = false;
-        fairyInfoCG.blocksRaycasts = false;
     }
 }

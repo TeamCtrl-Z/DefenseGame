@@ -64,3 +64,83 @@ public static class TransformExtensions
         return false;
     }
 }
+
+/// <summary>
+/// 변환을 도와주는 클래스
+/// </summary>
+public static class ConvertHelpers
+{
+    /// <summary>
+    /// 페어리 등급을 통해 등급 프레임 주소를 반환해주는 함수
+    /// </summary>
+    /// <param name="grade"> 등급 </param>
+    /// <returns> 이미지 주소 </returns>
+    public static string GetFairyGradeFrameAddress(FairyGrade grade)
+    {
+        string address;
+        switch (grade)
+        {
+            case FairyGrade.Normal:
+                address = "FairyGrade/NormalFrame";
+                break;
+
+            case FairyGrade.Magic:
+                address = "FairyGrade/MagicFrame";
+                break;
+
+            case FairyGrade.Rare:
+                address = "FairyGrade/RareFrame";
+                break;
+
+            case FairyGrade.Unique:
+                address = "FairyGrade/UniqueFrame";
+                break;
+
+            case FairyGrade.Legend:
+                address = "FairyGrade/LegendFrame";
+                break;
+            default:
+                address = string.Empty;
+                break;
+        }
+
+        return address;
+    }
+
+    /// <summary>
+    /// 페어리 등급을 통해 등급 백그라운드 주소를 반환해주는 함수
+    /// </summary>
+    /// <param name="grade"> 등급 </param>
+    /// <returns> 이미지 주소 </returns>
+    public static string GetFairyGradeBGAddress(FairyGrade grade)
+    {
+        string address;
+        switch (grade)
+        {
+            case FairyGrade.Normal:
+                address = "FairyGrade/NormalBG";
+                break;
+
+            case FairyGrade.Magic:
+                address = "FairyGrade/MagicBG";
+                break;
+
+            case FairyGrade.Rare:
+                address = "FairyGrade/RareBG";
+                break;
+
+            case FairyGrade.Unique:
+                address = "FairyGrade/UniqueBG";
+                break;
+
+            case FairyGrade.Legend:
+                address = "FairyGrade/LegendBG";
+                break;
+            default:
+                address = string.Empty;
+                break;
+        }
+
+        return address;
+    }
+}
