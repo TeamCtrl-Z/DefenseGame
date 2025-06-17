@@ -28,6 +28,11 @@ public class FairyInfoUI : MonoBehaviour
     private SortingFairyUI sortingFairyUI;
 
     /// <summary>
+    /// 화면 전환용 FadeUI
+    /// </summary>
+    private FadeUI fadeUI;
+
+    /// <summary>
     /// 페어리 정보창 닫기 버튼
     /// </summary>
     [field:SerializeField]
@@ -40,9 +45,15 @@ public class FairyInfoUI : MonoBehaviour
     public Button FairyInfoButton { get; private set; }
 
     /// <summary>
+    /// 보트 운용창 버튼
+    /// </summary>
+    [field:SerializeField]
+    public Button BoatOperationButton { get; private set; }
+
+    /// <summary>
     /// 페어리 정보창의 CG
     /// </summary>
-    private CanvasGroup fairyInfoCG;
+    public CanvasGroup FairyInfoCG { get; private set; }
 
     /// <summary>
     /// 현재 정렬 타입
@@ -56,17 +67,31 @@ public class FairyInfoUI : MonoBehaviour
 
     private void Awake()
     {
-        fairyInfoCG = GetComponent<CanvasGroup>();
-
-        sortingFairyUI.onSortingChanged += SetSortAndRefresh;
-        FairyInfoInitialize();
+        FairyInfoCG = GetComponent<CanvasGroup>();
     }
 
     private void Start()
     {
-        CloseButton.onClick.AddListener(() => { CloseFairyInfoUI(); });
-        FairyInfoButton.onClick.AddListener(() => { CloseFairyInfoUI(); });
-    }
+        fadeUI = UIManager.Instance.FadeUI;
+
+        CloseButton.onClick.AddListener(() =>
+        {
+            fadeUI.Fade(CloseFairyInfoUI);
+        });
+
+        FairyInfoButton.onClick.AddListener(() =>
+        {
+            fadeUI.Fade(CloseFairyInfoUI);
+        });
+
+        BoatOperationButton.onClick.AddListener(() =>
+        {
+            fadeUI.Fade(() => 
+            { 
+                CloseFairyInfoUI(); 
+                // 보트 운용창 열기
+            });
+        });
 
     private void OnEnable()
     {
@@ -78,7 +103,9 @@ public class FairyInfoUI : MonoBehaviour
     /// </summary>
     private void CloseFairyInfoUI()
     {
-        StartCoroutine(UIUtility.ClosePopupUIWithCanvasGroup(fairyInfoCG));
+        FairyInfoCG.alpha = 0.0f;
+        FairyInfoCG.interactable = false;
+        FairyInfoCG.blocksRaycasts = false;
     }
 
     /// <summary>
