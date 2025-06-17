@@ -15,14 +15,41 @@ public class ButtonUI : MonoBehaviour
     private Button fairyInfoButton;
 
     /// <summary>
-    /// 페어리 정보UI(나중에 UI컴포넌트로 바꾸기)
+    /// 보트 운용 버튼
     /// </summary>
     [SerializeField]
+    private Button boatOperationButton;
+
+    /// <summary>
+    /// 화면 전환 UI
+    /// </summary>
+    private FadeUI fadeUI;
+
+    /// <summary>
+    /// 페어리 정보UI CG
+    /// </summary>
     private CanvasGroup fairyInfoCG;
+
+    /// <summary>
+    /// 보트 운용UI CG
+    /// </summary>
+    private CanvasGroup boatOperationCG;
 
     private void Start()
     {
-        fairyInfoButton.onClick.AddListener(() => { OpenFairyInfoUI(); });
+        fadeUI = UIManager.Instance.FadeUI;
+        fairyInfoCG = UIManager.Instance.FairyInfo.FairyInfoCG;
+        boatOperationCG = UIManager.Instance.BoatOperation.BoatOpertaionCG;
+
+        fairyInfoButton.onClick.AddListener(() =>
+        {
+            fadeUI.Fade(OpenFairyInfoUI);
+        });
+
+        boatOperationButton.onClick.AddListener(() =>
+        {
+            fadeUI.Fade(OpenBoatOperationUI);
+        });
     }
 
     /// <summary>
@@ -30,25 +57,18 @@ public class ButtonUI : MonoBehaviour
     /// </summary>
     private void OpenFairyInfoUI()
     {
-        StartCoroutine(OpenFairyInfoUICoroutine());
-    }
-
-    /// <summary>
-    /// 페어리 정보창을 끄는 코루틴
-    /// </summary>
-    private IEnumerator OpenFairyInfoUICoroutine()
-    {
-        float timeElapsed = 0.0f;
-
-        while (timeElapsed < 0.2f)
-        {
-            timeElapsed += Time.deltaTime;
-            fairyInfoCG.alpha = timeElapsed * 5;
-            yield return null;
-        }
-
         fairyInfoCG.alpha = 1f;
         fairyInfoCG.interactable = true;
         fairyInfoCG.blocksRaycasts = true;
+    }
+
+    /// <summary>
+    /// 보트 운용창을 여는 함수
+    /// </summary>
+    private void OpenBoatOperationUI()
+    {
+        boatOperationCG.alpha = 1f;
+        boatOperationCG.interactable= true;
+        boatOperationCG.blocksRaycasts = true;
     }
 }
