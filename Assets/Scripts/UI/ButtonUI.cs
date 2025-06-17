@@ -15,7 +15,7 @@ public class ButtonUI : MonoBehaviour
     private Button fairyInfoButton;
 
     /// <summary>
-    /// 보트 운용 버튼
+    /// 페어리 정보UI(나중에 UI컴포넌트로 바꾸기)
     /// </summary>
     [SerializeField]
     private Button boatOperationButton;

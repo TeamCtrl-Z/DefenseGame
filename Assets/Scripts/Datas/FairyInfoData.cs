@@ -19,6 +19,16 @@ public class FairyInfoData
     public FairyGrade Grade;
 
     /// <summary>
+    /// 페어리 인 게임 이미지 주소
+    /// </summary>
+    public string Image_1;
+
+    /// <summary>
+    /// 페어리 일러스트 이미지 주소
+    /// </summary>
+    public string Image_2;
+
+    /// <summary>
     /// 페어리 설명
     /// </summary>
     public string Desc;

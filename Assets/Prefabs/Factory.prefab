@@ -662,6 +662,7 @@ Transform:
   - {fileID: 7917619562306107139}
   - {fileID: 7254601374888361192}
   - {fileID: 1228940397680671638}
+  - {fileID: 8363609416132529309}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1168639004949360782
@@ -858,7 +859,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c88c76b2aa8dc24ca32e40a196dc518, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 5261304465877487142, guid: 5a97dc458d4eff44f9ef0c93bde890e1, type: 3}
+  prefab: {fileID: 1717769099378389128, guid: 5ac59a977a043554cb0d2e4525371f18, type: 3}
   poolSize: 64
 --- !u!1 &2064804375534894155
 GameObject:
@@ -997,7 +998,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 1520255155769831172, guid: 38ff85285b34dfd4a833f0709e8627a5, type: 3}
-  poolSize: 64
+  poolSize: 1
 --- !u!1 &2405634722519681623
 GameObject:
   m_ObjectHideFlags: 0
@@ -1273,7 +1274,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 2712530474505849997, guid: 9e7b6c1ac8121ce468ed43a686720566, type: 3}
-  poolSize: 16
+  poolSize: 1
 --- !u!1 &2571615144658163723
 GameObject:
   m_ObjectHideFlags: 0
@@ -1319,7 +1320,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 5497006950781778703, guid: 41b6f39b4403ea748b24621a086dafc2, type: 3}
-  poolSize: 16
+  poolSize: 1
 --- !u!1 &2576281441402938289
 GameObject:
   m_ObjectHideFlags: 0
@@ -1871,7 +1872,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 2976149628883731713, guid: 704c2cf9550b55e47920f7e852116e15, type: 3}
-  poolSize: 16
+  poolSize: 1
 --- !u!1 &3809500247803696266
 GameObject:
   m_ObjectHideFlags: 0
@@ -3251,7 +3252,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 5439519899236288667, guid: 3f354af79f6e24b4596746c122ba857e, type: 3}
-  poolSize: 16
+  poolSize: 1
 --- !u!1 &7417084103561236175
 GameObject:
   m_ObjectHideFlags: 0
@@ -3344,6 +3345,52 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 2835078482480448708, guid: 03167e206480a1c4aa06b8f7ee67af12, type: 3}
   poolSize: 64
+--- !u!1 &7758201185977692864
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8363609416132529309}
+  - component: {fileID: 2194297582826485754}
+  m_Layer: 0
+  m_Name: ToastMessagePool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8363609416132529309
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7758201185977692864}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1527577420808434877}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2194297582826485754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7758201185977692864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc4c776756f1bff44b2764c6e9f26fba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 3220855169436673816, guid: 98c4c3f7f63ff774480ed528b8d23043, type: 3}
+  poolSize: 16
 --- !u!1 &7760455757189594731
 GameObject:
   m_ObjectHideFlags: 0
@@ -3573,7 +3620,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 6780973474684360724, guid: 978c1c9d08da242408ddcc4c9124a2e1, type: 3}
-  poolSize: 16
+  poolSize: 1
 --- !u!1 &8245158695477910962
 GameObject:
   m_ObjectHideFlags: 0
@@ -3757,7 +3804,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 4923936915580164361, guid: e9dd7de36d8d7f94881da0207c30a540, type: 3}
-  poolSize: 16
+  poolSize: 1
 --- !u!1 &8928390008336350726
 GameObject:
   m_ObjectHideFlags: 0

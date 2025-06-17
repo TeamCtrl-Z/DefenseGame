@@ -21,17 +21,22 @@ public class FairyInstanceData
     /// <summary>
     /// 페어리 이름
     /// </summary>
-    public string Name;
+    public string Name => Table_Fairy.Instance.GetFairyName(FID);
 
     /// <summary>
     /// 페어리 타입
     /// </summary>
-    public string Type;
+    public string Type => ((FairyType)FID).ToString();
 
     /// <summary>
     /// 페어리 일러스트 주소(Addressable)
     /// </summary>
-    public string FairyImage;
+    public string FairyIllustImage => Table_Fairy.Instance.GetFairyIllustImageAddress(FID);
+
+    /// <summary>
+    /// 페어리 프로필 이미지 주소
+    /// </summary>
+    public string FairyProfileImage => Table_Fairy.Instance.GetFairyProfileImageAddress(FID);
 
     /// <summary>
     /// 페어리 등급
@@ -101,8 +106,8 @@ public class FairyInstanceData
     /// <summary>
     /// 추가 공격 스피드
     /// </summary>
-    private float bonusAttackSpeed => Equipments.Sum(equip =>
-        DataService.Instance.ItemDataManager.TryGetItemDataByIoid(equip.IOID, out var data) ? data.AttackSpeedBonus : 0f);
+    private float bonusAttackSpeed => Equipments.Count != 0 ? Equipments.Sum(equip =>
+        DataService.Instance.ItemDataManager.TryGetItemDataByIoid(equip.IOID, out var data) ? data.AttackSpeedBonus : 0f) : 1.0f;
 
     /// <summary>
     /// 페어리 공격 스피드(기본 스피드 * 추가 스피드 속도 비율)

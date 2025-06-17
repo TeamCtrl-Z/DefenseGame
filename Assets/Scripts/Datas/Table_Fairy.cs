@@ -206,5 +206,24 @@ public class Table_Fairy : TableClass
         return infoTable[fid].Name;
     }
 
+    /// <summary>
+    /// 페어리 프로필 이미지 주소를 알려주는 함수
+    /// </summary>
+    /// <param name="fid"> 페어리 종류 </param>
+    /// <returns>이미지 주소</returns>
+    public string GetFairyProfileImageAddress(uint fid)
+    {
+        if (!infoTable.ContainsKey(fid))
+            return null;
+        return infoTable[fid].Image_1;
+    }
+
+    public string GetFairyIllustImageAddress(uint fid)
+    {
+        if (!infoTable.ContainsKey(fid))
+            return null;
+        return infoTable[fid].Image_2;
+    }
+
     #endregion
 }

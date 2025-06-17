@@ -86,16 +86,19 @@ public class FairyInfoUI : MonoBehaviour
 
         BoatOperationButton.onClick.AddListener(() =>
         {
-            fadeUI.Fade(() => 
-            { 
-                CloseFairyInfoUI(); 
+            fadeUI.Fade(() =>
+            {
+                CloseFairyInfoUI();
                 // 보트 운용창 열기
             });
         });
 
-        sortingFairyUI.onSortingChanged += SetSortAndRefresh;
-
         FairyInfoInitialize();
+    }
+
+    private void OnEnable()
+    {
+        RefreshFairySlot();
     }
 
     /// <summary>
@@ -118,7 +121,7 @@ public class FairyInfoUI : MonoBehaviour
             slot.onSlotTouch += detailInfo.RefreshFairyDetailInfo;
         }
 
-        RefreshFairySlot();
+        sortingFairyUI.onSortingChanged += SetSortAndRefresh;
     }
 
     /// <summary>

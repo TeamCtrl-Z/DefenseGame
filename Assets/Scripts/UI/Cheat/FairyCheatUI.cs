@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,6 +21,12 @@ public class FairyCheatUI : MonoBehaviour
     private Transform content;
 
     /// <summary>
+    /// 토글들을 생성할 그룹
+    /// </summary>
+    [SerializeField]
+    private ToggleGroup toggleGroup;
+
+    /// <summary>
     /// 닫기 버튼
     /// </summary>
     [SerializeField]
@@ -30,6 +38,9 @@ public class FairyCheatUI : MonoBehaviour
     [SerializeField]
     private Button getBtn;
 
+    /// <summary>
+    /// 갯수를 적을 input 필드
+    /// </summary>
     [SerializeField]
     private TMP_InputField inputField;
 
@@ -37,11 +48,6 @@ public class FairyCheatUI : MonoBehaviour
     /// 모든 페어리 fid들
     /// </summary>
     private List<uint> fids;
-
-    /// <summary>
-    /// 선택된 fid
-    /// </summary>
-    private uint? selectFid = null;
 
     private void Awake()
     {
@@ -62,33 +68,39 @@ public class FairyCheatUI : MonoBehaviour
     private void AddItem(uint fid)
     {
         GameObject cell = Instantiate(cellPrefab, content);
+
+        Toggle toggle = cell.GetComponent<Toggle>();
+        toggle.group = toggleGroup;
+
         FairyCheatSlotUI slot = cell.GetComponent<FairyCheatSlotUI>();
         slot.RefreshFairySlot(fid);
-        slot.onSlotTouch += (fid) => { selectFid = fid; };
     }
 
     private void ClickGetBtn()
     {
+        var selected = toggleGroup.ActiveToggles().FirstOrDefault();
+        var slot = selected.GetComponent<FairyCheatSlotUI>();
+    
         if (inputField.text == "" || inputField.text == "0")
         {
             // TODO : 토스트 메세지 띄우기
             return;
         }
 
-        if (selectFid == null)
+        if (slot == null)
             return;
 
         void success()
         {
             // TODO : 토스트 메세지 띄우기
-            Debug.Log("페어리 치트 얻기 성공");
+            ToastManager.Instance.ShowToast($"{Table_Fairy.Instance.GetFairyName(slot.FID)} 페어리를 얻었습니다.");
         }
 
         if (uint.TryParse(inputField.text, out uint count))
         {
             // TODO : 서버 요청
             if (count < 1000)
-                StartCoroutine(ServerData_Fairys.RequestCheatGetFairy(selectFid ?? 0, count, success));
+                StartCoroutine(ServerData_Fairys.RequestCheatGetFairy(slot.FID, count, success));
             else
             {
                 // TODO : 토스트 메세지 띄우기
