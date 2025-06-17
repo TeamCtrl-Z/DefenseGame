@@ -12,4 +12,16 @@ public class UIManager : Singleton<UIManager>
     /// </summary>
     [field : SerializeField]
     public FairyInfoUI FairyInfo {  get; private set; }
+
+    /// <summary>
+    /// 보트 운용창
+    /// </summary>
+    [field : SerializeField]
+    public BoatOperationUI BoatOperation { get; private set; }
+
+    /// <summary>
+    /// Fade 창
+    /// </summary>
+    [field : SerializeField]
+    public FadeUI FadeUI { get; private set; }
 }
