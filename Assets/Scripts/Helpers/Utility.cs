@@ -41,39 +41,32 @@ public static class AddressableUtility
     }
 }
 
+/// <summary>
+/// UI를 켜고 끄는 메서드를 제공하는 클래스
+/// </summary>
 public static class UIUtility
 {
-    public static IEnumerator OpenPopupUIWithCanvasGroup(CanvasGroup cg)
+    /// <summary>
+    /// UI를 켜는 메서드
+    /// </summary>
+    /// <param name="cg">해당 UI의 CanvasGroup</param>
+    public static void OpenPopupUIWithCanvasGroup(CanvasGroup cg)
     {
         cg.gameObject.SetActive(true);
-        float timeElapsed = 0.0f;
-
-        while (timeElapsed < 0.2f)
-        {
-            timeElapsed += Time.deltaTime;
-            cg.alpha = timeElapsed * 5;
-            yield return null;
-        }
-
         cg.alpha = 1f;
         cg.interactable = true;
         cg.blocksRaycasts = true;
     }
 
-    public static IEnumerator ClosePopupUIWithCanvasGroup(CanvasGroup cg)
+    /// <summary>
+    /// UI를 끄는 메서드
+    /// </summary>
+    /// <param name="cg">해당 UI의 CanvasGroup</param>
+    public static void ClosePopupUIWithCanvasGroup(CanvasGroup cg)
     {
-        float timeElapsed = 0.2f;
-
-        while (timeElapsed > 0f)
-        {
-            timeElapsed -= Time.deltaTime;
-            cg.alpha = timeElapsed * 5;
-            yield return null;
-        }
-
-        cg.alpha = 0f;
-        cg.interactable = false;
         cg.blocksRaycasts = false;
+        cg.interactable = false;
+        cg.alpha = 0f;
         cg.gameObject.SetActive(false);
     }
 }

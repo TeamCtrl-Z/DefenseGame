@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Playables;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,6 +22,9 @@ public class CheatButtonUI : MonoBehaviour
 
     private void Start()
     {
-        cheatOpenButton.onClick.AddListener(() => { StartCoroutine(UIUtility.OpenPopupUIWithCanvasGroup(cheatSelectCG)); });
+        cheatOpenButton.onClick.AddListener(() => 
+        {
+            UIManager.Instance.FadeUI.Fade(() => UIUtility.OpenPopupUIWithCanvasGroup(cheatSelectCG));
+        });
     }
 }

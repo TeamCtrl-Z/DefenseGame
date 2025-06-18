@@ -28,11 +28,6 @@ public class FairyInfoUI : MonoBehaviour
     private SortingFairyUI sortingFairyUI;
 
     /// <summary>
-    /// 화면 전환용 FadeUI
-    /// </summary>
-    private FadeUI fadeUI;
-
-    /// <summary>
     /// 페어리 정보창 닫기 버튼
     /// </summary>
     [field:SerializeField]
@@ -72,24 +67,28 @@ public class FairyInfoUI : MonoBehaviour
 
     private void Start()
     {
-        fadeUI = UIManager.Instance.FadeUI;
-
         CloseButton.onClick.AddListener(() =>
         {
-            fadeUI.Fade(CloseFairyInfoUI);
+            UIManager.Instance.FadeUI.Fade(() =>
+            {
+                UIUtility.ClosePopupUIWithCanvasGroup(FairyInfoCG);
+            });
         });
 
         FairyInfoButton.onClick.AddListener(() =>
         {
-            fadeUI.Fade(CloseFairyInfoUI);
+            UIManager.Instance.FadeUI.Fade(() =>
+            {
+                UIUtility.ClosePopupUIWithCanvasGroup(FairyInfoCG);
+            });
         });
 
         BoatOperationButton.onClick.AddListener(() =>
         {
-            fadeUI.Fade(() =>
+            UIManager.Instance.FadeUI.Fade(() =>
             {
-                CloseFairyInfoUI();
-                // 보트 운용창 열기
+                UIUtility.ClosePopupUIWithCanvasGroup(FairyInfoCG);
+                UIUtility.OpenPopupUIWithCanvasGroup(UIManager.Instance.BoatOperation.BoatOpertaionCG);
             });
         });
 
@@ -99,16 +98,6 @@ public class FairyInfoUI : MonoBehaviour
     private void OnEnable()
     {
         RefreshFairySlot();
-    }
-
-    /// <summary>
-    /// 페어리 정보창을 끄는 함수
-    /// </summary>
-    private void CloseFairyInfoUI()
-    {
-        FairyInfoCG.alpha = 0.0f;
-        FairyInfoCG.interactable = false;
-        FairyInfoCG.blocksRaycasts = false;
     }
 
     /// <summary>

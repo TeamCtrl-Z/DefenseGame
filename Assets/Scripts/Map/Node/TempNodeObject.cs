@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 /// <summary>
 /// 임시 노드 오브젝트 클래스
 /// </summary>
-public class TempNodeObject : NodeObjectBase
+public class TempNodeObject : NodeBase
 {
     /// <summary>
     /// 임시 노드용 인덱스(안쓰는 인덱스 숫자)

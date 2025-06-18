@@ -131,7 +131,7 @@ public class NodeContainerObject : MonoBehaviour
         bool result = false;
 
         // 인덱스가 정상
-        if (IsValidIndex(nodeIndex, out NodeObjectBase node))
+        if (IsValidIndex(nodeIndex, out NodeBase node))
         {
             node.PlaceNode(fairy);
             result = true;
@@ -149,7 +149,7 @@ public class NodeContainerObject : MonoBehaviour
     {
         bool result = false;
 
-        if (IsValidIndex(nodeIndex, out NodeObjectBase node))
+        if (IsValidIndex(nodeIndex, out NodeBase node))
         {
             if (!node.IsEmpty)
             {
@@ -180,8 +180,8 @@ public class NodeContainerObject : MonoBehaviour
     public void MoveFairy(uint from, uint to)
     {
         if (from != to
-            && IsValidIndex(from, out NodeObjectBase fromNode)
-            && IsValidIndex(to, out NodeObjectBase toNode))
+            && IsValidIndex(from, out NodeBase fromNode)
+            && IsValidIndex(to, out NodeBase toNode))
         {
             if (!fromNode.IsEmpty)
             {
@@ -211,7 +211,7 @@ public class NodeContainerObject : MonoBehaviour
     public bool TryGetFairyAt(uint index, out IPlaceable fairy)
     {
         fairy = null;
-        if (IsValidIndex(index, out NodeObjectBase node))
+        if (IsValidIndex(index, out NodeBase node))
         {
             if (node.IsEmpty == false)
             {
@@ -255,7 +255,7 @@ public class NodeContainerObject : MonoBehaviour
     /// <param name="index">확인할 인덱스 번호</param>
     /// <param name="targetNode">index가 가리키는 노드</param>
     /// <returns>존재하는 인덱스면 true, 아니면 false</returns>
-    private bool IsValidIndex(uint index, out NodeObjectBase targetNode)
+    private bool IsValidIndex(uint index, out NodeBase targetNode)
     {
         targetNode = null;
 

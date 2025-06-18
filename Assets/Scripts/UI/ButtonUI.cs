@@ -21,11 +21,6 @@ public class ButtonUI : MonoBehaviour
     private Button boatOperationButton;
 
     /// <summary>
-    /// 화면 전환 UI
-    /// </summary>
-    private FadeUI fadeUI;
-
-    /// <summary>
     /// 페어리 정보UI CG
     /// </summary>
     private CanvasGroup fairyInfoCG;
@@ -37,38 +32,23 @@ public class ButtonUI : MonoBehaviour
 
     private void Start()
     {
-        fadeUI = UIManager.Instance.FadeUI;
         fairyInfoCG = UIManager.Instance.FairyInfo.FairyInfoCG;
         boatOperationCG = UIManager.Instance.BoatOperation.BoatOpertaionCG;
 
         fairyInfoButton.onClick.AddListener(() =>
         {
-            fadeUI.Fade(OpenFairyInfoUI);
+            UIManager.Instance.FadeUI.Fade(() => 
+            {
+                UIUtility.OpenPopupUIWithCanvasGroup(fairyInfoCG);
+            });
         });
 
         boatOperationButton.onClick.AddListener(() =>
         {
-            fadeUI.Fade(OpenBoatOperationUI);
+            UIManager.Instance.FadeUI.Fade(() =>
+            {
+                UIUtility.OpenPopupUIWithCanvasGroup(boatOperationCG);
+            });
         });
-    }
-
-    /// <summary>
-    /// 페어리 정보창을 여는 함수
-    /// </summary>
-    private void OpenFairyInfoUI()
-    {
-        fairyInfoCG.alpha = 1f;
-        fairyInfoCG.interactable = true;
-        fairyInfoCG.blocksRaycasts = true;
-    }
-
-    /// <summary>
-    /// 보트 운용창을 여는 함수
-    /// </summary>
-    private void OpenBoatOperationUI()
-    {
-        boatOperationCG.alpha = 1f;
-        boatOperationCG.interactable= true;
-        boatOperationCG.blocksRaycasts = true;
     }
 }

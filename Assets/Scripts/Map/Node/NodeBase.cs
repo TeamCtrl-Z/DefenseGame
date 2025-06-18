@@ -4,7 +4,7 @@ using UnityEngine;
 /// <summary>
 /// 노드 오브젝트의 기본 클래스
 /// </summary>
-public class NodeObjectBase : MonoBehaviour
+public class NodeBase : MonoBehaviour
 {
     /// <summary>
     /// NodeContainer에서 몇 번째 노드인지를 나타내는 변수

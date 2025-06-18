@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 /// <summary>
 /// 노드 오브젝트 클래스
 /// </summary>
-public class NodeObject : NodeObjectBase
+public class NodeObject : NodeBase
 {
     /// <summary>
     /// 드래그의 시작을 알리는 델리게이트(unit:드래그를 시작한 슬롯의 인덱스)

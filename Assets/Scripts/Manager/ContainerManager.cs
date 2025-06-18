@@ -17,6 +17,17 @@ public class ContainerManager : MonoBehaviour, IInitialize
     public NodeContainerObject BoatNodeContainer => boatNodeContainer;
 
     /// <summary>
+    /// 배UI의 노드 컨테이너
+    /// </summary>
+    [SerializeField]
+    private NodeContainerUI boatNodeContainerUI;
+
+    /// <summary>
+    /// 배UI의 노드 컨테이너를 가져오는 프로퍼티
+    /// </summary>
+    public NodeContainerUI BoatNodeContainerUI => boatNodeContainerUI;
+
+    /// <summary>
     /// 초기화 하는 함수
     /// </summary>
     public void Initialize()
@@ -24,5 +35,9 @@ public class ContainerManager : MonoBehaviour, IInitialize
         boatNodeContainer = FindFirstObjectByType<NodeContainerObject>();
         if (boatNodeContainer == null) return;
         boatNodeContainer.InitializeNodeContainer();
+
+        boatNodeContainerUI = FindFirstObjectByType<NodeContainerUI>();
+        if (boatNodeContainerUI == null) return;
+        boatNodeContainerUI.InitializeNodeContainer();
     }
 }

@@ -96,7 +96,13 @@ public class CheatSelectUI : MonoBehaviour
 
     private void Start()
     {
-        closeBtn.onClick.AddListener(() => { StartCoroutine(UIUtility.ClosePopupUIWithCanvasGroup(canvasGroup)); });
+        closeBtn.onClick.AddListener(() => 
+        {
+            UIManager.Instance.FadeUI.Fade(() =>
+            {
+                UIUtility.OpenPopupUIWithCanvasGroup(canvasGroup);
+            });
+        });
 
         for (int i = 0; i < (int)CheatCommand.Max; i++)
         {
