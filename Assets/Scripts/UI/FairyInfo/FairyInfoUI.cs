@@ -62,6 +62,7 @@ public class FairyInfoUI : MonoBehaviour
 
     private void Awake()
     {
+        Debug.Log($"FairyInfoCG Awake");
         FairyInfoCG = GetComponent<CanvasGroup>();
     }
 

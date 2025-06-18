@@ -411,6 +411,16 @@ public class Factory : Singleton<Factory>
     private ToastMessagePool toastMessage;
 
     /// <summary>
+    /// 페어리 파이어 UI 풀
+    /// </summary>
+    private FairyFireUIPool fairyFireUI;
+
+    /// <summary>
+    /// 페어리 포이즌 UI 풀
+    /// </summary>
+    private FairyPoisonUIPool fairyPoisonUI;
+
+    /// <summary>
     /// Factory 초기화 함수
     /// </summary>
     protected override void OnInitialize()
@@ -657,6 +667,12 @@ public class Factory : Singleton<Factory>
 
         if (this.TryGetComponentInChildren<ToastMessagePool>(out toastMessage))
             toastMessage.Initialize();
+
+        if (this.TryGetComponentInChildren<FairyFireUIPool>(out fairyFireUI))
+            fairyFireUI.Initialize();
+
+        if (this.TryGetComponentInChildren<FairyPoisonUIPool>(out fairyPoisonUI))
+            fairyPoisonUI.Initialize();
     }
 
     #region Enemy Pool
@@ -1486,6 +1502,24 @@ public class Factory : Singleton<Factory>
     public FairyController GetFariyEletronic(Vector2 position, float angle = 0.0f)
     {
         return fairyEletronic.GetObject(position, new Vector3(0, 0, angle));
+    }
+
+    #endregion
+
+    #region FairyUI
+    public FairyUI GetFairyUIByType(FairyType type, FairyInstanceData data, Vector2? position, float angle = 0.0f)
+    {
+        switch (type)
+        {
+            //case FairyType.Basic: return fairyBasic.GetObject(data, position, new Vector3(0, 0, angle));
+            case FairyType.Fire: return fairyFireUI.GetObject(data, position, new Vector3(0, 0, angle));
+            case FairyType.Poison: return fairyPoisonUI.GetObject(data, position, new Vector3(0, 0, angle));
+            //case FairyType.Light: return fairyLight.GetObject(data, position, new Vector3(0, 0, angle));
+            //case FairyType.Freeze: return fairyFreeze.GetObject(data, position, new Vector3(0, 0, angle));
+            //case FairyType.Frozen: return fairyFrozen.GetObject(data, position, new Vector3(0, 0, angle));
+            //case FairyType.Electronic: return fairyEletronic.GetObject(data, position, new Vector3(0, 0, angle));
+            default: return null;
+        }
     }
     #endregion
 

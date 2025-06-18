@@ -57,6 +57,18 @@ public class FairyDataManager : MonoBehaviour, IServerData
     }
 
     /// <summary>
+    /// 페어리 UI 소환 함수
+    /// </summary>
+    /// <param name="fid"> 소환하고 싶은 페어리 아이디 </param>
+    /// <param name="position"> 소환 위치 </param>
+    /// <param name="angle"> 소환 각도 </param>
+    /// <returns> 소환 페어리 UI</returns>
+    public FairyUI SpawnFairyUIByFid(uint fid, Vector3 position, float angle = 0.0f)
+    {
+        return instanceFidTable[fid].GetFairyUI(position, angle);
+    }
+
+    /// <summary>
     /// 서버 데이터 적용
     /// </summary>
     /// <param name="res"></param>
@@ -90,23 +102,25 @@ public class FairyDataManager : MonoBehaviour, IServerData
             }
             return;
         }
-
-        foreach (var fairy in fariyArray)
+        else
         {
-            string foid = fairy["foid"].Value<string>();
+            foreach (var fairy in fariyArray)
+            {
+                string foid = fairy["foid"].Value<string>();
 
-            if (instanceFoidTable.ContainsKey(foid)) // 이미 있는 경우
-            {
-                JsonConvert.PopulateObject(fairy.ToString(), instanceFoidTable[foid]);
-            }
-            else // 처음 생성
-            {
-                var data = fairy.ToObject<FairyInstanceData>();
-                if (data != null)
+                if (instanceFoidTable.ContainsKey(foid)) // 이미 있는 경우
                 {
-                    instanceFoidTable[data.FOID] = data;
+                    JsonConvert.PopulateObject(fairy.ToString(), instanceFoidTable[foid]);
+                }
+                else // 처음 생성
+                {
+                    var data = fairy.ToObject<FairyInstanceData>();
+                    if (data != null)
+                    {
+                        instanceFoidTable[data.FOID] = data;
 
-                    instanceFidTable[data.FID] = data;
+                        instanceFidTable[data.FID] = data;
+                    }
                 }
             }
         }

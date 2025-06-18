@@ -6,6 +6,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// 페어리 치트 UI
+/// </summary>
 public class FairyCheatUI : MonoBehaviour
 {
     /// <summary>
@@ -65,6 +68,10 @@ public class FairyCheatUI : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 페어리 선택 아이템 추가
+    /// </summary>
+    /// <param name="fid"></param>
     private void AddItem(uint fid)
     {
         GameObject cell = Instantiate(cellPrefab, content);
@@ -76,14 +83,17 @@ public class FairyCheatUI : MonoBehaviour
         slot.RefreshFairySlot(fid);
     }
 
+    /// <summary>
+    /// 페어리 얻기 버튼 클릭
+    /// </summary>
     private void ClickGetBtn()
     {
         var selected = toggleGroup.ActiveToggles().FirstOrDefault();
         var slot = selected.GetComponent<FairyCheatSlotUI>();
-    
+
         if (inputField.text == "" || inputField.text == "0")
         {
-            // TODO : 토스트 메세지 띄우기
+            ToastManager.Instance.ShowToast($"얻고 싶은 페어리의 갯수를 입력해 주세요");
             return;
         }
 
@@ -92,23 +102,21 @@ public class FairyCheatUI : MonoBehaviour
 
         void success()
         {
-            // TODO : 토스트 메세지 띄우기
             ToastManager.Instance.ShowToast($"{Table_Fairy.Instance.GetFairyName(slot.FID)} 페어리를 얻었습니다.");
         }
 
         if (uint.TryParse(inputField.text, out uint count))
         {
-            // TODO : 서버 요청
-            if (count < 1000)
+            if (count <= 1000)
                 StartCoroutine(ServerData_Fairys.RequestCheatGetFairy(slot.FID, count, success));
             else
             {
-                // TODO : 토스트 메세지 띄우기
-            }                
+                ToastManager.Instance.ShowToast($"페어리의 갯수는 1000개 이하만 가능합니다.");
+            }
         }
         else
         {
-            // TODO : 토스트 메세지 띄우기
+            ToastManager.Instance.ShowToast($"입력 값은 0이상의 정수만 가능합니다. 현재 입력 값 {inputField.text}");
         }
     }
 }

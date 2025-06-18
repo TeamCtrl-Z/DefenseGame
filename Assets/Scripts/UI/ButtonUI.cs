@@ -20,26 +20,13 @@ public class ButtonUI : MonoBehaviour
     [SerializeField]
     private Button boatOperationButton;
 
-    /// <summary>
-    /// 페어리 정보UI CG
-    /// </summary>
-    private CanvasGroup fairyInfoCG;
-
-    /// <summary>
-    /// 보트 운용UI CG
-    /// </summary>
-    private CanvasGroup boatOperationCG;
-
     private void Start()
     {
-        fairyInfoCG = UIManager.Instance.FairyInfo.FairyInfoCG;
-        boatOperationCG = UIManager.Instance.BoatOperation.BoatOpertaionCG;
-
         fairyInfoButton.onClick.AddListener(() =>
         {
             UIManager.Instance.FadeUI.Fade(() => 
             {
-                UIUtility.OpenPopupUIWithCanvasGroup(fairyInfoCG);
+                UIUtility.OpenPopupUIWithCanvasGroup(UIManager.Instance.FairyInfo.FairyInfoCG);
             });
         });
 
@@ -47,7 +34,7 @@ public class ButtonUI : MonoBehaviour
         {
             UIManager.Instance.FadeUI.Fade(() =>
             {
-                UIUtility.OpenPopupUIWithCanvasGroup(boatOperationCG);
+                UIUtility.OpenPopupUIWithCanvasGroup(UIManager.Instance.BoatOperation.BoatOpertaionCG);
             });
         });
     }

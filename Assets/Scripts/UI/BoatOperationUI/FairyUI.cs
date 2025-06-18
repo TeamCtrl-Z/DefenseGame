@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 /// <summary>
 /// 페어리 UI (드래그 가능한 유닛)
 /// </summary>
-public class FairyUI : RecycleObject, IPlaceable, IBeginDragHandler, IEndDragHandler, IDragHandler
+public class FairyUI : RecycleObject, IPlaceable, IBeginDragHandler, IEndDragHandler, IDragHandler, ICharacterIdentity
 {
     /// <summary>
     /// 페어리를 집으면 실행되는 함수
@@ -32,9 +32,29 @@ public class FairyUI : RecycleObject, IPlaceable, IBeginDragHandler, IEndDragHan
     /// </summary>
     public uint CurrentNodeIndex { get; private set; }
 
+    /// <summary>
+    /// 페어리 fid
+    /// </summary>
+    [field: SerializeField]
+    public uint ID { get; private set; }
+
+    /// <summary>
+    /// 페어리 FOID
+    /// </summary>
+    public string FOID { get; private set; }
+
     private void Start()
     {
         container = GameManager.Instance.ContainerManager.BoatNodeContainerUI;
+    }
+
+    /// <summary>
+    /// 초기화
+    /// </summary>
+    /// <param name="foid">해당 페어리 foid</param>
+    public void Initialize(FairyInstanceData data)
+    {
+        FOID = data.FOID;
     }
 
     /// <summary>

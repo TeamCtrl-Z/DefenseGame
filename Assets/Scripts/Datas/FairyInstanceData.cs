@@ -144,4 +144,15 @@ public class FairyInstanceData
     {
         return Factory.Instance.GetFairyByType((FairyType)FID, this, position, angle);
     }
+
+    /// <summary>
+    /// 페어리 인스턴스 가져오기
+    /// </summary>
+    /// <param name="position">소환 위치</param>
+    /// <param name="angle">소환 각도</param>
+    /// <returns>소환될 페어리</returns>
+    public FairyUI GetFairyUI(Vector3 position, float angle)
+    {
+        return Factory.Instance.GetFairyUIByType((FairyType)FID, this, position, angle);
+    }
 }

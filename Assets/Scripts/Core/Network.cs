@@ -54,6 +54,7 @@ public class Network
         string fullUrl = BaseUrl.TrimEnd('/') + "/" + relativeUrl.TrimStart('/');
         Debug.Log(fullUrl);
         webRequest = new UnityWebRequest(fullUrl, httpMethod.ToUpper());
+        webRequest.certificateHandler = new AcceptAllCertificates();
         webRequest.disposeCertificateHandlerOnDispose = true;
     }
 
@@ -188,5 +189,13 @@ public class Network
 
         // 5) 사용 후 UnityWebRequest가 더 이상 필요 없으면 자원 해제
         webRequest.Dispose();
+    }
+}
+
+public class AcceptAllCertificates : CertificateHandler
+{
+    protected override bool ValidateCertificate(byte[] certificateData)
+    {
+        return true;
     }
 }

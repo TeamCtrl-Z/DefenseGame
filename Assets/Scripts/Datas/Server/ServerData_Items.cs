@@ -42,4 +42,36 @@ public static class ServerData_Items
         DataService.Instance.ApplyCommonResponse(res);
         success?.Invoke();
     }
+
+    /// <summary>
+    /// 재화를 수정하는 치트키(DB상 User쪽에 있는 게 맞지만 맥락 상 여기에 두기로 결정)
+    /// </summary>
+    /// <param name="type"> 재화 타입 </param>
+    /// <param name="amount"> 수정하고 싶은 양 </param>
+    /// <param name="success"> 성공 콜백 </param>
+    /// <param name="fail"> 실패 콜백 </param>
+    /// <returns></returns>
+    public static IEnumerator RequestCheatModifyCurrency(CurrencyType type, ulong amount, Action success, Action fail = null)
+    {
+        string url = "/items/cheat/modify";
+        Network network = new Network(url, "POST");
+        network.SetRequestData(new
+        {
+            currencyType = type.ToString(),
+            amount = amount
+        });
+        yield return network.SendRequest();
+
+        if (!string.IsNullOrEmpty(network.Error))
+        {
+            Debug.LogWarning(network.Error);
+            fail?.Invoke();
+            yield break;
+        }
+
+        string responseJson = network.ResponseText;
+        JObject res = JObject.Parse(responseJson);
+        DataService.Instance.ApplyCommonResponse(res);
+        success?.Invoke();
+    }
 }
