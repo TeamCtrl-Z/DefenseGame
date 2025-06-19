@@ -1,10 +1,11 @@
 using System;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 /// <summary>
 /// 드래그 가능한 UI 노드
 /// </summary>
-public class NodeObjectUI : NodeBase, IPointerEnterHandler
+public class NodeObjectUI : NodeBase, IPointerClickHandler
 {
     /// <summary>
     /// 드래그가 시작되면 실행하는 이벤트
@@ -15,6 +16,11 @@ public class NodeObjectUI : NodeBase, IPointerEnterHandler
     /// 드래그가 끝나면 실행되는 이벤트
     /// </summary>
     public event Action<uint?> onDragEnd;
+
+    /// <summary>
+    /// 마우스 클릭하면 실행되는 이벤트
+    /// </summary>
+    public event Action<uint> onClick;
 
     /// <summary>
     /// 드래그가 시작되면 실행하는 메서드
@@ -54,5 +60,14 @@ public class NodeObjectUI : NodeBase, IPointerEnterHandler
     {
         onDragBegin = null;
         onDragEnd = null;
+    }
+
+    /// <summary>
+    /// 이 오브젝트가 클릭되면 실행되는 메서드
+    /// </summary>
+    /// <param name="eventData">포인터 데이터</param>
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        onClick?.Invoke(Index);
     }
 }

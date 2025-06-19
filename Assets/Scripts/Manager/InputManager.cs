@@ -20,7 +20,7 @@ public class InputManager : MonoBehaviour, IInitialize
     /// <summary>
     /// 화면을 터치하면 실행되느 델리게이트
     /// </summary>
-    public event Action<Vector3> onTouch;
+    public event Action<Vector2> onTouch;
 
     /// <summary>
     /// 인풋 액션

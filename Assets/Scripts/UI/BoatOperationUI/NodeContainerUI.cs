@@ -46,6 +46,11 @@ public class NodeContainerUI : MonoBehaviour
     public TempNodeObjectUI TempNode => tempNode;
 
     /// <summary>
+    /// 페어리 데이터
+    /// </summary>
+    private FairyInstanceData fairyData;
+
+    /// <summary>
     /// NodeContainerUI를 초기화 하는 함수
     /// </summary>
     public void InitializeNodeContainer()
@@ -55,12 +60,26 @@ public class NodeContainerUI : MonoBehaviour
             nodes[i].InitializeNode(i);
             nodes[i].onDragBegin += OnFairyMoveBegin;
             nodes[i].onDragEnd += OnFairyMoveEnd;
+            nodes[i].onClick += ((index) => {
+                if (fairyData != null)
+                {
+                    FairyUI fairyUI = DataService.Instance.FairyDataManager.SpawnFairyUIByFid(fairyData.FID, Vector2.zero);
+                    IPlaceable fairy = fairyUI as IPlaceable;
+                    PlaceFairy(index, fairy);
+                }
+            });
+
         }
 
         tempNode.InitializeTempNode();
+        GameManager.Instance.InputManager.onTouch += CancelPlacement;
+        fairyData = null;
     }
 
-    private void OnDisable() => ClearAllDelegates();
+    private void OnDisable()
+    {
+        ClearAllDelegates();
+    }
 
     /// <summary>
     /// 페어리 이동을 시작하면 실행하는 함수
@@ -157,6 +176,46 @@ public class NodeContainerUI : MonoBehaviour
             node = tempNode;
 
         return node != null;
+    }
+
+    /// <summary>
+    /// 슬롯을 터치하면 실행되는 함수
+    /// </summary>
+    /// <param name="fairyData">슬롯의 페어리 데이터</param>
+    public void SelectSlotForPlacement(FairyInstanceData fairyData)
+    {
+        if (fairyData == null)
+        {
+            this.fairyData = fairyData;
+            for (uint i = 0; i < NodeCount; i++)
+            {
+                HighlightOverlayUI overlay = nodes[i].GetComponent<HighlightOverlayUI>();
+                if (nodes[i].IsEmpty) overlay.StartGlow();
+            }
+        }
+    }
+
+    /// <summary>
+    /// 배치하는 것을 취소하는 함수
+    /// </summary>
+    /// <param name="screen">터치 위치</param>
+    private void CancelPlacement(Vector2 screen)
+    {
+        if (fairyData != null)
+        {
+            Vector2 diff = screen - (Vector2)transform.position;
+
+            RectTransform rectTransform = (RectTransform)transform;
+            if (!rectTransform.rect.Contains(diff))
+            {
+                fairyData = null;
+                for (uint i = 0; i < NodeCount; i++)
+                {
+                    HighlightOverlayUI overlay = nodes[i].GetComponent<HighlightOverlayUI>();
+                    if (nodes[i].IsEmpty) overlay.EndGlow();
+                }
+            }
+        }
     }
 
     /// <summary>

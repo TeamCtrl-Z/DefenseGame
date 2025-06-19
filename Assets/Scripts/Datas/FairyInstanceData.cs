@@ -44,6 +44,11 @@ public class FairyInstanceData
     public FairyGrade Grade => Table_Fairy.Instance.GetFairyGrade(FID) ?? FairyGrade.Normal;
 
     /// <summary>
+    /// 페어리 배치 여부
+    /// </summary>
+    public bool IsPlaced;
+
+    /// <summary>
     /// 페어리 레벨
     /// </summary>
     public uint Level;
@@ -146,11 +151,11 @@ public class FairyInstanceData
     }
 
     /// <summary>
-    /// 페어리 인스턴스 가져오기
+    /// 페어리UI 인스턴스 가져오기
     /// </summary>
     /// <param name="position">소환 위치</param>
     /// <param name="angle">소환 각도</param>
-    /// <returns>소환될 페어리</returns>
+    /// <returns>소환될 페어리 UI</returns>
     public FairyUI GetFairyUI(Vector3 position, float angle)
     {
         return Factory.Instance.GetFairyUIByType((FairyType)FID, this, position, angle);

@@ -5,6 +5,7 @@ using UnityEngine;
 /// </summary>
 public class Factory : Singleton<Factory>
 {
+    #region ObjectPool_Enemy
     /// <summary>
     /// Enemy_000 풀
     /// </summary>
@@ -254,7 +255,9 @@ public class Factory : Singleton<Factory>
     /// Enemy_211 풀
     /// </summary>
     private Enemy_211Pool enemy_211;
+    #endregion
 
+    #region ObjectPool Effect
     /// <summary>
     /// EnemyDieEffect 풀
     /// </summary>
@@ -270,6 +273,43 @@ public class Factory : Singleton<Factory>
     /// </summary>
     private BoatHitPool boatHit;
 
+    /// <summary>
+    /// 눈보라 파티클 풀
+    /// </summary>
+    private SnowPool snow;
+
+    /// <summary>
+    /// 불 폭발 파티클 풀(Fire Splash 데미지 때 사용)
+    /// </summary>
+    private FireExplosionPool fireExp;
+
+    /// <summary>
+    /// 번개 파티클 풀(Eletronic 효과로 사용)
+    /// </summary>
+    private LightningPool lightning;
+
+    /// <summary>
+    /// 마크 풀
+    /// </summary>
+    private MarkerPool marker;
+
+    /// <summary>
+    /// GoldSparkle 풀
+    /// </summary>
+    private GoldSparklePool goldSparkle;
+
+    /// <summary>
+    /// GemSparkle 풀
+    /// </summary>
+    private GemSparklePool gemSparkle;
+
+    /// <summary>
+    /// DiamondSparkle 풀
+    /// </summary>
+    private DiamondSparklePool diamondSparkle;
+    #endregion
+
+    #region ObjectPool Attack
     /// <summary>
     /// Projectile_Basic 풀
     /// </summary>
@@ -319,7 +359,9 @@ public class Factory : Singleton<Factory>
     /// Bullet 풀
     /// </summary>
     private BulletPool bullet;
+    #endregion
 
+    #region ObjectPool Fairy
     /// <summary>
     /// FairyBasic 풀
     /// </summary>
@@ -353,28 +395,10 @@ public class Factory : Singleton<Factory>
     /// <summary>
     /// FairyEletronic 풀
     /// </summary>
-    private FairyEletronicPool fairyEletronic;
+    private FairyEletronicPool fairyElectronic;
+    #endregion
 
-    /// <summary>
-    /// 눈보라 파티클 풀
-    /// </summary>
-    private SnowPool snow;
-
-    /// <summary>
-    /// 불 폭발 파티클 풀(Fire Splash 데미지 때 사용)
-    /// </summary>
-    private FireExplosionPool fireExp;
-
-    /// <summary>
-    /// 번개 파티클 풀(Eletronic 효과로 사용)
-    /// </summary>
-    private LightningPool lightning;
-
-    /// <summary>
-    /// 마크 풀
-    /// </summary>
-    private MarkerPool marker;
-
+    #region ObjectPool Currency
     /// <summary>
     /// Gold 재화 풀
     /// </summary>
@@ -389,42 +413,58 @@ public class Factory : Singleton<Factory>
     /// Diamond 재화 풀
     /// </summary>
     private DiamondPool diamond;
+    #endregion
 
-    /// <summary>
-    /// GoldSparkle 풀
-    /// </summary>
-    private GoldSparklePool goldSparkle;
-
-    /// <summary>
-    /// GemSparkle 풀
-    /// </summary>
-    private GemSparklePool gemSparkle;
-
-    /// <summary>
-    /// DiamondSparkle 풀
-    /// </summary>
-    private DiamondSparklePool diamondSparkle;
-
+    #region ObjectPool Toast
     /// <summary>
     /// 토스트 메세지 풀
     /// </summary>
     private ToastMessagePool toastMessage;
+    #endregion
+
+    #region ObjectPool FairyUI
+    /// <summary>
+    /// Fairy Basic UI 풀
+    /// </summary>
+    private FairyBasicUIPool fairyBasicUI;
 
     /// <summary>
-    /// 페어리 파이어 UI 풀
+    /// Fairy Fire UI 풀
     /// </summary>
     private FairyFireUIPool fairyFireUI;
 
     /// <summary>
-    /// 페어리 포이즌 UI 풀
+    /// Fairy Poison UI 풀
     /// </summary>
     private FairyPoisonUIPool fairyPoisonUI;
+
+    /// <summary>
+    /// Fairy Light UI 풀
+    /// </summary>
+    private FairyLightUIPool fairyLightUI;
+
+    /// <summary>
+    /// Fairy Freeze UI 풀
+    /// </summary>
+    private FairyFreezeUIPool fairyFreezeUI;
+
+    /// <summary>
+    /// Fairy Frozen UI 풀
+    /// </summary>
+    private FairyFrozenUIPool fairyFrozenUI;
+
+    /// <summary>
+    /// Fairy Electronic UI 풀
+    /// </summary>
+    private FairyElectronicUIPool fairyElectronicUI;
+    #endregion
 
     /// <summary>
     /// Factory 초기화 함수
     /// </summary>
     protected override void OnInitialize()
     {
+        #region Initialize Enemy
         if (this.TryGetComponentInChildren<Enemy_000Pool>(out enemy_000))
             enemy_000.Initialize();
 
@@ -574,7 +614,9 @@ public class Factory : Singleton<Factory>
 
         if (this.TryGetComponentInChildren<Enemy_211Pool>(out enemy_211))
             enemy_211.Initialize();
+        #endregion
 
+        #region Initialize Effect
         if (this.TryGetComponentInChildren<EnemyDieEffectPool>(out enemyDieEffect))
             enemyDieEffect.Initialize();
 
@@ -584,6 +626,29 @@ public class Factory : Singleton<Factory>
         if (this.TryGetComponentInChildren<BoatHitPool>(out boatHit))
             boatHit.Initialize();
 
+        if (this.TryGetComponentInChildren<SnowPool>(out snow))
+            snow.Initialize();
+
+        if (this.TryGetComponentInChildren<FireExplosionPool>(out fireExp))
+            fireExp.Initialize();
+
+        if (this.TryGetComponentInChildren<LightningPool>(out lightning))
+            lightning.Initialize();
+
+        if (this.TryGetComponentInChildren<MarkerPool>(out marker))
+            marker.Initialize();
+
+        if (this.TryGetComponentInChildren<GoldSparklePool>(out goldSparkle))
+            goldSparkle.Initialize();
+
+        if (this.TryGetComponentInChildren<GemSparklePool>(out gemSparkle))
+            gemSparkle.Initialize();
+
+        if (this.TryGetComponentInChildren<DiamondSparklePool>(out diamondSparkle))
+            diamondSparkle.Initialize();
+        #endregion
+
+        #region Initialize Attack
         if (this.TryGetComponentInChildren<Projectile_BasicPool>(out projectile_Basic))
             projectile_Basic.Initialize();
 
@@ -613,7 +678,9 @@ public class Factory : Singleton<Factory>
 
         if (this.TryGetComponentInChildren<BulletPool>(out bullet))
             bullet.Initialize();
+        #endregion
 
+        #region Initialize Fairy
         if (this.TryGetComponentInChildren<FairyBasicPool>(out fairyBasic))
             fairyBasic.Initialize();
 
@@ -632,21 +699,11 @@ public class Factory : Singleton<Factory>
         if (this.TryGetComponentInChildren<FairyFrozenPool>(out fairyFrozen))
             fairyFrozen.Initialize();
 
-        if (this.TryGetComponentInChildren<FairyEletronicPool>(out fairyEletronic))
-            fairyEletronic.Initialize();
+        if (this.TryGetComponentInChildren<FairyEletronicPool>(out fairyElectronic))
+            fairyElectronic.Initialize();
+        #endregion
 
-        if (this.TryGetComponentInChildren<SnowPool>(out snow))
-            snow.Initialize();
-
-        if (this.TryGetComponentInChildren<FireExplosionPool>(out fireExp))
-            fireExp.Initialize();
-
-        if (this.TryGetComponentInChildren<LightningPool>(out lightning))
-            lightning.Initialize();
-
-        if (this.TryGetComponentInChildren<MarkerPool>(out marker))
-            marker.Initialize();
-
+        #region Initialize Currency
         if (this.TryGetComponentInChildren<GoldPool>(out gold))
             gold.Initialize();
 
@@ -655,24 +712,35 @@ public class Factory : Singleton<Factory>
 
         if (this.TryGetComponentInChildren<DiamondPool>(out diamond))
             diamond.Initialize();
+        #endregion
 
-        if (this.TryGetComponentInChildren<GoldSparklePool>(out goldSparkle))
-            goldSparkle.Initialize();
-
-        if (this.TryGetComponentInChildren<GemSparklePool>(out gemSparkle))
-            gemSparkle.Initialize();
-
-        if (this.TryGetComponentInChildren<DiamondSparklePool>(out diamondSparkle))
-            diamondSparkle.Initialize();
-
+        #region Initialize Toast
         if (this.TryGetComponentInChildren<ToastMessagePool>(out toastMessage))
             toastMessage.Initialize();
+        #endregion
+
+        #region Initialize FairyUI
+        if (this.TryGetComponentInChildren<FairyBasicUIPool>(out fairyBasicUI))
+            fairyBasicUI.Initialize();
 
         if (this.TryGetComponentInChildren<FairyFireUIPool>(out fairyFireUI))
             fairyFireUI.Initialize();
 
         if (this.TryGetComponentInChildren<FairyPoisonUIPool>(out fairyPoisonUI))
             fairyPoisonUI.Initialize();
+
+        if (this.TryGetComponentInChildren<FairyLightUIPool>(out fairyLightUI))
+            fairyLightUI.Initialize();
+
+        if (this.TryGetComponentInChildren<FairyFreezeUIPool>(out fairyFreezeUI))
+            fairyFreezeUI.Initialize();
+
+        if (this.TryGetComponentInChildren<FairyFrozenUIPool>(out fairyFrozenUI))
+            fairyFrozenUI.Initialize();
+
+        if (this.TryGetComponentInChildren<FairyElectronicUIPool>(out fairyElectronicUI))
+            fairyElectronicUI.Initialize();
+        #endregion
     }
 
     #region Enemy Pool
@@ -1227,6 +1295,7 @@ public class Factory : Singleton<Factory>
     }
     #endregion
 
+    #region Attack Pool
     /// <summary>
     /// Projectile 공격체를 소환하는 함수
     /// </summary>
@@ -1402,6 +1471,7 @@ public class Factory : Singleton<Factory>
     {
         return bullet.GetObject(position, new Vector3(0, 0, angle));
     }
+    #endregion
 
     #region Fairy Pool
     /// <summary>
@@ -1422,7 +1492,7 @@ public class Factory : Singleton<Factory>
             case FairyType.Light: return fairyLight.GetObject(data, position, new Vector3(0, 0, angle));
             case FairyType.Freeze: return fairyFreeze.GetObject(data, position, new Vector3(0, 0, angle));
             case FairyType.Frozen: return fairyFrozen.GetObject(data, position, new Vector3(0, 0, angle));
-            case FairyType.Electronic: return fairyEletronic.GetObject(data, position, new Vector3(0, 0, angle));
+            case FairyType.Electronic: return fairyElectronic.GetObject(data, position, new Vector3(0, 0, angle));
             default: return null;
         }
     }
@@ -1501,23 +1571,23 @@ public class Factory : Singleton<Factory>
     /// <returns></returns>
     public FairyController GetFariyEletronic(Vector2 position, float angle = 0.0f)
     {
-        return fairyEletronic.GetObject(position, new Vector3(0, 0, angle));
+        return fairyElectronic.GetObject(position, new Vector3(0, 0, angle));
     }
 
     #endregion
 
-    #region FairyUI
+    #region FairyUI Pool
     public FairyUI GetFairyUIByType(FairyType type, FairyInstanceData data, Vector2? position, float angle = 0.0f)
     {
         switch (type)
         {
-            //case FairyType.Basic: return fairyBasic.GetObject(data, position, new Vector3(0, 0, angle));
+            case FairyType.Basic: return fairyBasicUI.GetObject(data, position, new Vector3(0, 0, angle));
             case FairyType.Fire: return fairyFireUI.GetObject(data, position, new Vector3(0, 0, angle));
             case FairyType.Poison: return fairyPoisonUI.GetObject(data, position, new Vector3(0, 0, angle));
-            //case FairyType.Light: return fairyLight.GetObject(data, position, new Vector3(0, 0, angle));
-            //case FairyType.Freeze: return fairyFreeze.GetObject(data, position, new Vector3(0, 0, angle));
-            //case FairyType.Frozen: return fairyFrozen.GetObject(data, position, new Vector3(0, 0, angle));
-            //case FairyType.Electronic: return fairyEletronic.GetObject(data, position, new Vector3(0, 0, angle));
+            case FairyType.Light: return fairyLightUI.GetObject(data, position, new Vector3(0, 0, angle));
+            case FairyType.Freeze: return fairyFreezeUI.GetObject(data, position, new Vector3(0, 0, angle));
+            case FairyType.Frozen: return fairyFrozenUI.GetObject(data, position, new Vector3(0, 0, angle));
+            case FairyType.Electronic: return fairyElectronicUI.GetObject(data, position, new Vector3(0, 0, angle));
             default: return null;
         }
     }

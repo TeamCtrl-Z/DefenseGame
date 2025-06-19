@@ -1,8 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine.AddressableAssets;
-using UnityEngine.ResourceManagement.AsyncOperations;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -36,6 +32,11 @@ public class FairySlotUI : MonoBehaviour
     /// 페어리 프레임
     /// </summary>
     [SerializeField] private Image fairyFrame;
+
+    /// <summary>
+    /// 페어리 배치 여부
+    /// </summary>
+    [SerializeField] private Image fairyPlace;
 
     /// <summary>
     /// 페어리 인스턴스 데이터
@@ -76,6 +77,7 @@ public class FairySlotUI : MonoBehaviour
         if (fairyImageAddress != string.Empty)
             AddressableUtility.LoadSpriteByAddress(fairyImageAddress, fairyImage);
         SetGradeSlot(fairyInstanceData.Grade);
+        fairyPlace.enabled = fairyInstanceData.IsPlaced;
     }
 
     /// <summary>
