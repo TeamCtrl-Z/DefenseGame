@@ -25,7 +25,7 @@ public class FairyUI : RecycleObject, IPlaceable, IBeginDragHandler, IEndDragHan
     /// <summary>
     /// NodeContainerUI
     /// </summary>
-    private NodeContainerUI container;
+    private NodeContainerUI container => GameManager.Instance.ContainerManager.BoatNodeContainerUI;
 
     /// <summary>
     /// 현재 배치된 노드의 인덱스
@@ -42,11 +42,6 @@ public class FairyUI : RecycleObject, IPlaceable, IBeginDragHandler, IEndDragHan
     /// 페어리 FOID
     /// </summary>
     public string FOID { get; private set; }
-
-    private void Start()
-    {
-        container = GameManager.Instance.ContainerManager.BoatNodeContainerUI;
-    }
 
     /// <summary>
     /// 초기화

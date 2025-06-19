@@ -79,12 +79,12 @@ public class GameManager : Singleton<GameManager>
     protected override void OnInitialize()
     {
         base.OnInitialize();
-        if (SceneManager.GetActiveScene().name == "LoginScene")
-            return;
-
+        
         inputManager = GetComponent<InputManager>();
         inputManager.Initialize();
-        
+
+        if (SceneManager.GetActiveScene().name == "LoginScene")
+            return;
         containerManager = GetComponent<ContainerManager>();
         containerManager.Initialize();
 

@@ -42,6 +42,8 @@ public class InputManager : MonoBehaviour, IInitialize
 
     private void OnDisable()
     {
+        if (action == null)
+            return;
         action.GameInput.Drag.canceled -= OnDragEnd;
         action.GameInput.Drag.started -= OnDragStart;
         action.GameInput.Touch.performed -= OnTouch;

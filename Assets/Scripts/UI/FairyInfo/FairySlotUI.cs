@@ -77,7 +77,7 @@ public class FairySlotUI : MonoBehaviour
         if (fairyImageAddress != string.Empty)
             AddressableUtility.LoadSpriteByAddress(fairyImageAddress, fairyImage);
         SetGradeSlot(fairyInstanceData.Grade);
-        fairyPlace.enabled = fairyInstanceData.IsPlaced;
+        //fairyPlace.enabled = fairyInstanceData.IsPlaced;
     }
 
     /// <summary>

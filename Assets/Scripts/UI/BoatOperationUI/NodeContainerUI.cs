@@ -184,7 +184,7 @@ public class NodeContainerUI : MonoBehaviour
     /// <param name="fairyData">슬롯의 페어리 데이터</param>
     public void SelectSlotForPlacement(FairyInstanceData fairyData)
     {
-        if (fairyData == null)
+        if (this.fairyData == null)
         {
             this.fairyData = fairyData;
             for (uint i = 0; i < NodeCount; i++)
