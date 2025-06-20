@@ -30,24 +30,25 @@ public class FairyInfoUI : MonoBehaviour
     /// <summary>
     /// 페어리 정보창 닫기 버튼
     /// </summary>
-    [field:SerializeField]
-    public Button CloseButton { get; private set; }
+    [SerializeField]
+    private Button closeButton;
 
     /// <summary>
     /// 페어리 정보창 버튼(누르면 닫힘)
     /// </summary>
-    [field:SerializeField]
-    public Button FairyInfoButton { get; private set; }
+    [SerializeField]
+    private Button fairyInfoButton;
 
     /// <summary>
     /// 보트 운용창 버튼
     /// </summary>
-    [field:SerializeField]
-    public Button BoatOperationButton { get; private set; }
+    [SerializeField]
+    private Button boatOperationButton;
 
     /// <summary>
     /// 페어리 정보창의 CG
     /// </summary>
+    [field: SerializeField]
     public CanvasGroup FairyInfoCG { get; private set; }
 
     /// <summary>
@@ -60,36 +61,60 @@ public class FairyInfoUI : MonoBehaviour
     /// </summary>
     private bool isAscending = true;
 
-    private void Awake()
-    {
-        Debug.Log($"FairyInfoCG Awake");
-        FairyInfoCG = GetComponent<CanvasGroup>();
-    }
-
     private void Start()
     {
-        CloseButton.onClick.AddListener(() =>
+        closeButton.onClick.AddListener(() =>
         {
             UIManager.Instance.FadeUI.Fade(() =>
             {
+                fairyInfoButton.interactable = false;
+                boatOperationButton.interactable = false;
+            }
+            , () =>
+            {
                 UIUtility.ClosePopupUIWithCanvasGroup(FairyInfoCG);
+            }
+            , () =>
+            {
+                fairyInfoButton.interactable = true;
+                boatOperationButton.interactable = true;
             });
         });
 
-        FairyInfoButton.onClick.AddListener(() =>
+        fairyInfoButton.onClick.AddListener(() =>
         {
             UIManager.Instance.FadeUI.Fade(() =>
             {
+                fairyInfoButton.interactable = false;
+                boatOperationButton.interactable = false;
+            }
+            , () =>
+            {
                 UIUtility.ClosePopupUIWithCanvasGroup(FairyInfoCG);
+            }
+            , () =>
+            {
+                fairyInfoButton.interactable = true;
+                boatOperationButton.interactable = true;
             });
         });
 
-        BoatOperationButton.onClick.AddListener(() =>
+        boatOperationButton.onClick.AddListener(() =>
         {
             UIManager.Instance.FadeUI.Fade(() =>
+            {
+                fairyInfoButton.interactable = false;
+                boatOperationButton.interactable = false;
+            }
+            , () =>
             {
                 UIUtility.ClosePopupUIWithCanvasGroup(FairyInfoCG);
                 UIUtility.OpenPopupUIWithCanvasGroup(UIManager.Instance.BoatOperation.BoatOpertaionCG);
+            }
+            , () =>
+            {
+                fairyInfoButton.interactable = true;
+                boatOperationButton.interactable = true;
             });
         });
 

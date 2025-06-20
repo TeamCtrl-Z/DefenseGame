@@ -26,7 +26,17 @@ public class ButtonUI : MonoBehaviour
         {
             UIManager.Instance.FadeUI.Fade(() => 
             {
+                fairyInfoButton.interactable = false;
+                boatOperationButton.interactable = false;
+            }
+            , () => 
+            {
                 UIUtility.OpenPopupUIWithCanvasGroup(UIManager.Instance.FairyInfo.FairyInfoCG);
+            }
+            , () =>
+            {
+                fairyInfoButton.interactable = true;
+                boatOperationButton.interactable = true;
             });
         });
 
@@ -34,7 +44,17 @@ public class ButtonUI : MonoBehaviour
         {
             UIManager.Instance.FadeUI.Fade(() =>
             {
+                fairyInfoButton.interactable = false;
+                boatOperationButton.interactable = false;
+            }
+            , () =>
+            {
                 UIUtility.OpenPopupUIWithCanvasGroup(UIManager.Instance.BoatOperation.BoatOpertaionCG);
+            }
+            , () =>
+            {
+                fairyInfoButton.interactable = true;
+                boatOperationButton.interactable = true;
             });
         });
     }

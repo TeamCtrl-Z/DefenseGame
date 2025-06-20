@@ -52,7 +52,7 @@ public static class UIUtility
     /// <param name="cg">해당 UI의 CanvasGroup</param>
     public static void OpenPopupUIWithCanvasGroup(CanvasGroup cg)
     {
-        cg.gameObject.SetActive(true);
+        CanvasManager.Instance.IsWindowPopups = true;
         cg.alpha = 1f;
         cg.interactable = true;
         cg.blocksRaycasts = true;
@@ -67,6 +67,6 @@ public static class UIUtility
         cg.blocksRaycasts = false;
         cg.interactable = false;
         cg.alpha = 0f;
-        cg.gameObject.SetActive(false);
+        CanvasManager.Instance.IsWindowPopups = false;
     }
 }

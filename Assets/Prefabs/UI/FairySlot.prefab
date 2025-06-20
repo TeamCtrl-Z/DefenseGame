@@ -350,6 +350,7 @@ MonoBehaviour:
   fairyImage: {fileID: 1965321194970987099}
   fairyBG: {fileID: 1190417159965177117}
   fairyFrame: {fileID: 1949350628148077737}
+  fairyPlace: {fileID: 744700376214687405}
 --- !u!1 &5839504882716769527
 GameObject:
   m_ObjectHideFlags: 0

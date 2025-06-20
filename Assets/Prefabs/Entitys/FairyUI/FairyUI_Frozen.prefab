@@ -91,10 +91,10 @@ PrefabInstance:
     - target: {fileID: 4297144938124802586, guid: 18ec8d3150badc847aa3b5fe997da971, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 9ceff9f36722f0d47979690bd448c057, type: 3}
+      objectReference: {fileID: 21300000, guid: 954baac4d9976684895e031c5b90c800, type: 3}
     - target: {fileID: 8085864139484285759, guid: 18ec8d3150badc847aa3b5fe997da971, type: 3}
       propertyPath: m_Name
-      value: FairyUI_1 Variant
+      value: FairyUI_Frozen
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3596017038190961985}
   - component: {fileID: 4297144938124802586}
   - component: {fileID: 6688657247877181794}
+  - component: {fileID: 2012405577403690906}
   m_Layer: 0
   m_Name: FairyUI_1
   m_TagString: Untagged
@@ -88,3 +89,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa871a4c24aca6640ab4f1eefdf76e33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <ID>k__BackingField: 0
+--- !u!210 &2012405577403690906
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8085864139484285759}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_SortAtRoot: 0

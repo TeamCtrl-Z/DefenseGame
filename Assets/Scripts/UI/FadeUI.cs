@@ -27,17 +27,18 @@ public class FadeUI : MonoBehaviour
     /// <summary>
     /// Fade 효과 실행 후 콜백 함수 실행
     /// </summary>
-    public void Fade(Action onFadeMiddleAction)
+    public void Fade(Action onFadeEarlyAction, Action onFadeMiddleAction, Action onFadeLastAction)
     {
-        StartCoroutine(FadeCoroutine(onFadeMiddleAction));
+        StartCoroutine(FadeCoroutine(onFadeEarlyAction, onFadeMiddleAction, onFadeLastAction));
     }
 
     /// <summary>
     /// 화면 전환 할때 실행되는 델리게이트
     /// </summary>
     /// <param name="midAction">전환중 실행되는 이벤트</param>
-    private IEnumerator FadeCoroutine(Action midAction)
+    private IEnumerator FadeCoroutine(Action earlyAction, Action midAction, Action lastAction)
     {
+        earlyAction?.Invoke();
         float time = 0f;
         while (time < fadeDuration)
         {
@@ -60,5 +61,6 @@ public class FadeUI : MonoBehaviour
             yield return null;
         }
         fadePanel.color = Color.clear;
+        lastAction?.Invoke();
     }
 }

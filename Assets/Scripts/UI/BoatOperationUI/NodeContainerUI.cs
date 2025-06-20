@@ -1,6 +1,8 @@
+using AnimatorHash;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 using UnityEngine;
 
 /// <summary>
@@ -63,9 +65,7 @@ public class NodeContainerUI : MonoBehaviour
             nodes[i].onClick += ((index) => {
                 if (fairyData != null)
                 {
-                    FairyUI fairyUI = DataService.Instance.FairyDataManager.SpawnFairyUIByFid(fairyData.FID, Vector2.zero);
-                    IPlaceable fairy = fairyUI as IPlaceable;
-                    PlaceFairy(index, fairy);
+                    FairyPlacement(index);
                 }
             });
 
@@ -182,7 +182,7 @@ public class NodeContainerUI : MonoBehaviour
     /// 슬롯을 터치하면 실행되는 함수
     /// </summary>
     /// <param name="fairyData">슬롯의 페어리 데이터</param>
-    public void SelectSlotForPlacement(FairyInstanceData fairyData)
+    public void TouchFairySlot(FairyInstanceData fairyData)
     {
         if (this.fairyData == null)
         {
@@ -190,7 +190,7 @@ public class NodeContainerUI : MonoBehaviour
             for (uint i = 0; i < NodeCount; i++)
             {
                 HighlightOverlayUI overlay = nodes[i].GetComponent<HighlightOverlayUI>();
-                if (nodes[i].IsEmpty) overlay.StartGlow();
+                overlay.StartGlow();
             }
         }
     }
@@ -212,9 +212,54 @@ public class NodeContainerUI : MonoBehaviour
                 for (uint i = 0; i < NodeCount; i++)
                 {
                     HighlightOverlayUI overlay = nodes[i].GetComponent<HighlightOverlayUI>();
-                    if (nodes[i].IsEmpty) overlay.EndGlow();
+                    overlay.EndGlow();
                 }
             }
+        }
+    }
+
+    /// <summary>
+    /// 페어리를 최종 배치하는 함수
+    /// </summary>
+    /// <param name="index">배치할 인덱스</param>
+    private void FairyPlacement(uint index)
+    {
+        if (!nodes[index].IsEmpty)
+        {
+            FairyUI placedFairy = nodes[index].Fairy as FairyUI;
+            placedFairy.ReturnToPool();
+        }
+
+        if (fairyData.IsPlaced)
+        {
+            PlaceFairy(index, nodes[fairyData.NodeIndex].Fairy);
+        }
+        else
+        {
+            FairyUI fairyUI = DataService.Instance.FairyDataManager.SpawnFairyUIByFid(fairyData.FID, Vector2.zero);
+            IPlaceable fairy = fairyUI as IPlaceable;
+            PlaceFairy(index, fairy);
+        }
+
+        fairyData = null;
+
+        for (uint i = 0; i < NodeCount; i++)
+        {
+            HighlightOverlayUI overlay = nodes[i].GetComponent<HighlightOverlayUI>();
+            overlay.EndGlow();
+        }
+    }
+
+    /// <summary>
+    /// 컨테이너의 모든 노드를 비우는 함수
+    /// </summary>
+    public void ClearContainer()
+    {
+        foreach (var node in nodes)
+        {
+            FairyUI fairy = node.Fairy as FairyUI;
+            fairy.ReturnToPool();
+            node.ClearNode();
         }
     }
 

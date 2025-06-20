@@ -24,7 +24,7 @@ public class CheatButtonUI : MonoBehaviour
     {
         cheatOpenButton.onClick.AddListener(() => 
         {
-            UIManager.Instance.FadeUI.Fade(() => UIUtility.OpenPopupUIWithCanvasGroup(cheatSelectCG));
+            UIManager.Instance.FadeUI.Fade(null, () => UIUtility.OpenPopupUIWithCanvasGroup(cheatSelectCG), null);
         });
     }
 }

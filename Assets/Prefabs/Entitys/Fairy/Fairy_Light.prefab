@@ -181,10 +181,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <ID>k__BackingField: 8
-  attackSpeed: 0
-  attackPower: 0
-  <AttackSpeedFactor>k__BackingField: 1
-  <AttackPowerFactor>k__BackingField: 1
+  <AttackSpeedBuffMultiflier>k__BackingField: 1
+  <AttackPowerBuffMultiflier>k__BackingField: 1
 --- !u!114 &3085633977577737613
 MonoBehaviour:
   m_ObjectHideFlags: 0

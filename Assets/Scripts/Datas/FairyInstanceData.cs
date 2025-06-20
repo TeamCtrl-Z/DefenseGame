@@ -49,6 +49,11 @@ public class FairyInstanceData
     public bool IsPlaced;
 
     /// <summary>
+    /// 페어리가 배치된 노드 인덱스
+    /// </summary>
+    public uint NodeIndex;
+
+    /// <summary>
     /// 페어리 레벨
     /// </summary>
     public uint Level;

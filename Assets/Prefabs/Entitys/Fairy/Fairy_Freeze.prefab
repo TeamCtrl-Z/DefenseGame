@@ -61,6 +61,10 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8561114932065450332, guid: 9e7b6c1ac8121ce468ed43a686720566, type: 3}
+      propertyPath: m_FlipX
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8561114932065450332, guid: 9e7b6c1ac8121ce468ed43a686720566, type: 3}
       propertyPath: m_Color.b
       value: 0.3210245
       objectReference: {fileID: 0}
@@ -97,4 +101,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb766afceff203449b428c6b04bfb5db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attribute: {fileID: 11400000, guid: 4e661363a3a388a4499b565574d2ffb3, type: 2}

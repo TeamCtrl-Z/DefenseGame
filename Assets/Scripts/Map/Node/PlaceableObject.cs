@@ -86,6 +86,7 @@ public class PlaceableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
             onDragEnd = null;
             onDragBegin += containerManager.BoatNodeContainer[index].OnBeginDrag;
             onDragEnd += containerManager.BoatNodeContainer[index].OnEndDrag;
+
             transform.SetParent(containerManager.BoatNodeContainer[index].transform, false);
             transform.position = containerManager.BoatNodeContainer[index].transform.position;
             SortOrderFairy();
@@ -99,6 +100,7 @@ public class PlaceableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
     public void ReturnToPool()
     {
         transform.SetParent(poolTransform, false);
+        gameObject.SetActive(false);
     }
 
     /// <summary>

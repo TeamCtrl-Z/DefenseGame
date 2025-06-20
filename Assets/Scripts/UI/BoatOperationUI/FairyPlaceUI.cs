@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FairyPlaceUI : MonoBehaviour
 {
@@ -10,6 +11,12 @@ public class FairyPlaceUI : MonoBehaviour
     /// </summary>
     [SerializeField]
     private int tabIndex;
+
+    /// <summary>
+    /// 리셋 버튼
+    /// </summary>
+    [SerializeField]
+    private Button resetButton;
 
     /// <summary>
     /// 페어리 슬롯 UI 배열
@@ -48,6 +55,11 @@ public class FairyPlaceUI : MonoBehaviour
             if (index != tabIndex) return;
             RefreshFairySlot();
         });
+
+        resetButton.onClick.AddListener(() =>
+        {
+            GameManager.Instance.ContainerManager.BoatNodeContainerUI.ClearContainer();
+        });
     }
 
     /// <summary>
@@ -59,7 +71,7 @@ public class FairyPlaceUI : MonoBehaviour
         {
             slot.onSlotTouch += ((fairyData) =>
             {
-                GameManager.Instance.ContainerManager.BoatNodeContainerUI.SelectSlotForPlacement(fairyData);
+                GameManager.Instance.ContainerManager.BoatNodeContainerUI.TouchFairySlot(fairyData);
             });
         }
 

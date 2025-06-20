@@ -91,10 +91,10 @@ PrefabInstance:
     - target: {fileID: 4297144938124802586, guid: 18ec8d3150badc847aa3b5fe997da971, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: bae3c49891847784e8387a631d45e39a, type: 3}
+      objectReference: {fileID: 21300000, guid: 7601f720326dfe04c85011124f5ada41, type: 3}
     - target: {fileID: 8085864139484285759, guid: 18ec8d3150badc847aa3b5fe997da971, type: 3}
       propertyPath: m_Name
-      value: FairyUI_Poison Variant
+      value: FairyUI_Poison
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

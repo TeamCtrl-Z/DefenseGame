@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Rendering;
 
 /// <summary>
 /// 페어리 UI (드래그 가능한 유닛)
@@ -18,7 +19,7 @@ public class FairyUI : RecycleObject, IPlaceable, IBeginDragHandler, IEndDragHan
     public event Action<PointerEventData> onDragEnd;
 
     /// <summary>
-    /// 페어리가 배치되면 실행되는 이벤트
+    /// 페어리를 배치하면 실행되는 이벤트
     /// </summary>
     public event Action<uint> OnPlaced;
 
@@ -46,7 +47,7 @@ public class FairyUI : RecycleObject, IPlaceable, IBeginDragHandler, IEndDragHan
     /// <summary>
     /// 초기화
     /// </summary>
-    /// <param name="foid">해당 페어리 foid</param>
+    /// <param name="data">해당 페어리 data</param>
     public void Initialize(FairyInstanceData data)
     {
         FOID = data.FOID;
@@ -108,7 +109,26 @@ public class FairyUI : RecycleObject, IPlaceable, IBeginDragHandler, IEndDragHan
 
             transform.SetParent(container[index].transform, false);
             transform.localPosition = Vector3.zero;
-            OnPlaced?.Invoke(index);
+            SortOrderFairy();
+            OnPlaced(index);
         }
+    }
+
+    /// <summary>
+    /// FairyUI를 풀로 되돌리는 함수
+    /// </summary>
+    public override void ReturnToPool()
+    {
+        base.ReturnToPool();
+        gameObject.SetActive(false);
+    }
+
+    /// <summary>
+    /// SortingOrder를 페어리의 위치에 맞게 설정하는 함수
+    /// </summary>
+    private void SortOrderFairy()
+    {
+        SortingGroup sg = GetComponent<SortingGroup>();
+        sg.sortingOrder = -Mathf.FloorToInt(transform.localPosition.y * 1000);
     }
 }
