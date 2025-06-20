@@ -10,11 +10,6 @@ using UnityEngine;
 public class FairyDataManager : MonoBehaviour, IServerData
 {
     /// <summary>
-    /// 내가 보유한 페어리 인스턴스 테이블- k : foid, v : FairyInstanceData
-    /// </summary>
-    private Dictionary<string, FairyInstanceData> instanceFoidTable;
-
-    /// <summary>
     /// 내가 보유한 페어리 인스턴스 테이블 (fid 버전)
     /// </summary>
     private Dictionary<uint, FairyInstanceData> instanceFidTable;
@@ -24,7 +19,6 @@ public class FairyDataManager : MonoBehaviour, IServerData
     /// </summary>
     public void Initialize()
     {
-        instanceFoidTable = new();
         instanceFidTable = new();
     }
 
@@ -32,15 +26,15 @@ public class FairyDataManager : MonoBehaviour, IServerData
     /// 플레이어가 가진 페어리의 상세 정보를 얻어오는 함수
     /// </summary>
     /// <param name="fid"> 패어리 아이디 </param>
-    /// <param name="statData"> 해당 detailStatusData </param>
+    /// <param name="statData"> 해당 instanceData </param>
     /// <returns>성공 실패</returns>
-    public bool TryGetInstanceData(string foid, out FairyInstanceData statData)
+    public bool TryGetInstanceData(uint fid, out FairyInstanceData statData)
     {
         statData = null;
-        if (!instanceFoidTable.ContainsKey(foid))
+        if (!instanceFidTable.ContainsKey(fid))
             return false;
 
-        statData = instanceFoidTable[foid];
+        statData = instanceFidTable[fid];
         return true;
     }
 
@@ -78,25 +72,23 @@ public class FairyDataManager : MonoBehaviour, IServerData
             return;
 
         // 플레이어가 가진 페어리 리스트 
-        var fariyArray = res["fairys"] as JArray;
+        var fairyArray = res["fairys"] as JArray;
 
         // 단일 페어리 데이터
-        if (fariyArray == null)
+        if (fairyArray == null)
         {
             var fairy = res["fairys"];
-            string foid = fairy["foid"].Value<string>();
+            uint fid = fairy["fid"].Value<uint>();
 
-            if (instanceFoidTable.ContainsKey(foid)) // 이미 있는 경우
+            if (instanceFidTable.ContainsKey(fid)) // 이미 있는 경우
             {
-                JsonConvert.PopulateObject(fairy.ToString(), instanceFoidTable[foid]);
+                JsonConvert.PopulateObject(fairy.ToString(), instanceFidTable[fid]);
             }
             else // 처음 생성
             {
                 var data = fairy.ToObject<FairyInstanceData>();
                 if (data != null)
                 {
-                    instanceFoidTable[data.FOID] = data;
-
                     instanceFidTable[data.FID] = data;
                 }
             }
@@ -104,21 +96,19 @@ public class FairyDataManager : MonoBehaviour, IServerData
         }
         else
         {
-            foreach (var fairy in fariyArray)
+            foreach (var fairy in fairyArray)
             {
-                string foid = fairy["foid"].Value<string>();
+                uint fid = fairy["fid"].Value<uint>();
 
-                if (instanceFoidTable.ContainsKey(foid)) // 이미 있는 경우
+                if (instanceFidTable.ContainsKey(fid)) // 이미 있는 경우
                 {
-                    JsonConvert.PopulateObject(fairy.ToString(), instanceFoidTable[foid]);
+                    JsonConvert.PopulateObject(fairy.ToString(), instanceFidTable[fid]);
                 }
                 else // 처음 생성
                 {
                     var data = fairy.ToObject<FairyInstanceData>();
                     if (data != null)
                     {
-                        instanceFoidTable[data.FOID] = data;
-
                         instanceFidTable[data.FID] = data;
                     }
                 }
@@ -132,6 +122,6 @@ public class FairyDataManager : MonoBehaviour, IServerData
     /// <returns>페어리데이터 리스트</returns>
     public List<FairyInstanceData> GetAllFairyInstanceData()
     {
-        return new List<FairyInstanceData>(instanceFoidTable.Values);
+        return new List<FairyInstanceData>(instanceFidTable.Values);
     }
 }

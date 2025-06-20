@@ -1591,6 +1591,11 @@ public class Factory : Singleton<Factory>
             default: return null;
         }
     }
+
+    public FairyUI GetFairyUI(FairyInstanceData data, Vector2? position, float angle = 0.0f)
+    {
+        return fairyPoisonUI.GetObject(data, position, new Vector3(0, 0, angle));
+    }
     #endregion
 
     #region Effect Pool

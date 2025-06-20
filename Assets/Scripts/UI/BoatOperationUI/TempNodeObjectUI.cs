@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 /// <summary>
 /// 임시 UI 노드 (드래그 중 마우스를 따라다니는 페어리 위치)
@@ -22,13 +23,7 @@ public class TempNodeObjectUI : NodeBase
 
     private void Update()
     {
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(
-            transform.parent as RectTransform,
-            Input.mousePosition,
-            null,
-            out Vector2 localPoint);
-
-        transform.localPosition = localPoint;
+        transform.position = GetMouseWorldPosition();
 
         if (Fairy != null)
             Fairy.Place(tempNodeIndex);
@@ -40,6 +35,7 @@ public class TempNodeObjectUI : NodeBase
     /// <param name="fairy">배치되는 페어리</param>
     public override void PlaceNode(IPlaceable fairy)
     {
+        Debug.Log("TempNodeObjectUI PlaceNode called");
         this.fairy = fairy;
         isEmpty = false;
     }
@@ -60,5 +56,18 @@ public class TempNodeObjectUI : NodeBase
     {
         FromIndex = null;
         nodeIndex = tempNodeIndex;
+    }
+
+    /// <summary>
+    /// 화면상의 마우스 위치를 2D좌표로 변환하여 반환하는 함수
+    /// </summary>
+    /// <returns>변환된 위치</returns>
+    private Vector3 GetMouseWorldPosition()
+    {
+        Vector2 pos2D = Mouse.current.position.ReadValue();
+        Vector3 screenPos = new Vector3(pos2D.x, pos2D.y, -Camera.main.transform.position.z);
+        Vector3 worldPos = Camera.main.ScreenToWorldPoint(screenPos);
+        worldPos.z = 0f;
+        return worldPos;
     }
 }

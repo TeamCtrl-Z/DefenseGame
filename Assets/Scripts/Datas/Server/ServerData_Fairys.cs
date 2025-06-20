@@ -15,14 +15,15 @@ public static class ServerData_Fairys
     /// <param name="upCount"> 레벨 업 갯수 </param>
     /// <param name="success">성공 콜백</param>
     /// <param name="fail"> 실패 콜백</param>
-    public static IEnumerator RequestFairyLevelUp(string foid, uint upCount, Action success, Action fail)
+    public static IEnumerator RequestFairyLevelUp(uint fid, uint upCount, Action success, Action fail)
     {
         Debug.Log("RequestFairyLevelUp 시작");
         string url = "/fairy/levelup";
         Network network = new Network(url, "POST");
         network.SetRequestData(new
         {
-            foid = foid,
+            uid = DataService.Instance.UserDataManager.User.uid,
+            fid = fid,
             upCount = upCount,
         });
         yield return network.SendRequest();
@@ -54,6 +55,7 @@ public static class ServerData_Fairys
         Network network = new Network(url, "POST");
         network.SetRequestData(new
         {
+            uid = DataService.Instance.UserDataManager.User.uid,
             fid = fid,
             count = count
         });

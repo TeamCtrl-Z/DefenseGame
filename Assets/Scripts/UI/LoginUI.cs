@@ -22,6 +22,12 @@ public class LoginUI : MonoBehaviour
     private Button guestLoginButton;
 
     /// <summary>
+    /// 파이어 베이스 토큰 직접 불러와서 로그인(테스트 용)
+    /// </summary>
+    [SerializeField]
+    private Button justLoginButton;
+
+    /// <summary>
     /// 진행 상태 Text
     /// </summary>
     [SerializeField]
@@ -70,6 +76,11 @@ public class LoginUI : MonoBehaviour
         guestLoginButton.onClick.AddListener(() =>
         {
             loginManager.OnGuestLoginButtonClicked();
+        });
+
+        justLoginButton.onClick.AddListener(() =>
+        {
+            loginManager.OnJustLoginButtonClicked();
         });
     }
 

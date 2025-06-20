@@ -33,11 +33,11 @@ public class UserDataManager : MonoBehaviour, IServerData
     /// </summary>
     public ulong Currency_Gold
     {
-        get => User.gold;
+        get => User.currency.Gold;
         private set
         {
-            User.gold = value;
-            OnCurrencyGoldChanged?.Invoke(User.gold);
+            User.currency.Gold = value;
+            OnCurrencyGoldChanged?.Invoke(User.currency.Gold);
         }
     }
 
@@ -46,11 +46,11 @@ public class UserDataManager : MonoBehaviour, IServerData
     /// </summary>
     public ulong Currency_Gem
     {
-        get => User.gem;
+        get => User.currency.Gem;
         private set
         {
-            User.gem = value;
-            OnCurrencyGemChanged?.Invoke(User.gem);
+            User.currency.Gem = value;
+            OnCurrencyGemChanged?.Invoke(User.currency.Gem);
         }
     }
 
@@ -59,11 +59,11 @@ public class UserDataManager : MonoBehaviour, IServerData
     /// </summary>
     public uint Currency_Diamond
     {
-        get => User.diamond;
+        get => User.currency.Diamond;
         private set
         {
-            User.diamond = value;
-            OnCurrencyDiamondChanged?.Invoke(User.diamond);
+            User.currency.Diamond = value;
+            OnCurrencyDiamondChanged?.Invoke(User.currency.Diamond);
         }
     }
 
@@ -158,7 +158,7 @@ public class UserDataManager : MonoBehaviour, IServerData
     {
         if (res["user"] == null)
             return;
-
+        
         // 처음 서버에서 데이터를 내려받았을 때
         if (User == null)
         {
@@ -169,9 +169,9 @@ public class UserDataManager : MonoBehaviour, IServerData
             JsonConvert.PopulateObject(res["user"].ToString(), User);
 
             // 재화 이벤트 호출 용
-            Currency_Gold = User.gold;
-            Currency_Gem = User.gem;
-            Currency_Diamond = User.diamond;
+            Currency_Gold = User.currency.Gold;
+            Currency_Gem = User.currency.Gem;
+            Currency_Diamond = User.currency.Diamond;
         }
 
         Debug.Log("유저 데이터 받음");

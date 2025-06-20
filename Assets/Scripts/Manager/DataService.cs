@@ -87,6 +87,7 @@ public class DataService : Singleton<DataService>
     /// <param name="res"></param>
     public void ApplyCommonResponse(JObject res)
     {
+        Debug.Log($"서버 데이터 적용: {res.ToString(Newtonsoft.Json.Formatting.Indented)}");
         foreach (IServerData mgr in serverDataMgrs)
         {
             mgr.ApplyServerData(res);

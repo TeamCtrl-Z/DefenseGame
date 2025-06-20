@@ -14,11 +14,6 @@ public class FairyInstanceData
     public uint FID;
 
     /// <summary>
-    /// 페어리 인스턴스 아이디
-    /// </summary>
-    public string FOID;
-
-    /// <summary>
     /// 페어리 이름
     /// </summary>
     public string Name => Table_Fairy.Instance.GetFairyName(FID);
@@ -27,6 +22,11 @@ public class FairyInstanceData
     /// 페어리 타입
     /// </summary>
     public string Type => ((FairyType)FID).ToString();
+
+    /// <summary>
+    /// 페어리 인게임 이미지 주소
+    /// </summary>
+    public string FairyInGameImage => Table_Fairy.Instance.GetFairyInGameImageAddress(FID);
 
     /// <summary>
     /// 페어리 일러스트 주소(Addressable)
@@ -163,6 +163,6 @@ public class FairyInstanceData
     /// <returns>소환될 페어리 UI</returns>
     public FairyUI GetFairyUI(Vector3 position, float angle)
     {
-        return Factory.Instance.GetFairyUIByType((FairyType)FID, this, position, angle);
+        return Factory.Instance.GetFairyUI(this, position, angle);
     }
 }

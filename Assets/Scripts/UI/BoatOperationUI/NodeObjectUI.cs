@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
@@ -25,7 +26,11 @@ public class NodeObjectUI : NodeBase, IPointerClickHandler
     /// <summary>
     /// 드래그가 시작되면 실행하는 메서드
     /// </summary>
-    public void OnBeginDrag() => onDragBegin?.Invoke(Index);
+    public void OnBeginDrag()
+    {
+        Debug.Log($"NodeObjectUI OnBeginDrag {Index}");
+        onDragBegin?.Invoke(Index);
+    }
 
     /// <summary>
     /// 드래그가 끝나면 실행하는 메서드

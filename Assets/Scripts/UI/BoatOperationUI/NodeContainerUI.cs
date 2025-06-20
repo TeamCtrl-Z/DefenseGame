@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Serialization;
+using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
@@ -57,12 +58,15 @@ public class NodeContainerUI : MonoBehaviour
     /// </summary>
     public void InitializeNodeContainer()
     {
+        Debug.Log("NodeContainerUI InitializeNodeContainer called");
         for (uint i = 0; i < nodes.Length; i++)
         {
             nodes[i].InitializeNode(i);
+            Debug.Log($"{nodes[i].name}, exists");
             nodes[i].onDragBegin += OnFairyMoveBegin;
             nodes[i].onDragEnd += OnFairyMoveEnd;
-            nodes[i].onClick += ((index) => {
+            nodes[i].onClick += ((index) =>
+            {
                 if (fairyData != null)
                 {
                     FairyPlacement(index);
@@ -78,7 +82,7 @@ public class NodeContainerUI : MonoBehaviour
 
     private void OnDisable()
     {
-        ClearAllDelegates();
+        //ClearAllDelegates();
     }
 
     /// <summary>
@@ -87,6 +91,7 @@ public class NodeContainerUI : MonoBehaviour
     /// <param name="index">시작한 노드의 인덱스</param>
     private void OnFairyMoveBegin(uint index)
     {
+        Debug.Log("NodeContainerUI OnFairyMoveBegin called");
         MoveFairy(index, tempNode.Index);
         onDragBegin?.Invoke();
     }
@@ -115,6 +120,7 @@ public class NodeContainerUI : MonoBehaviour
     /// <param name="to">to노드의 인덱스</param>
     public void MoveFairy(uint from, uint to)
     {
+        Debug.Log("Movee Fairy called from: " + from + " to: " + to);
         if (from != to
             && IsValidIndex(from, out NodeBase fromNode)
             && IsValidIndex(to, out NodeBase toNode))
@@ -123,6 +129,7 @@ public class NodeContainerUI : MonoBehaviour
             {
                 if (toNode is TempNodeObjectUI)
                 {
+                    Debug.Log("Move Fairy to TempNode");
                     tempNode.FromIndex = from;
                     PlaceFairy(to, fromNode.Fairy);
                     fromNode.ClearNode();
@@ -257,6 +264,7 @@ public class NodeContainerUI : MonoBehaviour
     {
         foreach (var node in nodes)
         {
+            if (node.Fairy == null) continue;
             FairyUI fairy = node.Fairy as FairyUI;
             fairy.ReturnToPool();
             node.ClearNode();

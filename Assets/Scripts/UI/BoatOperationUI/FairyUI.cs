@@ -2,11 +2,12 @@ using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Rendering;
+using UnityEngine.UI;
 
 /// <summary>
 /// 페어리 UI (드래그 가능한 유닛)
 /// </summary>
-public class FairyUI : RecycleObject, IPlaceable, IBeginDragHandler, IEndDragHandler, IDragHandler, ICharacterIdentity
+public class FairyUI : RecycleObject, IPlaceable, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
     /// <summary>
     /// 페어리를 집으면 실행되는 함수
@@ -34,15 +35,12 @@ public class FairyUI : RecycleObject, IPlaceable, IBeginDragHandler, IEndDragHan
     public uint CurrentNodeIndex { get; private set; }
 
     /// <summary>
-    /// 페어리 fid
-    /// </summary>
-    [field: SerializeField]
-    public uint ID { get; private set; }
-
-    /// <summary>
     /// 페어리 FOID
     /// </summary>
-    public string FOID { get; private set; }
+    public uint FID { get; private set; }
+
+    private Canvas canvas;
+    private GraphicRaycaster raycaster;
 
     /// <summary>
     /// 초기화
@@ -50,14 +48,18 @@ public class FairyUI : RecycleObject, IPlaceable, IBeginDragHandler, IEndDragHan
     /// <param name="data">해당 페어리 data</param>
     public void Initialize(FairyInstanceData data)
     {
-        FOID = data.FOID;
+        FID = data.FID;
     }
 
     /// <summary>
     /// 드래그가 시작되면 실행하는 함수
     /// </summary>
     /// <param name="eventData">포인터 데이터</param>
-    public void OnBeginDrag(PointerEventData eventData) => onDragBegin?.Invoke();
+    public void OnBeginDrag(PointerEventData eventData)
+    {
+        Debug.Log("FairyUI OnBeginDrag");
+        onDragBegin?.Invoke();
+    }
 
     /// <summary>
     /// 드래그 중에 실행하는 함수(빈함수)
@@ -104,13 +106,14 @@ public class FairyUI : RecycleObject, IPlaceable, IBeginDragHandler, IEndDragHan
             CurrentNodeIndex = index;
             onDragBegin = null;
             onDragEnd = null;
+            Debug.Log($"FairyUI Place called with index: {index}");
             onDragBegin += container[index].OnBeginDrag;
             onDragEnd += container[index].OnDrop;
 
             transform.SetParent(container[index].transform, false);
             transform.localPosition = Vector3.zero;
             SortOrderFairy();
-            OnPlaced(index);
+            OnPlaced?.Invoke(index);
         }
     }
 
@@ -128,7 +131,16 @@ public class FairyUI : RecycleObject, IPlaceable, IBeginDragHandler, IEndDragHan
     /// </summary>
     private void SortOrderFairy()
     {
-        SortingGroup sg = GetComponent<SortingGroup>();
-        sg.sortingOrder = -Mathf.FloorToInt(transform.localPosition.y * 1000);
+        if (canvas == null || raycaster == null)
+        {
+            canvas = gameObject.AddComponent<Canvas>();
+            raycaster = gameObject.AddComponent<GraphicRaycaster>();
+        }
+
+        canvas.overrideSorting = true;
+        canvas.sortingLayerName = "UI";
+        canvas.sortingOrder = (int)(-transform.position.y * 1000.0f);
+        canvas.vertexColorAlwaysGammaSpace = true;
+
     }
 }

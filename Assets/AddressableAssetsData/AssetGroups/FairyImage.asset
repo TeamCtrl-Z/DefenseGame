@@ -10,20 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
-  m_Name: FairyImgae
+  m_Name: FairyImage
   m_EditorClassIdentifier: 
-  m_GroupName: FairyImgae
+  m_GroupName: FairyImage
   m_Data:
     m_SerializedData: []
   m_GUID: 6904a85c04c2692458c00d6bf50b445f
   m_SerializeEntries:
   - m_GUID: 85d198c25e23b6a4a93cff91bc4f8aef
-    m_Address: FairyImage/Poison
+    m_Address: FairyImage/Profile/Poison
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f5efb36b2d9f6ff48b2463b05cfd6621
-    m_Address: FairyImage/Frozen
+    m_Address: FairyImage/Profile/Frozen
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

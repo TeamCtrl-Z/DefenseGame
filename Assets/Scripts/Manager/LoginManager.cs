@@ -91,6 +91,15 @@ public class LoginManager : MonoBehaviour
     }
 
     /// <summary>
+    /// Firebase 토큰을 직접 불러와서 로그인(테스트 용)
+    /// </summary>
+    public void OnJustLoginButtonClicked()
+    {
+        OnStatusChange?.Invoke("Firebase 토큰 로그인 중…");
+        StartCoroutine(LoginProcess());
+    }
+
+    /// <summary>
     /// 회원가입 하기 전에 Firebase 익명 로그인 및 ID 토큰 요청을 처리하는 함수
     /// </summary>
     private IEnumerator SignInAnonymouslyAndRegister()
@@ -272,19 +281,4 @@ public class LoginManager : MonoBehaviour
     }
 
     #endregion
-}
-
-/// <summary>
-/// 유저 정보 클래스
-/// </summary>
-[Serializable]
-public class UserData
-{
-    public string firebaseUID;
-    public string provider;
-    public string playerID;
-    public string lastLoginAt;
-    public ulong gold;
-    public ulong gem;
-    public uint diamond;
 }

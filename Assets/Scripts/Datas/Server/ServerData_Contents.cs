@@ -22,6 +22,7 @@ public static class ServerData_Contents
         Network network = new Network(url, "POST");
         network.SetRequestData(new
         {
+            uid = DataService.Instance.UserDataManager.User.uid,
             stageId = DataService.Instance.ContentsDataManager.CurrentStage.StageID
         });
         yield return network.SendRequest();
@@ -51,6 +52,7 @@ public static class ServerData_Contents
         Network network = new Network(url, "POST");
         network.SetRequestData(new
         {
+            uid = DataService.Instance.UserDataManager.User.uid,
             chapterId = DataService.Instance.ContentsDataManager.CurrentChapter.ChapterID
         });
         yield return network.SendRequest();

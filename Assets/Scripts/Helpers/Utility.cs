@@ -70,3 +70,33 @@ public static class UIUtility
         CanvasManager.Instance.IsWindowPopups = false;
     }
 }
+
+/// <summary>
+/// UI를 켜고 끄는 메서드를 제공하는 클래스
+/// </summary>
+public static class CheatUIUtility
+{
+    /// <summary>
+    /// UI를 켜는 메서드
+    /// </summary>
+    /// <param name="cg">해당 UI의 CanvasGroup</param>
+    public static void OpenPopupUIWithCanvasGroup(CanvasGroup cg)
+    {
+        cg.gameObject.SetActive(true);
+        cg.alpha = 1f;
+        cg.interactable = true;
+        cg.blocksRaycasts = true;
+    }
+
+    /// <summary>
+    /// UI를 끄는 메서드
+    /// </summary>
+    /// <param name="cg">해당 UI의 CanvasGroup</param>
+    public static void ClosePopupUIWithCanvasGroup(CanvasGroup cg)
+    {
+        cg.blocksRaycasts = false;
+        cg.interactable = false;
+        cg.alpha = 0f;
+        cg.gameObject.SetActive(false);
+    }
+}

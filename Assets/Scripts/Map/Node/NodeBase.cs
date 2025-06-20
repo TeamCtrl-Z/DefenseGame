@@ -56,7 +56,6 @@ public class NodeBase : MonoBehaviour
         }
         else
         {
-            Debug.Log("PlaceNode");
             ClearNode();
             OnPlacedFairy?.Invoke(Index, null);
         }

@@ -83,7 +83,7 @@ public static class ServerData_Users
     {
         string deleteUrl = "/user/delete";
 
-        var deleteRequestData = new { };
+        var deleteRequestData = new { uid = DataService.Instance.UserDataManager.User.uid };
         Network network = new Network(deleteUrl, "POST");
         network.SetRequestData(deleteRequestData);
         yield return network.SendRequest();

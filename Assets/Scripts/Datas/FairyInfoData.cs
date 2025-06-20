@@ -24,9 +24,14 @@ public class FairyInfoData
     public string Image_1;
 
     /// <summary>
-    /// 페어리 일러스트 이미지 주소
+    /// 페어리 프로필 이미지 주소
     /// </summary>
     public string Image_2;
+
+    /// <summary>
+    /// 페어리 일러스트 이미지 주소
+    /// </summary>
+    public string Image_3;
 
     /// <summary>
     /// 페어리 설명

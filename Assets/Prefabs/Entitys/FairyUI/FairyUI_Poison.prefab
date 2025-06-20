@@ -8,6 +8,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 527270821907276214, guid: 18ec8d3150badc847aa3b5fe997da971, type: 3}
+      propertyPath: m_OverrideSorting
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 527270821907276214, guid: 18ec8d3150badc847aa3b5fe997da971, type: 3}
+      propertyPath: m_OverridePixelPerfect
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3518323269692534795, guid: 18ec8d3150badc847aa3b5fe997da971, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

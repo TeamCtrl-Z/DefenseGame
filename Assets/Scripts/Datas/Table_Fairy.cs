@@ -205,6 +205,18 @@ public class Table_Fairy : TableClass
             return null;
         return infoTable[fid].Name;
     }
+    
+    /// <summary>
+    /// 페어리 인게임 이미지 주소를 알려주는 함수
+    /// </summary>
+    /// <param name="fid"> 페어리 종류 </param>
+    /// <returns>이미지 주소</returns>
+    public string GetFairyInGameImageAddress(uint fid)
+    {
+        if (!infoTable.ContainsKey(fid))
+            return null;
+        return infoTable[fid].Image_1;
+    }
 
     /// <summary>
     /// 페어리 프로필 이미지 주소를 알려주는 함수
@@ -215,14 +227,19 @@ public class Table_Fairy : TableClass
     {
         if (!infoTable.ContainsKey(fid))
             return null;
-        return infoTable[fid].Image_1;
+        return infoTable[fid].Image_2;
     }
 
+    /// <summary>
+    /// 페어리 일러스트 이미지 주소를 알려주는 함수
+    /// </summary>
+    /// <param name="fid"> 페어리 종류 </param>
+    /// <returns>이미지 주소</returns>
     public string GetFairyIllustImageAddress(uint fid)
     {
         if (!infoTable.ContainsKey(fid))
             return null;
-        return infoTable[fid].Image_2;
+        return infoTable[fid].Image_3;
     }
 
     #endregion

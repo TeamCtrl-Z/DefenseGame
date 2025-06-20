@@ -12,16 +12,17 @@ public static class ServerData_Ships
     /// <summary>
     /// 배에 페어리들 배치 요청
     /// </summary>
-    /// <param name="slotFairys"> 배치된 페어리 목록 (k - 슬롯 인덱스, v - foid) </param>
+    /// <param name="slotFairys"> 배치된 페어리 목록 (k - 슬롯 인덱스, v - fid) </param>
     /// <param name="success"> 성공 콜백 </param>
     /// <param name="fail"> 실패 콜백 </param>
     /// <returns></returns>
-    public static IEnumerator RequestAssignFairys(Dictionary<uint, string> slotFairys, Action success, Action fail = null)
+    public static IEnumerator RequestAssignFairys(Dictionary<uint, uint> slotFairys, Action success, Action fail = null)
     {
         string url = "/ship/assign";
         Network network = new Network(url, "POST");
         network.SetRequestData(new
         {
+            uid = DataService.Instance.UserDataManager.User.uid,
             slotFairys = slotFairys
         });
         yield return network.SendRequest();

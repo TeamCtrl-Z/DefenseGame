@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Playables;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -24,7 +21,7 @@ public class CheatButtonUI : MonoBehaviour
     {
         cheatOpenButton.onClick.AddListener(() => 
         {
-            UIManager.Instance.FadeUI.Fade(null, () => UIUtility.OpenPopupUIWithCanvasGroup(cheatSelectCG), null);
+            UIManager.Instance.FadeUI.Fade(null, () => CheatUIUtility.OpenPopupUIWithCanvasGroup(cheatSelectCG), null);
         });
     }
 }

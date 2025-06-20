@@ -53,10 +53,11 @@ public static class ServerData_Items
     /// <returns></returns>
     public static IEnumerator RequestCheatModifyCurrency(CurrencyType type, ulong amount, Action success, Action fail = null)
     {
-        string url = "/items/cheat/modify";
+        string url = "/item/cheat/modify";
         Network network = new Network(url, "POST");
         network.SetRequestData(new
         {
+            uid = DataService.Instance.UserDataManager.User.uid,
             currencyType = type.ToString(),
             amount = amount
         });
